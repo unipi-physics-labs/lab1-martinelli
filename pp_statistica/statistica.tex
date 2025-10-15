@@ -1,0 +1,1626 @@
+\chapter{Probabilit\`a e statistica}
+\label{chap:ProbabilitaStatistica}
+\mt
+
+Questo capitolo raccoglie alcuni fatti fondamentali relativi
+al calcolo elementare delle probabilit\`a ed alla rappresentazione
+di fenomeni casuali.
+Si introduce il concetto di funzione di distribuzione (per variabili
+casuali discrete e continue) e si definiscono le caratteristiche
+fondamentali (media, varianza e deviazione standard) comuni a tutte
+le distribuzioni.
+
+\section{Definizione di probabilit\`a}
+
+\subsection{Prima definizione (Laplace, 1812)}
+
+\index{probabilit\`a}La probabilit\`a di un evento $E$, che si indica
+solitamente con $\prob{E}$, \`e uguale al rapporto tra il numero dei casi
+favorevoli e quello dei casi possibili:
+\eqnl{
+\prob{E} = \rm{\frac{casi~favorevoli}{casi~possibili}}
+}{eq:ProbLaplace}
+Questa viene anche chiamata {\itshape probabilit\`a a priori} di un evento.
+\`E evidente, dalla (\ref{eq:ProbLaplace}), che:
+\eqnl{
+\prob{E} \le 1
+}{eq:ProbabilitaTotale}
+Questa definizione, limitata al campo dei numeri razionali ed applicabile solo
+in situazioni in cui il numero di casi possibili \`e finito, \`e sufficiente
+per i casi pi\`u elementari.
+
+\begin{exemplify}
+
+\example{Qual \`e la probabilit\`a che, nel lancio di una moneta,
+esca testa (o croce)?\\
+Indichiamo con $T$ e $C$ l'uscita di testa o croce, rispettivamente.
+Il numero di casi possibili \`e due, mentre il numero di casi favorevoli \`e
+uno, per cui:
+$$
+\prob{T}= \prob{C} =\frac{1}{2}
+$$}
+
+\example{Qual \`e la probabilit\`a che, nel lancio di un dado,
+esca un numero fissato (ad esempio il $3$)?\\
+Vi \`e un solo caso favorevole su sei possibili, per cui:
+$$
+\prob{3} =\frac{1}{6}
+$$}
+
+\example{Qual \`e la probabilit\`a che, lanciando due monete,
+esca almeno una testa?\\
+Indichiamo con $T$ l'uscita di una testa e con $C$ l'uscita di una
+croce. Le realizzazioni elementari del nostro esperimento si possono
+identificare univocamente con coppie ordinate $(u1, u2)$ dove
+$u_1$ indica l'uscita della prima moneta e $u_2$ quella della seconda.
+Nel nostro caso avremo esattamente $4$ casi possibili: $(T, T)$,
+$(T, C)$, $(C, T)$ e $(C, C)$. Tra di essi quelli favorevoli sono $3$:
+$(T, T)$, $(T, C)$ e $(C, T)$; per cui:
+$$
+\prob{{\rm almeno~una~testa}}=\frac{3}{4}
+$$}
+
+\end{exemplify}
+
+\noindent Non appena la situazione si complica diventa necessario tenere
+conto che alcuni casi possono essere pi\`u o meno {\itshape favorevoli}
+di altri. Dobbiamo quindi modificare la nostra definizione aggiungendo
+esplicitamente la richiesta che i casi siano \emph{ugualmente possibili}.
+Vedremo tra breve una definizione alternativa e pi\`u generale.
+
+
+\begin{exemplify}
+
+\example{Supponiamo di lanciare due dadi a sei facce; qual \`e la
+probabilit\`a che la somma delle uscite sia $4$?
+Se applicassimo acriticamente la \ref{eq:ProbLaplace}, essendo i casi
+possibili esattamente $11$ (la somma delle uscite di due dadi pu\`o assumere
+tutti i valori interi da $2$ a $12$) dovremmo concludere che
+$\prob{4} = \textstyle\frac{1}{11}$ che \`e falso.
+Vedremo tra breve come calcolare correttamente questa probabilit\`a;
+per inciso anticipiamo che $\prob{4} = \textstyle\frac{1}{12}$.}
+
+\end{exemplify}
+
+
+\subsection{Seconda definizione (Venn, 1866)\index{probabilit\`a}}
+
+Si tratta di una definizione operativa. La probabilit\`a di un evento
+$E$ coincide con la frequenza relativa dell'evento stesso quando
+il numero totale $N$ di volte in cui si ripete l'esperimento \`e molto grande:
+\eqnl{
+\prob{E} = \lim_{N\to\infty}\frac{n}{N}
+}{eq:ProbVenn}
+in cui $n$ \`e il numero di volte in cui si registra l'evento $E$.
+Poich\'e $n\le N$ vale ovviamente la (\ref{eq:ProbabilitaTotale}).
+
+L'equazione (\ref{eq:ProbVenn}) non ha chiaramente il significato
+che i matematici attribuiscono di solito al concetto di limite.
+Essa significa sostanzialmente che, compiendo una serie di prove,
+al crescere di $N$ il rapporto $\frac{n}{N}$ tende a stabilizzarsi intorno
+ad un certo valore, con fluttuazioni che tendono a decrescere sempre di pi\`u.
+
+Questa definizione \`e utile per le applicazioni pratiche ma non per una
+rigorosa costruzione matematica della teoria della probabilit\`a.
+
+
+\subsection{Terza definizione (Kolmogorov, 1933)\index{probabilit\`a}}
+
+Si tratta di una definizione assiomatica fondata sulla teoria degli insiemi.
+Sia $E$ un generico evento elementare associato ad un certo
+esperimento e chiamiamo ${\cal S}$ l'insieme di tutti gli eventi elementari
+$E$. Si consideri adesso un generico  sottoinsieme $s$ di ${\cal S}$:
+$$
+s\subseteq {\cal S}
+$$
+e sia ${\cal E}$ l'insieme di tutti i sottoinsiemi di ${\cal S}$:
+$$
+{\cal E} = \{s: s\subseteq {\cal S}\}
+$$
+Notiamo esplicitamente che l'insieme vuoto $\emptyset$ e l'insieme  ${\cal S}$
+appartengono ad ${\cal E}$:
+\begin{eqnarray*}
+\emptyset & \in & {\cal E}\\
+{\cal S}  & \in & {\cal E}
+\end{eqnarray*}
+Notiamo altres\`i che, dati due qualsiasi insiemi ${\cal A}$ e ${\cal B}$
+appartenenti ad ${\cal E}$, anche la loro unione, la loro intersezione
+ed i loro complementari in ${\cal E}$ appartengono ad ${\cal E}$.
+In formule:
+\begin{eqnarray*}
+{\cal A} \cup {\cal B} & \in & {\cal E}
+\qquad \forall {\cal A}, {\cal B} \in {\cal E}\\
+{\cal A} \cap {\cal B} & \in & {\cal E}
+\qquad \forall {\cal A}, {\cal B} \in {\cal E}\\
+\overline {\cal A} & \in & {\cal E}
+\qquad \forall {\cal A} \in {\cal E}
+\end{eqnarray*}
+
+Sia dunque $\prob{s}$ una funzione definita nell'insieme ${\cal E}$ che
+associa ad ogni sottoinsieme $s$ di $\cal{S}$ un numero reale non negativo.
+Diciamo che $\prob{s}$ \`e una probabilit\`a se valgono le seguenti propriet\`a:
+\begin{enumerate}
+\item{
+$\prob{{\cal S}} = 1$
+}
+\item{
+$\prob{{\cal A} \cup {\cal B}} = \prob{{\cal A}} + \prob{{\cal B}} -
+\prob{{\cal A} \cap {\cal B}}
+\qquad \forall {\cal A}, {\cal B} \in {\cal E}$
+}
+\item{
+$\prob{\emptyset} = 0$
+}
+\end{enumerate}
+Da queste tre propriet\`a deriva di nuovo la (\ref{eq:ProbabilitaTotale}).
+
+
+\section{Propriet\`a e leggi della probabilit\`a}
+\index{probabilit\`a!leggi della}
+
+\subsection{Addizione}
+
+\index{probabilit\`a!addizione delle}Se $A$ e $B$ sono due eventi
+{\itshape disgiunti} (cio\`e {\itshape non} possono verificarsi
+contemporaneamente nello stesso esperimento o, equivalentemente, i sottoinsiemi
+che li rappresentano hanno intersezione vuota), la probabilit\`a che si
+verifichi l'evento $A$ oppure l'evento $B$ (in altre parole l'unione degli
+eventi $A$ e $B$) \`e:
+\eqnlbox{
+\prob{A{\rm~o~}B} = \prob{A} + \prob{B}
+}{eq:SommaProbDisgiunti}
+
+\begin{exemplify}
+
+\example{Si lanci un dado a sei facce. Qual \`e la probabilit\`a
+che esca il $2$ oppure il $3$?\\
+Con il consueto significato dei simboli:
+$$
+\prob{2{\rm~o~}3}=\prob{2}+\prob{3}=\frac{1}{6}+\frac{1}{6}= \frac{1}{3}
+$$}
+
+\end{exemplify}
+
+\noindent Se $A$ e $B$ sono \emph{compatibili}, cio\`e non sono disgiunti,
+possono in generale presentarsi dei casi favorevoli ad entrambi gli eventi, che
+vengono dunque contati sia nel calcolo di $\prob{A}$ che in quello di
+$\prob{B}$.
+In questo caso se applicassimo la (\ref{eq:SommaProbDisgiunti}), questi
+casi verrebbero contati due volte; ne segue che la legge dell'addizione
+delle probabilit\`a deve essere cos\`i generalizzata:
+\eqnlbox{
+\prob{A{\rm~o~}B} = \prob{A} + \prob{B} - \prob{A{\rm~e~}B}
+}{eq:SommaProb}
+
+\begin{exemplify}
+
+\example{\label{esem:CartaReOFiori}Supponiamo di estrarre una carta da un
+mazzo di $52$ carte e consideriamo i seguenti eventi possibili:
+\begin{center}\begin{tabular}{l}
+$A$ = la carta \`e di fiori \\
+$B$ = la carta \`e un re \\
+\end{tabular}\end{center}
+Le probabilit\`a che ciascuno di questi due eventi si realizzi si calcola
+facilmente come rapporto tra casi favorevoli e casi possibili:
+\begin{eqnarray*}
+\prob{A} &=& \frac{13}{52}\\
+\prob{B} &=& \frac{4}{52}
+\end{eqnarray*}
+Vogliamo calcolare la probabilit\`a dell'evento C che la carta estratta
+sia una carta di fiori oppure un re:
+\begin{center}\begin{tabular}{l}
+$C$ = la carta \`e di fiori oppure \`e un re \\
+\end{tabular}\end{center}
+Se applicassimo la (\ref{eq:SommaProbDisgiunti}) otterremmo
+$\prob{C} = \prob{A} + \prob{B} = \frac{17}{52}$, che \`e errato.
+I due eventi $A$ e $B$, infatti, non sono disgiunti (il re di fiori \`e
+contemporaneamente una carta di fiori ed un re), per cui:
+$$
+\prob{C} = \prob{A} + \prob{B} - \prob{A{\rm~e~}B} =
+\frac{13}{52} + \frac{4}{52} - \frac{1}{52}= \frac{16}{52}
+$$
+che \`e il risultato corretto, come \`e immediato verificare.}
+
+\end{exemplify}
+
+
+\subsection{Moltiplicazione}
+
+\index{probabilit\`a!moltiplicazione delle}Se $A$ e $B$ sono due eventi
+{\itshape indipendenti} (cio\`e non causalmente
+connessi, nel senso che il fatto che si verifichi A non influenza in alcun
+modo il fatto che B si verifichi, e viceversa) la probabilit\`a
+che sia $A$ che $B$ si verifichino \`e data da:
+\eqnlbox{
+\prob{A{\rm~e~}B} = \prob{A} \cdot \prob{B}
+}{eq:ProdottoProbIndipendenti}
+Infatti se indichiamo con $n_A$ ed $n_B$ i casi favorevoli degli eventi $A$
+ e $B$ e con $N_A$ e $N_B$ i corrispondenti casi possibili,
+si ha:
+\begin{eqnarray*}
+\prob{A} &=& \frac{n_A}{N_A}\\
+\prob{B} &=& \frac{n_B}{N_B}
+\end{eqnarray*}
+I casi possibili dell'evento $C = (A{\rm~e~}B)$ sono $N_A\cdot N_B$,
+mentre i casi favorevoli sono $n_A\cdot n_B$, per cui:
+$$
+\prob{A{\rm~e~}B}=\frac{n_A\cdot n_B}{N_A\cdot N_B}=\prob{A} \cdot \prob{B}
+$$
+
+\begin{exemplify}
+
+\example{Si lancino un dado ed una moneta. Qual \`e la probabilit\`a che
+escano il $2$ e la testa?\\
+Seguendo la (\ref{eq:ProdottoProbIndipendenti}) scriviamo:
+$$
+\prob{{\rm2~e~testa}}=\frac{1}{6} \cdot \frac{1}{2}=\frac{1}{12}
+$$}
+
+\example{\label{esem:UnDado2UnDado3}Supponiamo di lanciare due dadi a sei
+facce. Qual \`e la probabilit\`a che il primo dado dia $2$ ed il
+secondo $3$?
+Identifichiamo i nostri eventi elementari:
+\begin{center}\begin{tabular}{l}
+$A$ = il primo dado d\`a $2$\\
+$B$ = il secondo dado d\`a $3$\\
+\end{tabular}\end{center}
+$$
+\prob{A{\rm~e~}B} = \prob{A} \cdot \prob{B} =
+\frac{1}{6} \cdot \frac{1}{6} = \frac{1}{36}
+$$}
+
+\example{\label{esem:CartaReEFiori}Supponiamo di estrarre una carta da un
+mazzo di $52$ carte e consideriamo di nuovo gli eventi:
+\begin{center}\begin{tabular}{l}
+$A$ = la carta \`e di fiori \\
+$B$ = la carta \`e un re \\
+\end{tabular}\end{center}
+Le corrispondenti probabilit\`a, come gi\`a detto nell'esempio
+\ref{esem:CartaReOFiori} sono $\prob{A} = \frac{13}{52}$ e $\prob{B} =
+\frac{4}{52}$.
+Questa volta vogliamo calcolare la probabilit\`a dell'evento C che
+la carta estratta sia il re di fiori:
+\begin{center}\begin{tabular}{l}
+$C$ = la carta \`e il re di fiori \\
+\end{tabular}\end{center}
+Essendo gli eventi indipendenti possiamo applicare la
+(\ref{eq:ProdottoProbIndipendenti}):
+$$
+\prob{C} = \prob{A} \cdot \prob{B} =
+\frac{13}{52} \cdot \frac{4}{52} = \frac{1}{52}
+$$
+che \`e il risultato corretto. Notiamo esplicitamente che l'esempio non \`e
+cos\`i banale come pu\`o apparire a prima vista; vi sono casi in cui
+non \`e affatto ovvio stabilire se due eventi siano indipendenti o meno
+(cfr. in particolare l'esempio \ref{esem:CartaReEFioriConJolly}).}
+
+\end{exemplify}
+
+\noindent Quando gli eventi {\itshape non} sono indipendenti la
+(\ref{eq:ProdottoProbIndipendenti}) non vale pi\`u. I due esempi
+che seguono chiariscono questa affermazione.
+
+\begin{exemplify}
+
+\example{\label{esem:UnDado2e3} Supponiamo di lanciare un dado. Qual \`e
+la probabilit\`a che l'uscita sia $2$ e $3$?\\
+Gli eventi elementari sono:
+\begin{center}\begin{tabular}{l}
+$A$ = l'uscita \`e $2$ \\
+$B$ = l'uscita \`e $3$ \\
+\end{tabular}\end{center}
+Se applicassimo di nuovo la (\ref{eq:ProdottoProbIndipendenti}) otterremmo,
+esattamente come nell'esempio \ref{esem:UnDado2UnDado3}, una
+pro\-ba\-bi\-li\-t\`a pari ad $\frac{1}{36}$, il che \`e chiaramente assurdo,
+in quanto il $2$ ed il $3$ {\itshape non} possono uscire contemporaneamente.
+In particolare la probabilit\`a cercata \`e nulla.
+
+In effetti i due eventi sono incompatibili e, di conseguenza, non sono
+indipendenti, per cui la (\ref{eq:ProdottoProbIndipendenti}) non vale in
+questo caso.}
+
+\example{\label{esem:CartaReEFioriConJolly} Un caso meno ovvio.
+Consideriamo di nuovo l'esempio \ref{esem:CartaReEFiori} ma questa volta
+aggiungiamo un jolly al mazzo di $52$ carte. Sia di nuovo:
+\begin{center}\begin{tabular}{l}
+$A$ = la carta \`e di fiori \\
+$B$ = la carta \`e un re \\
+$C$ = la carta \`e il re di fiori\\
+\end{tabular}\end{center}
+Adesso il mazzo \`e di $53$ carte per cui le probabilit\`a degli eventi
+$A$ e $B$ divengono:
+\begin{eqnarray*}
+\prob{A}&=&\frac{13}{53}\\
+\prob{B}&=&\frac{4}{53}
+\end{eqnarray*}
+Se applicassimo di nuovo la (\ref{eq:ProdottoProbIndipendenti}) otterremmo
+$$
+\prob{C} = \prob{A} \cdot \prob{B} =
+\frac{13}{53} \cdot \frac{4}{53} = \frac{212}{2809}
+$$
+mentre sappiamo che la probabilit\`a di estrarre il re di fiori \`e
+esattamente $\frac{1}{53}$.
+
+In questo caso non vale la legge della moltiplicazione per eventi
+indipendenti, in quanto gli eventi non sono pi\`u indipendenti:
+se esce una carta di fiori questo esclude che sia
+un jolly, quindi modifica la probabilit\`a che sia un re.
+
+Impareremo tra breve come la (\ref{eq:ProdottoProbIndipendenti}) possa
+essere generalizzata al caso di eventi non indipendenti); nel frattempo
+l'esempio merita un commento un poco pi\`u articolato, dato che
+la questione dell'indipendenza tra eventi tende talvolta ad essere
+sfuggente.
+Supponiamo, nelle ipotesi dell'esempio, di estrarre una carta, e supponiamo
+ancora che questa carta sia di fiori. La probabilit\`a che essa sia
+un re \`e esattamente $\frac{1}{13}$, dato che vi sono $13$ carte di fiori e,
+tra queste, solo una \`e un re. Supponiamo viceversa che la carta non sia
+di fiori. In questo caso la probabilit\`a che essa sia un re \`e $\frac{3}{40}$
+(vi sono esattamente $53 - 13 = 40$ carte che non sono di fiori e, tra queste,
+solo $3$ sono re).
+Dunque sapere se la carta sia di fiori o meno influenza la probabilit\`a
+che essa sia un re; che \`e come dire che i due eventi non sono
+indipendenti.
+
+Se ripetiamo lo stesso esercizio nel caso dell'esempio \ref{esem:CartaReEFiori}
+le cose vanno diversamente: se estraiamo una carta di fiori la probabilit\`a
+che essa sia un re \`e $\frac{1}{13}$, e se estraiamo una carta non di
+fiori la probabilit\`a che essa sia un re \`e $\frac{3}{39}$
+(vi sono esattamente $52 - 13 = 39$ carte che non sono di fiori e, tra queste,
+solo $3$ sono re) cio\`e ancora $\frac{1}{13}$. In quel caso possiamo
+affermare che gli eventi sono effettivamente indipendenti.
+}
+
+\end{exemplify}
+
+\noindent La legge della moltiplicazione pu\`o essere generalizzata al caso
+di eventi non indipendenti.
+Definiamo la \emph{probabilit\`a dell'evento $B$ condizionata dall'evento
+$A$}, e la indichiamo con $\prob{B|A}$, come la probabilit\`a che si verifichi
+$B$ una volta che si \`e verificato $A$. La nozione di probabilit\`a
+condizionata permette di caratterizzare in modo semplice l'indipendenza
+tra eventi. Se $A$ e $B$ sono indipendenti vale infatti:
+\eqnl{
+\prob{B|A} = \prob{B|\overline{A}} = \prob{B}
+}{eq:IndipendenzaEventi}
+e viceversa gli eventi $A$ e $B$ sono indipendenti se la
+(\ref{eq:IndipendenzaEventi}) \`e verificata.
+Nel nostro nuovo linguaggio la legge di moltiplicazione delle probabilit\`a
+diviene:
+\eqnlbox{
+\prob{A{\rm~e~}B} = \prob{A} \cdot \prob{B|A}
+}{eq:ProdottoProb}
+Alla luce di questa relazione possiamo riesaminare criticamente gli esempi
+\ref{esem:UnDado2e3} e \ref{esem:CartaReEFioriConJolly}.
+
+\begin{exemplify}
+
+\example{Riesaminiamo l'esempio \ref{esem:UnDado2e3}. La probabilit\`a che
+esca il $3$, una volta che \`e uscito il $2$, \`e nulla poich\'e i due
+eventi sono incompatibili:
+$$
+\prob{B|A} = 0
+$$
+per cui:
+$$
+\prob{C} = \prob{A} \cdot \prob{B|A} = \frac{1}{6}\cdot 0
+$$}
+
+\example{Torniamo per l'ultima volta sull'esempio
+\ref{esem:CartaReEFioriConJolly} e consideriamo di nuovo i nostri
+tre eventi elementari:
+\begin{center}\begin{tabular}{l}
+$A$ = la carta \`e di fiori \\
+$B$ = la carta \`e un re \\
+$C$ = la carta \`e il re di fiori\\
+\end{tabular}\end{center}
+\`E facile convincersi (lo abbiamo sostanzialmente gi\`a dimostrato) che:
+\begin{eqnarray*}
+\prob{B|A} & = & \frac{1}{13}\\
+\prob{B|\overline{A}} & = & \frac{3}{40} 
+\end{eqnarray*}
+per cui gli eventi non sono indipendenti. Scriveremo allora:
+$$
+\prob{C} = \prob{A} \cdot \prob{B|A} =
+\frac{13}{53}\cdot \frac{1}{13} = \frac{1}{53}
+$$
+che \`e il risultato corretto.
+Nel caso dell'esempio \ref{esem:CartaReEFiori} si ha viceversa:
+\begin{eqnarray*}
+\prob{B|A} & = & \frac{1}{13}\\
+\prob{B|\overline{A}} & = & \frac{3}{39} = \frac{1}{13} 
+\end{eqnarray*}
+per cui possiamo usare indifferentemente la (\ref{eq:ProdottoProbIndipendenti})
+o la (\ref{eq:ProdottoProb}).}
+
+\end{exemplify}
+
+
+\section{Variabili casuali e funzioni di distribuzione}
+
+\index{variabile casuale}\index{distribuzione!funzione di}
+Sia $x$ il risultato di un determinato esperimento; $x$ dipende in generale
+dalla particolare realizzazione dell'esperimento stesso, per cui \`e una
+variabile casuale. Esistono casi di variabili casuali \emph{discrete}, cio\`e
+variabili che possono assumere un numero finito (o al massimo numerabile)
+di valori in un intervallo finito, e casi di variabili \emph{continue} su
+intervalli finiti o infiniti.
+
+\begin{exemplify}
+
+\example{Si consideri il lancio di un dado a sei facce. L'uscita del lancio
+\`e una variabile casuale discreta che pu\`o assumere esattamente sei valori.}
+
+\example{Supponiamo di sparare con una carabina su di un bersaglio:
+la distanza dal centro a cui arriva il colpo \`e una variabile
+casuale continua su di un intervallo finito.}
+
+\end{exemplify}
+
+\subsection{Variabili casuali discrete}
+
+Consideriamo dapprima il caso di variabile discreta e
+supponiamo che $\fromto{x_1}{x_n}$ siano gli $n$ possibili esiti;
+indichiamo con $\prob{x_i}$ la probabilit\`a che l'esito dell'esperimento in
+questione sia proprio $x_i$.
+Definiamo {\itshape funzione di distribuzione} della variabile $x$ l'insieme
+dei valori di $\prob{x_i}$.
+
+\begin{exemplify}
+
+\example{\label{esem:DistribuzioneUnDado}Sia la variabile casuale $x$
+l'uscita di un dado a sei facce; essa pu\`o assumere sei
+valori $x_i$, che coincidono con i numeri interi tra $1$ e $6$.
+Se il dado \`e equo ciascuna delle facce ha la stessa probabilit\`a
+$\frac{1}{6}$ di uscire e la funzione di distribuzione \`e:
+
+\pdftable{x_i}{6}%
+{$1$ & $2$ & $3$ & $4$ & $5$ & $6$}%
+{$\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ & $\frac{1}{6}$ &
+$\frac{1}{6}$ & $\frac{1}{6}$}}
+
+\example{\label{esem:DistribuzioneDueDadi}Consideriamo adesso il lancio di
+due dadi e sia $x$ la somma delle uscite
+dei dadi stessi; $x$ pu\`o assumere tutti i valori interi tra $2$ e $12$,
+ma questa volta gli $x_i$ non sono equiprobabili anche se i dadi sono equi.
+I casi possibili sono in totale $6 \cdot 6 = 36$ ed ognuno pu\`o essere
+univocamente identificato con la coppia $(u_1, u_2)$, in cui $u_1$ \`e
+l'uscita del primo dado e $u_2$ quella del secondo.
+Mentre il $2$ ha solamente un modo per realizzarsi, $(1, 1)$, il $4$,
+tanto per fare un esempio, pu\`o realizzarsi in tre modi diversi: $(1, 3)$,
+$(2, 2)$ o $(3, 1)$.
+La probabilit\`a di uscita pu\`o allora essere calcolata come rapporto tra il
+numero di casi favorevoli ed il numero totale di casi possibili:
+
+\pdftable{x_i}{11}
+{$2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$}%
+{$\frac{1}{36}$ & $\frac{2}{36}$ & $\frac{3}{36}$ & $\frac{4}{36}$ &
+$\frac{5}{36}$ & $\frac{6}{36}$ & $\frac{5}{36}$ & $\frac{4}{36}$ &
+$\frac{3}{36}$ & $\frac{2}{36}$ & $\frac{1}{36}$}}
+
+\end{exemplify}
+
+
+\subsection{Variabili casuali continue}
+
+Mentre nel caso discreto la funzione di distribuzione \`e una
+funzione che associa ad ogni valore della variabile $x$ la sua probabilit\`a,
+nel caso di una variabile continua questa definizione non \`e pi\`u applicabile
+poich\'e {\itshape la probabilit\`a che la variabile $x$ assuma un valore
+esattamente definito \`e zero} (vedremo tra poco che si tratta essenzialmente
+di un integrale su un dominio di misura nulla).
+\`E invece sensato chiedersi quale sia la probabilit\`a che la $x$ assuma
+un valore compreso in un certo intervallo assegnato.
+Dividiamo allora l'intervallo in cui pu\`o variare la $x$ in $n$ intervallini
+di ampiezza $\Delta x$ centrati attorno ai punti $x_i$, con
+$i = \fromto{1}{n}$.
+Possiamo calcolare la probabilit\`a che la variabile
+vada a cadere in ciascun intervallino, cio\`e la probabilit\`a che essa
+assuma un valore compreso fra $x_i - \tinyfrac{\Delta x}{2}$ e
+$x_i + \tinyfrac{\Delta x}{2}$:
+$$
+\prob{x_i,\Delta x} \equiv \prob{x_i - \tinyfrac{\Delta x}{2} \leq x
+\leq x_i + \tinyfrac{\Delta x}{2}}
+$$
+Per avere una grandezza indipendente dalla larghezza dell'intervallino
+si pu\`o calcolare il rapporto tra $\prob{x_i, \Delta x}$ e $\Delta x$.
+Quello che otteniamo \`e qualcosa di simile ad una probabilit\`a
+specifica o probabilit\`a per unit\`a di intervallo.
+Se consideriamo il limite:
+$$
+\lim_{\Delta x\to0}  \frac{\prob{x_i, \Delta x}}{\Delta x}
+$$
+otteniamo la {\itshape densit\`a di probabilit\`a} $p(x)$ che \`e per
+definizione la funzione di distribuzione della variabile casuale
+$x$\index{probabilit\`a!densit\`a di}.
+La probabilit\`a che la nostra variabile casuale assuma un
+valore compreso nell'intervallo \emph{infinitesimo} $\ud x$ centrato attorno
+ad un generico valore $x$ si scrive pertanto:
+$$
+\prob{x, \ud x} = p(x) \, \ud x
+$$
+e, corrispondentemente, la probabilit\`a che essa assuma un valore
+compreso nell'intervallo \emph{finito} $\cinterval{a}{b}$ \`e data da:
+\eqnlbox{
+\prob{a \leq x \leq b} = \dintegral{p(x)}{x}{a}{b}
+}{eq:ProbVarContinua}
+
+\begin{exemplify}
+
+\example{\label{esem:DistUniforme01}
+Consideriamo la funzione di distribuzione:
+$$
+p(x) = \left \{ \begin{array}{ll}
+1 & 0 \leq x \leq 1\\
+0 & x < 0 ; ~ x > 1
+\end{array} \right.
+$$
+Ci si chiede quale sia la probabilit\`a che $x$ sia maggiore di $0.5$.\\
+Seguendo la (\ref{eq:ProbVarContinua}), scriveremo:
+$$
+\prob{0.5 \leq x \leq 1} = \dintegral{1}{x}{0.5}{1} = \eval{x}{0.5}{1} =
+1 - 0.5 = 0.5
+$$}
+
+\example{\label{esem:Autobus}Supponiamo di dover prendere un autobus.
+Sappiamo che passa da una certa fermata ogni $10$ minuti ma non sappiamo
+a che ora.
+Qual \`e la probabilit\`a di dover aspettare per pi\`u di $3$ minuti, se
+ci presentiamo a caso alla fermata?
+L'istante in cui ci rechiamo alla fermata \`e una variabile casuale
+del tutto scorrelata dall'istante di arrivo dell'autobus, per cui il
+tempo di attesa sar\`a pure una variabile casuale la cui funzione di
+distribuzione sar\`a uniforme tra un valore minimo ($0$
+minuti, nel caso in cui arriviamo esattamente insieme all'autobus) ed un
+valore massimo ($10$ minuti, nel caso in cui arriviamo appena dopo
+la partenza dell'autobus stesso).
+Possiamo scrivere esplicitamente questa funzione di distribuzione come:
+$$
+p(x) = \left \{ \begin{array}{ll}
+\frac{1}{10} & 0 \leq x \leq 10\\
+0 & x < 0 ; ~ x > 10
+\end{array} \right.
+$$
+in cui il valore $\frac{1}{10}$, come vedremo in dettaglio nella sezione
+\ref{subsec:NormalizzazioneMedia}, \`e conseguenza diretta di quella
+che va sotto il nome di condizione di normalizzazione.
+La probabilit\`a cercata, dunque, si scrive come:
+$$
+\prob{x \geq 3} = \dintegral{\frac{1}{10}}{x}{3}{10} =
+\eval{\frac{x}{10}}{3}{10} = 1 - \frac{3}{10} = 0.7
+$$}
+
+\end{exemplify}
+
+
+\section{Rappresentazione di fenomeni casuali}
+
+In questo paragrafo ci occupiamo del problema fondamentale della
+rappresentazione dei dati sperimentali raccolti nello studio
+di un certo fenomeno casuale.
+
+Se la grandezza che stiamo misurando pu\`o assumere un numero
+finito di valori (o meglio se la variabile casuale che stiamo
+studiando \`e discreta) allora il modo pi\`u immediato di rappresentare
+i dati raccolti \`e quello di creare una tabella contenente,
+per ognuno dei valori possibili di $x$, il numero di volte
+(numero di {\itshape occorrenze} o {\itshape frequenza}) in cui abbiamo
+registrato il valore in questione.
+
+\begin{exemplify}
+
+\example{\label{esem:DueDadiSperimentale}Supponiamo di lanciare per $200$
+volte due dadi e di registrare, per ogni lancio, la somma delle due uscite,
+che chiamiamo $x$.
+La seguente tabella contiene le occorrenze misurate dei possibili
+valori di $x$; come \`e ovvio, la somma degli $n(x_i)$ \`e proprio $200$.
+
+\twolinestable{$x_i$}{$n(x_i)$}{11}
+{$2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$}%
+{$7$ & $5$ & $18$ & $18$ & $31$ & $36$ & $29$ & $24$ & $12$ & $12$ & $8$}
+
+}
+
+\end{exemplify}
+
+\noindent Una rappresentazione alternativa, e per certi versi pi\`u
+{\itshape espressiva}, dei dati \`e costituita da un grafico
+(cfr. figura \ref{fig:GraficoBarreDueDadi}) in cui, in corrispondenza di
+ognuno dei valori possibili della variabile casuale si traccia un segmento
+verticale di lunghezza proporzionale al numero di volte in cui si \`e
+registrato il valore in questione, ossia al numero di {\itshape occorrenze}
+$n(x_i)$ di tale valore.
+
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/dices_frequency.tex}}
+{Rappresentazione di frequenza della somma delle uscite
+di due dadi, relativa ai dati dell'esempio \ref{esem:DueDadiSperimentale}.
+Sull'asse delle ascisse si ha la variabile
+casuale $x$ e, in corrispondenza di ognuno dei valori possibili $x_i$
+(che in questo caso sono tutti gli interi da $2$ a $12$), si traccia un
+segmento verticale la cui lunghezza \`e proporzionale al numero di volte
+in cui si \`e ottenuto il valore in questione.}
+{fig:GraficoBarreDueDadi}
+
+In una rappresentazione di questo tipo, che si chiama generalmente
+{\itshape rappresentazione di frequenza}, sull'asse delle ordinate
+si leggono direttamente le occorrenze (registrate nelle $N$ volte
+in cui si ripete l'esperimento) di ognuno dei valori che la variabile
+casuale pu\`o assumere. \`E evidente che in questa rappresentazione la
+somma dei valori sull'asse delle ordinate \`e uguale proprio ad $N$.
+
+Talvolta pu\`o essere pi\`u utile rappresentare le frequenze relative, cio\`e
+i rapporti tra le singole occorrenze ed il numero totale di volte in cui
+si ripete l'esperimento:
+$$
+f(x_i) = \frac{n(x_i)}{N}
+$$
+Uno dei vantaggi di questo approccio \`e che, dato che
+la frequenza relativa di un evento tende alla probabilit\`a dell'evento
+stesso al tendere di $N$ all'infinito, come si legge nella (\ref{eq:ProbVenn}),
+la tabella delle frequenze relative pu\`o essere confrontata direttamente con
+la funzione di distribuzione.
+
+\begin{exemplify}
+
+\example{\label{esem:DueDadiSperimentaleFreqRel}Torniamo ai dati dell'esempio
+\ref{esem:DueDadiSperimentale}.
+In questo caso la tabella delle frequenze relative si scrive come:
+
+\twolinestable{$x_i$}{$f(x_i)$}{11}%
+{$2$ & $3$ & $4$ & $5$ & $6$ & $7$ & $8$ & $9$ & $10$ & $11$ & $12$}%
+{$0.035$ & $0.025$ & $0.09$ & $0.09$ & $0.155$ & $0.18$ & $0.145$ & $0.12$ &
+$0.06$ & $0.06$ & $0.004$}
+
+\noindent e la somma dei valori degli $f(x_i)$ \`e adesso $1$ anzich\'e $200$.}
+
+\end{exemplify}
+
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/dices_relative_frequency.tex}}
+{Rappresentazione di frequenza relativa della somma delle uscite
+di due dadi (i dati sono quelli dell'esempio \ref{esem:DueDadiSperimentale}).}
+{fig:GraficoBarreDueDadiFreqRel}
+
+\noindent In figura \ref{fig:GraficoBarreDueDadiFreqRel} si ha la
+{\itshape rappresentazione di frequenza relativa} riferita all'esempio
+\ref{esem:DueDadiSperimentale}.
+Uno degli svantaggi della rappresentazione di frequenza relativa \`e
+costituito dal fatto che l'informazione su $N$ \`e completamente perduta.
+Questi due diversi approcci sono dunque entrambi utili e l'uno o
+l'altro deve essere privilegiato a seconda del particolare aspetto che
+si vuole mettere in evidenza.
+
+\begin{exemplify}
+
+\example{\label{esem:ChiodiniLunghezza}Supponiamo di avere un campione di $70$
+chiodini e di aver misurato con un calibro centesimale la lunghezza di
+ciascuno di essi ottenendo la seguente tabella%
+\footnote{
+Dati realmente ottenuti il 6 Agosto 2005.
+}%
+.
+
+\listtable{10}{Lunghezza}{cm}
+{$1.731$ & $1.739$ & $1.698$ & $1.700$ & $1.697$ &
+ $1.728$ & $1.696$ & $1.714$ & $1.697$ & $1.697$ \\
+ $1.724$ & $1.729$ & $1.746$ & $1.703$ & $1.696$ &
+ $1.679$ & $1.756$ & $1.689$ & $1.743$ & $1.747$\\
+ $1.742$ & $1.723$ & $1.712$ & $1.729$ & $1.739$ &
+ $1.681$ & $1.657$ & $1.663$ & $1.694$ & $1.693$\\
+ $1.737$ & $1.717$ & $1.736$ & $1.709$ & $1.705$ &
+ $1.724$ & $1.706$ & $1.699$ & $1.701$ & $1.708$\\
+ $1.712$ & $1.731$ & $1.729$ & $1.703$ & $1.698$ &
+ $1.661$ & $1.685$ & $1.695$ & $1.703$ & $1.740$\\
+ $1.705$ & $1.730$ & $1.723$ & $1.716$ & $1.711$ &
+ $1.722$ & $1.724$ & $1.729$ & $1.695$ & $1.721$\\
+ $1.707$ & $1.713$ & $1.722$ & $1.695$ & $1.649$ &
+ $1.706$ & $1.726$ & $1.732$ & $1.703$ & $1.707$\\
+}
+
+\noindent \`E facile verificare che le misure
+assumono valori compresi tra $1.649 \cm$ e $1.756 \cm$; data la risoluzione
+dello strumento, $0.001 \cm$, il numero di valori che la nostra variabile
+pu\`o, in linea di principio, assumere, \`e
+$$
+\frac{(1.756-1.649)}{0.001}=107
+$$
+Non c'\`e dubbio, allora, che una tabella con $107$ colonne, analoga
+a quella dell'esempio \ref{esem:DueDadiSperimentale} in questo caso
+sarebbe poco {\itshape leggibile}.}
+
+\end{exemplify}
+
+Questo tipo di rappresentazione \`e molto utile per variabili che possono
+assumere valori discreti ed in numero non molto grande.
+Quando queste condizioni non sono soddisfatte si usa tipicamente un altro
+tipo di rappresentazione detto ad {\itshape istogramma}.\index{istogramma}
+Nel caso di variabili continue l'istogramma \`e sostanzialmente l'unica
+rappresentazione possibile.
+Un istogramma \`e di nuovo un grafico in cui si pone sull'asse
+delle ascisse la variabile casuale $x$ da rappresentare.
+L'intervallo di variabilit\`a di $x$ (cio\`e, operativamente, l'intervallo
+entro cui si dispongono le misure di $x$ effettuate) viene suddiviso in un
+certo numero di intervallini di uguale ampiezza (che si chiamano anche
+{\itshape canali} o {\itshape bin} dell'istogramma) ed ognuno di questi \`e
+assunto come base di un rettangolo di area {\itshape proporzionale} al numero
+di misure che cadono nel canale stesso%
+\footnote{
+Si osservi che, in un istogramma, le grandezze riportate sull'asse delle
+ordinate devono avere le dimensioni fisiche dell'inverso della variabile $x$,
+di modo che l'area di ogni rettangolo abbia le dimensioni di un numero puro.
+}%
+.
+In base alla costruzione appena descritta l'area al di sotto dell'istogramma
+\`e pari al numero $N$ delle prove effettuate: si dice che l'istogramma
+\`e {\itshape normalizzato} al numero $N$ delle misure o semplicemente
+normalizzato ad $N$.
+
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/histogram_12_bins.tex}}
+{Istogramma normalizzato ad $N$ relativo ai dati dell'esempio
+\ref{esem:ChiodiniLunghezza}. La larghezza di ogni canale
+dell'istogramma \`e fissata a $0.01 \cm$ (pari a $10$ volte la risoluzione
+dello strumento).}
+{fig:IstogrammaN}
+
+Anche in questo caso si pu\`o riportare in ogni canale dell'istogramma
+la frazione (anzich\'e il numero) di prove in cui il risultato cade entro
+il canale stesso; operativamente \`e sufficiente dividere l'altezza di ogni
+rettangolo per $N$. Cos\`i facendo l'area al di sotto dell'istogramma
+diviene uguale ad 1 e si dice che l'istogramma \`e normalizzato ad 1.
+
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/histogram_12_bins_frequency.tex}}
+{Istogramma normalizzato ad $1$ dei dati dell'esempio
+\ref{esem:ChiodiniLunghezza}. La larghezza di ciascuno dei canali
+dell'istogramma \`e pari a $0.010 \cm$}
+{fig:Istogramma1}
+
+Bench\'e si perda completamente l'informazione relativa alla distribuzione
+dei dati dentro ciascun intervallo, questa rappresentazione \`e molto utile
+per una prima analisi di un fenomeno.
+In generale si deve cercare un compromesso tra la quantit\`a totale
+dell'informazione e la sua chiarezza: non conviene fare gli intervalli troppo
+piccoli perch\'e altrimenti si si mettono in evidenza le fluttuazioni
+statistiche; d'altra parte, se essi sono troppo grandi, al limite non si ha
+pi\`u informazione.
+
+\panelfig
+{\twobyonetexfig
+{./pp_statistica/figure/histogram_107_bins.tex}
+{Istogramma con $107$ canali (di larghezza pari a $0.001 \cm$).}
+{./pp_statistica/figure/histogram_3_bins.tex}
+{Istogramma con $3$ canali (di larghezza pari a $0.04 \cm$).}
+{fig:IstogrammaBinnatoMale}}
+{Istogrammi normalizzati ad N dei dati dell'esempio
+\ref{esem:ChiodiniLunghezza} per diverse scelte dell'ampiezza dei canali.
+In un caso (\ref{fig:IstogrammaBinnatoMale:a}) l'istogramma \`e
+sostanzialmente equivalente ad una normale rappresentazione in frequenza e
+dominato dalle fluttuazioni statistiche; nell'altro
+(\ref{fig:IstogrammaBinnatoMale:b}) il numero di canali
+\`e cos\`i piccolo che la quantit\`a di informazione \`e molto ridotta
+rispetto alla tabella dei dati.}
+{fig:IstogrammaBinnatoMale}
+
+Per determinare l'ampiezza degli intervalli risulta particolarmente conveniente
+usare la seguente regola empirica che trover\`a negli argomenti trattati in
+seguito la sua giustificazione: l'ampiezza degli intervallini
+deve essere circa uguale all'intervallo di variabilit\`a della
+variabile casuale diviso per la radice quadrata del numero di prove effettuate:
+\eqnl{
+\Delta x\approx \frac{x_{max} - x_{min}}{\sqrt{N}}
+}{eq:SceltaIntervalliIstogramma}
+Tale quantit\`a risulta essere una stima grossolana ma veloce della deviazione
+standard della distribuzione \cite{Kyker, McGovern}.
+
+\caution{La (\ref{eq:SceltaIntervalliIstogramma}) non \`e una regola
+{\itshape assoluta}: se il risultato della divisione \`e un numero scomodo
+per i calcoli lo si pu\`o tranquillamente approssimare per ottenere un valore
+pi\`u comodo.}
+
+\begin{exemplify}
+
+\example{Nell'esempio \ref{esem:ChiodiniLunghezza} si ha
+$x_{min} = 1.649$, $x_{max} = 1.756$, con $N=70$,
+per cui la (\ref{eq:SceltaIntervalliIstogramma}) fornisce
+$\Delta x \approx 0.013 \cm$. Per confronto, il valore scelto per gli
+istogrammi riportati in figure
+\ref{fig:IstogrammaN} e \ref{fig:Istogramma1} \`e $0.01 \cm$.}
+
+\end{exemplify}
+
+\noindent Per inciso, notiamo che talvolta si usa rappresentare i dati con
+istogrammi anche se i valori assunti dalla variabile sono discreti
+ed in numero limitato.
+Tale rappresentazione si usa solo nel caso in cui il numero dei dati a
+disposizione non \`e molto maggiore dei possibili valori assunti dalla
+variabile casuale, per cui \`e necessario raggruppare i dati a disposizione se
+si vuole ottenere una rappresentazione degli stessi abbastanza regolare.
+
+
+
+\section{Caratteristiche comuni alle distribuzioni}
+
+
+\subsection{Premessa}
+
+Premettiamo qui alcune definizioni che ci saranno utili nel seguito.
+Definiamo:
+\eqnl{
+\dsum{a_i}{i}{1}{n} = a_1 + a_2 + a_3 + \cdots + a_n
+}{eq:DefinizioneSommatoria}
+Elenchiamo di seguito alcune delle propriet\`a formali di cui gode la
+sommatoria.
+\begin{numlist}
+\item{Il significato della (\ref{eq:DefinizioneSommatoria}) non cambia
+se si cambia nome all'indice su cui si esegue la somma:
+\eqn{
+\dsum{a_i}{i}{1}{n} =
+\dsum{a_\ell}{\ell}{1}{n} =
+\dsum{a_\flat}{\flat}{1}{n}=
+\dsum{a_\varsigma}{\varsigma}{1}{n}
+}
+che si esprime solitamente dicendo che l'indice \`e {\itshape muto}.
+}
+\item{Per la propriet\`a distributiva del prodotto rispetto all'addizione
+si ha:
+\eqn{
+\dsum{c \cdot a_i}{i}{1}{n} =c \cdot \dsum{a_i}{i}{1}{n}
+}
+cio\`e una costante (leggi: una grandezza che non dipende dall'indice su
+cui si somma) pu\`o essere {\itshape portata fuori} dalla sommatoria.
+}
+\item{Il quadrato di una sommatoria (lo useremo in seguito) si scrive come:
+\eqn{
+\left(\dsum{a_i}{i}{1}{n}\right)^2 =
+\dsum{a_i}{i}{1}{n}  \cdot \dsum{a_j}{j}{1}{n} =
+\dsum{\dsum{a_i a_j}{j}{1}{n}}{i}{1}{n} =
+\dsum{a_i a_j}{i, j}{1}{n}
+}
+}
+\end{numlist}
+
+\begin{exemplify}
+
+\example{
+Scriviamo esplicitamente il quadrato di una sommatoria di tre
+termini.
+Usando la notazione appena introdotta, si ha:
+$$
+\left(\displaystyle\dsum{a_i}{i}{1}{3}\right)^2=(a_1+a_2+a_3)^2=
+a_1a_1+a_2a_1+a_3a_1+a_1a_2+a_2a_2+a_3a_2+a_1a_3+a_2a_3+a_3a_3
+$$}
+
+\end{exemplify}
+
+
+\subsection{Notazioni}
+
+Prima di andare avanti ci soffermiamo un attimo per fissare
+le notazioni che useremo nel seguito.
+Abbiamo definito la funzione di distribuzione di una variabile
+casuale discreta come l'insieme delle probabilit\`a delle realizzazioni
+elementari del nostro fenomeno $\{ \prob{x_i} \}$ e quella di una variabile
+casuale continua come la densit\`a di probabilit\`a $p(x)$.
+Nel seguito seguiremo sempre la convenzione di indicare con una
+lettera maiuscola (non necessariamente la $P$) la funzione di distribuzione
+di una variabile discreta e con una lettera minuscola (non necessariamente
+la $p$) la funzione di distribuzione di una variabile continua.
+
+Avremo spesso a che fare con \emph{famiglie} di funzioni di
+distribuzioni dipendenti da uno o pi\`u parametri. In tal caso, per
+convenzione, scriveremo i nomi dei parametri (quando necessario)
+separati dalla variabile tramite un punto e virgola;
+$B(n;\; p_1, \fromto{p_2}{p_n})$ o $u(x;\; p_1, \fromto{p_2}{p_n})$,
+tanto per fare un esempio.
+
+\begin{exemplify}
+
+\example{Abbiamo incontrato nell'esempio \ref{esem:DistUniforme01}
+il primo caso di una distribuzione, quella uniforme, di cui parleremo
+diffusamente nel seguito (cfr. sezione \ref{DistribuzioneUniforme}).
+Nel caso in questione si trattava di una
+distribuzione uniforme tra $0$ ed $1$, ma \`e chiaro che, presi due numeri
+reali $a$ e $b$ (con $a < b$) possiamo definire la funzione di
+distribuzione uniforme tra $a$ e $b$.
+Seguendo le nostre convenzioni ci riferiremo ad essa con la notazione
+$u(x; a, b)$ o, quando gli estremi saranno chiari dal contesto,
+semplicemente $u(x)$. La lettera minuscola indica che si tratta di una
+variabile continua ($u$ sta per uniforme) ed i
+parametri della famiglia (in questo caso i due estremi $a$ e $b$) figurano
+accanto al nome della variabile ($x$) separati da un punto e virgola.}
+
+\end{exemplify}
+
+\noindent Senza eccedere in fantasia, riserveremo la lettera $P$ maiuscola per
+indicare la probabilit\`a che una variabile casuale discreta assuma un
+valore fissato, ad esempio $\prob{x =3}$ o semplicemente $\prob{3}$, ove non vi
+siano ambiguit\`a, o che una variabile casuale continua assuma un valore
+compreso in un certo intervallo, ad esempio $\prob{1 \leq x \leq 2}$.
+
+
+\subsection{\label{subsec:NormalizzazioneMedia}Definizioni di base:
+  normalizzazione e valor medio}
+
+Sia $x$ una variabile casuale, discreta o continua e sia $\prob{x}$ la
+distribuzione di probabilit\`a associata (nel caso in cui $x$ sia
+discreta), oppure $p(x)$ la densit\`a di probabilit\`a (se $x$ \`e
+continua).
+Elenchiamo di seguito alcune propriet\`a e definizioni che sono
+comuni a tutte le distribuzioni e che utilizzeremo ampiamente nel seguito.
+
+Per prima cosa vogliamo che, in accordo alle nostre definizioni
+di probabilit\`a, la somma su tutti i casi possibili della
+probabilit\`a sia uguale ad uno. Questo si esprime matematicamente imponendo
+la {\itshape condizione di normalizzazione}:
+\index{normalizzazione!di una funzione di distribuzione}
+\eqnlbox{
+\discvscont{1 =}
+{\dsum{\prob{x_i}}{i}{1}{n}}
+{\dintegral{p(x)}{x}{-\infty}{\infty}}
+}{eq:Normalizzazione}
+
+Definiamo la {\itshape media} $\mu$ di una variabile casuale $x$ come
+:\index{media!definizione}
+\eqnlbox{
+\discvscont{\mu =}
+{\dsum{x_i}{i}{1}{n} \cdot \prob{x_i}}
+{\dintegral{x \cdot p(x)}{x}{-\infty}{\infty}}
+}{eq:Media}
+Possiamo giustificare la plausibilit\`a di questa definizione applicandola
+al caso particolare di una variabile casuale discreta in cui i valori
+possibili $\fromto{x_1}{x_n}$ siano equiprobabili:
+$$
+\prob{x_1} = \prob{x_2} = \cdots =  \prob{x_n} = P_0
+$$
+In questo caso la condizione di normalizzazione:
+$$
+\dsum{\prob{x_i}}{i}{1}{n} = \dsum{P_0}{i}{1}{n} = n P_0 = 1
+$$
+impone che:
+$$
+P_0 = \frac{1}{n}
+$$
+e la media si scrive, secondo la (\ref{eq:Media}), come:
+$$
+\mu = \dsum{x_i}{i}{1}{n} \cdot \prob{x_i} =
+\dsum{x_i}{i}{1}{n} \cdot P_0 =
+\dsum{x_i}{i}{1}{n} \cdot \frac{1}{n} =
+\frac{1}{n} \dsum{x_i}{i}{1}{n}
+$$
+In questo caso, dunque, la media della variabile coincide proprio con la
+media aritmetica dei valori che essa pu\`o assumere.
+Notiamo ancora che, nel caso in cui i  valori $x_i$ non siano equiprobabili,
+essi vengono correttamente pesati in modo diverso nella (\ref{eq:Media}) a
+seconda della probabilit\`a corrispondente.
+
+\begin{exemplify}
+
+\example{\label{esem:MediaUnDado}Sia la variabile casuale $x$ l'uscita di un
+dado equo a sei facce, di cui abbiamo gi\`a scritto esplicitamente la
+funzione di distribuzione nell'esempio \ref{esem:DistribuzioneUnDado}.
+Quanto vale la media?\\
+Si ha:
+$$
+\mu = \dsum{x_i}{i}{1}{6} \cdot \prob{x_i} =
+\dsum{x_i}{i}{1}{6} \cdot \frac{1}{6} =
+\frac{1}{6} \cdot (1 + 2 + 3 + 4 + 5 + 6) = \frac{21}{6} = 3.5
+$$
+Notiamo esplicitamente che in questo caso il valor medio non coincide con
+nessuno dei valori possibili della variabile $x$.}
+
+\example{\label{esem:MediaDueDadi}Ripetiamo l'esercizio precedente nel caso
+in cui la variabile $x$ sia la somma delle uscite nel lancio di due dadi
+(cfr. esempio
+\ref{esem:DistribuzioneDueDadi}).
+\begin{eqnarray*}
+\mu &=& \dsum{x_i}{i}{1}{11} \cdot \prob{x_i} =\\
+&=& 2 \cdot \frac{1}{36} + 3 \cdot \frac{2}{36} +
+4 \cdot \frac{3}{36} + 5 \cdot \frac{4}{36} + 6 \cdot \frac{5}{36} +
+7 \cdot \frac{6}{36} + 8 \cdot \frac{5}{36} + \\
+&+& 9 \cdot \frac{4}{36} + 10 \cdot \frac{3}{36} + 11 \cdot \frac{2}{36} +
+12 \cdot \frac{1}{36} = \frac{252}{36} = 7
+\end{eqnarray*}
+che \`e esattamente il doppio di quanto calcolato poco fa per un singolo dado.
+Vedremo nel seguito che si tratta in effetti di un caso particolare
+di una relazione la cui validit\`a \`e molto pi\`u generale.}
+
+\example{\label{esem:MediaDistTriangolare}Sia $x$ una variabile casuale
+definita nell'intervallo $[0, 2]$ con densit\`a di pro\-ba\-bi\-li\-t\`a
+(cfr. figura \ref{fig:DistribuzioneTriangolare}):
+$$\displaystyle
+p(x) = \left \{ \begin{array}{ll}
+\displaystyle 1 - \frac{1}{2} x & 0 \leq x \leq 2\\
+\displaystyle 0                 & x < 0; \; x > 2
+\end{array} \right.
+$$
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/triangular.tex}}
+{Grafico della distribuzione triangolare definita nell'esempio
+\ref{esem:MediaDistTriangolare}. Si pu\`o verificare facilmente che la
+condizione di normalizzazione (\ref{eq:Normalizzazione}) \`e verificata.}
+{fig:DistribuzioneTriangolare}
+La media della distribuzione (che \`e un caso particolare di
+distribuzione triangolare) \`e data da:
+\begin{eqnarray*}
+\mu &=& \dintegral{x \cdot p(x)}{x}{-\infty}{\infty} =
+\dintegral{x \cdot \left(1 - \frac{1}{2}x \right)}{x}{0}{2} =
+\dintegral{x}{x}{0}{2} - \frac{1}{2} \dintegral{x^2}{x}{0}{2} =\\
+&=& \eval{\frac{x^2}{2}}{0}{2} -
+\eval{\frac{x^3}{6}}{0}{2} =
+2 - \frac{4}{3} = \frac{2}{3} \approx 0.666
+\end{eqnarray*}
+Notiamo esplicitamente come la media non coincida, in questo caso
+particolare, con il valor medio dell'intervallo in cui la
+variabile \`e definita (cio\`e $1$): essendo i valori prossimi
+allo $0$ {\itshape pi\`u probabili} degli altri, $\mu$ tende
+corrispondentemente a spostarsi verso lo $0$.}
+
+\end{exemplify}
+
+
+Definiamo {\itshape mediana} di una distribuzione quel valore
+$\median$ della variabile casuale tale che:\index{mediana!definizione}
+\eqnlbox{
+\discvscont{}
+{\prob{x \le \median} = \prob{x \ge \median}}
+{\dintegral{p(x)}{x}{-\infty}{\median} = \dintegral{p(x)}{x}{\median}{\infty}}
+}{eq:Mediana}
+Per una distribuzione di variabile casuale continua la mediana
+in generale esiste ed in pi\`u vale la condizione:
+$$
+\dintegral{p(x)}{x}{-\infty}{\median} =
+\dintegral{p(x)}{x}{\median}{\infty}  = \frac{1}{2}
+$$
+
+\caution{Nel caso di una variabile discreta non \`e detto che questo valore
+esista (cfr. esempio \ref{esem:MedianaUnDado}) per cui la trattazione \`e
+delicata.
+In letteratura si trovano diverse convenzioni tra le quali molto comune \`e la
+seguente: se le variabili costituiscono una popolazione finita a $(2N+1)$
+elementi, dove $N$ \`e un intero positivo, la mediana \`e il valore del
+$(N+1)^{mo}$  elemento ordinato. Se ci sono $2N$ elementi ogni valore
+dell'intervallo tra i due elementi di mezzo $N$ ed $N+1$ soddisfa la 2.17 e
+questa non unicit\`a \`e convenzionalmente rimossa definendo la mediana essere a
+met\`a tra i valori dell'$N^{mo}$ e dell'$(N+1)^{mo}$ elemento.}
+
+Notiamo che se la funzione di distribuzione \`e simmetrica,
+allora la mediana (se esiste) e la media coincidono.
+
+\begin{exemplify}
+
+\example{\label{esem:MedianaUnDado}Consideriamo, al solito, l'uscita di
+un dado equo a sei facce (cfr. esempio \ref{esem:DistribuzioneUnDado}).
+In questo caso, se seguiamo la definizione (\ref{eq:Mediana}),
+la mediana non esiste perch\'e non esiste alcun valore
+della variabile casuale per cui essa sia soddisfatta, come
+si pu\`o verificare facilmente:
+\begin{eqnarray}
+\frac{1}{6} = \prob{x \leq 1} &\neq& \prob{x \geq 1} = 1\nonumber\\
+\frac{2}{6} = \prob{x \leq 2} &\neq& \prob{x \geq 2} = \frac{5}{6}\nonumber\\
+\frac{3}{6} = \prob{x \leq 3} &\neq& \prob{x \geq 3} = \frac{4}{6}\nonumber\\
+\frac{4}{6} = \prob{x \leq 4} &\neq& \prob{x \geq 4} = \frac{3}{6}\nonumber\\
+\frac{5}{6} = \prob{x \leq 5} &\neq& \prob{x \geq 5} = \frac{2}{6}\nonumber\\
+1 = \prob{x \leq 6} &\neq& \prob{x \geq 6} = \frac{1}{6}\nonumber
+\end{eqnarray}}
+
+\example{Nel caso della distribuzione triangolare dell'esempio
+\ref{esem:MediaDistTriangolare} la mediana \`e data dall'equazione:
+\begin{eqnarray*}
+\frac{1}{2} &=& \dintegral{p(x)}{x}{-\infty}{\median} =
+\dintegral{\left( 1 - \frac{1}{2} x \right)}{x}{0}{\median} =
+\eval{x - \frac{x^2}{4}}{0}{\median} =\\
+&=& \mu_{\frac{1}{2}} - \frac{\median^2}{4}
+\end{eqnarray*}
+da cui:
+$$
+\median= 2 - \sqrt{2} \approx 0.586
+$$}
+
+\end{exemplify}
+
+Definiamo il {\itshape valore pi\`u probabile} (che alcuni
+autori chiamano anche \emph{moda}\index{moda}) come il valore
+della variabile casuale (se esiste) in corrispondenza del quale la funzione
+di distribuzione ha un massimo.
+
+\begin{exemplify}
+
+\example{Nel caso dell'uscita di un dado equo i sei valori possibili della
+variabile casuale sono equiprobabili per cui il valore pi\`u probabile
+non \`e definito.}
+
+\example{Nel caso della distribuzione triangolare dell'esempio
+\ref{esem:MediaDistTriangolare} il valore pi\`u probabile \`e
+$x = 0$.}
+
+\end{exemplify}
+
+
+\subsection{Valore di aspettazione o di previsione}
+\index{aspettazione!valore di}
+
+Consideriamo una funzione $f(x)$ di una variabile casuale $x$;
+definiamo il {\itshape valore di aspettazione} o {\itshape valore
+di previsione} di $f(x)$ come:
+\eqnlbox{
+\discvscont{\expect{f(x)} =}
+{\dsum{f(x_i)}{i}{1}{n}  \cdot \prob{x_i}}
+{\dintegral{f(x) \cdot p(x)}{x}{-\infty}{\infty}}
+}{eq:ValoreDiAspettazione}
+Si pu\`o vedere facilmente che, nel caso particolare $f(x)=x$, si ha:
+$$
+\expect{x} = \mu
+$$
+cio\`e il valor medio di una variabile $x$, definito dalla (\ref{eq:Media}),
+non \`e altro che il valore di aspettazione della variabile stessa.
+Per questo motivo il valore di aspettazione di una funzione $f(x)$ viene
+anche detto {\itshape valor medio} di $f(x)$.
+Elenchiamo di seguito alcune propriet\`a dell'operatore $E$.
+\begin{numlist}
+\item{Il valore di aspettazione di una costante $c$ \`e uguale alla costante
+stessa:
+$$
+\expect{c}= c
+$$
+}
+\item{L'operatore $E$ \`e un operatore lineare, nel senso che, se $c_1$ e $c_2$
+sono due costanti e $f(x)$ e $g(x)$ sono due funzioni di una variabile
+casuale $x$, allora:
+$$
+\expect{c_1\cdot f(x) + c_2\cdot g(x)} =
+c_1\cdot \expect{f(x)} + c_2\cdot \expect{g(x)}
+$$
+}
+\end{numlist}
+Sono casi particolari di quanto appena detto le seguenti espressioni,
+che ci saranno utili nel seguito:
+\begin{eqnarray*}
+\expect{c_1 \cdot f(x)} & = & c_1 \cdot \expect{f(x)}\\
+\expect{f(x) + g(x)}    & = & \expect{f(x)} + \expect{g(x)}
+\end{eqnarray*}
+La dimostrazione di queste propriet\`a sfrutta sostanzialmente
+la linearit\`a della sommatoria e dell'integrale.
+
+
+\subsection{Dispersione intorno alla media: varianza e deviazione standard}
+
+Ci poniamo in questo paragrafo il problema di determinare, data una variabile
+casuale $x$, una funzione $f(x)$ tale che il valore di aspettazione
+$\expect{f(x)}$ indichi quanto in media la variabile stessa tenda ad essere
+lontana dal suo valor medio (con lieve abuso di termini si usa anche
+dire: quanto la distribuzione sia {\itshape larga} o {\itshape stretta}).
+Come vedremo in seguito questo problema \`e strettamente legato alla
+valutazione dell'errore statistico da associare ad una serie di misure
+sperimentali di una variabile casuale.
+
+Ingenuamente potremmo pensare di prendere, quale funzione adatta allo scopo:
+$$
+f(x) = x - \mu
+$$
+cio\`e la funzione che rappresenta lo scarto
+dalla media; tuttavia si ha:
+$$
+\expect{x - \mu} = \expect{x} - \expect{\mu} = \mu - \mu = 0
+$$
+Quindi questo valore di aspettazione di fatto non fornisce informazione
+alcuna. D'altra parte era logico aspettarselo in quanto gli scarti per
+difetto tendono statisticamente a compensare quelli per eccesso.
+Una seconda possibilit\`a \`e data da
+$$
+f(x)=\abs{x - \mu}
+$$
+Si tratta di una quantit\`a assolutamente {\itshape ragionevole}
+il cui difetto maggiore risiede nel non essere particolarmente comoda
+per i calcoli.
+In effetti quello che si usa di solito \`e 
+$$
+f(x) = (x - \mu)^2
+$$
+Definiamo allora {\itshape varianza} di una distribuzione la quantit\`a:
+\index{varianza!definizione}
+\eqnlbox{
+\discvscont{\sigma^2 = \expect{(x - \mu)^2} =}
+{\dsum{(x_i - \mu)^2 \cdot \prob{x_i}}{i}{1}{n}}
+{\dintegral{(x-\mu)^2 \cdot p(x)}{x}{-\infty}{\infty}}
+}{eq:Varianza}
+e la {\itshape deviazione standard} come la radice quadrata della varianza:
+\index{deviazione standard!definizione}
+\eqnlbox{
+\sigma = \sqrt{\sigma^2}
+}{eq:Stdev}
+
+\begin{exemplify}
+
+\example{\label{esem:VarianzaUnDado}Sia la variabile casuale $x$ l'uscita
+di un dado equo a sei facce (cfr. esempio \ref{esem:DistribuzioneUnDado} e
+\ref{esem:MediaUnDado}). La varianza della funzione di distribuzione si scrive:
+\begin{eqnarray*}
+\sigma^2 &=& \dsum{(x_i - \mu)^2 \cdot \prob{x_i}}{i}{1}{6}  =
+\dsum{\left(x_i - \frac{7}{2}\right) ^2 \cdot \frac{1}{6}}{i}{1}{6}  =\\
+&=& \left(\frac{25}{4} + \frac{9}{4} + \frac{1}{4} +
+\frac{1}{4} + \frac{9}{4} + \frac{25}{4} \right) \cdot \frac{1}{6} =
+\frac{35}{2} \cdot \frac{1}{6} = \frac{35}{12} \approx 2.917
+\end{eqnarray*}
+e la deviazione standard:
+$$
+\sigma = \sqrt{\frac{35}{12}} \approx 1.708
+$$}
+
+\example{\label{esem:VarianzaDueDadi}Sia la variabile $x$ la somma delle
+uscite nel lancio di due dadi (cfr. esempio \ref{esem:DistribuzioneDueDadi}
+e \ref{esem:MediaDueDadi}). la varianza \`e:
+\begin{eqnarray*}
+\sigma^2 &=& \dsum{(x_i - \mu)^2 \cdot \prob{x_i}}{i}{1}{11} =
+\dsum{(x_i - 7)^2 \cdot \prob{x_i}}{i}{1}{11} = \\
+&=& 25 \cdot \frac{1}{36} + 16 \cdot \frac{2}{36} +
+9 \cdot \frac{3}{36} + 4 \cdot \frac{4}{36} + 1 \cdot \frac{5}{36} + 0
+\cdot \frac{6}{36} + 1 \cdot \frac{5}{36} + \\
+&+& 4 \cdot \frac{4}{36} + 9 \cdot \frac{3}{36} + 16 \cdot \frac{2}{36} +
+25 \cdot \frac{1}{36} = \frac{210}{36} = \frac{35}{6} \approx 5.833
+\end{eqnarray*}
+che \`e esattamente il doppio di quanto calcolato poco fa per un dado.
+Vedremo nel seguito che, come per la media (cfr. esempio
+\ref{esem:MediaDueDadi}), si tratta in effetti di un caso particolare
+di un risultato importante della statistica la cui validit\`a \`e molto
+pi\`u generale.
+La deviazione standard \`e:
+$$
+\sigma = \sqrt{\frac{35}{6}} \approx 2.415
+$$}
+
+\example{\label{esem:VarianzaDistTriangolare}Nel caso della distribuzione
+triangolare dell'esempio \ref{esem:MediaDistTriangolare} la varianza \`e:
+\begin{eqnarray*}
+\sigma^2 &=& \dintegral{(x-\mu)^2 \cdot p(x)}{x}{-\infty}{\infty}=
+\dintegral{\left(x-\frac{2}{3}\right)^2\cdot
+\left(1-\frac{1}{2}x\right)}{x}{0}{2} =\\
+&=&\dintegral{\left( -\frac{1}{2}x^3 + \frac{5}{3}x^2 - \frac{14}{9}x +
+\frac{4}{9} \right)}{x}{0}{2} =
+\eval{-\frac{1}{8}x^4 + \frac{5}{9}x^3 - \frac{14}{18}x^2 +
+\frac{4}{9} x}{0}{2} =\\
+&=& \left( -2 + \frac{40}{9} -\frac{28}{9} + \frac{8}{9} \right) = \frac{2}{9}
+\approx 0.222
+\end{eqnarray*}
+e la deviazione standard:
+$$
+\sigma = \sqrt{\frac{2}{9}} \approx 0.471
+$$}
+
+\end{exemplify}
+
+\noindent Partendo dalla definizione di varianza data in (\ref{eq:Varianza})
+possiamo scrivere:
+\begin{eqnarray*}
+\sigma^2 & = & \expect{(x - \mu)^2} = \expect{(x^2 + \mu^2 - 2x\mu)} =\\
+& = & \expect{x^2} + \expect{\mu^2} - \expect{2x\mu} =\\
+& = & \expect{x^2} + \mu^2 - 2\mu \cdot \expect{x} =\\
+& = & \expect{x^2} + \mu^2 - 2\mu^2 = \expect{x^2} - \mu^2
+\end{eqnarray*}
+Siamo arrivati cos\`i all'importante risultato:\index{varianza!calcolo della}
+\eqnlbox{
+\sigma^2 = \expect{x^2} - \mu^2
+}{eq:Varianza2}
+Anticipiamo sin da ora che la (\ref{eq:Varianza2}) risulta spesso
+utile nei calcoli e la useremo sovente nel seguito.
+
+\begin{exemplify}
+
+\example{\label{esem:VarianzaDistTriangolare2}Ricalcoliamo la varianza della 
+distribuzione triangolare dell'esempio \ref{esem:MediaDistTriangolare}
+utilizzando la (\ref{eq:Varianza2}):
+\begin{eqnarray*}
+\expect{x^2} & = & \dintegral{x^2 \cdot p(x)}{x}{-\infty}{\infty} =
+\dintegral{x^2\cdot \left(1-\frac{1}{2}x\right)}{x}{0}{2} =
+\dintegral{\left( x^2 - \frac{1}{2}x^3 \right)}{x}{0}{2}  =\\
+&=&\eval{\frac{1}{3}x^3 - \frac{1}{8}x^4}{0}{2} =
+\left( \frac{8}{3} - 2 \right) = \frac{2}{3}
+\end{eqnarray*}
+per cui, ricordando che $\mu = \frac{2}{3}$, come mostrato nell'esempio
+\ref{esem:MediaDistTriangolare}:
+$$
+\sigma^2 = \expect{x^2} - \mu^2 = \frac{2}{3} - \frac{4}{9} = \frac{2}{9}
+$$
+che \`e proprio il risultato trovato nell'esempio
+\ref{esem:VarianzaDistTriangolare}.}
+
+\end{exemplify}
+
+\subsection{\label{subsec:HWHM}La semilarghezza a met\`a altezza}
+Sebbene la nozione di semilarghezza a met\`a altezza non si applichi 
+in modo banale a tutte le distribuzioni, si tratta di una quantit\`a cos\`i
+spesso usata in letteratura che vale la pena, a questo punto, accennarvi
+con un certo dettaglio.
+Supporremo, nel seguito di questo paragrafo, di avere a che fare con una
+variabile casuale continua $x$ la cui funzione di distribuzione $p(x)$
+presenti un solo massimo locale (in caso contrario la trattazione si
+complicherebbe).
+Si tratta di un'assunzione assolutamente ragionevole, che come vedremo
+sar\`a soddisfatta dalla maggior parte delle distribuzioni che incontreremo nel
+seguito.
+Nelle nostre ipotesi ci sono esattamente due valori di $x$ (che chiameremo
+qui $x_+$ e $x_-$) per cui il valore della funzione di distribuzione \`e
+esattamente la met\`a del valore che la funzione stessa assume nel massimo
+(che sappiamo essere unico).
+In altre parole possiamo dire che la retta orizzontale che interseca l'asse $y$
+in corrispondenza della met\`a dell'\emph{altezza} della funzione di
+distribuzione intersecher\`a il grafico della funzione stessa proprio nei due
+punti $x_+$ e $x_-$ (cfr. figura \ref{fig:HWHM}).
+
+\panelfig
+{\onebyonetexfig{./pp_statistica/figure/fwhm.tex}}
+{Significato geometrico della semilarghezza a met\`a altezza.
+Notiamo esplicitamente che non \`e necessario che la funzione di distribuzione
+sia simmetrica rispetto al valor medio.}
+{fig:HWHM}
+
+\noindent Definiamo allora la semilarghezza a met\`a altezza, che si trova
+spesso indicata con l'acronimo $\hwhm$\index{HWHM!definizione}%
+\footnote{
+$\hwhm$ sta qui per l'espressione inglese \emph{Half Width at Half Maximum},
+che significa appunto semilarghezza a met\`a altezza. 
+}%
+, come:
+\eqnlbox
+{\hwhm = \frac{\abs{x_+ - x_-}}{2}}
+{eq:HWHM}
+Spesso, in letteratura, si usa anche la larghezza intera a met\`a altezza,
+che si indica con l'acronimo $\fwhm$%
+\footnote{
+Corrispondentemente $\fwhm$ sta per \emph{Full Width at Half Maximum}.
+}
+e si definisce banalmente come:
+\eqnlbox{
+\fwhm = \abs{x_+ - x_-}
+}{eq:FWHM}
+
+\begin{exemplify}
+
+\example{\label{esem:HWHMDistTriangolare}Torniamo ancora una volta alla
+distribuzione triangolare definita nell'esercizio
+\ref{esem:MediaDistTriangolare}. In questo caso abbiamo banalmente:
+\begin{eqnarray*}
+x_- &=& 0\\
+x_+ &=& 1
+\end{eqnarray*}
+per cui la semilarghezza a met\`a altezza \`e:
+$$
+\hwhm = \frac{1}{2}
+$$
+Utilizzando il risultato dell'esempio \ref{esem:VarianzaDistTriangolare}
+possiamo anche calcolare il rapporto:
+$$
+\frac{\hwhm}{\sigma} = \frac{1}{2} \cdot \sqrt{\frac{9}{2}} =
+\sqrt{\frac{9}{8}} \approx 1.06
+$$
+che \`e estremamente vicino all'unit\`a.}
+
+\end{exemplify}
+
+\noindent Il fatto che, nell'esempio precedente, il rapporto tra la
+semilarghezza e la deviazione standard della distribuzione fosse cos\`i
+prossimo ad $1$ non deve stupire ed \`e solamente un caso particolare
+di un risultato che, per lo meno a livello qualitativo,
+ha una validit\`a molto pi\`u generale.
+In effetti abbiamo gi\`a detto che la deviazione standard (proprio
+come la $\hwhm$), costituisce una stima di quanto una data distribuzione sia
+\emph{larga}, in un senso che abbiamo precisato nel paragrafo precedente.
+Se scriviamo allora:
+\eqn{
+\hwhm = \varepsilon \sigma
+}
+(cosa che \`e sempre possibile, a patto di scegliere opportunamente la costante
+$\varepsilon$) possiamo precisare quanto ottenuto fino ad ora dicendo che
+$\varepsilon$, pur dipendendo dalla particolare forma della distribuzione,
+\`e dell'ordine dell'unit\`a. Notiamo esplicitamente che, nota la forma
+analitica della funzione di distribuzione, $\varepsilon$ pu\`o essere
+calcolato come nell'esempio \ref{esem:HWHMDistTriangolare}; in ogni caso,
+comunque, la semilarghezza a met\`a altezza costituisce una stima pi\`u o
+meno accurata (dipende dai dettagli della funzione di distribuzione) della
+deviazione standard.
+
+
+\subsection{Momenti di una distribuzione\index{momenti!di una distribuzione}}
+Normalizzazione, media e varianza sono casi particolari dei pi\`u
+generali {\itshape momenti centrati di ordine n} cos\`i definiti:
+\eqnlbox{
+\mom{n}{a} = \expect{(x-a)^n}
+}{eq:Momenti}
+Normalizzazione e media sono rispettivamente i momenti {\itshape centrati
+nell'origine} di ordine zero ed uno. Infatti il momento di ordine $n$
+centrato nell'origine si scrive come:
+$$
+\mom{n}{0} = \expect{(x - 0)^n} = \expect{x^n}
+$$
+ed \`e immediato verificare che
+\begin{eqnarray*}
+\mom{0}{0} & = & 1\\
+\mom{1}{0} & = & \mu
+\end{eqnarray*}
+I momenti di ordine generico rispetto al valor medio $\mu$ ({\itshape momenti
+centrati nel valor medio}) sono cos\`i spesso usati da meritare una notazione
+dedicata. Nel seguito ogni volta che ometteremo il valore attorno a cui
+un momento \`e centrato, intenderemo il momento stesso centrato attorno
+al valor medio:
+\eqnbox{
+\mommean{n} \equiv \mom{n}{\mu} = \expect{(x - \mu)^n}
+}
+Con questo significato dei termini si ha, come \`e immediato verificare:
+\begin{eqnarray*}
+\mommean{0} & = & \expect{1} = 1\\
+\mommean{1} & = & \expect{(x - \mu)^1} = 0\\
+\mommean{2} & = & \expect{(x - \mu)^2} = \sigma^2
+\end{eqnarray*}
+Mediante il momento di ordine tre si costruisce il parametro
+adimensionale:
+\eqnlbox{
+\gamma_1 = \frac{\mommean{3}}{\sigma^3}
+}{eq:Skewness}
+chiamato coefficiente di asimmetria o {\itshape skewness}.\index{skewness}
+Infatti $\mommean{3}$ \`e nullo quando la distribuzione \`e simmetrica
+rispetto a $\mu$.
+
+\begin{exemplify}
+
+\example{\label{esem:SkewnessDistTriangolare}Torniamo ancora una volta sulla
+distribuzione triangolare dell'esempio \ref{esem:MediaDistTriangolare} e
+calcoliamone il coefficiente di asimmetria. Il momento terzo centrato nel valor
+medio \`e:
+\begin{eqnarray*}
+\mommean{3} &=& \dintegral{(x-\mu)^3 \cdot p(x)}{x}{-\infty}{\infty} =
+\dintegral{\left(x-\frac{2}{3}\right)^3\cdot
+\left(1-\frac{1}{2}x\right)}{x}{0}{2} =\\
+&=&\dintegral{\left( -\frac{1}{2}x^4 + 2x^3 - \frac{8}{3}x^2 +
+\frac{40}{27}x - \frac{8}{27} \right)}{x}{0}{2} =\\
+&=& \eval{-\frac{1}{10}x^5 + \frac{1}{2}x^4 - \frac{8}{9}x^3 +
+\frac{20}{27}x^2 - \frac{8}{27} x}{0}{2} =\\
+&=& \left( - \frac{16}{5} + 8 - \frac{64}{9} + \frac{80}{27} -
+\frac{16}{27} \right) = \frac{8}{135}
+\end{eqnarray*}
+e la skewness:
+$$
+\gamma_1 = \frac{M_3}{\sigma^3} = \frac{8}{135} \cdot
+\left( \frac{9}{2} \right)^{\frac{3}{2}} = \frac{2^{\frac{3}{2}}}{5}
+\approx 0.566
+$$
+Come ci aspettavamo, non essendo la distribuzione simmetrica
+rispetto alla media, il coefficiente di asimmetria risulta diverso da
+zero. Il segno (positivo) ci dice che la zona con minore
+densit\`a di probabilit\`a sta a destra del valor medio.}
+
+\end{exemplify}
+
+Mediante il momento di ordine quattro $\mommean{4}$ si costruisce il
+parametro adimensionale:
+\eqnlbox{
+\gamma_2 = \frac{\mommean{4}}{\sigma^4}
+}{eq:Curtosi}
+chiamato anche {\itshape curtosi}, che misura quanto \`e piatta una
+distribuzione (quanto pi\`u \`e piatta tanto minore \`e $\gamma_2$)
+\index{curtosi}.
+
+Nota la funzione di distribuzione, si possono conoscere i momenti di tutti gli
+ordini, purch\'e esistano.
+Per inciso notiamo che \`e vero anche il viceversa:  se si
+conoscono tutti i momenti di una certa variabile casuale \`e possibile
+ottenere la funzione di distribuzione di tale variabile.
+
+
+\subsection{Discussione e cenno al Teorema di Tschebyscheff
+\index{Tschebyscheff!teorema di}}
+
+Quando si hanno misure i cui risultati fluttuano, il risultato della
+misura \`e una variabile casuale funzione delle condizioni sperimentali.
+Come vedremo in dettaglio pi\`u avanti
+la media di questa variabile casuale \`e il valore pi\`u
+significativo del risultato. La deviazione standard misura
+l'incertezza da attribuire a questo risultato.
+Il fatto che si possa assumere come valore buono la media e come misura
+dell'incertezza la deviazione standard \`e fondato su di un importante teorema
+di statistica dovuto a Tschebyscheff.
+\begin{teo}[di Tschebyscheff]
+Sia $x$ una variabile casuale tale che
+esistano finiti $\mu$ e $\sigma$. Detto $k$ un numero positivo, si ha:
+\eqnlbox{
+\prob{\abs{x - \mu} \ge k\sigma} \le \frac{1}{k^2}
+}{eq:TeoremaDiTschebyscheff}
+\end{teo}
+\noindent cio\`e \`e poco probabile avere grandi deviazioni dalla media e
+tali deviazioni sono convenientemente misurate in unit\`a di $\sigma$.
+Il teorema si dimostra notando che, se nella definizione di $\sigma^2$
+(che per comodit\`a scriviamo nel caso continuo):
+$$
+\sigma^2=\dintegral{(x-\mu)^2 \cdot p(x)}{x}{-\infty}{\infty}
+$$
+mettiamo al posto di $(x-\mu)^2$ zero se esso \`e minore di $k^2\sigma^2$
+(dove $k$ \`e una costante assegnata) e $k^2\sigma^2$ negli altri casi,
+otteniamo:
+$$
+\sigma^2 \ge k^2\sigma^2\dintegral{p(x)}{x}{\abs{x - \mu} \ge k\sigma}{}
+=k^2\sigma^2\cdot \prob{\abs{x - \mu} \ge k\sigma}
+$$
+che \`e esattamente la relazione (\ref{eq:TeoremaDiTschebyscheff}).
+
+\begin{exemplify}
+
+\example{\label{esem:Tschebyscheff}Sia $x$ una variabile casuale distribuita
+secondo la funzione triangolare dell'esempio \ref{esem:MediaDistTriangolare}.
+Ci chiediamo quale sia la probabilit\`a che $x$ disti pi\`u di $2$ deviazioni
+standard dal suo valor medio.
+Notiamo anzitutto che $x$ non pu\`o essere minore di $\mu-2\sigma$
+poich\'e questo valore \`e escluso dall'intervallo su cui la
+funzione di distribuzione \`e definita. Il valore cercato \`e perci\`o:
+\begin{eqnarray*}
+\prob{\abs{x - \mu} \ge 2\sigma} &=& 
+\dintegral{p(x)}{x}{\mu + 2\sigma}{\infty} =
+\dintegral{\left( 1-\frac{1}{2}x \right)}{x}
+{\frac{2}{3} + 2 \sqrt{\frac{2}{9}}}{2} =\\
+&=& \eval{x-\frac{1}{4} x^2}{\frac{2}{3} + 2 \sqrt{\frac{2}{9}}}{2} =
+\frac{6-4\sqrt{2}}{9} \approx 0.038
+\end{eqnarray*}
+Il teorema di Tschebyscheff fornisce in questo caso il limite
+superiore:
+$$
+\prob{\abs{x - \mu} \ge 2\sigma} \le \left( \frac{1}{2}\right)^2 =
+\frac{1}{4} = 0.25
+$$
+che \`e ampiamente soddisfatto.}
+
+\end{exemplify}
+
+\noindent L'esempio \ref{esem:Tschebyscheff} mette in luce come, molto
+spesso, il teorema di Tschebyscheff fornisca un limite superiore
+piuttosto {\itshape blando} alla probabilit\`a che una variabile casuale
+si discosti pi\`u di una quantit\`a fissata dal proprio valor medio
+(nel caso in questione \`e, a 2 $\sigma$, il 25\% contro un valore effettivo
+di meno del 4\%).
+In effetti, nota la funzione di distribuzione, la quantit\`a
+$\prob{\abs{x-\mu} \ge k\sigma}$ pu\`o essere calcolata esplicitamente
+per qualsiasi valore di $k$.
+D'altra parte il teorema \`e assolutamente generale, nel senso che vale
+per una funzione di distribuzione arbitraria.
+
+
+\subsection{Cenno alla teoria dei campioni}
+Vediamo quali sono le ipotesi che si fanno applicando i concetti statistici
+fino ad ora trattati ai risultati delle misure sperimentali:
+\begin{enumerate}
+\item{
+L'insieme delle misure sperimentali (che non \`e che una piccola parte di
+tutte le misure effettuabili) \`e un {\itshape campione} di tutte le possibili
+misure.
+}
+\item{
+Si postula l'esistenza di una distribuzione dei risultati di tutte le misure
+effettuabili: questa viene chiamata \emph{distribuzione generatrice}
+(\emph{parent distribution}).
+}
+\item{Dal campione dobbiamo ricavare la migliore stima della media $\mu$ e
+della varianza $\sigma^2$ della distribuzione generatrice, che sono ignote.
+}
+\end{enumerate}
+Questo rientra in un discorso generale nell'ambito della teoria dei
+campioni, che qui non tratteremo.
+Per completezza diamo qui le espressioni per la migliore stima
+(a partire da un campione finito di misure) della media e della deviazione
+standard della distribuzione generatrice, che saranno ricavate nel paragrafo
+\ref{sec:MediaVarCampione}:
+\begin{eqnarray*}
+m &=& \frac{1}{n}\dsum{x_i}{i}{1}{n}\\
+s &=& \sqrt{\frac{1}{n-1}\dsum{(x_i - m)^2}{i}{1}{n}}
+\end{eqnarray*}
+
+
+Notiamo che molti testi postulano l'esistenza di un {\itshape valore vero}
+della grandezza da misurare. Questo postulato \`e non solo non necessario,
+ma anche sbagliato: non esiste il {\itshape valore vero di una grandezza 
+fisica}.
+Quanto pi\`u si raffinano gli strumenti tanto meglio si scopre che le
+grandezze fisiche fluttuano: al limite in cui si arriva alla struttura atomica
+il principio di indeterminazione afferma che il risultato \`e inevitabilmente
+governato da leggi probabilistiche. Quindi poniamo il seguente postulato:
+non esiste un valore vero, ma esiste il valore medio della distribuzione
+generatrice.
+Questo  \`e dunque il valore che \`e pi\`u ragionevole accettare per
+rappresentare la grandezza in questione.

@@ -1,0 +1,1770 @@
+\chapter{Distribuzioni}
+\label{chap:Distribuzioni}
+\mt
+
+Questo capitolo raccoglie alcuni risultati fondamentali circa le
+funzioni di distribuzione pi\`u comunemente usate in fisica.
+
+
+\section{Distribuzione binomiale}
+\index{binomiale!distribuzione}
+
+\subsection{Premessa: i coefficienti binomiali}
+
+Richiamiamo brevemente alcune definizioni che ci saranno utili nel
+seguito. Dato un numero intero $k$, il suo fattoriale \`e definito come:
+$$
+k! = k \cdot (k - 1) \cdot (k - 2) \cdots 2 \cdot 1
+$$
+Inoltre:
+$$
+0!=1!=1
+$$
+Il numero di possibili combinazioni di $n$ elementi $k$ a $k$,
+anche detto coefficiente binomiale $n$ su $k$ si pu\`o scrivere come:
+\eqnl{
+\binom{n}{k} = \frac{n \cdot (n-1)\cdots (n - k + 1)}{k!} =
+\binomial{n}{k}
+}{eq:CoefficienteBinomiale}
+Utilizzando i coefficienti binomiali \`e possibile scrivere in modo
+estremamente compatto la formula per lo sviluppo della potenza
+n-esima di un binomio:
+\eqnl{
+(x + y)^n=\dsum{\binom{n}{k}x^k y^{n-k}}{k}{0}{n}
+}{eq:PotenzaDiBinomio}
+Per inciso notiamo che, nel caso particolare $x = y = 1$, l'equazione
+precedente fornisce l'interessante risultato:
+\eqnl{
+\dsum{\binom{n}{k}}{k}{0}{n} = 2^n
+}{eq:SommaCoeffBinomiali}
+
+
+\subsection{La distribuzione binomiale}
+
+Consideriamo $n$ realizzazioni indipendenti di uno stesso
+esperimento $E$ che abbia esattamente due esiti distinti possibili,
+$E_1$ ed $E_2$, con probabilit\`a:
+\begin{eqnarray*}
+\prob{E_1} & = & p\\
+\prob{E_2} & = & q = 1 - p
+\end{eqnarray*}
+Dato un generico numero intero $k$ con $k \in \cinterval{0}{n}$, la
+probabilit\`a di ottenere esattamente $k$ volte l'evento $E_1$
+\`e data dalla distribuzione binomiale
+
+\eqnlbox{
+\binomialpdf{k}{n, p} = \binom{n}{k}p^k q^{n-k}
+}{eq:Binomiale}
+
+\noindent Notiamo esplicitamente che, nella formula, $k$ \`e la
+variabile casuale, mentre $n$ e $p$ sono parametri fissati dal
+particolare problema sotto studio (come di consueto la variabile
+\`e separata dai parametri da un punto e virgola); $q$ non \`e un 
+parametro indipendente in quanto \`e univocamente fissato da $p$.
+Qui e nel seguito scriviamo $q$ anzich\'e $(1 - p)$ solo per avere
+formule pi\`u compatte.
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/binomial_4_1-6.tex}
+{Grafico della distribuzione binomiale per \hbox{$n=4$} e
+\hbox{$p=\frac{1}{6}$}.}
+{./pp_distribuzioni/figure/binomial_4_1-2.tex}
+{Grafico della distribuzione binomiale per \hbox{$n=4$} e
+\hbox{$p=\frac{1}{2}$}.}
+{./pp_distribuzioni/figure/binomial_10_1-6.tex}
+{Grafico della distribuzione binomiale per \hbox{$n=10$} e
+\hbox{$p=\frac{1}{6}$}.}
+{./pp_distribuzioni/figure/binomial_10_1-2.tex}
+{Grafico della distribuzione binomiale per \hbox{$n=10$} e
+\hbox{$p=\frac{1}{2}$}.}
+{fig:DistribuzioneBinomiale}}
+{Grafici della distribuzione binomiale per diversi valori di $n$
+e $p$. Come discuteremo in dettaglio nel seguito, per alti valori di $np$ la
+distribuzione binomiale tende ad assumere una classica forma a campana.}
+{fig:DistribuzioneBinomiale}
+
+Supponiamo, per fissare le idee, che l'evento sia il risultato del
+lancio di una moneta. I modi nei quali l'evento pu\`o realizzarsi sono due:
+testa o croce, che indichiamo qui con $T$ e $C$. Se la moneta \`e
+equa, essi sono equiprobabili:
+\begin{eqnarray*}
+\prob{T} & = & p = \smallfrac{1}{2}\\
+\prob{C} & = & q = 1 - p = \smallfrac{1}{2}
+\end{eqnarray*}
+La probabilit\`a che in $n$ lanci i primi $k$ diano $T$ e gli altri $(n - k)$
+diano $C$ \`e:
+$$
+\prob{\overbrace{TTTTT\ldots}^{k~{\rm volte}}
+\overbrace{CCCCC\ldots}^{n - k~{\rm volte}}} =
+p^k q^{n - k} = \left( \frac{1}{2} \right)^n
+$$
+per\`o avere $k$ teste esattamente in questo ordine \`e solo uno dei tanti
+possibili modi nei quali si possono avere $k$ volte $T$ e $(n-k)$ volte $C$.
+Potremmo avere, tanto per fare un esempio, $C$ nei primi $(n - k)$ lanci e
+$T$ nei rimanenti $k$:
+$$
+\prob{\overbrace{CCCCC\ldots}^{n - k~{\rm volte}}
+\overbrace{TTTTT\ldots}^{k~{\rm volte}}} =
+p^k q^{n - k} = \left( \frac{1}{2} \right)^n
+$$
+insieme a molte altre combinazioni \emph{miste}, tutte con la stessa
+probabilit\`a $p^k q^{n - k}$. Si tratta dunque di contare queste combinazioni;
+e il numero totale di modi un cui possiamo \emph{disporre} $k$ teste in $n$
+lanci \`e dato proprio dal numero di combinazioni di $n$ elementi $k$ a $k$,
+cos\`i come scritto nella (\ref{eq:CoefficienteBinomiale}).
+Da cui segue immediatamente la distribuzione binomiale (\ref{eq:Binomiale}).
+
+\begin{exemplify}
+
+\example{Supponiamo di lanciare una moneta per $4$ volte. Le sequenze possibili
+sono complessivamente $2^4 = 16$ e sono qui di seguito elencate:
+$TTTT$, $CTTT$, $TCTT$, $CCTT$, $TTCT$, $CTCT$, $TCCT$, $CCCT$,
+$TTTC$, $CTTC$, $TCTC$, $CCTC$, $TTCC$, $CTCC$, $TCCC$, $CCCC$.
+Se la moneta non \`e truccata ognuna di queste combinazioni ha la stessa
+probabilit\`a $P$di uscire:
+$$
+P = \left(\frac{1}{2}\right)^4 = \frac{1}{16}
+$$
+Le combinazioni in cui $T$ (testa) figura
+esattamente due volte sono $6$ (per l'esattezza le combinazioni $4$, $6$, $7$,
+$10$, $11$ e $13$, numerate nell'ordine in cui esse sono riportate sopra).
+Notiamo esplicitamente che:
+$$
+6 = \binom{4}{2}
+$$
+La probabilit\`a di avere due volte testa in quattro lanci pu\`o essere
+calcolata esplicitamente come il rapporto tra casi favorevoli e casi possibili:
+$$
+P = \frac{6}{16} = \frac{3}{8}
+$$
+Pi\`u semplicemente, la (\ref{eq:Binomiale}) si applica direttamente
+al nostro caso, fornendo (ovviamente) lo stesso risultato:
+$$
+\binomialpdf{2}{4, \tinyfrac{1}{2}} =
+\binom{4}{2} \cdot \left( \smallfrac{1}{2} \right)^2
+\cdot \left( \smallfrac{1}{2} \right)^{4 - 2} =
+6 \cdot \frac{1}{4} \cdot \frac{1}{4} = \frac{6}{16} = \frac{3}{8}
+$$}
+
+\end{exemplify}
+
+
+\subsection{Normalizzazione, media e varianza}
+
+Sfruttando la relazione (\ref{eq:PotenzaDiBinomio}) \`e semplice
+dimostrare che la condizione di normalizzazione (\ref{eq:Normalizzazione})
+\`e soddisfatta:
+\eqnl{
+\dsum{\binomialpdf{k}{n, p}}{k}{0}{n} =
+\dsum{\binom{n}{k}p^k q^{n-k}}{k}{0}{n} =
+(p + q)^n = 1^n = 1
+}{eq:NormalizzazioneBinomiale}
+
+La media \index{media!della distribuzione binomiale} si calcola secondo la
+(\ref{eq:Media}):
+$$
+\mu = \expect{k} = \dsum{k \cdot \binomialpdf{k}{n, p}}{k}{0}{n} =
+\dsum{k \cdot \binom{n}{k}p^k q^{n-k}}{k}{0}{n} = 
+\dsum{k \cdot \binomial{n}{k} \cdot p^k q^{n-k}}{k}{0}{n}
+$$
+Il termine con $k = 0$ non contribuisce alla somma perch\'e il $k$
+\`e a moltiplicare, per cui possiamo riscrivere l'espressione precedente
+facendo partire la somma da $1$:
+$$
+\mu = \dsum{k \cdot \binomial{n}{k}}{k}{1}{n} \cdot p^k q^{n - k} =
+\dsum{k \cdot \frac{np \cdot (n -1)!}{k \cdot (k - 1)! (n - k)!}}{k}{1}{n}
+\cdot p^{k-1} q^{n - k}
+$$
+Adesso possiamo portare fuori dal segno di sommatoria il termine $np$ a
+moltiplicare, dato che non dipende dall'indice $k$ su cui si somma, e
+semplificare il $k$ che \`e sia al numeratore che al denominatore:
+$$
+\mu = np \dsum{\frac{(n - 1)!}{(k - 1)!(n - k)!}}{k}{1}{n}
+\cdot p^{k - 1} q^{n - k}
+$$
+Ponendo $h = k - 1$ e $m = n - 1$ si ottiene:
+$$
+\mu = np \dsum{\binomial{m}{h}}{h}{0}{m} \cdot p^h q^{m - h} = 
+np \dsum{\binom{m}{h}}{h}{0}{m} p^h q^{m - h}
+$$
+Nell'ultima sommatoria riconosciamo la condizione di normalizzazione
+(\ref{eq:NormalizzazioneBinomiale}), per cui concludiamo:
+\eqnlbox{
+\mu = np
+}{eq:BinomialeMedia}
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/binomial_detailed.tex}}
+{Grafico della distribuzione binomiale per $n = 10$ e $p = \frac{1}{6}$;
+rappresenta, per fissare le idee, la probabilit\`a che in $10$ lanci di un dado
+un numero dato (ad esempio il $5$) esca $k$ volte ($k = 0, \ldots, 10$).
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneBinomialeDettagliata}
+
+Per stimare la varianza \index{varianza!della distribuzione binomiale}
+utilizziamo la (\ref{eq:Varianza2}); il valore di aspettazione di $k^2$ 
+si calcola come:
+$$
+\expect{k^2} = \dsum{k^2 \cdot \binomialpdf{k}{n, p}}{k}{0}{n} =
+\dsum{k^2 \cdot \binom{n}{k}p^k q^{n-k}}{k}{0}{n} =
+\dsum{k^2 \cdot \binomial{n}{k} \cdot p^k q^{n-k}}{k}{0}{n}
+$$
+Esattamente come prima possiamo far partire la somma da $1$, dato che
+il primo termine \`e nullo:
+\begin{eqnarray*}
+\expect{k^2} & = & \dsum{k^2 \cdot \binomial{n}{k}}{k}{1}{n}
+\cdot p^k q^{n - k} =
+\dsum{k^2 \cdot \frac{np \cdot (n -1)!}{k \cdot (k - 1)! (n - k)!}}{k}{1}{n}
+\cdot p^{k-1} q^{n - k} =\\
+& = & np \dsum{k \cdot \frac{(n - 1)!}{(k - 1)!(n - k)!}}{k}{1}{n}
+\cdot p^{k - 1} q^{n - k}
+\end{eqnarray*}
+E ponendo, come prima, $h = k - 1$ e $m = n - 1$ si ottiene:
+$$
+\expect{k^2} = np\dsum{(h + 1) \cdot \binomialpdf{h}{m, p}}{h}{0}{m} =
+np \left[ \dsum{h\cdot \binomialpdf{h}{m, p}}{h}{0}{m} +
+\dsum{\binomialpdf{h}{m, p}}{h}{0}{m} \right] = np(mp + 1)
+$$
+Ricordando che $m = n - 1$ si ha alla fine:
+$$
+\expect{k^2} = np(np - p + 1)
+$$
+che possiamo utilizzare per il calcolo della varianza:
+$$
+\sigma^2 = \expect{k^2} - \mu^2 = np(np - p + 1) - (np)^2 =
+np - np^2 = np(1 - p) = npq
+$$
+Concludendo la varianza vale:
+\eqnlbox{
+\sigma^2 = np(1 - p) = npq
+}{eq:BinomialeVarianza}
+e la deviazione standard:
+\eqnlbox{
+\sigma = \sqrt{np(1 - p)} = \sqrt{npq}
+}{eq:BinomialeRMS}
+
+\begin{exemplify}
+
+\example{Supponiamo di lanciare un dado per $4$ volte.
+La probabilit\`a che un numero fissato (per esempio il $3$) esca
+$0, 1, \ldots, 4$ volte \`e dato dalla distribuzione binomiale
+con $n=4$, $p=\frac{1}{6}$ e $k=0, 1, \ldots, 4$ rispettivamente.
+Calcoliamo esplicitamente $\binomialpdf{k}{4, \tinyfrac{1}{6}}$ per
+ogni valore di $k$ (vedi anche figura \ref{fig:DistribuzioneBinomiale}):
+\begin{eqnarray*}
+\prob{0} = \binomialpdf{0}{4, \tinyfrac{1}{6}} & = & \binom{4}{0} \cdot
+\left( \smallfrac{1}{6} \right)^0 \cdot \left( \smallfrac{5}{6} \right)^{4-0}=
+1 \cdot 1 \cdot \frac{625}{1296} \approx 0.482\\
+\prob{1} = \binomialpdf{1}{4, \tinyfrac{1}{6}} & = & \binom{4}{1} \cdot
+\left( \smallfrac{1}{6} \right)^1 \cdot \left( \smallfrac{5}{6} \right)^{4-1}=
+4 \cdot \frac{1}{6} \cdot \frac{125}{216} \approx 0.386\\
+\prob{2} = \binomialpdf{2}{4, \tinyfrac{1}{6}} & = & \binom{4}{2} \cdot
+\left( \smallfrac{1}{6} \right)^2 \cdot \left( \smallfrac{5}{6} \right)^{4-2}=
+6 \cdot \frac{1}{36} \cdot \frac{25}{36} \approx 0.116\\
+\prob{3} = \binomialpdf{3}{4, \tinyfrac{1}{6}} & = & \binom{4}{3} \cdot
+\left( \smallfrac{1}{6} \right)^3 \cdot \left( \smallfrac{5}{6} \right)^{4-3}=
+4 \cdot \frac{1}{216} \cdot \frac{5}{6} \approx 1.54 \cdot 10^{-2}\\
+\prob{4} = \binomialpdf{4}{4, \tinyfrac{1}{6}} & = & \binom{4}{4} \cdot
+\left( \smallfrac{1}{6} \right)^4 \cdot \left( \smallfrac{5}{6} \right)^{4-4}=
+1 \cdot \frac{1}{1296} \cdot 1 \approx 7.72 \cdot 10^{-4}
+\end{eqnarray*}
+La media e la deviazione standard di questa distribuzione sono rispettivamente,
+secondo la (\ref{eq:BinomialeMedia}) e la (\ref{eq:BinomialeRMS}):
+\begin{eqnarray*}
+\mu &=& n p=4\cdot\frac{1}{6}\approx 0.67,\\
+\sigma &=& \left( 4\cdot\frac{1}{6}\cdot\frac{5}{6} \right)^
+{\frac{1}{2}}\approx 0.74.
+\end{eqnarray*}
+}
+
+\end{exemplify}
+
+
+\section{Distribuzione di Poisson}
+\index{Poisson!distribuzione di}
+
+\subsection{Premessa: il numero di Nepero}
+
+Definiamo il numero di Nepero $e$, che ci sar\`a utile nel seguito, come:
+$$
+e \equiv \lim_{n\to\infty} \left( 1 + \frac{1}{n} \right)^n
+\approx 2.7182818284590452353602874713526624977572470 \ldots
+$$
+Per completezza ricordiamo che si pu\`o dimostrare la seguente uguaglianza:
+\eqnl{
+\lim_{n\to\infty} \left( 1 + \frac{x}{n} \right)^n =
+e^x = \dsum{\frac{x^n}{n!}}{n}{0}{\infty}
+}{eq:e}
+da cui, per $x = 1$, si ottiene una formula grazie alla quale \`e facile
+valutare $e$ con il grado di approssimazione desiderato:
+$$
+e = 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \frac{1}{120}
++ \frac{1}{720} + \ldots
+$$
+
+\subsection{La distribuzione di Poisson}
+
+Sotto alcune semplici ipotesi, che verranno chiarite tra breve,
+la probabilit\`a che si verifichino $k$ eventi in una situazione
+in cui in media se ne verificano $\mu$ \`e data dalla cosiddetta
+distribuzione di Poisson:
+\eqnlbox{
+\poissonpdf{k}{\mu} = \frac{\mu^k}{k!}\,e^{-\mu}
+}{eq:Poisson}
+Sottolineiamo di nuovo la notazione utilizzata:
+$k$ \`e la variabile casuale e $\mu$ \`e un parametro che, come vedremo,
+rappresenta la media nel senso della (\ref{eq:Media}).
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/poisson_1.tex}
+{Grafico della distribuzione di Poisson per $\mu=1$.}
+{./pp_distribuzioni/figure/poisson_2.tex}
+{Grafico della distribuzione di Poisson per $\mu=2$.}
+{./pp_distribuzioni/figure/poisson_5.tex}
+{Grafico della distribuzione di Poisson per $\mu=5$.}
+{./pp_distribuzioni/figure/poisson_10.tex}
+{Grafico della distribuzione di Poisson per $\mu=10$.}
+{fig:DistribuzioneDiPoisson}}
+{Grafici della distribuzione di Poisson per diversi valori della media $\mu$.
+Al crescere di $\mu$ la distribuzione di Poisson tende ad assumere via via
+la classica forma a {\itshape campana}, simmetrica rispetto al valor medio.}
+{fig:DistribuzioneDiPoisson}
+
+Formalmente la distribuzione di Poisson si ottiene come limite della
+distribuzione binomiale nel caso in cui:
+\begin{eqnarray}\label{eq:CondizioniPoisson}
+p & \ll & 1\\ \nonumber
+n & \gg & 1\\ \nonumber
+np & = & \mu {\rm~(costante)}
+\end{eqnarray}
+cio\`e quando $n$ tende all'infinito e $p$ tende a zero ma il loro prodotto
+(che, ricordiamo, rappresenta il valor medio della distribuzione) rimane
+finito. Infatti:
+$$
+\lim_{n \to \infty} \binomialpdf{k}{n, p} =
+\lim_{n \to \infty} \binom{n}{k}p^k q^{n-k}=
+\lim_{n \to \infty} \binom{n}{k}p^k (1 - p)^{n - k}
+$$
+Ricordando che il valor medio della distribuzione binomiale \`e $\mu = np$,
+come appare nell'ultima condizione delle (\ref{eq:CondizioniPoisson}),
+possiamo scrivere:
+$$
+p = \frac{\mu}{n}
+$$
+e quindi:
+\begin{eqnarray*}
+\lim_{n \to \infty} \binomialpdf{k}{n, p} & = &
+\lim_{n \to \infty} \binomial{n}{k} \cdot \left( \frac{\mu}{n} \right)^k
+\cdot \left( 1 - \frac{\mu}{n} \right)^{n-k} =\\
+& = & \lim_{n \to \infty} \frac{n \cdot (n - 1)
+\cdots (n - k + 1)}{k!} \cdot \left( \frac{\mu}{n} \right)^k
+\cdot \left( 1 - \frac{\mu}{n} \right)^{n-k} =\\
+& = & \lim_{n \to \infty} \frac{n \cdot (n - 1)
+\cdots (n - k + 1)}{n^k} \cdot
+\frac{\mu^k}{k!} \cdot \frac{\left(1-\frac{\mu}{n}\right)^n}
+{\left(1-\frac{\mu}{n}\right)^k}
+\end{eqnarray*}
+Notiamo che il primo termine del prodotto dentro il segno di limite:
+$$
+\lim_{n \to \infty} \overbrace{\frac{n \cdot (n - 1)
+\cdots (n - k + 1)}{n^k}}^{k {\rm~termini}} = 1
+$$
+tende ad $1$ poich\'e per n grande:
+$$
+(n - 1) \simeq (n - 2) \simeq \ldots \simeq (n - k + 1) \simeq n
+$$
+Si ha dunque:
+$$
+\lim_{n \to \infty} \binomialpdf{k}{n, p} =
+\lim_{n \to \infty} \frac{\mu^k}{k!} \cdot
+\frac{\left(1-\frac{\mu}{n}\right)^n} {\left(1-\frac{\mu}{n}\right)^k} =
+\frac{\mu^k}{k!}\,e^{-\mu} = \poissonpdf{k}{\mu}
+$$
+Questo significa che ci si deve aspettare una Poissoniana tutte le volte in
+cui il numero degli eventi possibili \`e enorme, ma quelli che in media si
+verificano sono abbastanza pochi.
+
+\begin{exemplify}
+
+\example{\label{esempio:Poisson}Supponiamo di lanciare tre dadi
+per $500$ volte; supponiamo anche di registrare, ad ogni lancio, la somma $S$
+delle uscite dei tre dadi in questione. Ci chiediamo quale sia la
+probabilit\`a che il valore $S = 4$ esca per $10$ volte.
+
+Il modo formalmente corretto di impostare il problema \`e quello di
+utilizzare la statistica binomiale. Con tre dadi a sei facce si hanno
+$6^3=216$ possibili combinazioni in totale; quelle che danno come somma
+$4$ sono esattamente $3$: $(1, 1, 2)$, $(1, 2, 1)$ e $(2, 1, 1)$.
+La probabilit\`a che la somma delle uscite in un lancio di tre dadi sia
+$4$ \`e dunque $p=\frac{3}{216}$. A questo punto \`e facile calcolare
+la probabilit\`a che questo accada $10$ volte in $500$ lanci:
+$$
+P = \binomialpdf{10}{500, \tinyfrac{3}{216}} =
+\binom{500}{10} \cdot \left( \smallfrac{3}{216} \right)^{10}
+\cdot \left( \smallfrac{213}{216} \right)^{490} \simeq 0.06933.
+$$
+
+Ma alla luce di quanto detto in questo paragrafo possiamo anche
+applicare la statistica Poissoniana (n \`e {\itshape grande}
+e p \`e {\itshape piccolo}).
+Su $500$ lanci $S$ ammonter\`a a $4$, in media, un numero di volte
+pari a: 
+$$
+\mu = 500 \cdot \frac{3}{216} = \frac{125}{18} \simeq 6.94
+$$
+e la probabilit\`a di avere $10$ volte il valore $4$ sar\`a dunque:
+$$
+P = \poissonpdf{10}{\tinyfrac{125}{18}} =
+\frac{6.94^{10}}{10!} \cdot e^{-6.94} \simeq 0.06929
+$$
+che \`e in ottimo accordo con quanto trovato prima.}
+
+\end{exemplify}
+
+\noindent
+Se l'applicabilit\`a della distribuzione di Poisson fosse limitata a
+situazioni simili all'esempio \ref{esempio:Poisson}, la sua utilit\`a sarebbe
+piuttosto modesta, non vi \`e dubbio.
+Pur tuttavia, ancor prima di andare avanti, vale la pena di notare come,
+in questa formulazione, non sia necessario conoscere a priori n\'e il
+numero $n$ di eventi possibili n\'e la probabilit\`a $p$ di un singolo
+evento, ma solo il numero medio di eventi osservati $n p$ o una sua stima.
+E in molte situazioni \`e proprio questo ci\`o che si misura direttamente
+in laboratorio.
+
+\begin{exemplify}
+
+\example{Nelle misure di radiometria si ha tipicamente a che fare con un
+campione di materiale radioattivo ed un apparato sperimentale che permette di
+rivelare le particelle o la radiazione prodotte dai processi di decadimento.
+In una situazione di questo tipo (come vedremo in seguito si tratta,
+sotto certe ipotesi, di un tipico processo Poissoniano) ci\`o che si misura
+direttamente \`e proprio il numero medio di decadimenti per unit\`a di tempo
+e {\itshape non} il numero di atomi del campione o la probabilit\`a di
+decadimento del singolo nucleo.}
+
+\end{exemplify}
+
+\noindent Come accennato prima, la distribuzione di Poisson non si ottiene
+solamente come limite di una binomiale.
+E' possibile dimostrare \cite{Bevington} che sono governati dalla
+statistica di Poisson conteggi casuali che soddisfino le seguenti propriet\`a:
+\begin{enumerate}
+\item il verificarsi di un evento non \`e influenzato in nessun modo
+dal verificarsi o meno degli altri eventi ({\itshape indipendenza degli
+eventi})
+\item per piccoli intervalli di tempo la possibilit\`a che si verifichino
+$k$ eventi \`e proporzionale al tempo ({\itshape regolarit\`a}),
+\item la probabilit\`a di contare un certo numero di eventi in un
+intervallo di tempo $\tau$ non dipende dall'istante in cui si effettua il
+conteggio, ma solo da $\tau$ ({\itshape stazionariet\`a}),
+\end{enumerate}
+Le ipotesi necessarie alla dimostrazione sono cos\`i generali che in effetti
+la statistica di Poisson ha un campo di applicabilit\`a estremamente vasto
+\cite{Lafleur}.
+Tanto per fare qualche esempio: il numero di persone che passano per una
+determinata soglia in un intervallo di tempo fissato (per esempio il numero
+di persone che entrano in una biblioteca in 10 minuti) o il numero di un
+particolare tipo di automobili che passano per un certo luogo in un intervallo
+di tempo fissato, o ancora il numero di particelle di un campione radioattivo
+che decadono in un intervallo di tempo fissato sono tipici esempi di conteggi
+Poissoniani.
+
+\begin{exemplify}
+
+\example{\label{pioggia}L'esempio seguente mette in luce l'importanza
+della stazionariet\`a nei fenomeni Poissoniani.
+In figura \ref{esem:Pioggia} sono riportati i dati relativi alle
+precipitazioni mensili registrate da una stazione meteorologica
+Statunitense%
+\footnote{I dati sono disponibili alla pagina web
+{\tt http://www.sci.usq.edu.au/staff/dunn/Datasets/index.html}
+insieme a numerosi altri \emph{set} di dati potenzialmente interessanti.
+}
+nel periodo compreso tra il $1871$ ed il $1998$.
+Possiamo chiederci se il livello di precipitazioni mensile sia ben
+descritto da una distribuzione di Poisson; operativamente ci\`o che
+dobbiamo fare \`e confrontare la distribuzioni in frequenza
+dei dati con le occorrenze attese assumendo una distribuzione di Poisson
+con media $\mu$ pari al livello medio di precipitazioni misurato.
+
+\panelfig
+{\twobyonetexfig
+{./pp_distribuzioni/figure/rainfall_1.tex}
+{Istogramma delle precipitazioni registrate nel mese di gennaio negli anni
+$1871$ ed il $1998$ ($128$ misure in totale).}
+{./pp_distribuzioni/figure/rainfall_0.tex}
+{Istogramma delle precipitazioni mensili (senza alcuna selezione sul mese)
+per gli anni $1871$ ed il $1998$ ($128 \cdot 12 = 1536$ misure in totale).}
+{esem:Pioggia}}
+{Distribuzione delle precipitazioni mensili (in pollici) registrate dalla
+stazione meteorologica di Wendover, Utah (Stati Uniti) nel periodo compreso
+tra il gennaio $1871$ ed il $1998$. Nel grafico \ref{esem:Pioggia:b} sono
+riportate tutte le $128 \cdot 12 = 1536$ misure, mentre nel grafico
+\ref{esem:Pioggia:a} sono riportate solamente quelle relative ai mesi
+di gennaio. L'istogramma tratteggiato rappresenta, in entrambi i casi, la
+distribuzione di Poisson che meglio si adatta ai dati.}
+{esem:Pioggia}
+
+Ci\`o che impariamo da questo semplice esercizio \`e che (nel caso in
+questione) la distribuzione delle misure \`e molto lontana da un Poissoniana
+se includiamo tutte le osservazioni (figura \ref{esem:Pioggia:b}) ma
+\`e invece sorprendentemente vicina ad una Poissoniana se ci limitiamo
+ai dati registrati nel mese di gennaio (figura \ref{esem:Pioggia:a}).
+\`E chiaro che siamo di fronte ad un fenomeno che \`e ragionevolmente
+stazionario su tempi scala dell'ordine del mese ma non su tempi pi\`u
+lunghi (d'altra parte \`e ragionevole aspettarsi che le variazioni stagionali
+siano significative).
+Semplificando brutalmente possiamo pensare che le distribuzioni delle
+precipitazioni, limitate a ciascuno dei $12$ mesi dell'anno, siano
+descritte (pi\`u o meno) bene da distribuzioni Poissoniane; il punto \`e che
+queste $12$ distribuzioni avranno medie diverse tra di loro (a causa
+delle variazioni stagionali) e questo fa s\`i che la distribuzione integrata
+sull'intero anno non sia Poissoniana.}
+
+\end{exemplify}
+
+\subsection{Normalizzazione, media e varianza}
+
+Verifichiamo che la distribuzione (\ref{eq:Poisson}) \`e normalizzata:
+$$
+\dsum{\poissonpdf{k}{\mu}}{k}{0}{\infty} = 
+\dsum{\frac{\mu^k}{k!} \, e^{-\mu}}{k}{0}{\infty} =
+e^{-\mu} \cdot \dsum{\frac{\mu^k}{k!}}{k}{0}{\infty} = e^{-\mu} \cdot e^\mu = 1
+$$
+dove si \`e fatto uso, nel penultimo passaggio, della (\ref{eq:e}).
+
+Calcoliamo il valore di aspettazione di $k$ sulla distribuzione,
+cio\`e la media\index{media!della distribuzione di Poisson},
+secondo la (\ref{eq:Media}):
+$$
+\expect{k} = \dsum{k \cdot \poissonpdf{k}{\mu}}{k}{0}{\infty}=
+\dsum{k \cdot \frac{\mu^k}{k!} \, e^{-\mu}}{k}{0}{\infty} =
+e^{-\mu} \cdot \dsum{k \cdot \frac{\mu^k}{k!}}{k}{0}{\infty}
+$$
+Al solito il termine con $k = 0$ non contribuisce alla somma, per cui
+possiamo far iniziare la somma stessa da $k = 1$:
+$$
+\expect{k} = e^{-\mu} \cdot \dsum{k \cdot \frac{\mu^k}{k!}}{k}{1}{\infty} = 
+e^{-\mu} \cdot \dsum{\frac{\mu^k}{(k - 1)!}}{k}{1}{\infty}
+$$
+Ponendo $h = k - 1$ possiamo trasformare l'espressione come segue:
+$$
+\expect{k} = e^{-\mu} \cdot \dsum{\frac{\mu^{h + 1}}{h!}}{h}{0}{\infty} =
+e^{-\mu} \cdot \dsum{\mu \cdot \frac{\mu^{h}}{h!}}{h}{0}{\infty} =
+\mu e^{-\mu} \cdot \dsum{\frac{\mu^{h}}{h!}}{h}{0}{\infty} =
+\mu e^{-\mu} \cdot e^{\mu} = \mu
+$$
+Dunque il parametro $\mu$ ha proprio il significato della media nel senso
+della definizione (\ref{eq:Media}), come avevamo anticipato.
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/poisson_detailed.tex}}
+{Grafico della distribuzione di Poisson per $\mu = 2$.
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneDiPoissonDettagliata}
+
+Per il calcolo della varianza \index{varianza!della distribuzione di Poisson}
+partiamo, esattamente come abbiamo fatto nel caso della distribuzione
+binomiale, dal valore di aspettazione di $k^2$:
+$$
+\expect{k^2} = \dsum{k^2 \cdot \poissonpdf{k}{\mu}}{k}{0}{\infty}=
+\dsum{k^2 \cdot \frac{\mu^k}{k!} \, e^{-\mu}}{k}{0}{\infty}
+$$
+Al solito eliminiamo il termine con $k = 0$ e operiamo il cambiamento
+di variabile $h = k - 1$:
+\begin{eqnarray*}
+\expect{k^2} & = & \dsum{k^2 \cdot \frac{\mu^k}{k!}\, e^{-\mu}}{k}{1}{\infty} =
+\dsum{k\mu \cdot \frac{\mu^{k - 1}}{(k - 1)!} \, e^{-\mu}}{k}{1}{\infty} =
+\mu \cdot \dsum{(h + 1) \cdot \frac{\mu^{h}}{h!}\, e^{-\mu}}{h}{0}{\infty} =\\
+& = & \mu \left[ \dsum{h \cdot \poissonpdf{h}{\mu}}{h}{0}{\infty} +
+\dsum{\poissonpdf{h}{\mu}}{h}{0}{\infty}  \right] = \mu(\mu + 1) = \mu^2 + \mu
+\end{eqnarray*}
+da cui:
+$$
+\sigma^2 = \expect{k^2} - \mu^2 = \mu^2 + \mu - \mu^2 = \mu
+$$
+In conclusione abbiamo l'espressione per la varianza:
+\eqnlbox{
+\sigma^2 = \mu
+}{eq:PoissonVarianza}
+e per la deviazione standard:
+\eqnlbox{
+\sigma = \sqrt{\mu}
+}{eq:PoissonRMS}
+Questo dice che la larghezza della distribuzione di Poisson \`e
+pari alla radice quadrata del valor medio.
+
+\begin{exemplify}
+
+\example{Supponiamo per un certo campione di una sostanza radioattiva
+si abbiano in media $10$ decadimenti al secondo. Facciamo l'ulteriore
+assunzione che questo numero non cambi significativamente nel corso del nostro
+esperimento.
+Ci chiediamo quale sia la probabilit\`a di avere meno di tre decadimenti in
+un intervallo di $0.5$ secondi.
+
+Il numero medio di decadimenti nel nostro intervallo di tempo \`e
+$\mu = 0.5 \cdot 10 = 5$.
+La probabilit\`a di avere $0, 1, 2$ decadimenti \`e, rispettivamente:
+\begin{eqnarray*}
+\prob{0} = \poissonpdf{0}{5} &=& \frac{5^{0}}{0!} \, e^{-5} \simeq 0.0067\\
+\prob{1} = \poissonpdf{1}{5} &=& \frac{5^{1}}{1!} \, e^{-5} \simeq 0.0337\\
+\prob{2} = \poissonpdf{2}{5} &=& \frac{5^{2}}{2!} \, e^{-5} \simeq 0.0842,
+\end{eqnarray*}
+per cui la probabilit\`a cercata \`e la somma di queste tre:
+$$
+P = \prob{0} + \prob{1} + \prob{2} \simeq 12\%
+$$
+
+Notiamo che l'assunzione che il numero di decadimenti al secondo non
+cambi nel tempo (assunzione per altro tipicamente verificata nelle misure
+che si eseguono normalmente in laboratorio con sostanze radioattive)
+garantisce la stazionariet\`a del processo che, come detto prima, \`e
+fondamentale per la derivazione formale della distribuzione di Poisson.
+In generale il numero di atomi radioattivi contenuti in un certo campione
+decresce esponenzialmente con il tempo
+$$
+N(t) = N_0e^{-\lambda t}
+$$
+e con esso anche il numero medio di decadimenti
+per unit\`a di tempo, per cui su intervalli molto lunghi il processo non
+\`e Poissoniano. Per completezza: l'inverso del parametro $\lambda$ prende
+il nome di {\itshape vita media} del nucleo radioattivo (si pu\`o facilmente
+dimostrare che dopo un tempo $\frac{1}{\lambda}$ il numero di atomi
+non ancora decaduti si \`e ridotto di un fattore $\frac{1}{e}\simeq0.368$)
+e la nostra condizione di stazionariet\`a pu\`o essere espressa
+quantitativamente richiedendo che la durata del nostro esperimento sia molto
+pi\`u breve della vita media del campione.}
+
+\end{exemplify}
+
+\section{Distribuzione uniforme}
+
+\index{uniforme!distribuzione}\label{DistribuzioneUniforme}
+\`E il pi\`u semplice esempio di funzione di distribuzione di variabile
+casuale continua (per cui essa rappresenta una densit\`a di probabilit\`a):
+\eqnlbox{
+\uniformpdf{x}{a, b} = \left \{ \begin{array}{ll}
+\frac{\displaystyle 1}{\displaystyle (b - a)} & a \leq x \leq b\\
+0 & x < a ; ~ x > b
+\end{array} \right.
+}{eq:Uniforme}
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/uniform_-1_1.tex}
+{Grafico della distribuzione uniforme per $a=-1$ e $b=1$.}
+{./pp_distribuzioni/figure/uniform_0_1.tex}
+{Grafico della distribuzione uniforme per $a=0$ e $b=1$.}
+{./pp_distribuzioni/figure/uniform_-2_2.tex}
+{Grafico della distribuzione uniforme per $a=-2$ e $b=2$.}
+{./pp_distribuzioni/figure/uniform_0_2.tex}
+{Grafico della distribuzione uniforme per $a=0$ e $b=2$.}
+{fig:DistribuzioneUniforme}}
+{Grafici della distribuzione uniforme per diversi valori di $a$ e $b$.
+Dovendo valere la condizione di normalizzazione, il massimo della 
+funzione di distribuzione \`e tanto pi\`u piccolo quanto pi\`u
+grande \`e la lunghezza dell'intervallo $\cinterval{a}{b}$ su cui essa \`e
+diversa da zero.}
+{fig:DistribuzioneUniforme}
+
+
+\subsection{Normalizzazione, media e varianza}
+
+La distribuzione, cos\`i come \`e scritta nella (\ref{eq:Uniforme}),
+\`e correttamente normalizzata:
+$$
+\dintegral{\uniformpdf{x}{a, b}}{x}{-\infty}{\infty} =
+\dintegral{\frac{1}{(b-a)}}{x}{a}{b} =
+\frac{1}{(b-a)}\dintegral{}{x}{a}{b} =
+\frac{1}{(b-a)} \cdot (b-a) = 1
+$$
+
+La media \index{media!della distribuzione uniforme} \`e data da:
+\begin{eqnarray*}
+\mu & = & \expect{x} =
+\dintegral{x \cdot \uniformpdf{x}{a, b}}{x}{-\infty}{\infty} =
+\dintegral{\frac{x}{(b-a)}}{x}{a}{b} =
+\frac{1}{(b-a)} \dintegral{x}{x}{a}{b} =
+\frac{1}{(b-a)}\eval{\frac{x^2}{2}}{a}{b} =\\
+& = & \frac{1}{(b-a)}\cdot \frac{(b^2-a^2)}{2} =
+\frac{1}{(b-a)}\cdot \frac{(b-a)\cdot(b+a)}{2} =
+\frac{(b+a)}{2}
+\end{eqnarray*}
+cio\`e coincide, come \`e naturale aspettarsi, con il valor
+medio dell'intervallo su cui la densit\`a di probabilit\`a \`e non
+nulla:
+\eqnlbox{
+\mu = \frac{(b+a)}{2}
+}{eq:UniformeMedia}
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/uniform_detailed.tex}}
+{Grafico della distribuzione uniforme per $a = -1$, $b = 1$.
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneUniformeDettagliata}
+
+Il valore di aspettazione di $x^2$ \`e dato da:
+\begin{eqnarray*}
+\expect{x^2} & = &
+\dintegral{x^2 \cdot \uniformpdf{x}{a, b}}{x}{-\infty}{\infty} =
+\dintegral{\frac{x^2}{(b-a)}}{x}{a}{b} =
+\frac{1}{(b-a)} \dintegral{x^2}{x}{a}{b} =
+\frac{1}{(b-a)}\eval{\frac{x^3}{3}}{a}{b} =\\
+&=& \frac{1}{(b-a)}\cdot \frac{(b^3-a^3)}{3} =
+\frac{1}{(b-a)}\cdot \frac{(b-a)\cdot(b^2 + ab + a^2)}{3} =
+\frac{(b^2 + ab + a^2)}{3}
+\end{eqnarray*}
+e la varianza \index{varianza!della distribuzione uniforme}, al solito:
+\begin{eqnarray*}
+\sigma^2 & = &
+\expect{x^2} - \mu^2 =
+\frac{(b^2 + ab + a^2)}{3} -\frac{(b+a)^2}{4} =
+\frac{(4b^2 + 4ab + 4a^2 - 3b^2 -6ab - 3 a^2)}{12} =\\
+&=& \frac{(b^2-2ab+a^2)}{12} =
+\frac{(b-a)^2}{12}
+\end{eqnarray*}
+Per concludere:
+\eqnlbox{
+\sigma^2=\frac{(b-a)^2}{12}
+}{eq:UniformeVarianza}
+e ancora:
+\eqnlbox{
+\sigma=\frac{(b-a)}{\sqrt{12}}
+}{eq:UniformeRMS}
+
+\begin{exemplify}
+
+\example{Supponiamo di misurare la massa di un oggetto con una bilancia
+digitale con la risoluzione di un grammo; sia $m=58 \g$ il valore indicato
+dal display. Se possiamo escludere la presenza di effetti sistematici \`e
+ragionevole ammettere che il misurando sia compreso, con densit\`a di
+probabilit\`a uniforme, tra $57.5$ e $58.5 \g$.
+La media della distribuzione sar\`a $58 \g$ e la deviazione standard
+$\frac{1}{\sqrt{12}} = 0.289 \g$.
+Se vogliamo attribuire un errore statisticamente corretto alla nostra misura
+scriveremo, al livello di una deviazione standard:
+$$
+m=58.0 \pm 0.3 \g
+$$}
+
+\end{exemplify}
+
+
+\section{Distribuzione esponenziale}
+
+\index{esponenziale!distribuzione}Una variabile casuale la cui funzione di
+distribuzione sia data da:
+\eqnlbox{
+\exponentialpdf{x}{\lambda} = \left \{ \begin{array}{ll}
+\lambda e^{-\lambda x} & 0 \leq x \leq \infty\\
+0 & x < 0
+\end{array} \right.
+}{eq:Esponenziale}
+(con $\lambda \geq 0$) viene chiamata variabile casuale esponenziale con
+parametro $\lambda$ (oppure anche esponenzialmente distribuita con parametro
+$\lambda$).
+Vale la pena di notare che, per ragioni dimensionali, il parametro
+$\lambda$ ha le dimensioni di $x^{-1}$.
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/exponential_0_5.tex}
+{Grafico della distribuzione esponenziale per $\lambda=0.5$.}
+{./pp_distribuzioni/figure/exponential_1_0.tex}
+{Grafico della distribuzione esponenziale per $\lambda=1$.}
+{./pp_distribuzioni/figure/exponential_1_5.tex}
+{Grafico della distribuzione esponenziale per $\lambda=1.5$.}
+{./pp_distribuzioni/figure/exponential_2_0.tex}
+{Grafico della distribuzione esponenziale per $\lambda=2$.}
+{fig:DistribuzioneEsponenziale}}
+{Grafici della funzione $\exponentialpdf{x}{\lambda}$ per diversi valori di
+$\lambda$. Dovendo valere la condizione di normalizzazione, il valore massimo
+della funzione di distribuzione (in questo caso per $x = 0$) aumenta
+all'aumentare del parametro $\lambda$.}
+{fig:DistribuzioneEsponenziale}
+
+La probabilit\`a che il valore della variabile casuale sia compreso
+in un intervallo fissato pu\`o essere calcolato molto facilmente:
+\eqnl{
+\prob{x_1 \leq x \leq x_2} =
+\dintegral{\exponentialpdf{x}{\lambda}}{x}{x_1}{x_2} =
+e^{-\lambda x_1} - e^{-\lambda x_2}
+}{eq:ProbExp}
+con $x_1 > 0$ e $x_2 > x_1$.
+Come caso particolare della (\ref{eq:ProbExp}) si pu\`o calcolare:
+\eqnl{
+\prob{x \leq x_0} = 1 - e^{-\lambda x_0}
+}{eq:FunzioneCumulativaExp}
+che prende il nome di {\itshape funzione cumulativa} della distribuzione
+esponenziale.
+
+Un risultato particolarmente interessante (che non dimostreremo qui)
+\`e costituito dal fatto che la funzione di distribuzione esponenziale
+\`e la funzione di distribuzione dell'intervallo (di solito temporale)
+che intercorre tra due conteggi successivi in processi Poissoniani.
+Tipici esempi di variabili casuali distribuite esponenzialmente sono:
+il tempo dopo il quale un nucleo radioattivo decade (in questo caso
+l'inverso del parametro $\lambda$ prende il nome di {\itshape vita media}
+del nucleo), il tempo che intercorre tra due successive chiamate di telefono
+sbagliate, ma anche la distanza che una particella percorre in un mezzo
+omogeneo prima di interagire con il mezzo stesso (in questo caso l'inverso del
+parametro $\lambda$ prende il nome di {\itshape lunghezza di interazione} o
+{\itshape cammino libero medio}).
+
+Sfruttando la \ref{eq:FunzioneCumulativaExp} possiamo dimostrare un'altra
+interessante propriet\`a della distribuzione esponenziale; scriviamo:
+$$
+\prob{x \geq x_1 + x_2} = 1 - \prob{x \leq x_1 + x_2} =
+e^{-\lambda(x_1 + x_2)} = e^{-\lambda x_1}\cdot e^{-\lambda x_2}
+$$
+Per cui si ha:
+\eqn{
+\prob{x \geq x_1 + x_2} = \prob{x \geq x_1} \cdot \prob{x \geq x_2}
+}
+Una variabile casuale che goda di questa propriet\`a si dice
+una variabile {\itshape senza memoria} (o anche {\itshape memory-less}).
+La condizione di assenza di memoria si pu\`o scrivere anche come:
+\eqn{
+\prob{x \geq x_1 + x_2 | \, x \geq x_1} = \prob{x \geq x_2}
+}
+
+\begin{exemplify}
+
+\example{Supponiamo di {\itshape osservare}, a partire da un istante $t_0$, un
+nucleo radioattivo con vita media (inverso del parametro $\lambda$) di $1 \s$.
+La probabilit\`a che, dopo un secondo, il nucleo non sia decaduto \`e:
+$$
+\prob{x \geq 1} = e^{-1} \simeq 37\%
+$$
+Supponiamo adesso che il nucleo non sia ancora decaduto dopo $10 \s$, il che
+\`e estremamente improbabile ma perfettamente possibile---a proposito:
+quanto vale la probabilit\`a di questo evento?
+Ebbene: la probabilit\`a che il nucleo non decada tra $t_0 + 10 \s$ e
+$t_0 + 11 \s$ \`e di nuovo il $37 \%$.
+Tanto per fissare le idee: se la stessa cosa valesse per un'automobile,
+ad ogni istante una vettura appena uscita dal concessionario ed una con
+$200000 \km$ alle spalle avrebbero la stessa probabilit\`a di rompersi
+entro il giorno successivo\ldots Purtroppo, al contrario dei nuclei
+radioattivi le auto hanno memoria della propria storia!}
+
+\end{exemplify}
+
+\subsection{Normalizzazione, media e varianza}
+
+La distribuzione, al solito, \`e normalizzata:
+$$
+\dintegral{\exponentialpdf{x}{\lambda}}{x}{0}{\infty} =
+\dintegral{\lambda e^{-\lambda x}}{x}{0}{\infty} =
+\eval{- e^{-\lambda x}}{0}{\infty} = 1
+$$
+(nel penultimo passaggio si \`e operato il cambiamento di variabile
+$t = \lambda x$).
+
+La media della distribuzione \index{media!della distribuzione esponenziale},
+scritta nella forma (\ref{eq:Esponenziale}), vale:
+$$
+\mu = \expect{x}=
+\dintegral{x \cdot \exponentialpdf{x}{\lambda}}{x}{0}{\infty} =
+\dintegral{x \lambda e^{-\lambda x}}{x}{0}{\infty}
+$$
+Con il cambiamento di variabile $\lambda x = t$, l'integrale diviene:
+$$
+\mu = \frac{1}{\lambda} \dintegral{t e^{-t}}{t}{0}{\infty}
+$$
+che pu\`o essere calcolato per parti:
+$$
+\mu = \frac{1}{\lambda} \left( \eval{-t e^{-t}}{0}{\infty} +
+\dintegral{e^{-t}}{t}{0}{\infty} \right) =
+\frac{1}{\lambda} \eval{-e^{-t}}{0}{\infty} = \frac{1}{\lambda}
+$$
+Si ha dunque:
+\eqnlbox{
+\mu = \frac{1}{\lambda}
+}{eq:EsponenzialeMedia}
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/exponential_detailed.tex}}
+{Grafico della funzione $\exponentialpdf{x}{\lambda}$ per $\lambda = 1$.
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneEsponenzialeDettagliata}
+
+Per la varianza \index{varianza!della distribuzione esponenziale}, al solito,
+si parte dal valore di aspettazione di $x^2$:
+$$
+\expect{x^2} = \dintegral{x^2\cdot \exponentialpdf{x}{\lambda}}{x}{0}{\infty} =
+\dintegral{x^2 \lambda e^{-\lambda x}}{x}{0}{\infty}
+$$
+Con lo stesso cambiamento di variabile ed integrando per parti due
+volte si ha:
+$$
+\expect{x^2} = \frac{1}{\lambda^2} \dintegral{t^2 e^{-t}}{t}{0}{\infty} =
+\frac{1}{\lambda^2}\left( \eval{-t^2 e^{-t}}{0}{\infty} +
+2 \dintegral{t e^{-t}}{t}{0}{\infty} \right) = \frac{2}{\lambda^2}
+$$
+e, di conseguenza:
+$$
+\sigma^2 = \expect{x^2} - \mu^2 =
+\frac{2}{\lambda^2} - \frac{1}{\lambda^2} = \frac{1}{\lambda^2}
+$$
+Riassumendo:
+\eqnlbox{
+\sigma^2 = \frac{1}{\lambda^2}
+}{eq:EsponenzialeVarianza}
+e ancora:
+\eqnlbox{
+\sigma = \frac{1}{\lambda}
+}{eq:EsponenzialeRMS}
+
+\begin{exemplify}
+
+\example{Supponiamo che il cammino libero medio $l_0$ di una particella in un
+certo mezzo (omogeneo) sia $1 \mm$. Quando la particella penetra nel mezzo,
+in generale percorrer\`a una certa distanza $x$ (che, a parit\`a di condizioni,
+varia in modo casuale di volta in volta) prima di interagire;
+come detto prima, questa distanza \`e descritta da una densit\`a di
+probabilit\`a del tipo:
+$$
+p(x) = \frac{1}{l_0}e^{-\frac{x}{l_0}}
+$$
+che \`e proprio una distribuzione esponenziale con parametro
+$\lambda=\frac{1}{l_0}$.
+Come si evince facilmente dalla (\ref{eq:EsponenzialeMedia}),
+il valore di aspettazione della variabile $x$ \`e $l_0$. Il che
+significa, in altre parole, che la nostra particella percorre in media
+una distanza $l_0$ prima di interagire (da cui il nome di cammino
+libero medio).
+Ci chiediamo quale sia la probabilit\`a che la particella percorra
+un distanza $l$ di almeno $1 \cm$ nel mezzo prima di interagire col mezzo
+stesso.
+
+La probabilit\`a cercata si calcola immediatamente sfruttando la
+funzione cumulativa (\ref{eq:FunzioneCumulativaExp}) trovata prima:
+$$
+\prob{x \geq l} = 1 - \prob{x \leq l} = 1 - \left( 1 - e^{-\lambda l} \right)=
+e^{-\lambda l} = e^{-\frac{l}{l_0}} = e^{-10} \approx 4.54 \cdot 10^{-5}
+$$
+Cio\`e \`e estremamente poco probabile che una particella percorra una
+distanza maggiore a 10 volte il cammino libero medio prima di interagire.}
+
+\end{exemplify}
+
+
+\section{Distribuzione di Gauss}
+
+\subsection{Premessa: la funzione di Gauss}
+
+Come premessa matematica allo studio della distribuzione di Gauss
+elenchiamo di seguito alcune propriet\`a rilevanti della funzione
+di Gauss:
+\eqnl{
+f(x) = e^{-x^2}
+}{eq:FunzioneDiGauss}
+che ci saranno utili in seguito.
+\begin{numlist}
+\item{
+$f(x)$ \`e definita su tutta la retta reale, cio\`e per
+$x \in \ointerval{-\infty}{\infty}$.
+}
+\item{
+$f(x)$ \`e pari, il che si esprime formalmente scrivendo:
+$$
+f(x) = f(-x)
+$$
+Graficamente questo significa che la funzione \`e simmetrica per
+riflessione rispetto all'asse $x = 0$.
+}
+\item{
+$f(x)$ tende a zero per grandi valori di x:
+$$
+\lim_{x\to\pm\infty} f(x) = 0
+$$
+}
+\item{
+Il punto $x = 0$ \`e un punto di massimo, nel senso che:
+$$
+f(x) \le f(0) = 1 \qquad \forall x \in \ointerval{-\infty}{\infty}
+$$
+}
+\item{
+La derivata prima della funzione \`e:
+$$
+\tfder{f(x)}{x} =-2x e^{-x^2}
+$$
+che vale 0 solamente per $x=0$, per cui non ci sono altri
+punti di massimo o minimo.
+Inoltre:
+$$
+\tfder{f(x)}{x} \left \{ \begin{array}{ll}
+> 0 & \forall x < 0\\
+< 0 & \forall x >0
+\end{array} \right.
+$$
+quindi $f(x)$ \`e crescente per $x < 0$ e decrescente per $x > 0$.
+}
+\item{
+$f(x)$ ha la tipica forma di una distribuzione a campana.
+La semilarghezza a met\`a altezza si calcola attraverso il formalismo
+introdotto nel paragrafo \ref{subsec:HWHM}. Imponendo:
+$$
+f(x_{\pm}) =\frac{1}{2} f(0) = \frac{1}{2}
+$$
+possiamo scrivere:
+$$
+e^{-x_{\pm}^2}=\frac{1}{2}
+$$
+da cui:
+$$
+x_{\pm}^2=\pm \ln 2
+$$
+ed infine:
+\eqnl{
+\hwhm = \frac{x_+ - x_-}{2} = \sqrt{\ln2} \approx 0.83
+}{eq:HWHMGaussiana}
+}
+\item{
+$f(x)$ decresce in modo estremamente rapido al crescere di $x$; ad esempio:
+$$
+f(3)=e^{-9} \approx 1.234 \cdot 10^{-4}
+$$
+}
+\item{
+L'integrale su tutto l'asse reale della funzione vale:
+\eqnl{
+I = \dintegral{e^{-x^2}}{x}{-\infty}{\infty} = \sqrt{\pi}
+}{eq:IntegraleGaussiana}
+Infatti:
+$$
+I^2 =
+\dintegral{e^{-x^2}}{x}{-\infty}{\infty} \cdot
+\dintegral{e^{-y^2}}{y}{-\infty}{\infty} =
+\dintegral{}{x}{-\infty}{\infty}
+\dintegral{e^{-(x^2+y^2)}}{y}{-\infty}{\infty}
+$$
+che \`e un integrale doppio su tutto il piano $x y$. Passando in coordinate
+polari l'elemento di superficie diviene
+$$
+\ud s = r \, \ud \,r \, \ud \phi
+$$
+e l'integrale si scrive come:
+$$
+I^2 = \dintegral{}{\phi}{0}{2\pi} \dintegral{re^{-r^2}}{r}{0}{\infty} =
+2\pi \eval{-\frac{e^{-r^2}}{2}}{0}{\infty} = \pi
+$$
+}
+\end{numlist}
+
+\caution{La funzione di Gauss, nella forma (\ref{eq:FunzioneDiGauss}) non
+\`e una funzione di distribuzione in quanto, come si evince dalla
+(\ref{eq:IntegraleGaussiana}), essa non \`e normalizzata.
+Vedremo tra breve l'espressione completa (cio\`e correttamente normalizzata)
+per la distribuzione di Gauss.}
+
+\subsection{La distribuzione di Gauss}
+
+\index{Gauss!distribuzione di} La funzione di distribuzione di Gauss si scrive
+come:
+\eqnlbox{
+\gaussianpdf{x}{\mu, \sigma} = 
+\frac{1}{\sigma\sqrt{2\pi}} \,
+e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}
+}{eq:Gaussiana}
+dove $\mu$ e $\sigma$ sono due costanti di cui si chiarir\`a in seguito il
+significato.
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/gaussian_0_1.tex}
+{Grafico della distribuzione di Gauss per $\mu=0$ e $\sigma=1$.}
+{./pp_distribuzioni/figure/gaussian_0_2.tex}
+{Grafico della distribuzione di Gauss per $\mu=0$ e $\sigma=2$.}
+{./pp_distribuzioni/figure/gaussian_1_1.tex}
+{Grafico della distribuzione di Gauss per $\mu=1$ e $\sigma=1$.}
+{./pp_distribuzioni/figure/gaussian_-1_0_5.tex}
+{Grafico della distribuzione di Gauss per $\mu=-1$ e $\sigma=0.5$.}
+{fig:DistribuzioneDiGauss}}
+{Grafici della funzione $\gaussianpdf{x}{\mu, \sigma}$ per diversi valori
+di $\sigma$ e $\mu$. Dovendo valere la condizione di normalizzazione, il
+valore massimo della funzione di distribuzione diminuisce all'aumentare
+della deviazione standard.}
+{fig:DistribuzioneDiGauss}
+
+Proprio come la distribuzione uniforme e quella esponenziale, si tratta
+di una funzione di distribuzione continua, cio\`e la variabile casuale \`e
+una variabile continua e $\gaussianpdf{x}{\mu, \sigma}$
+rappresenta la densit\`a di
+probabilit\`a. Assomiglia molto alla funzione $e^{-x^2}$ (studiata nel
+paragrafo precedente), cui \`e legata dal cambiamento di variabile:
+\eqnl{
+t = \frac{1}{\sqrt{2}} \frac{x-\mu}{\sigma}
+}{eq:CambVarIntGauss}
+attraverso il quale la (\ref{eq:Gaussiana}) diviene appunto:
+$$
+g(t) \propto e^{-t^2}
+$$
+Per calcolare la semilarghezza a met\`a altezza
+\index{HWHM!della distribuzione di Gauss} possiamo allora utilizzare
+(quasi) direttamente la (\ref{eq:HWHMGaussiana}). Nella variabile $t$ si ha,
+con il linguaggio consueto:
+$$
+t_{\pm} = \pm \sqrt{\ln 2}
+$$
+e, passando alla $x$:
+$$
+x_{\pm} = \mu + \sqrt{2}~\sigma t_{\pm} = \mu \pm \sqrt{2 \ln 2} ~ \sigma
+$$
+da cui infine:
+$$
+\hwhm = \frac{x_+ - x_-}{2} = \sqrt{2 \ln 2} ~ \sigma \approx 1.2\sigma
+$$
+Ne segue che, come vedremo pi\`u in dettaglio tra breve, $\mu$ rappresenta
+il centro della campana e $\sigma$ d\`a una misura della larghezza.
+
+\subsection{Normalizzazione, media e varianza}
+
+Come tutte le funzioni di distribuzione la (\ref{eq:Gaussiana})
+\`e correttamente normalizzata:
+$$
+\dintegral{\gaussianpdf{x}{\mu, \sigma}}{x}{-\infty}{\infty} =
+\frac{1}{\sigma\sqrt{2\pi}}
+\dintegral{e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}}{x}
+{-\infty}{\infty}
+$$
+Con il solito cambiamento di variabile (\ref{eq:CambVarIntGauss})
+l'integrale diviene:
+$$
+\dintegral{\gaussianpdf{x}{\mu, \sigma}}{x}{-\infty}{\infty} =
+\frac{1}{\sigma\sqrt{2\pi}} \cdot \sigma \sqrt{2}
+\dintegral{e^{-t^2}}{t}{-\infty}{\infty} = 1
+$$
+dove, nell'ultimo passaggio, si \`e usata la (\ref{eq:IntegraleGaussiana}).
+
+La media della distribuzione \`e data da:
+$$
+\expect{x} =
+\dintegral{x \cdot \gaussianpdf{x}{\mu, \sigma}}{x}{-\infty}{\infty} = \mu
+$$
+come si pu\`o dimostrare calcolando direttamente l'integrale
+o, pi\`u semplicemente, osservando che la funzione
+$\gaussianpdf{x}{\mu, \sigma}$ \`e simmetrica rispetto ad $x=\mu$.
+Ne segue che la costante che compare nell'esponente della funzione di Gauss
+(ed \`e indicata con $\mu$) \`e proprio la media della distribuzione
+nel senso della (\ref{eq:Media}) \index{media!della distribuzione di Gauss}.
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/gaussian_detailed.tex}}
+{Grafico della distribuzione di Gauss per $\mu = 0$ e $\sigma = 1$.
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneDiGaussDettagliata}
+
+La varianza \`e:
+$$
+\expect{(x-\mu)^2} =
+\dintegral{(x-\mu)^2 \cdot \gaussianpdf{x}{\mu, \sigma}}{x}{-\infty}{\infty}
+$$
+Effettuando la sostituzione (\ref{eq:CambVarIntGauss}) si ha:
+\begin{eqnarray*}
+\expect{(x-\mu)^2} & = &
+\dintegral{2t^2\sigma^2 \cdot \frac{e^{-t^2}}{\sigma\sqrt{2\pi}} \cdot
+\sigma\sqrt{2}}{t}{-\infty}{\infty} =
+\frac{\sigma^2}{\sqrt{\pi}}
+\dintegral{t\cdot 2te^{-t^2}}{t}{-\infty}{\infty} =\\
+& = & \frac{\sigma^2}{\sqrt{\pi}}\left(\eval{-te^{-t^2}}{-\infty}{\infty}+
+\dintegral{e^{-t^2}}{t}{-\infty}{\infty}\right)= \sigma^2
+\end{eqnarray*}
+Cio\`e la costante indicata con $\sigma$ nella (\ref{eq:Gaussiana})
+\`e proprio la deviazione standard nel senso della (\ref{eq:Varianza})
+\index{varianza!della distribuzione di Gauss}.
+
+\subsection{Integrazione della distribuzione di Gauss}
+
+Come sappiamo, in generale, la probabilit\`a che una generica variabile
+gaussiana $x$ sia compresa in nell'intervallo $\cinterval{0}{a}$
+\`e:
+\eqnl{
+\prob{0\le x\le a} = \dintegral{\gaussianpdf{x}{\mu, \sigma}}{x}{0}{a}
+}{eq:ProbGauss}
+Sfortunatamente questo integrale {\itshape non ha espressione analitica}%
+\footnote{
+L'esatto significato di questa affermazione viene solitamente
+chiarito nei corsi di Analisi matematica, ma essenzialmente l'integrale
+della funzione di distribuzione di Gauss su un generico intervallo non
+pu\`o essere espresso in forma chiusa in termini di funzioni
+elementari.
+}%
+; il che non significa, ovviamente, che non possa essere valutato
+numericamente con il grado di accuratezza desiderato.
+Nelle appendici \ref{app:Erf1} e \ref{app:Erf2} i valori
+della (\ref{eq:ProbGauss}) si trovano tabulati in corrispondenza di
+una serie di valori utili.
+Le tavole sono date per una variabile Gaussiana in forma standard
+(con media 0 e varianza 1):
+\eqnl{
+z = \frac{x-\mu}{\sigma}
+}{eq:VarGaussStandard}
+per cui la funzione di distribuzione diventa:
+$$
+\gaussianpdf{z}{0, 1} = \frac{1}{\sqrt{2\pi}} \, e^{-z^2/2}
+$$
+In generale prima di usare le tavole \`e necessario passare alla
+variabile in forma standard; l'esempio seguente chiarisce il
+procedimento da seguire.
+
+\begin{exemplify}
+
+\example{Supponiamo di avere una variabile casuale gaussiana $x$, con media
+$\mu = 20$ e deviazione standard $\sigma = 4$.
+Qual \`e la probabilit\`a che $x$ sia compreso tra $x_1 = 22$ e $x_2 = 24$?\\
+Passando alla variabile standard:
+$$
+z=\frac{x-20}{4}
+$$
+i trasformati degli estremi $x_1$ e $x_2$ divengono:
+\begin{eqnarray*}
+z_1 &=& \frac{22-20}{4} = 0.5\\
+z_2 &=& \frac{24-20}{4} = 1
+\end{eqnarray*}
+Per cui:
+\begin{eqnarray*}
+\prob{22\le x\le24} & = & \prob{0.5\le z\le1} =
+\dintegral{\gaussianpdf{z}{0, 1}}{z}{0.5}{1} =\\
+& = & \dintegral{\gaussianpdf{z}{0, 1}}{z}{0}{1} -
+\dintegral{\gaussianpdf{z}{0, 1}}{z}{0}{0.5} 
+\approx 0.3413 - 0.1915 = 0.1498
+\end{eqnarray*}
+in cui i valori numerici degli integrali si leggono direttamente
+in appendice \ref{app:Erf1}.}
+
+\example{Con riferimento alla variabile $x$ definita nell'esempio precedente:
+qual \`e la probabilit\`a che $x$ sia compreso tra $15$ e $25$?\\
+Esattamente come prima:
+\begin{eqnarray*}
+z_1 &=& \frac{15-20}{4} = -1.25\\
+z_2 &=& \frac{25-20}{4} = 1.25
+\end{eqnarray*}
+\begin{eqnarray*}
+\prob{15\le x\le25} & = & \prob{-1.25\le z\le 1.25} =
+\dintegral{\gaussianpdf{z}{0, 1}}{z}{-1.25}{1.25} =\\
+& = & 2\cdot \dintegral{\gaussianpdf{z}{0, 1}}{z}{0}{1.25}
+\approx 2\cdot 0.39435 = 0.7870
+\end{eqnarray*}}
+
+\example{Sempre con riferimento alla variabile $x$ dell'esempio precedente:
+qual \`e la probabilit\`a che $x$ sia maggiore di $30$?\\
+Scriviamo, al solito:
+\begin{eqnarray*}
+z_1 &=& \frac{30-20}{4} = 2.5\\
+z_2 &=& \frac{\infty-20}{4} = \infty
+\end{eqnarray*}
+e di conseguenza:
+\begin{eqnarray*}
+\prob{x \ge 30} & = & \prob{z\ge 2.5} =
+\dintegral{\gaussianpdf{z}{0, 1}}{z}{2.5}{\infty}=\\
+& = & \dintegral{\gaussianpdf{z}{0, 1}}{z}{0}{\infty} -
+\dintegral{\gaussianpdf{z}{0, 1}}{z}{0}{2.5} \approx 0.5 - 0.4946 = 0.0054
+\end{eqnarray*}}
+
+\end{exemplify}
+
+\subsection{Relazione con altre distribuzioni} 
+
+La distribuzione di Gauss si ottiene formalmente come
+caso limite della binomiale \index{binomiale!distribuzione} quando
+$n\to\infty$ e $p$ resta costante.
+In pratica quando sia $n p$ che $n(1-p)$ sono $\ge 5$ la gaussiana \`e gi\`a
+una buona approssimazione della binomiale \cite{Brownlee}.
+Poich\'e la binomiale ha media $n p$ e deviazione standard
+$\sqrt{n p(1-p)}$ la corrispondente gaussiana \`e:
+\eqn{
+\gaussianpdf{x}{n, p}=\frac{1}{\sqrt{2\pi n p(1-p)}} \,
+e^{-\frac{1}{2}\frac{(x-n p)^2}{n p(1-n p)}}
+}
+
+\begin{exemplify}
+
+\example{Si calcoli la probabilit\`a che, lanciando $10$ monete, il numero
+$k$ di teste sia compreso tra $3$ e $6$.\\
+Come gi\`a sappiamo il modo corretto di impostare il problema
+\`e quello di utilizzare la statistica binomiale;
+con il consueto significato dei termini si ha $n=10$ e $p=\frac{1}{2}$:
+$$
+\binomialpdf{k}{10, \tinyfrac{1}{2}}=
+\binom{10}{k} \cdot \left(\smallfrac{1}{2}\right)^k
+\cdot \left(\smallfrac{1}{2}\right)^{10-k}
+$$
+si ottiene:
+\begin{eqnarray*}
+\binomialpdf{3}{10, \tinyfrac{1}{2}} & = & 
+\binom{10}{3} \cdot \left(\smallfrac{1}{2}\right)^3
+\cdot \left(\smallfrac{1}{2}\right)^7=\frac{15}{128}\\
+\binomialpdf{4}{10, \tinyfrac{1}{2}} & = &
+\binom{10}{4} \cdot \left(\smallfrac{1}{2}\right)^4
+\cdot \left(\smallfrac{1}{2}\right)^6=\frac{105}{512}\\
+\binomialpdf{5}{10, \tinyfrac{1}{2}} & = &
+\binom{10}{5} \cdot \left(\smallfrac{1}{2}\right)^5
+\cdot \left(\smallfrac{1}{2}\right)^5=\frac{63}{256}\\
+\binomialpdf{6}{10, \tinyfrac{1}{2}} & = &
+\binom{10}{6} \cdot \left(\smallfrac{1}{2}\right)^6
+\cdot \left(\smallfrac{1}{2}\right)^4=\frac{105}{512}
+\end{eqnarray*}
+per cui:
+$$
+\prob{3\le k\le 6} = \binomialpdf{3}{10, \tinyfrac{1}{2}} +
+\binomialpdf{4}{10, \tinyfrac{1}{2}} +
+\binomialpdf{5}{10, \tinyfrac{1}{2}} +
+\binomialpdf{6}{10, \tinyfrac{1}{2}} \approx 0.7734
+$$
+
+Per usare l'approssimazione gaussiana, $k$ deve essere considerata
+formalmente come una variabile continua (e non discreta, come essa \`e in
+realt\`a). In questo schema, dunque, ci\`o che si deve calcolare \`e
+$\prob{2.5 \le x \le 6.5}$ per una variabile gaussiana con media
+$$
+\mu=n p=10\cdot \frac{1}{2}=5
+$$
+e deviazione standard
+$$
+\sigma=\sqrt{n p(1-p)}=\sqrt{5 \cdot \frac{1}{2}}\approx 1.58
+$$
+Passando alla variabile standard gli estremi di integrazione divengono:
+\begin{eqnarray*}
+z_1&=&\frac{2.5-5}{1.58}\approx-1.58\\
+z_2&=&\frac{6.5-5}{1.58}\approx0.95
+\end{eqnarray*}
+ed infine:
+$$
+\prob{2.5\le k\le 6.5} = 0.4429 + 0.3289 = 0.7718
+$$
+Che \`e molto vicino al valore $0.7734$ trovato prima.
+
+In questo caso il lavoro per calcolare i due valori \`e circa lo
+stesso, ma se, ad esempio, $n=100$ e si cerca la probabilit\`a che $k$ sia
+compreso tra $30$ e $60$, non disponendo di un computer o di molta pazienza,
+\`e di gran lunga preferibile fare uso dell'approssimazione gaussiana,
+che, tra l'altro, diventa pi\`u precisa al crescere di $n$.}
+
+\end{exemplify}
+
+Si pu\`o dimostrare che la distribuzione di Gauss si ottiene
+anche come limite della distribuzione di Poisson
+\index{Poisson!distribuzione di} per grandi valori
+della media $\mu$ (vedi figura \ref{fig:ConfrontoPoissonGauss}).
+In questo caso la deviazione standard, come sappiamo,
+\`e data da $\sigma = \sqrt{\mu}$ per cui la gaussiana corrispondente
+sar\`a:
+\eqn{
+\gaussianpdf{x}{\mu}=\frac{1}{\sqrt{2\pi\mu}} \,
+e^{-\frac{1}{2}\frac{(x-\mu)^2}{\mu}}
+}
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/gaussian_vs_poisson.tex}}
+{Confronto tra una Poissoniana con media $\mu=30$
+ed una Gaussiana con media $\mu=30$ e deviazione standard $\sigma=\sqrt{30}$.}
+{fig:ConfrontoPoissonGauss}
+
+
+\begin{exemplify}
+
+\example{Supponiamo che in un dato campione di materiale radioattivo vi siano
+in media $30$ decadimenti al secondo. Ci chiediamo quale sia la probabilit\`a
+che in un certo intervallo di $1 \s$ il numero di decadimenti sia
+compreso tra $30$ e $35$.
+
+Se l'ipotesi di stazionariet\`a \`e verificata il processo segue la
+statistica di Poisson e la probabilit\`a di avere k decadimenti \`e:
+$$
+\poissonpdf{k}{30} = \frac{30^k}{k!} \, e^{-30}
+$$
+In particolare:
+\begin{eqnarray*}
+\poissonpdf{30}{30} &=& \frac{30^{30}}{30!} \, e^{-30} \approx 0.0726\\
+\poissonpdf{31}{30} &=& \frac{30^{31}}{31!} \, e^{-30} \approx 0.0703\\
+\poissonpdf{32}{30} &=& \frac{30^{32}}{32!} \, e^{-30} \approx 0.0659\\
+\poissonpdf{33}{30} &=& \frac{30^{33}}{33!} \, e^{-30} \approx 0.0599\\
+\poissonpdf{34}{30} &=& \frac{30^{34}}{34!} \, e^{-30} \approx 0.0529\\
+\poissonpdf{35}{30} &=& \frac{30^{35}}{35!} \, e^{-30} \approx 0.0453
+\end{eqnarray*}
+per cui la probabilit\`a cercata \`e:
+$$
+\prob{30 \le k \le 35} = \sum_{k=30}^{35}\poissonpdf{k}{30} \approx 0.3745
+$$
+
+Proviamo adesso ad applicare l'approssimazione gaussiana. Analogamente
+all'esempio precedente dobbiamo calcolare $\prob{29.5 \le x \le 35.5}$
+per una variabile gaussiana con media
+$$
+\mu=30
+$$
+e deviazione standard
+$$
+\sigma=\sqrt{\mu}\approx 5.48
+$$
+Passando alla variabile standard gli estremi di integrazione divengono:
+\begin{eqnarray*}
+z_1&=&\frac{29.5-30}{5.48}\approx -0.09\\
+z_2&=&\frac{35.5-30}{5.48}\approx 1.00
+\end{eqnarray*}
+ed infine:
+$$
+\prob{29.5\le k\le 35.5} = 0.0359+0.3413 = 0.3772
+$$
+che di nuovo \`e molto vicino al valore trovato con il calcolo esatto.
+Notiamo anche che se ci fossimo chiesti, tanto per fare un esempio, la
+probabilit\`a di avere meno di 30 conteggi, il calcolo nello schema di
+Poisson sarebbe stato estremamente pi\`u laborioso.}
+
+\end{exemplify}
+
+\noindent \`E importante sottolineare che l'utilit\`a della distribuzione di
+Gauss non \`e limitata al fatto che essa sia il limite di una binomiale o di
+una Poissoniana.
+In realt\`a in tutti i casi in cui le fluttuazioni di una variabile casuale
+continua sono dovute alla somma di tanti piccoli contributi indipendenti,
+la gaussiana sembra descrivere bene la distribuzione di questa
+variabile. In fisica questa situazione si presenta molto spesso, per cui in
+pratica quando non ci sono errori sistematici o cause di errore fortemente
+correlate tra di loro, cio\`e non indipendenti, la distribuzione dei risultati
+di una misura \`e molto ben descritta da una gaussiana.
+
+
+
+\section{Distribuzione del \texorpdfstring{$\chi^2$}{chi2}}
+\label{sec:chiquadro}
+\index{$\chi^2$!distribuzione del}
+
+\subsection{Premessa: la funzione \texorpdfstring{$\Gamma$}{gamma} di Eulero}
+
+Definiamo la funzione $\Gamma$ di Eulero che, come vedremo, compare nella
+costante di normalizzazione della distribuzione del $\chi^2$, attraverso la
+relazione integrale:
+$$
+\Gamma(x) = \dintegral{t^{x-1} e^{-t}}{t}{0}{\infty}
+$$
+con $x$ complesso e $t$ reale.
+Si pu\`o dimostrare facilmente, integrando per parti, che:
+$$
+\Gamma(x+1) = x \cdot \Gamma(x) 
+$$
+Allora, notando che $\Gamma(1) = 1$, \`e semplice verificare che, per ogni
+numero naturale, la funzione $\Gamma$ gode della notevole propriet\`a:
+$$
+\Gamma(n+1) = n!
+$$
+per cui pu\`o essere considerata come una sorta di generalizzazione al campo
+complesso della funzione fattoriale.
+
+
+\subsection{La distribuzione del \texorpdfstring{$\chi^2$}{chi2}}
+
+Sia $x$ la somma dei quadrati di $n$ variabili gaussiane $z_i$ in forma
+standard ($\mu=0$, $\sigma=1$) indipendenti:
+$$
+x = \sum_{i=1}^n z_i^2
+$$
+Questa quantit\`a si chiama $\chi^2$ (\emph{chi quadro}) ad $n$ gradi di
+libert\`a, \`e definito nell'intervallo $\linterval{0}{\infty}$ e la sua
+funzione di distribuzione \`e:
+\eqnlbox{
+\chisquarepdf{x}{n}=C_n x^{\frac{n-2}{2}}e^{-\frac{x}{2}}
+}{eq:ChiQuadro}
+dove $C_n$ \`e una costante di normalizzazione che vale:
+\eqn{
+C_n=\frac{1}{2^{\frac{n}{2}}\Gamma \left( \frac{n}{2} \right)}
+}
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/chisquare_1.tex}
+{Grafico della distribuzione del $\chi^2$ ad 1 grado di libert\`a.}
+{./pp_distribuzioni/figure/chisquare_2.tex}
+{Grafico della distribuzione del $\chi^2$ a 2 gradi di libert\`a.}
+{./pp_distribuzioni/figure/chisquare_3.tex}
+{Grafico della distribuzione del $\chi^2$ a 3 gradi di libert\`a.}
+{./pp_distribuzioni/figure/chisquare_15.tex}
+{Grafico della distribuzione del $\chi^2$ a 15 gradi di libert\`a.}
+{fig:DistribuzioneDelChiQuadro}}
+{Grafici della distribuzione del $\chi^2$ per diversi gradi di libert\`a.
+Notiamo che, all'aumentare del numero $n$ di gradi di libert\`a, la
+distribuzione tende ad assumere la caratteristica forma a campana.
+Dovendo valere la condizione di normalizzazione, il valore massimo della
+funzione decresce al crescere di $n$.}
+{fig:DistribuzioneDelChiQuadro}
+
+\noindent Per grandi valori di $n$ ($n\ge 30$), la funzione di distribuzione
+della variabile
+$$
+z = \sqrt{2\chi^2}-\sqrt{2n-1}
+$$
+tende ad una distribuzione normale con media zero e deviazione standard uno.
+
+\subsection{Normalizzazione, media e varianza}
+
+Essendo il calcolo della media e quello della varianza un po'
+laboriosi, ci limitiamo qui a riportare i risultati, che utilizzeremo
+nel seguito.
+Il valor medio \index{media!della distribuzione del $\chi^2$} della
+distribuzione del $\chi^2$ \`e uguale al numero di
+gradi di libert\`a
+\eqnlbox{
+\mu = n
+}{eq:ChiQuadroMedia}
+e la varianza \index{varianza!della distribuzione del $\chi^2$} \`e
+uguale a due volte il numero di gradi di libert\`a:
+\eqnlbox{
+\sigma^2 = 2n
+}{eq:ChiQuadroVarianza}
+per cui la deviazione standard \`e data da:
+\eqnlbox{
+\sigma = \sqrt{2n}
+}{eq:ChiQuadroRMS}
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/chisquare_detailed.tex}}
+{Grafico della distribuzione del $\chi^2$ a $5$ gradi di libert\`a.
+Per completezza i punti corrispondenti a $x = \mu$ e $x = \mu + \sigma$
+sono esplicitamente indicati sul grafico.}
+{fig:DistribuzioneDelChiQuadroDettagliata}
+
+Anche per la distribuzione del $\chi^2$ si trovano delle tavole che danno
+sia i valori della densit\`a $\chisquarepdf{x}{n}$
+sia i valori della probabilit\`a
+$$
+P_n(x)=\dintegral{\chisquarepdf{\xi}{n}}{\xi}{0}{x}
+$$
+Rimandiamo in particolare alle tavole nelle appendici \ref{app:ChiQuadro1}
+e \ref{app:ChiQuadro2}.
+
+
+\section{Distribuzione di Cauchy}
+
+\index{Cauchy!distribuzione di}La distribuzione di Cauchy, che scriviamo nella
+forma:
+\eqnlbox{
+\cauchypdf{x}{a} = \frac{a}{\pi} \frac{1}{(a^2 + x^2)}
+}{eq:Cauchy}
+possiede alcune propriet\`a che la rendono particolarmente interessante.
+In effetti essa \`e ampiamente utilizzata,
+in fisica atomica ed in fisica delle particelle, in una forma
+leggermente modificata
+\eqnl{
+\pdf{{\cal W}}{x}{\median, \Gamma} = \frac{\Gamma}{2\pi}
+\frac{1}{\left[ \left(\displaystyle \frac{\Gamma}{2} \right)^2 +
+\left( x - \median \right)^2 \right]}
+}{eq:BreitWigner}
+che \`e generalmente nota come distribuzione di Lorentz o distribuzione
+di Breit-Wigner. La (\ref{eq:BreitWigner}) \`e essenzialmente identica
+alla (\ref{eq:Cauchy}), con la differenza che essa non \`e centrata in
+$x = 0$, ma in $x = \median$.
+Nel seguito ci riferiremo alla (\ref{eq:Cauchy}) senza sostanziale
+perdita di generalit\`a.
+
+\panelfig
+{\twobytwotexfig
+{./pp_distribuzioni/figure/cauchy_02.tex}
+{Grafico della distribuzione di Cauchy per $a=0.2$.}
+{./pp_distribuzioni/figure/cauchy_05.tex}
+{Grafico della distribuzione di Cauchy per $a=0.5$.}
+{./pp_distribuzioni/figure/cauchy_1.tex}
+{Grafico della distribuzione di Cauchy per $a=1$.}
+{./pp_distribuzioni/figure/cauchy_2.tex}
+{Grafico della distribuzione di Cauchy per $a=2$.}
+{fig:DistribuzioneDiCauchy}}
+{Grafici della distribuzione di Cauchy per diversi valori di $a$.
+Dovendo valere la condizione di normalizzazione, il valore massimo della
+funzione di distribuzione decresce al crescere di $a$.}
+{fig:DistribuzioneDiCauchy}
+
+
+\subsection{Normalizzazione, media e varianza}
+
+Verifichiamo prima di tutto che la distribuzione \`e normalizzata:
+$$
+\dintegral{\cauchypdf{x}{a}}{x}{-\infty}{\infty} =
+\dintegral{\frac{a}{\pi} \frac{1}{(a^2 + x^2)}}{x}{-\infty}{\infty}
+$$
+Con il cambiamento di variabile $\frac{x}{a} = t$ l'integrale diviene:
+$$
+\dintegral{\frac{a}{\pi} \frac{1}{(a^2 + x^2)}}{x}{-\infty}{\infty} =
+\frac{1}{\pi} \dintegral{\frac{1}{(1+t^2)}}{t}{-\infty}{\infty} =
+\frac{1}{\pi} \eval{\arctan (t)}{-\infty}{\infty} =
+\frac{1}{\pi} \cdot \left( \frac{\pi}{2} + \frac{\pi}{2} \right) = 1
+$$
+
+La mediana della distribuzione \index{mediana!della distribuzione di Cauchy}
+esiste e, essendo la distribuzione stessa simmetrica rispetto all'asse $x=0$,
+si ha $\median = 0$.
+
+\panelfig
+{\onebyonetexfig{./pp_distribuzioni/figure/cauchy_detailed.tex}}
+{Grafico della distribuzione di Cauchy per $a = 1$.
+Per completezza i punti corrispondenti a $x = \median$ e $x = \median + \hwhm$
+sono esplicitamente indicati sul grafico.
+La linea tratteggiata rappresenta una distribuzione di Gauss con media
+$\mu = 0$ e deviazione standard $\sigma = 1$; le code
+della gaussiana decrescono per grandi $x$ molto pi\`u velocemente di
+quelle della distribuzione di Cauchy.}
+{fig:DistribuzioneDiCauchyDettagliata}
+
+Formalmente la media \index{media!della distribuzione di Cauchy} si scrive,
+al solito, come:
+$$
+\mu = \expect{x} = \dintegral{x \cdot \cauchypdf{x}{a}}{x}{-\infty}{\infty} =
+\dintegral{\frac{a}{\pi} \frac{x}{(a^2 + x^2)}}{x}{-\infty}{\infty}
+$$
+Purtroppo questo integrale \emph{non \`e definito}.
+Una discussione completa dell'argomento esula dagli scopi di queste dispense;
+qui ci limitiamo a notare che l'integrale indefinito
+$$
+\iintegral{\frac{a}{\pi} \frac{x}{(a^2 + x^2)}}{x} =
+\frac{1}{2} \log (a^2 + x^2)
+$$
+quando viene valutato tra $-\infty$ e $+\infty$, porta ad una forma
+indeterminata del tipo $\infty - \infty$. 
+Notiamo altres\`i che l'integrale definito
+$$
+\dintegral{\frac{a}{\pi} \frac{x}{(a^2 + x^2)}}{x}{-c}{c}
+$$
+esiste ed \`e nullo, come si pu\`o verificare per calcolo diretto oppure
+sfruttando il fatto che l'integrando \`e dispari ed il dominio di integrazione
+\`e finito e simmetrico rispetto all'origine. Si potrebbe allora essere
+tentati di definire la media come:
+$$
+\mu = \lim_{c \rightarrow \infty}
+\dintegral{\frac{a}{\pi} \frac{x}{(a^2 + x^2)}}{x}{-c}{c}
+$$
+Questo limite (si tratta di ci\`o che \`e chiamato di solito
+\emph{parte principale} dell'integrale) esiste ed \`e zero; purtroppo questa
+definizione di media sarebbe causa di ulteriori problemi in relazione alla
+validit\`a di alcuni risultati significativi della teoria delle probabilit\`a.
+In altre parole la media della distribuzione di Cauchy non \`e definita.
+
+Ne consegue che nemmeno la varianza \`e definita (dato che la media \`e
+necessaria alla sua definizione)
+\index{varianza!della distribuzione di Cauchy}.
+Vale la pena notare che i momenti di ordine $k$ centrati attorno all'origine
+divergono per $k>1$:
+$$
+\expect{x^k} =
+\frac{a}{\pi} \dintegral{\frac{x^k}{(a^2 + x^2)}}{x}{-\infty}{\infty}  = \infty
+$$
+
+Non essendo definita la varianza, in questo caso risulta particolarmente utile
+il concetto di semilarghezza a met\`a altezza; per la distribuzione di Cauchy
+si tratta, in un certo senso, dell'unica scelta possibile. La semilarghezza a
+met\`a altezza ($\hwhm$) \index{HWHM!della distribuzione di Cauchy} si trova
+calcolando i valori $x_{\pm}$ di $x$ per cui:
+$$
+\cauchypdf{x_{\pm}}{a} = \frac{1}{2} \cauchypdf{0}{a}
+$$
+da cui:
+$$
+x_{\pm} = \pm a
+$$
+ed infine:
+$$
+\hwhm = a
+$$
+Questo significa che, a patto di scegliere $a$ abbastanza piccolo, la
+distribuzione di Cauchy pu\`o essere resa \emph{stretta} a piacere
+(figura \ref{fig:DistribuzioneDiCauchy}).
+Il che \`e sorprendente se pensiamo al fatto che il momento di ordine due
+intorno allo $0$ \`e infinito, indipendentemente da $a$.
+
+\begin{exemplify}
+
+\example{\label{es:Cauchy}Supponiamo di avere una sorgente radioattiva,
+posta a distanza $a$ da uno schermo%
+\footnote{
+Se lo schermo \`e, ad esempio, ricoperto con emulsione
+fotografica o equipaggiato opportunamente con un rivelatore,
+\`e possibile identificare con notevole precisione la
+posizione in cui una particella incide sullo schermo stesso.
+}
+infinitamente esteso, che emette particelle con distribuzione isotropa
+(cio\`e in tutte le direzioni con uguale probabilit\`a).
+Siamo interessati alla distribuzione dei punti in cui queste particelle
+incidono sullo schermo; tratteremo il problema come se fosse bidimensionale,
+considerando solo le particelle emesse in un piano ortogonale allo schermo e
+contenente la sorgente---e quindi restringendoci alla retta identificata
+dall'interersezione di questo piano con lo schermo stesso.
+
+Se indichiamo con $\theta$ l'angolo di emissione di una generica
+particella, misurato a partire dalla perpendicolare allo schermo passante
+per la sorgente, la densit\`a di probabilit\`a in questa variabile
+sar\`a uniforme:
+$$
+p_{\theta}(\theta) = \left \{ \begin{array}{ll}
+\frac{\displaystyle 1}{\displaystyle \pi} & -
+\frac{\pi}{2} \leq x \leq \frac{\pi}{2}\\
+0 & x < -\frac{\pi}{2}; ~ x > \frac{\pi}{2}
+\end{array} \right.
+$$
+(notare che abbiamo considerato solamente l'intervallo
+$[-\frac{\pi}{2}, \frac{\pi}{2}]$ poich\'e al di fuori di esso le particelle
+non raggiungono lo schermo).
+Il punto di impatto sullo schermo sar\`a dato da:
+\eqnl{
+x = a \cdot \tan \theta
+}{eq:Theta_X}
+ed il problema consiste nel calcolare la densit\`a di probabilit\`a nella
+nuova variabile $x$.
+Formalmente si tratta di valutare la densit\`a di probabilit\`a di una
+funzione di una variabile casuale di cui sia nota la funzione di distribuzione.
+Tratteremo diffusamente questo problema in sezione
+\ref{sec:Cambiamento Variabile}
+(cfr. in particolare l'esempio \ref{esem:CamVarCont2}). Qui ci limitiamo ad
+enunciare il risultato:
+$$
+p_x(x) = \frac{a}{\pi} \frac{1}{(a^2 + x^2)}
+$$
+cio\`e la variabile $x$ \`e distribuita secondo la distribuzione di Cauchy.}
+
+\end{exemplify}
+
+
+
+\clearpage
+\section{Sommario}
+Riportiamo nella tabella seguente le propriet\`a principali delle distribuzioni
+sin qui studiate.
+\stdtable{4}%
+{\sc Distribuzione & \sc Espressione & \sc Media & \sc Varianza}%
+{& & & \\
+Binomiale & $\displaystyle \binomialpdf{k}{n, p} = \binom{n}{k}p^k q^{n-k}$
+& $n p$ & $n p q$\\
+& & & \\
+Poissoniana & $\displaystyle \poissonpdf{k}{\mu} = \frac{\mu^k}{k!} e^{-\mu}$
+& $\mu$ & $\mu$\\
+& & & \\
+Uniforme & $\displaystyle \uniformpdf{x}{a, b} =
+\left \{ \begin{array}{ll} \frac{1}{(b - a)}
+& a \leq x \leq b\\ 0 & x < a; ~ x > b \end{array} \right.$
+& $\displaystyle \frac{b+a}{2}$ & $\displaystyle \frac{(b-a)^2}{12}$\\
+& & & \\
+Esponenziale & $\displaystyle \exponentialpdf{x}{\lambda} =
+\left \{ \begin{array}{ll} \lambda e^{-\lambda x} &
+0 \leq x \leq \infty\\ 0 & x < 0 \end{array} \right.$
+& $\displaystyle \frac{1}{\lambda}$ & $\displaystyle \frac{1}{\lambda^2}$\\
+& & & \\
+Gaussiana & $\displaystyle \gaussianpdf{x}{\mu, \sigma} =
+\frac{1}{\sigma\sqrt{2\pi}}e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$
+& $\mu$ & $\sigma^2$\\
+& & & \\
+$\chi^2$ & $\displaystyle \chisquarepdf{x}{n} =
+\frac{1}{2^{\frac{n}{2}}\Gamma 
+\left( \frac{n}{2} \right)} x^{\frac{n-2}{2}}e^{-\frac{x}{2}}$
+& $n$ & $2n$\\
+& & & \\
+Cauchy & $\displaystyle \cauchypdf{x}{a} = \frac{a}{\pi} \frac{1}{(a^2 + x^2)}$
+& - & -\\
+& & & \\
+}

@@ -1,0 +1,95 @@
+\newcommand{\tabhdr}[3]{
+\begin{center}
+\begin{tabular}{lr}
+\begin{minipage}[c]{0.48\textwidth}
+\input{#1}
+\end{minipage}
+&
+\begin{minipage}[c]{0.48\textwidth}
+{#2}
+\\[15 pt]
+{\textsc{Esempio}: {\itshape\footnotesize #3}}
+\end{minipage}
+\end{tabular}
+\end{center}
+}
+
+
+\newcommand{\embed}[5]
+{\noindent{#1}
+
+\nopagebreak%
+\setlength{\hangindent}{#2}\hangafter=-#3%
+\vspace{-#4\baselineskip}\noindent{#5}}
+
+
+\newcommand{\caution}[1]
+{\vspace{0.7\baselineskip}\nopagebreak%
+\embed{\large\dbend}{25pt}{2}{1.05}{\itshape #1}%
+\nopagebreak\vspace{0.7\baselineskip}}
+
+% Span.
+% \fromto{a}{b}
+\newcommand{\fromto}[2]
+{#1 \, \ldots \, #2}
+
+% Measurement units.
+\newcommand{\rad}
+{~{\rm rad}}
+\newcommand{\degrees}
+{~^{\circ}}
+\newcommand{\s}
+{~{\rm s}}
+\newcommand{\mm}
+{~{\rm mm}}
+\newcommand{\cm}
+{~{\rm cm}}
+\newcommand{\m}
+{~{\rm m}}
+\newcommand{\km}
+{~{\rm km}}
+\newcommand{\mg}
+{~{\rm mg}}
+\newcommand{\g}
+{~{\rm g}}
+\newcommand{\kg}
+{~{\rm kg}}
+\newcommand{\celsius}
+{~$^{\circ}${\rm C}}
+
+\newcommand{\ckey}[1]
+{{\tt<\hbox{#1}>}}
+
+\newcommand{\cchar}[1]
+{``{\tt\hbox{#1}}''}
+
+\newcommand{\ccmd}[1]
+{{\tt\hbox{#1}}}
+
+\newcommand{\dos}
+{Microsoft~DOS}
+
+\newcommand{\windows}
+{Microsoft~Windows}
+
+\newcommand{\linux}
+{Linux}
+
+\newcommand{\unix}
+{Unix}
+
+\newcommand{\gnuplot}
+{gnuplot}
+
+\newcommand{\scilab}
+{scilab}
+
+\newcommand{\emacs}
+{emacs}
+
+\newcommand{\wysiwyg}
+{\textsc{wysiwyg}}
+
+\newcommand{\gnuplotcmd}[1]
+{\begin{quotation}\noindent #1\end{quotation}}
+

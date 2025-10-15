@@ -1,0 +1,68 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+
+set xrange [-6:6]
+set yrange [0:1]
+set ytics 0 0.2
+
+# Four graphs with different lambda. 
+set ylabel "\\gplabel{$\\gaussianpdf{x}{0, 1}}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, 0, 1) lw lw_normal
+set out 'gaussian_0_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\gaussianpdf{x}{0, 2}}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, 0, 2) lw lw_normal
+set out 'gaussian_0_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\gaussianpdf{x}{1, 1}}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, 1, 1) lw lw_normal
+set out 'gaussian_1_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\gaussianpdf{x}{-1, 0.5}}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, -1, 0.5) lw lw_normal
+set out 'gaussian_-1_0_5.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+# Graph for mu = 0, sigma = 1, with the mean and the rms on the plot
+#
+mu    = 0
+sigma = 1
+mean  = gauss_mean(mu, sigma)
+rms   = gauss_rms(mu, sigma)
+set xrange [-4:4]
+set yrange [0:1]
+set ytics 0 0.2
+
+ymax = 1
+ylab = ymax*0.85
+yarr = ymax*0.8
+set ylabel "\\gplabel{$\\gaussianpdf{x}{0, 1}}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, mu, sigma) lw lw_normal
+set arrow from mean, yarr to mean, 0 front
+set label "$\\meanlabel$" at mean, ylab center
+set arrow from mean+rms, yarr to mean+rms, 0 front
+set label "$\\onesigmalabel$" at mean+rms, ylab center
+set out 'gaussian_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'
+
+# Comparison between the Gauss and Poisson distributions.
+#
+unset label
+unset arrow
+set xrange [10:50]
+set yrange [0:0.1]
+set ytics 0 0.02
+set boxwidth 0.4
+mu    = 30
+sigma = mu**0.5
+set ylabel "\\gplabel{$\\gaussianpdf{x}{30, \\sqrt{30}}} ,\\;\\; \\poissonpdf{x}{30}$" offset ylab_xoff, ylab_yoff
+plot gauss_pdf(x, mu, sigma) lw lw_normal,\
+	'gp_poisson_30.dat' using 1:2 with boxes ls 1
+set out 'gaussian_vs_poisson.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

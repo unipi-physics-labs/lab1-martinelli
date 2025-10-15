@@ -1,0 +1,137 @@
+\chapter{Un esempio di fit con \scilab}
+
+\gnuplot\ utilizza una variante del metodo di minimo $\chi^2$ per eseguire i
+fit. Il procedimento in questione \`e di tipo iterativo: si parte da una stima
+iniziale dei parametri (fornita dall'utente) e si cambiano questi ultimi
+fino a che il $\chi^2$ non converge ad un minimo. Questo \`e il modo in cui,
+in genere, funzionano i pacchetti di analisi dati per effettuare dei fit.
+In realt\`a, per lo meno nei casi pi\`u semplici, non \`e affatto complicato
+scrivere dei piccoli programmi che eseguano dei fit.
+
+\section{Minimo \texorpdfstring{$\chi^2$}{chi2} nel caso lineare}
+
+Supponiamo di avere una serie di dati sperimentali  e di volerli fittare con
+la funzione pi\`u semplice in assoluto:
+\begin{equation}
+f(x) = a x
+\end{equation}
+(abbiamo scelto una funzione puramente lineare, \`e bene notarlo, solamente
+per semplicit\`a; in generale azzerare l'intercetta non \`e un'operazione
+lecita).
+Al solito, nell'ipotesi che gli errori sulla $x$ siano trascurabili possiamo
+eseguire il fit minimizzando la quantit\`a:
+\begin{equation}
+S = \sum_{i=0}^n\frac{(y_i - a x_i)^2}{(\Delta y_i)^2}
+\end{equation}
+Nel nostro caso l'equazione da risolvere \`e:
+\begin{equation}
+\frac{\partial S}{\partial a} =
+-2\sum_{i=0}^n\frac{(y_i - a x_i)\cdot x_i}{(\Delta y_i)^2}  = 0
+\end{equation}
+che conduce all'equazione per $a$:
+\begin{equation}
+a = \frac{\displaystyle \sum_{i=0}^n\frac{y_ix_i}{(\Delta y_i)^2}}
+{\displaystyle \sum_{i=0}^n\frac{(x_i)^2}{(\Delta y_i)^2}}
+\end{equation}
+Notiamo, per inciso, che introducendo i vettori $n$-dimensionali:
+\begin{eqnarray}
+\mathbf{v} = \left(\frac{x_1}{\Delta y_1}, \frac{x_2}{\Delta y_2} \cdots 
+\frac{x_n}{\Delta y_n}\right)\\\nonumber
+\mathbf{w} = \left(\frac{y_1}{\Delta y_1}, \frac{y_2}{\Delta y_2} \cdots
+\frac{y_n}{\Delta y_n}\right)
+\end{eqnarray}
+l'equazione per $a$ si pu\`o scrivere in forma compatta come:
+\begin{equation}
+a = \frac{\mathbf{v} \cdot \mathbf{w}}{\mathbf{v} \cdot \mathbf{v}}
+\end{equation}
+in cui il puntino sta ad indicare l'usuale prodotto scalare tra vettori.
+
+\section{Implementare il fit con \scilab}
+
+A questo punto eseguire il fit \`e una cosa semplice: basta prendere i dati
+ed eseguire, nella giusta sequenza, i prodotti, le divisioni e le somme
+necessarie a calcolare $a$ secondo l'equazione scritta sopra.
+Una calcolatrice va benissimo, ma il tutto si pu\`o fare in modo pi\`u
+efficiente (specialmente nel caso si abbia un gran numero di dati)
+scrivendo un piccolo programma.
+Qualsiasi linguaggio di programmazione pu\`o servire egregiamente allo scopo;
+noi proveremo a farlo con il pacchetto \emph{software} \scilab, che offre
+tutta una serie di funzioni utili per maneggiare matrici e vettori.
+
+\scilab\ si lancia dalla \emph{shell} con il comando:
+\begin{verbatim}
+>scilab
+\end{verbatim}
+La prima cosa che dobbiamo fare \`e importare entro scilab la nostra matrice
+di dati, che chiameremo \cchar{M}. Supponendo che il nostro \emph{file} si
+chiami \cchar{LeggeOraria.txt}, useremo il comando di \scilab\ \cchar{read}
+come segue:
+\begin{verbatim}
+scilab>[M] = read('LeggeOraria.txt', 6, 3)
+[M] =
+|  5   10.1   2.0 |
+| 10   17.8   1.5 |
+| 15   26.6   1.5 |
+| 20   32.8   2.0 |
+| 25   40.2   2.5 |
+| 30   47.4   2.0 |
+scilab>
+\end{verbatim}
+Essenzialmente questo significa: leggiamo il \emph{file}
+\cchar{LeggeOraria.txt} ed estraiamo una matrice di sei righe e tre colonne
+che chiamiamo \cchar{M} e che da questo momento \`e disponibile in memoria
+per effettuare le operazioni desiderate; ad ogni passo \scilab\ dovrebbe
+stampare sullo schermo ci\`o che abbiamo appena fatto, che \`e utile per
+verificarne la correttezza.
+
+\caution{\scilab\ non ama i commenti (le righe precedute da \cchar{\#}, che
+invece non creavano problemi a \gnuplot) per cui dobbiamo avere la precauzione
+di cancellarle dal \emph{file} contenente i dati, prima di eseguire il
+comando.}
+
+A questo punto dobbiamo estrarre dalla matrice i vettori che ci interessano,
+cio\`e quello delle $x$, quello delle $y$ e quello degli errori sulla $y$.
+Il modo per farlo (con ovvio significato dei termini) \`e:
+\begin{verbatim}
+scilab>[x] = M(:, 1)
+[x] =
+|  5  |
+| 10  |
+| 15  |
+| 20  |
+| 25  |
+| 30  |
+scilab>[y] = M(:, 2)
+| 10.1 |
+| 17.8 |
+| 26.6 |
+| 32.8 |
+| 40.2 |
+| 47.4 |
+scilab>[dy] = M(:,3)
+| 2.0 |
+| 1.5 |
+| 1.5 |
+| 2.0 |
+| 2.5 |
+| 2.0 |
+scilab>
+\end{verbatim}
+Cio\`e: definiamo il vettore $x$ come la prima colonna della matrice \cchar{M},
+il vettore $y$ come la seconda colonna e $dy$ come la terza colonna.
+Costruiamo quindi i vettori $\mathbf{v}$ e $\mathbf{w}$ definiti nel paragrafo
+precedente:
+\begin{verbatim}
+scilab>v = x./dy
+scilab>w = y./dy
+scilab>
+\end{verbatim}
+(notare che l'operatore \cchar{./} \`e quello che consente, dentro \scilab,
+di eseguire la divisione membro a membro di due vettori).
+Non ci resta che eseguire i prodotti scalari per calcolare $a$:
+\begin{verbatim}
+scilab>(v'*w)/(v'*v)
+\end{verbatim}
+(l'apostrofo \cchar{'} indica il vettore trasposto, dopo di che il prodotto
+scalare si esegue con l'usuale simbolo di moltiplicazione); \scilab\ dovrebbe
+visualizzare sullo schermo il valore del parametro cercato.

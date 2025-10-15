@@ -1,0 +1,51 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_functions.fnc'
+
+set xlabel "\\gplabel{$t\\;({\\rm s})$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$x\\;({\\rm m})$}" offset ylab_xoff, ylab_yoff
+
+set yrange [0:15] 
+set ytics 0 3
+
+xsize = 0.80
+ysize = 0.97
+set size xsize, ysize
+
+fit line(x) 'least_squares.dat' using 1:2:4 via a, b
+plot 'least_squares.dat' using 1:2:4 with yerrorbars pt 8 ps 1, line(x) lt 2
+set out 'least_squares.tex'
+load '../../cc_gnuplot/gp_plot.util'
+replot
+set out
+
+
+fit line(x) 'least_chisquare.dat' using 1:2:4 via a, b
+plot 'least_chisquare.dat' using 1:2:4 with yerrorbars pt 8 ps 1, line(x) lt 2
+set out 'least_chisquare.tex'
+load '../../cc_gnuplot/gp_plot.util'
+replot
+set out
+
+fit line(x) 'least_chisquare.dat' using 1:2 via a, b
+plot 'least_chisquare.dat' using 1:2:4 with yerrorbars pt 8 ps 1, line(x) lt 2
+set out 'least_chisquare_noerror.tex'
+load '../../cc_gnuplot/gp_plot.util'
+replot
+set out
+
+fit pol10(x) 'least_chisquare.dat' using 1:2:4 via c_10, c_9, c_8, c_7,\
+	c_6, c_5, c_4, c_3, c_2, c_1, c_0
+plot 'least_chisquare.dat' using 1:2:4 with yerrorbars pt 8 ps 1, pol10(x) lt 2
+set out 'least_chisquare_pol10.tex'
+load '../../cc_gnuplot/gp_plot.util'
+replot
+set out
+
+fit pol10(x) 'least_chisquare_test.dat' using 1:2:4 via c_0
+plot 'least_chisquare_test.dat' using 1:2:4 with yerrorbars pt 8 ps 1, pol10(x) lt 2
+set out 'least_chisquare_pol10_test.tex'
+load '../../cc_gnuplot/gp_plot.util'
+replot
+set out
+set terminal x11

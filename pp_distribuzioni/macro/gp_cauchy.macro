@@ -1,0 +1,53 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+
+set xrange [-5:5]
+set yrange [0:2]
+set ytics 0 0.4
+
+# Four graphs with different lambda. 
+#
+
+set ylabel "\\gplabel{$\\cauchypdf{x}{0.2}}$" offset ylab_xoff, ylab_yoff
+plot cauchy_pdf(x, 0.2) lw lw_normal
+set out 'cauchy_02.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\cauchypdf{x}{0.5}}$" offset ylab_xoff, ylab_yoff
+plot cauchy_pdf(x, 0.5) lw lw_normal
+set out 'cauchy_05.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\cauchypdf{x}{1}}$" offset ylab_xoff, ylab_yoff
+plot cauchy_pdf(x, 1) lw lw_normal
+set out 'cauchy_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\cauchypdf{x}{2}}$" offset ylab_xoff, ylab_yoff
+plot cauchy_pdf(x, 2) lw lw_normal
+set out 'cauchy_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+# Graph for a = 1, with the mean and the rms on the plot
+#
+a      = 1
+median = cauchy_median(a)
+hwhm   = cauchy_hwhm(a)
+
+ymax = 0.75
+ylab = ymax*0.85
+yarr = ymax*0.8
+set xrange [-4:4]
+set yrange [0:ymax]
+set ytics 0.15
+set ylabel "\\gplabel{$\\cauchypdf{x}{1}}$" offset ylab_xoff, ylab_yoff
+plot cauchy_pdf(x, a) lw lw_normal, gauss_pdf(x, median, hwhm)
+set arrow from median, yarr to median, 0 front
+set label "$\\medianlabel$" at median, ylab center
+set arrow from median+hwhm, yarr to median+hwhm, 0 front
+set label "$\\onehwhmlabel$" at median+hwhm, ylab center
+set out 'cauchy_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

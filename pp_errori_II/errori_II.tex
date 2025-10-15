@@ -1,0 +1,1055 @@
+\chapter{Propagazione degli errori. Parte II}
+\label{chap:PropagazioneDegliErrori2}
+\mt
+
+In questo capitolo si riprende la propagazione degli errori/incertezze
+introdotta al Capitolo \ref{chap:PropagazioneDegliErrori1}, dove si era trattato
+soltanto l'incertezza massima che si commette nell'eseguire operazioni con
+grandezze $a, b, c, \ldots$ affette da incertezze
+$\Delta a, \Delta b, \Delta c, \ldots$
+
+I risultati di quel capitolo si applicano quando le grandezze sono
+misurate indipendentemente e le incertezze
+$\Delta a, \Delta b, \Delta c, \ldots$ non sono state determinate
+con metodi statistici.
+Tale situazione si incontra quando gli strumenti usati non sono
+molto sensibili, non si hanno fluttuazioni casuali e
+$\Delta a, \Delta b, \Delta c, \ldots$
+sono le risoluzioni degli strumenti stessi. Quando invece si
+presentano fluttuazioni casuali, l'incertezza \`e valutata tramite la stima
+della deviazione standard. Il problema della propagazione delle
+incertezze \`e allora il seguente: data una grandezza funzione di altre,
+come si possono combinare le deviazioni standard per le
+grandezze individuali per stimare l'incertezza sul risultato.
+
+
+\section{Media e varianza di funzioni di variabili casuali}
+\index{media!di una funzione di variabile casuale}
+\index{varianza!di una funzione di variabile casuale}
+Il problema della propagazione delle incertezze si riconduce al
+problema di determinare come e sotto quali ipotesi la media
+e la varianza di una funzione di variabili casuali sono legate
+alla media e varianza di tali variabili.
+
+\subsection{Funzioni di una sola variabile}
+
+Consideriamo dapprima il caso semplice di una grandezza $G$ funzione di una
+sola variabile $x$:
+$$
+G = f(x)
+$$
+Sia $\mu_x$ il valor medio della variabile $x$ e $\sigma^2_x$ la sua varianza:
+\begin{eqnarray*}
+\mu_x      & = & \expect{x} \\
+\sigma^2_x & = & \expect{(x-\mu_x)^2}
+\end{eqnarray*}
+Anche la variabile $G$ \`e una variabile casuale con una sua
+funzione di distribuzione. \`E pertanto possibile definirne il valor medio
+$\mu_G$ e la varianza $\sigma^2_G$:
+\begin{eqnarray*}
+\mu_G      & = & \expect{G} \\
+\sigma^2_G & = & \expect{(G-\mu_G)^2}
+\end{eqnarray*}
+Utilizzando lo sviluppo in serie di Taylor attorno al valor medio di $x$
+possiamo approssimare $G$ come:
+$$
+G = f(\mu_x) +
+\tfdereval{f}{x}{\mu_x} \cdot (x - \mu_x) +
+\frac{1}{2} \cdot \tsdereval{f}{x}{\mu_x} \cdot (x-\mu_x)^2 +
+\orderof{3}
+$$
+ed il suo valore di aspettazione (ricordiamo che si tratta di un
+operatore lineare) come:
+$$
+\mu_G = \expect{G} \simeq
+\expect{f(\mu_x)} +
+\expect{\tfdereval{f}{x}{\mu_x} \cdot (x - \mu_x)} +
+\expect{\frac{1}{2} \cdot \tsdereval{f}{x}{\mu_x} \cdot (x-\mu_x)^2}
+$$
+in cui i termini di ordine $3$ o superiore sono stati esplicitamente
+trascurati.
+Notiamo ancora una volta che le derivate sono \emph{calcolate}
+nel punto attorno al quale si sviluppa (nel caso particolare il valor
+medio di $x$) per cui non sono altro che \emph{numeri} (leggi: costanti
+indipendenti da $x$) e possono essere \emph{portate fuori} dal segno di
+valore di aspettazione---questo vale anche per il valore $f(x)$ della
+funzione calcolata in $\mu_x$:
+$$
+\mu_G \simeq f(\mu_x) +
+\tfdereval{f}{x}{\mu_x} \cdot \expect{(x - \mu_x)} +
+\frac{1}{2} \cdot \tsdereval{f}{x}{\mu_x} \cdot \expect{(x-\mu_x)^2}
+$$
+\`E molto semplice convincersi che il primo ordine dello sviluppo
+\`e nullo:
+$$
+\expect{(x - \mu_x)} = \expect{x} - \expect{\mu_x} = \mu_x - \mu_x = 0
+$$
+per cui alla fine, mettendo tutto insieme, otteniamo:
+$$
+\mu_G \simeq
+f(\mu_x) +
+\frac{1}{2} \cdot \tsdereval{f}{x}{\mu_x} \cdot \expect{(x - \mu_x)^2}
+$$
+Troncando lo sviluppo al second'ordine si deduce l'importante risultato:
+\eqnlbox{
+\mu_G \simeq f(\mu_x)
+}{eq:ValorMedioFunzioneDix}
+valido \emph{esattamente} quando la funzione $f(x)$ \`e lineare e
+\emph{approssimativamente} nei casi in cui si possano trascurare i termini
+del second'ordine o successivi nello sviluppo della funzione stessa.
+
+Data la (\ref{eq:ValorMedioFunzioneDix}) si ha:
+$$
+\sigma^2_G =
+\expect{ \left(G - \mu_G \right)^2} \simeq
+\expect{ \left(f(x) - f(\mu_x) \right)^2}
+$$
+Mettendo dentro la nostra espressione per lo sviluppo di $f(x)$ abbiamo:
+$$
+f(x) - f(\mu_x) = \tfdereval{f}{x}{\mu_x} \cdot (x - \mu_x) +
+\orderof{2}
+$$
+Trascurando di nuovo i termini al secondo ordine nello sviluppo in serie di
+$f(x)$ ne segue:
+$$
+\sigma^2_G \simeq
+\expect{\left(\tfdereval{f}{x}{\mu_x} \right)^2 \cdot (x - \mu_x)^2} =
+\left(\tfdereval{f}{x}{\mu_x} \right)^2 \cdot \expect{(x - \mu_x)^2} =
+\left(\tfdereval{f}{x}{\mu_x} \right)^2 \cdot \sigma_x^2
+$$
+ed infine:
+\eqnlbox{
+\sigma_G \simeq \abs{\tfdereval{f}{x}{\mu_x}} \cdot \sigma_x
+}{eq:SigmaFunzioneDix}
+Notiamo che questo risultato \`e simile a quello che si ottiene per la
+propagazione dell'errore massimo (\ref{eq:StimaGeneraleMonodimensionale}):
+$$
+\Delta G = \abs{\tfdereval{f}{a}{a_0}} \cdot \Delta a
+$$
+con la deviazione standard al posto dell'errore massimo.
+
+\begin{exemplify}
+
+\example{Consideriamo una variabile casuale x distribuita uniformemente
+nell'intervallo $\cinterval{9.9}{10.1}$:
+$$
+p(x) = \left \{ \begin{array}{ll}
+5 & 9.9 \leq x \leq 10.1\\
+0 & x < 9.9; ~ x > 10.1
+\end{array} \right.
+$$
+Sappiamo che la media e la deviazione standard di $x$ sono,
+secondo la (\ref{eq:UniformeMedia}) e la (\ref{eq:UniformeRMS}):
+\begin{eqnarray*}
+\mu_x    & = & \frac{10.1 + 9.9}{2} = 10\\
+\sigma_x & = & \frac{10.1 - 9.9}{\sqrt{12}} \approx 0.0577
+\end{eqnarray*}
+Consideriamo adesso la funzione $G(x) = x^2$.
+In questo semplice caso possiamo valutare esplicitamente $\mu_G$ e
+$\sigma_G$:
+\begin{eqnarray*}
+\mu_G & = & \expect{G} = \dintegral{x^2 \cdot p(x)}{x}{-\infty}{\infty} =
+\eval{5\frac{x^3}{3}}{9.9}{10.1} \approx 100.003 \\
+\sigma^2_G & = & \expect{G^2} - \mu_G^2 =
+\dintegral{x^4 \cdot p(x)}{x}{-\infty}{\infty} - \mu_G^2=
+\eval{5\frac{x^5}{5}}{9.9}{10.1} - \mu_G^2 \approx 1.333\\
+\sigma_G & = & \sqrt{\sigma^2_G} \approx 1.155
+\end{eqnarray*}
+Le equazioni (\ref{eq:ValorMedioFunzioneDix}) e (\ref{eq:SigmaFunzioneDix})
+(che nel caso non lineare valgono solo approssimativamente) prevedono:
+\begin{eqnarray*}
+\mu_G    & \simeq & \mu_x^2 \approx 100\\
+\sigma_G & \simeq & 2\mu_x \sigma_x \approx 1.154\\
+\end{eqnarray*}
+e sono in accordo eccellente con il risultato esatto.
+}
+
+\end{exemplify}
+
+\subsection{Funzioni di due variabili}
+
+Consideriamo adesso il caso di una grandezza $G$, funzione di due variabili
+casuali $x$ e $y$:
+$$
+G=f(x,y)
+$$
+Lo sviluppo in serie di Taylor attorno al punto $(\mu_x, \mu_y)$
+si scrive adesso, trascurando sin dall'inizio i termini del second'ordine o
+superiori, come:
+\eqnl{
+G \simeq f(\mu_x, \mu_y) +
+\pfdereval{f}{x}{\mu_x, \mu_y} \cdot (x - \mu_x) +
+\pfdereval{f}{y}{\mu_x, \mu_y} \cdot (y - \mu_y)
+}{eq:TaylorDueVariabili}
+in cui le derivate, al solito, sono calcolate nel punto attorno a cui
+si sviluppa. Notiamo che nello sviluppo al prim'ordine compaiono
+le derivate parziali rispetto ad entrambe le variabili.
+
+D'ora in avanti, per il resto di questo capitolo, ometteremo di indicare
+esplicitamente il punto in cui sono calcolate le derivate ovunque questo
+sia evidente dal contesto, nello spirito di ottenere i risultati che ci
+interessano in una forma pi\`u \emph{compatta}.
+Riscriviamo dunque la (\ref{eq:TaylorDueVariabili}) come:
+\eqn{
+G \simeq f(\mu_x, \mu_y) +
+\pfder{f}{x} \cdot (x - \mu_x) +
+\pfder{f}{y} \cdot (y - \mu_y)
+}
+e ancora, coma prima nel caso di una sola variabile:
+\begin{eqnarray*}
+\mu_G & = & \expect{G} \simeq \expect{f(\mu_x, \mu_y)} +
+\expect{\pfder{f}{x} \cdot (x - \mu_x)} +
+\expect{\pfder{f}{y} \cdot (y - \mu_y)}\\
+& = & f(\mu_x, \mu_y) +
+\pfder{f}{x} \cdot \expect{(x - \mu_x)} +
+\pfder{f}{y} \cdot \expect{(y - \mu_y)}
+\end{eqnarray*}
+Sfruttando il fatto che
+\begin{eqnarray*}
+\expect{(x-\mu_x)} &=& 0\\
+\expect{(y-\mu_y)} &=& 0
+\end{eqnarray*}
+abbiamo:
+\eqnlbox{
+\mu_G \simeq f(\mu_x, \mu_y)
+}{eq:ValorMedioFunzioneDix2}
+che, vale la pena ricordarlo ancora una volta, \`e valida nel limite in cui
+si possano trascurare i termini di ordine superiore al primo nello
+sviluppo in serie di Taylor di $G$.
+
+Per ci\`o che riguarda la varianza si ha:
+\begin{eqnarray*}
+\sigma_G^2 & = & \expect{(G - \mu_G)^2}
+\simeq \expect{\left( f(x,y) - f(\mu_x,\mu_y) \right)^2 } \simeq \\
+& \simeq & \expect{\left(
+\pfder{f}{x} \cdot (x - \mu_x) +
+\pfder{f}{y} \cdot (y - \mu_y)
+\right)^2} = \\
+& = & E \left[\,
+\left(\pfder{f}{x}\right)^2 \cdot (x - \mu_x)^2 +
+\left(\pfder{f}{y} \right)^2 \cdot (y - \mu_y)^2 +
+2 \cdot \pfder{f}{x} \cdot \pfder{f}{y} \cdot
+(x - \mu_x) \cdot (y - \mu_y) \, \right]
+\end{eqnarray*}
+Come prima le derivate sono semplici costanti che si possono
+tirar fuori dai valori di aspettazione:
+\begin{eqnarray*}
+\sigma_G^2 & = &
+\left(\pfder{f}{x} \right)^2 \cdot \expect{(x - \mu_x)^2} +
+\left(\pfder{f}{y} \right)^2 \cdot \expect{(y - \mu_y)^2} +\\
+& + & 2 \cdot \pfder{f}{x} \cdot
+\pfder{f}{y} \cdot \expect{(x - \mu_x)\cdot(y - \mu_y)} =\\
+& = & 
+\left(\pfder{f}{x} \right)^2 \cdot \sigma_x^2 +
+\left(\pfder{f}{y} \right)^2 \cdot \sigma_y^2 +
+2 \cdot \pfder{f}{x} \cdot \pfder{f}{y} \cdot \sigma_{xy}\\
+\end{eqnarray*}
+Infine:
+\eqnlbox{\sigma_G = \sqrt{
+\left(\pfder{f}{x} \right)^2 \cdot \sigma_x^2 +
+\left(\pfder{f}{y} \right)^2 \cdot \sigma_y^2 +
+2 \cdot \pfder{f}{x} \cdot \pfder{f}{y} \cdot \sigma_{xy}}
+}{eq:PropErroriCov}
+dove, a costo di essere pedanti, ricordiamo ancora che le derivate si
+intendono calcolate nel punto $(\mu_x, \mu_y)$; la quantit\`a $\sigma_{xy}$,
+che abbiamo appena introdotto prende il nome di {\itshape covarianza} ed
+\`e definita da:\index{covarianza}
+\eqnlbox{
+\sigma_{xy} = \expect{(x - \mu_x) \cdot (y - \mu_y)}
+}{eq:Covarianza}
+Ne parleremo pi\`u in dettaglio nella prossima sezione.
+
+Se le grandezze $x$ ed $y$ sono statisticamente indipendenti, che \`e un
+caso piuttosto comune in laboratorio, la (\ref{eq:PropErroriCov}) diviene:
+\eqnlbox{
+\sigma_G = \sqrt{
+\left(\pfder{f}{x} \right)^2 \cdot \sigma_x^2 +
+\left(\pfder{f}{y} \right)^2 \cdot \sigma_y^2}
+}{eq:PropErroriNoCov}
+
+\begin{exemplify}
+
+\example{\label{esem:DueDadi}Supponiamo di lanciare due dadi a sei facce.
+Sia $x$ l'uscita del primo
+dado, $y$ l'uscita del secondo e $G=x+y$ la somma della uscite.
+Sappiamo gi\`a la funzione di distribuzione di $x$ (e quindi di $y$)
+e ne abbiamo gi\`a calcolato media, varianza e deviazione standard
+(vedi esempi \ref{esem:MediaUnDado} e \ref{esem:VarianzaUnDado}):
+\begin{eqnarray*}
+\mu_x &=& 3.5\\
+\sigma^2_x &=& \frac{35}{12} \approx 2.917\\
+\end{eqnarray*}
+Analogamente per $G$ vale (vedi esempi \ref{esem:MediaDueDadi}
+e \ref{esem:VarianzaDueDadi}):
+\begin{eqnarray*}
+\mu_G &=& 7\\
+\sigma^2_G &=& \frac{70}{12} \approx 5.833\\
+\end{eqnarray*}
+Le equazioni (\ref{eq:ValorMedioFunzioneDix2}) e (\ref{eq:PropErroriNoCov})
+prevedono:
+\begin{eqnarray*}
+\mu_G &=& \mu_x + \mu_y = 2\mu_x = 7\\
+\sigma^2_G &=& \sigma^2_x + \sigma^2_y = 2\sigma^2_x = \frac{70}{12}
+\end{eqnarray*}
+ed esse sono verificate esattamente e non solo approssimativamente, perch\'e
+la legge che lega $G$ a $x$ e $y$ \`e lineare.}
+
+\end{exemplify}
+
+
+\subsection{La covarianza}
+
+Abbiamo definito la covarianza nella sezione precedente come:
+$$
+\sigma_{xy} = \expect{(x - \mu_x) \cdot (y - \mu_y)}
+$$
+Con un poco di algebra elementare, si pu\`o ricavare la relazione utile:
+$$
+\sigma_{xy} = \expect{xy - x\mu_y - \mu_xy + \mu_x\mu_y} = 
+\expect{xy} - \mu_x\mu_y - \mu_x\mu_y + \mu_x\mu_y = 
+\expect{xy} - \mu_x\mu_y
+$$
+La covarianza \`e una misura di quanto le fluttuazioni di $x$ e $y$
+sono legate (o meglio {\itshape correlate}, come vedremo nel paragrafo
+\ref{sec:Correlazione}) tra loro. In particolare se $x$ e
+$y$ sono statisticamente indipendenti, allora $\sigma_{xy}= 0$.
+\`E interessante notare come, in generale, il viceversa non sia sempre
+vero, nel senso che se la covarianza di due variabili \`e nulla
+non \`e detto che esse siano statisticamente indipendenti.\\
+
+\begin{exemplify}
+
+\example{Consideriamo una variabile casuale $x$ e la variabile casuale
+$x^2$. Esse non sono statisticamente indipendenti
+($x^2$ \`e univocamente determinata da $x$). Supponiamo che
+la funzione di distribuzione di $x$ abbia definiti i momenti almeno
+fino all'ordine tre e sia pari (cio\`e simmetrica
+rispetto all'asse $x=0$). Allora, usando la (\ref{eq:Covarianza}):
+$$
+\sigma_{xx^2} = \expect{x\cdot x^2}-\mu_x \cdot \mu_{x^2} =
+\mu_{x^3} - \mu_x \cdot \mu_{x^2} = 0
+$$
+poich\'e se la funzione di distribuzione \`e pari sia $\mu_{x^3}$
+che $\mu_x$ sono nulli.
+Dunque la covarianza \`e nulla.}
+
+\end{exemplify}
+
+\noindent Per completezza ricordiamo qui che si pu\`o dimostrare che per
+qualsiasi coppia di variabili vale la seguente relazione:
+\eqnlbox{
+\abs{\sigma_{xy}} \le \sigma_x\sigma_y
+}{eq:CovarianzaVarianza}
+
+\subsection{Caso generale}
+
+I risultati appena ottenuti si possono facilmente generalizzare ad un numero
+arbitrario di variabili $x_i$ ($ i = 1 \ldots n$):
+\eqnlbox{
+\sigma_G = \sqrt{\sum_{i=1}^n
+\left(\pfder{f}{x_i}\right)^2 \cdot \sigma^2_{x_i} +
+2\sum_{i = 1}^n \sum_{j\neq i}
+\left(\pfder{f}{x_i}\right) \left(\pfder{f}{x_j}\right) \cdot \sigma_{x_i x_j}}
+}{eq:PropErroriGenerale}
+dove tutte le derivate, questa volta, si intendono calcolate nel punto
+$(\mu_{x_1} \ldots \mu_{x_n})$, ossia in corrispondenza dei valori medi
+di \emph{tutte} le variabili $x_i$.
+Nell'ipotesi in cui le $x_i$ siano statisticamente indipendenti tra di loro,
+la (\ref{eq:PropErroriGenerale}) diviene:
+\eqnlbox{
+\sigma_G = \sqrt{\sum_{i=1}^n
+\left(\pfder{f}{x_i} \right)^2
+\cdot \sigma^2_{x_i}}
+}{eq:PropErroriGeneraleIndip}
+
+\`E di fondamentale importanza il fatto che tutti i risultati esposti
+rimangono validi se al posto della media e della
+varianza della \emph{parent distribution} abbiamo le loro stime.
+Nel prossimo paragrafo risolveremo il problema, fondamentale in fisica,
+di stimare la media e la varianza di una distribuzione a partire da un numero
+finito di misure sperimentali.
+Per il momento riportiamo, per completezza, la forma generale della
+propagazione degli errori nel caso di grandezze indipendenti, che \`e una
+relazione usatissima in laboratorio e sostituisce la formula dell'errore
+massimo (\ref{eq:ErroreMassimoGenerale}) derivata nel capitolo
+{\ref{chap:PropagazioneDegliErrori1}}%
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnote{
+Vale la pena sottolineare di nuovo come, bench\'e formalmente simili,
+la (\ref{eq:ErroreMassimoGenerale}) e la (\ref{eq:ErroreStatisticoGenerale})
+differiscano profondamente in quanto a contenuto fisico (la prima ci dice che
+una certa grandezza \`e {\itshape sicuramente} contenuta entro un
+certo intervallo, mentre la seconda ci dice che un certo intervallo ha una
+ben definita probabilit\`a di contenere il valore cercato).
+}%
+\renewcommand{\thefootnote}{\arabic{footnote}}
+.
+Utilizzando la notazione consueta, sia $G$ una grandezza funzione di altre
+grandezze $a, b, c \ldots$ Siano $a_0, b_0, c_0 \ldots$ i valori misurati
+sperimentalmente e $\Delta a, \Delta b, \Delta c \ldots$ le incertezze
+associate alle misure. Se interpretiamo $a_0, b_0, c_0 \ldots$ come la nostra
+migliore stima per le medie delle distribuzioni generatrici di
+$a, b, c \ldots $ e $\Delta a, \Delta b, \Delta c \ldots$
+come la migliore stima per le deviazioni standard della media, la formula di
+propagazione dell'errore su $G$ si legge direttamente dalla
+(\ref{eq:PropErroriGeneraleIndip}):
+\eqnlbox{
+\Delta G = \sqrt{
+\left( \pfder{f}{a} \cdot \Delta a \right)^2+
+\left( \pfder{f}{b} \cdot \Delta b \right)^2+
+\left( \pfder{f}{c} \cdot \Delta c \right)^2 + \cdots}
+}{eq:ErroreStatisticoGenerale}
+in cui le derivate si intendono calcolate nei punti \emph{misurati}
+$(a_0, b_0, c_0 \ldots)$.
+Notiamo ancora che, utilizzando la (\ref{eq:CovarianzaVarianza})
+nel caso di due variabili si ottiene:
+\begin{eqnarray*}
+\sigma_G^2 & = &
+\left(\pfder{f}{x} \right)^2 \cdot \sigma^2_x +
+\left(\pfder{f}{y} \right)^2 \cdot \sigma^2_y +
+2 \cdot \left(\pfder{f}{x} \right) \left(\pfder{f}{y} \right)
+\cdot \sigma_{xy} \le\\
+& \le & \left(\pfder{f}{x} \right)^2 \cdot \sigma^2_x +
+\left(\pfder{f}{y} \right)^2 \cdot \sigma^2_y +
+2 \cdot \left(\pfder{f}{x} \right)
+\left(\pfder{f}{y} \right) \cdot \sigma_x \sigma_y =\\
+& = & \left( \pfder{f}{x} \cdot \sigma_x +
+\pfder{f}{y} \cdot \sigma_y \right)^2
+\end{eqnarray*}
+e dunque:
+\eqn{
+\sigma_G \le \abs{\pfder{f}{x}} \cdot \sigma_x +
+\abs{\pfder{f}{y}} \cdot \sigma_y
+}
+che, per inciso, \`e generalizzabile ad un numero arbitrario di
+variabili.
+Il contenuto essenziale di questa relazione consiste nel fatto che
+quando, in un'operazione tra due grandezze $x$ ed $y$,
+combiniamo le incertezze come abbiamo imparato nel capitolo
+\ref{chap:PropagazioneDegliErrori1} otteniamo sempre un limite superiore
+per l'incertezza valutata nel modo {\itshape statisticamente
+corretto} (per questo parlavamo di {\itshape incertezza massima} o
+{\itshape errore massimo}).
+
+\begin{exemplify}
+
+\example{Supponiamo di misurare indipendentemente il periodo $T$ e la lunghezza
+$l$ di un pendolo semplice ottenendo:
+\begin{eqnarray*}
+T &=& 0.854 \pm 0.003 \s\\
+l &=& 1.140 \pm 0.005 \m
+\end{eqnarray*}
+Supponiamo anche che la valutazione delle incertezze associate alle misure sia
+stata eseguita in modo statisticamente corretto.
+Vogliamo ricavare una stima dell'accelerazione di gravit\`a $g$ utilizzando la
+relazione:
+$$
+T = 2\pi \sqrt{\frac{l}{g}}
+$$
+Invertendo l'equazione appena scritta troviamo:
+$$
+g(l, T) = \frac{4\pi^2 l}{T^2} \approx 9.82
+$$
+da cui:
+\begin{eqnarray*}
+\Delta g & = & \sqrt{
+\left( \pfdereval{g}{l}{T_0, l_0} \cdot \Delta l \right)^2 +
+\left( \pfdereval{g}{T}{T_0, l_0} \cdot \Delta T \right)^2} =
+\frac{4\pi^2}{T_0^2} \sqrt{ (\Delta l)^2 +
+\left( \frac{2 l_0\Delta T}{T_0} \right)^2} \approx 0.08
+\end{eqnarray*}
+Se avessimo valutato l'incertezza su $g$ secondo la formula dell'errore
+massimo avremmo ottenuto:
+$$
+\Delta g =
+\abs{\pfdereval{g}{l}{T_0, l_0}} \cdot \Delta l +
+\abs{\pfdereval{g}{T}{T_0, l_0}} \cdot \Delta T =
+\frac{4\pi^2}{T_0^2}
+\left( \Delta l + \frac{2 l_0\Delta T}{T_0} \right) \approx 0.11
+$$
+che, come atteso, \`e pi\`u grande.}
+
+\end{exemplify}
+
+C'\`e da osservare che anche nel caso in cui si prende come incertezza la
+risoluzione dello strumento, nello stimare una grandezza che \`e funzione di
+molte altre, conviene usare la (\ref{eq:PropErroriGenerale}) o la
+(\ref{eq:PropErroriGeneraleIndip}) perch\'e \`e pessimistico pensare che
+tutti gli errori contribuiscano nello stesso verso; l'errore statistico
+\`e pi\`u significativo.
+
+
+\section{Media e varianza campione}
+\label{sec:MediaVarCampione}
+\index{media campione}
+\index{varianza campione}
+
+\`E rimasto il problema di vedere come trattare i risultati delle misure
+quando questi non sono costanti. Riprendiamo perci\`o alcuni dei concetti
+introdotti precedentemente. Era stato osservato che l'insieme delle misure
+sperimentali \`e una piccola parte di tutte le misure effettuabili ed
+\`e quindi un campione di tutte le possibili misure, che sono a loro
+volta  distribuite secondo la cosiddetta distribuzione generatrice
+(o {\itshape parent distribution}).
+Conoscere {\itshape esattamente} la distribuzione generatrice richiederebbe
+un numero infinito di misure.
+Ci poniamo dunque il problema di valutare, a partire da un numero finito
+di misure, le migliori stime che possiamo dare della media e della varianza
+della distribuzione generatrice stessa.
+
+Supponiamo dunque di eseguire in laboratorio $n$ misure di una certa
+grandezza $x$ e siano $x_i$ ($i=1 \ldots n$) i risultati di tali misure.
+Come miglior stima della media $\mu$ si prende la
+media aritmetica $m$%
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnote{
+La notazione comunemente adottata
+\`e di indicare con $m$ ed $s^2$ (lettere dell'alfabeto romano) i valori
+{\itshape approssimati}, ottenuti da una serie finita di misurazioni e
+calcolati mediante la (\ref{eq:MediaCampione}) e la
+(\ref{eq:VarianzaCampione}) della media $\mu$ e della varianza $\sigma^2$
+(lettere dell'alfabeto greco) della distribuzione generatrice.
+}%
+\renewcommand{\thefootnote}{\arabic{footnote}}
+:
+\eqnlbox{
+m = \frac{1}{n}\sum_{i=1}^nx_i
+}{eq:MediaCampione}
+$m$ \`e la {\itshape media campione}, cio\`e la media della distribuzione
+campione e tende a $\mu$ quando $n$ tende all'infinito o, meglio, converge in
+probabilit\`a a $\mu$, cio\`e
+$$
+\forall\epsilon>0\quad \prob{|m-\mu| \ge \epsilon}\to 0\quad
+{\rm per}\quad n\to\infty.
+$$
+
+Come stima della varianza della distribuzione campione, tenuto conto del
+significato di varianza, potremmo essere tentati di prendere
+la media degli scarti al quadrato, cio\`e la quantit\`a
+$$
+s^2 = \frac{1}{n} \sum_{i=1}^n(x_i -m)^2
+$$
+Questo andrebbe benissimo se le quantit\`a $(x_i-m)$ fossero indipendenti
+tra di loro, ma in realt\`a non lo sono. Infatti:
+\begin{eqnarray*}
+\sum_{i=1}^{n}(x_i-m) &=&
+\sum_{i=1}^{n} x_i -\sum_{i=1}^{n} m =
+\sum_{i=1}^{n} x_i - n\cdot m =
+\sum_{i=1}^{n} x_i - n \cdot \frac{1}{n}\sum_{i=1}^{n}(x_i) =\\
+& = & \sum_{i=1}^{n} x_i - \sum_{i=1}^{n} x_i = 0
+\end{eqnarray*}
+Fisicamente questo dipende dal fatto che il valore di $m$ \`e stato ricavato
+proprio dagli $x_i$, per cui, conoscendo $m$ e conoscendo $n-1$ tra gli $x_i$,
+possiamo ricavare l'n-esimo $x_i$. Dunque le quantit\`a indipendenti sono
+$n-1$.
+Per dirla in altre parole, in linea di principio dovremmo prendere
+come stima della varianza la quantit\`a
+$$
+s^2 = \frac{1}{n} \sum_{i=1}^n(x_i - \mu)^2
+$$
+ma il problema \`e che noi {\itshape non} conosciamo la media $\mu$
+della distribuzione generatrice. Tutto ci\`o che conosciamo \`e la sua
+stima $m$ e quando sostituiamo $m$ a $\mu$ nella somma, i termini indipendenti
+cessano di essere $n$ e divengono $n-1$.
+Per farla breve la miglior stima della varianza della
+\emph{parent distribution} (a partire da un numero finito di misure
+sperimentali) \`e data da:
+\eqnlbox{
+s^2=\frac{1}{n-1}\sum_{i=1}^n(x_i-m)^2
+}{eq:VarianzaCampione}
+e, di conseguenza, la miglior stima della deviazione standard \`e:
+\eqnlbox{
+s = \sqrt{\frac{1}{(n - 1)}\sum_{i=1}^n(x_i-m)^2}
+}{eq:StdevCampione}
+Si pu\`o dimostrare che $s^2$ converge in
+probabilit\`a a $\sigma^2$ per $n$ che tende all'infinito.
+
+Vale la pena di notare, qui, che anche la media campione $m$ \`e una variabile
+casuale che ha una sua funzione di distribuzione (torneremo su questo
+in seguito). Questo deriva dal fatto che, eseguendo diverse volte $n$ misure
+di una certa grandezza, non otterremo sempre lo stesso valore di $m$.
+Molto spesso ci\`o che interessa \`e proprio la varianza della media
+campione.\index{media campione!varianza della}
+La stima della varianza della distribuzione della media campione $s_m^2$
+si pu\`o calcolare a partire dalla (\ref{eq:MediaCampione}):
+$$
+s^2_m  = \sum_{i=1}^n\left(\pfdereval{m}{x_i}{x_1 \ldots x_n} \right)^2
+\cdot \sigma^2_{x_i}
+$$
+Ma ogni elemento del campione appartiene alla stessa \emph{parent distribution}
+di varianza $\sigma^2$ stimata da $s^2$;
+inoltre per la (\ref{eq:MediaCampione}):
+$$
+\pfdereval{m}{x_i}{x_1 \ldots x_n} = \frac{1}{n}
+$$
+per cui, mettendo tutto insieme:
+$$
+s^2_m = \dsum{\frac{1}{n^2} \cdot \sigma^2}{i}{1}{n} \simeq
+\dsum{\frac{1}{n^2} \cdot s^2}{i}{1}{n}
+$$
+Ma nella somma sia $s$ che $n$ non dipendono dall'indice $i$ su cui
+la somma stessa \`e eseguita, per cui possono essere portati fuori:
+$$
+s^2_m = \frac{s^2}{n^2} \cdot \dsum{1}{i}{1}{n} = 
+\frac{s^2}{n^2} \cdot n = \frac{s^2}{n}
+$$
+La stima della deviazione standard (talvolta chiamata scarto quadratico medio
+della media) \`e dunque:
+\eqnlbox{
+s_m = \sqrt{\frac{1}{n(n - 1)} \dsum{(x_i - m)^2}{i}{1}{n}}
+}{eq:StdevMediaCampione}
+che si pu\`o scrivere anche come:
+\eqnlbox{
+s_m = \frac{s}{\sqrt{n}}
+}{eq:SMvsS}
+
+\begin{exemplify}
+
+\example{\label{esem:ErroreMedia} Supponiamo di misurare $n$ volte una certa
+grandezza $x$ e supponiamo che i valori misurati $x_i$ fluttuino in modo
+casuale. Il risultato della misura si pu\`o scrivere come:
+$$
+x = m \pm s_m
+$$
+oppure anche
+$$
+x = m \pm 2s_m
+$$
+dove $m$ e $s_m$ sono dati dalle (\ref{eq:MediaCampione}) e
+(\ref{eq:StdevMediaCampione}).
+La questione \`e di fondamentale importanza, in quanto questa \`e la
+situazione tipica che il fisico sperimentale incontra ogni giorno
+in laboratorio.
+Torneremo pi\`u avanti a discutere il significato di queste due
+scritture con maggior dettaglio.}
+
+\end{exemplify}
+
+
+\section{Il teorema del limite centrale}
+\index{limite centrale!teorema del}
+
+\subsection{Premessa}
+Consideriamo $n$ variabili casuali indipendenti $x_1, x_2 \ldots x_n$,
+con media $\mu_1, \mu_2 \ldots \mu_n$ e varianza
+$\sigma^2_1, \sigma^2_2 \ldots \sigma^2_n$ e sia $S$ (che pure \`e una
+variabile casuale) la loro somma
+$$
+S = x_1 + x_2 + \ldots + x_n = \dsum{x_i}{i}{1}{n}
+$$
+Poich\'e $S$ \`e una funzione lineare delle $x_i$ si pu\`o
+facilmente mostrare che la media $\mu_S$ e la varianza $\sigma^2_S$
+di $S$ sono date esattamente da:
+\begin{eqnarray}
+\mu_S &=& \mu_1 + \mu_2 + \ldots + \mu_n =
+\dsum{\mu_i}{i}{1}{n}\label{eq:SommaMedie}\\
+\sigma^2_S &=& \sigma_1^2 + \sigma_2^2 + \ldots + \sigma_n^2 =
+\dsum{\sigma^2_i}{i}{1}{n}
+\label{eq:SommaVarianze}
+\end{eqnarray}
+La dimostrazione segue sostanzialmente dalla \ref{eq:PropErroriGeneraleIndip}%
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnote{
+Ricordiamo ancora che, nel caso lineare, la \ref{eq:PropErroriGeneraleIndip}
+vale esattamente e non solo come approssimazione al prim'ordine.
+}\renewcommand{\thefootnote}{\arabic{footnote}}%
+:
+$$
+\sigma^2_S = \sum_{i=0}^{n} \left( \pfder{S}{x_i} \right) \cdot \sigma^2_i
+$$
+notando che:
+$$
+\pfder{S}{x_i} = 1 \qquad \forall i = 1\ldots n
+$$
+ed abbiamo gi\`a visto un esempio nel caso di due variabili
+(cfr. esempio \ref{esem:DueDadi}).
+
+
+\subsection{Il teorema del limite centrale}
+
+Il contenuto fondamentale del teorema del limite centrale \cite{Cramer}
+\`e racchiuso nel seguente enunciato:
+\begin{teo}[del limite centrale]
+Siano date $n$ variabili casuali indipendenti $x_i$; sotto
+condizioni molto deboli, e indipendentemente dalle funzioni di
+distribuzione delle singole $x_i$, la somma
+$S = x_1 + x_2 +\cdots+x_n$ \`e asintoticamente
+normale nel limite $n \rightarrow \infty$.
+\end{teo}
+Pi\`u precisamente per $n$ grande la funzione di distribuzione di $S$
+tende ad una distribuzione gaussiana con media e varianza date
+dalla (\ref{eq:SommaMedie}) e dalla (\ref{eq:SommaVarianze}),
+rispettivamente.
+
+In particolare se le variabili indipendenti $x_i$ sono tutte
+distribuite secondo la stessa funzione di distribuzione, con media
+$\mu$ e varianza $\sigma^2$, allora la somma $S$ \`e asintoticamente
+normale con media:
+\eqnl{
+\mu_S = \sum_{i=1}^{n} \mu = n\mu
+}{eq:SommaMedieUguali}
+e varianza:
+\eqnl{
+\sigma^2_S = \sum_{i=1}^{n} \sigma^2 = n\sigma^2
+}{eq:SommaVarianzeUguali}
+
+\begin{exemplify}
+
+\example{Sia la variabile casuale $x$ il numero di teste che escono nel lancio
+di $n$ monete.
+Formalmente $x$ \`e la somma di $n$ variabili casuali $x_i$ distribuite
+secondo la stessa funzione di distribuzione elementare:
+\pdftable{x_i}{3}%
+{$0$ & $1$}%
+{$\frac{1}{2}$ & $\frac{1}{2}$}
+che regola il numero di teste (pu\`o essere solo $0$ o $1$) che escono nel
+lancio di una moneta.
+\`E facile convincersi che la media e la varianza di tutte le $x_i$ \`e:
+\begin{eqnarray*}
+\mu_i &=& 0\cdot \frac{1}{2} + 1\cdot \frac{1}{2} = \frac{1}{2}\\
+\sigma^2_i &=& \left( 0 - \frac{1}{2} \right)^2 \cdot \frac{1}{2} +
+\left( 1 - \frac{1}{2} \right)^2 \cdot \frac{1}{2} = \frac{1}{4}
+\end{eqnarray*}
+
+Esaminiamo per prima cosa il caso semplice $n=2$. Con due monete
+si hanno quattro possibili uscite (TT, TC, CT, CC), i valori che la variabile
+numero di teste pu\`o assumere sono $0$, $1$ e $2$ e la funzione di
+distribuzione si calcola banalmente come rapporto tra i casi favorevoli e
+quelli possibili:
+\pdftable{x_i}{4}%
+{$0$ & $1$ & $2$}%
+{$\frac{1}{4}$ & $\frac{1}{2}$ & $\frac{1}{4}$}
+In questo caso la media e la varianza sono rispettivamente:
+\begin{eqnarray*}
+\mu &=& 0\cdot \frac{1}{4} + 1\cdot \frac{1}{2} + 2\cdot \frac{1}{4}= 1\\
+\sigma^2 &=& \left( 0 - 1 \right)^2 \cdot \frac{1}{4} +
+\left( 1 - 1 \right)^2 \cdot \frac{1}{2} +
+\left( 2 - 1 \right)^2 \cdot \frac{1}{4}  = \frac{1}{2}
+\end{eqnarray*}
+ed \`e facile verificare che, in accordo con le (\ref{eq:SommaMedieUguali}) e
+(\ref{eq:SommaVarianzeUguali}), si ha:
+\begin{eqnarray*}
+\mu &=& 2 \mu_i\\
+\sigma^2 &=& 2 \sigma_i^2
+\end{eqnarray*}
+
+\noindent Con $n=3$ monete il ragionamento si replica esattamente:
+\pdftable{x_i}{5}%
+{$0$ & $1$ & $2$ & $3$}%
+{$\frac{1}{8}$ & $\frac{3}{8}$ & $\frac{3}{8}$ & $\frac{1}{8}$}
+e, analogamente a prima:
+\begin{eqnarray*}
+\mu &=& 0\cdot \frac{1}{8} + 1\cdot \frac{3}{8} + 2\cdot \frac{3}{8} +
+3\cdot \frac{1}{8} = \frac{12}{8} = \frac{3}{2} = 3\mu_i\\
+\sigma^2 &=& \left( 0 - \frac{3}{2} \right)^2 \cdot \frac{1}{8} +
+\left( 1 - \frac{3}{2} \right)^2 \cdot \frac{3}{8} +
+\left( 2 - \frac{3}{2} \right)^2 \cdot \frac{3}{8} +
+\left( 3 - \frac{3}{2} \right)^2 \cdot \frac{1}{8}  =
+\frac{3}{4} = 3\sigma_i^2
+\end{eqnarray*}
+
+In generale \`e facile convincersi che la probabilit\`a di avere $k$ teste
+lanciando $n$ monete \`e data dalla distribuzione binomiale
+$\binomialpdf{k}{n, \tinyfrac{1}{2}}$:
+$$
+\prob{x = k} = \binom{n}{k}\cdot \left( \frac{1}{2} \right)^n
+$$
+La media e la varianza sono:
+\begin{eqnarray*}
+\mu &=& n p = n\cdot \frac{1}{2} = n\mu_i\\
+\sigma^2 &=& n p q = n\cdot \frac{1}{2}
+\cdot \frac{1}{2} = n\cdot \frac{1}{4} = n\sigma^2_i
+\end{eqnarray*}
+esattamente come previsto dalle (\ref{eq:SommaMedieUguali}) e
+(\ref{eq:SommaVarianzeUguali}).
+Al crescere di $n$, la funzione di distribuzione tende, come affermato dal
+teorema del limite centrale, alla classica forma a campana caratteristica
+della gaussiana (cfr. anche figura \ref{fig:DistribuzioneBinomiale}).}
+
+\end{exemplify}
+
+Una conseguenza fondamentale del teorema del limite centrale \`e che la
+media aritmetica di $n$ variabili casuali indipendenti con la stessa
+funzione di distribuzione (di media $\mu$ e varianza $\sigma^2$):
+$$
+m = \frac{1}{n}\sum_{i=1}^{n} x_i
+$$
+\`e asintoticamente normale con media, varianza e deviazione standard
+date rispettivamente da:
+\eqnlbox{
+\mu_m = \mu
+}{eq:MediaMedia}
+\eqnlbox{
+\sigma^2_m = \frac{\sigma^2}{n}
+}{eq:VarianzaMedia}
+\eqnlbox{
+\sigma_m = \frac{\sigma}{\sqrt{n}}
+}{SigmaMedia}
+
+Abbiamo gi\`a ricavato una relazione analoga che lega tra loro la stima della
+deviazione standard della {\itshape parent distribution} e quella della
+deviazione standard della media (cfr. \ref{eq:SMvsS}).
+Il teorema del limite centrale ci dice anche che la media segue una
+distribuzione che \`e ben approssimata da una gaussiana al crescere delle
+dimensioni del campione.
+L'importanza del teorema sta inoltre nel fatto che la convergenza \`e rapida;
+gi\`a per la media di 6 misure la distribuzione \`e ragionevolmente gaussiana.
+Quando il campione \`e di 20 o pi\`u misure la distribuzione \`e praticamente
+indistinguibile da una gaussiana in quasi tutti i casi sperimentati.
+
+\begin{exemplify}
+
+\example{\label{esem:LimiteCentrale1} Torniamo per un attimo all'esempio 
+\ref{esem:ErroreMedia}; alla luce
+del teorema del limite centrale (che ci dice che la media \`e
+distribuita gaussianamente) possiamo chiarire il significato di
+ci\`o che avevamo scritto.
+Poich\'e per una gaussiana, come si pu\`o facilmente leggere dalle
+tavole, si ha:
+$$
+\prob{|x-\mu| \le \sigma} = 68.26\%
+$$
+la scrittura:
+$$
+x = m \pm s_m
+$$
+significa che l'intervallo $\cinterval{m-s_m}{m+s_m}$ ha il $68.26\%$ di
+probabilit\`a di contenere il valor medio della distribuzione generatrice
+della nostra variabile casuale $x$ (che essenzialmente \`e il numero che ci
+interessa). Se raddoppiamo l'intervallo, prendendo:
+$$
+x = m \pm 2s_m,
+$$
+dato che per una gaussiana:
+$$
+\prob{\left| x - \mu \right| \le 2\sigma} = 95.44\%
+$$
+questa probabilit\`a diviene del $95.44\%$.}
+
+\example{Si misura preliminarmente per molte volte una certa grandezza
+$x$, ottenendo una serie di risultati $x_i$, da cui possiamo stimare la
+media e la deviazione standard della distribuzione generatrice del campione
+secondo le equazioni (\ref{eq:MediaCampione}) e (\ref{eq:StdevCampione}).
+Per fissare le idee supponiamo che, in una qualche unit\`a di misura:
+\begin{eqnarray*}
+m &=& 10.56\\
+s &=& 0.53
+\end{eqnarray*}
+Qual \`e la probabilit\`a che, su una singola misura, otteniamo un valore di
+$x$ maggiore di $11$?
+
+Senza ulteriori informazioni non esiste una risposta univoca a questa
+domanda, in quanto la probabilit\`a cercata dipende dalla forma analitica
+della distribuzione generatrice (di cui noi conosciamo solamente una stima
+della media e della deviazione standard).
+Se assumiamo una particolare distribuzione generatrice $p(x)$ (per esempio
+sulla base dei dati sperimentali o di \emph{input} della teoria), allora il
+calcolo si effettua banalmente secondo la formula consueta:
+$$
+\prob{x \geq 11} = \dintegral{p(x)}{x}{11}{+\infty}
+$$
+
+Tanto per fissare le idee, supponiamo che la distribuzione generatrice sia
+gaussiana, che \`e un caso piuttosto tipico in laboratorio. Passando alla
+variabile standard e consultando le tavole si ha:
+$$
+\prob{x \geq 11} = \prob{z \geq 0.83} \simeq 0.2033
+$$}
+
+\example{Con riferimento alla situazione dell'esempio precedente:
+qual \`e la probabilit\`a che, misurando la grandezza $x$
+per 30 volte, la media $m$ delle nostre misure sia pi\`u grande di $11$?
+
+Questa volta il problema \`e ben posto in quanto il teorema del limite
+centrale ci assicura che la media di 30 misure \`e, con ottima approssimazione,
+distribuita gaussianamente.
+Le stime per la media e la deviazione standard sono:
+\begin{eqnarray*}
+m_m &=& m = 10.56\\
+s_m &=& \frac{s}{\sqrt{n}} = 0.10
+\end{eqnarray*}
+Passando alla variabile standard e consultando le tavole in appendice:
+$$
+\prob{m \geq 11} = \prob{z \geq 4.40} \simeq 5.41 \cdot 10^{-6}
+$$
+Vale la pena sottolineare che la probabilit\`a \`e molto pi\`u bassa rispetto
+al valore calcolato nell'esempio precedente.}
+
+\end{exemplify}
+
+\`E chiaro che questi discorsi sono validi solo al tendere all'infinito delle
+dimensioni del campione. Se il campione \`e piccolo, per qualunque
+probabilit\`a assegnata, bisogna introdurre un fattore correttivo che dipende
+dal numero di gradi di libert\`a $\nu$%
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\footnote[8]{
+Torneremo sul concetto di {\itshape numero di gradi di libert\`a} nel paragrafo
+\ref{sec:TestChiQuadro}. Nel caso in questione $\nu = n-1$ poich\'e nella
+nostra stima della varianza $s^2$ utilizziamo la migliore stima di $m$
+anzich\'e $\mu$ (che \`e ignota).
+Confronta anche la (\ref{eq:VarianzaCampione}) e (\ref{eq:StdevCampione}).
+}%
+\renewcommand{\thefootnote}{\arabic{footnote}}
+:
+$$
+\nu = n-1
+$$
+cio\`e dal numero delle grandezze indipendenti \cite{Cramer, Arley}.
+Torneremo sull'argomento con dettagli maggiori nel paragrafo
+\ref{sec:tStudent}; per il momento ci limitiamo a menzionare il fatto che
+esistono tavole (vedi appendice \ref{app:tStudent_2}) per i fattori
+correttivi $t_p$ in funzione della probabilit\`a $p$ e del numero di
+gradi di libert\`a $\nu$. L'esempio seguente chiarisce il loro uso.
+
+\begin{exemplify}
+
+\example{\label{esem:ErroreCampionePiccolo}Supponiamo di aver misurato una
+determinata grandezza per $n=5$ volte e di aver valutato, a partire dalle
+nostre misure, le migliori stime $m$ e $s_m$ per la media e la deviazione
+standard della media.
+Ci chiediamo quale sia l'intervallo intorno a $m$ in cui abbiamo
+il $95\%$ di probabilit\`a di trovare $\mu$ (cfr. paragrafo
+\ref{sec:IntervalliDiConfidenza}).
+
+Se il nostro campione fosse molto grande $m$ sarebbe distribuita
+gaussianamente intorno a $\mu$ con deviazione standard $s_m$ e l'intervallo
+cercato sarebbe:
+$$
+m \pm 1.96 \cdot s_m
+$$
+(poco meno di 2 deviazioni standard, valore per cui la probabilit\`a \`e, come
+sappiamo dall'esempio \ref{esem:LimiteCentrale1}, il 95.44\%).
+Con 5 misure il numero di gradi di libert\`a \`e invece:
+$$
+\nu = 5-1 = 4
+$$
+ed il fattore correttivo $t_{0.95}$ per 4 gradi di libert\`a si legge
+dalla tavola in appendice \ref{app:tStudent_2} (terza riga, seconda colonna).
+Il nostro intervallo \`e dunque:
+$$
+m \pm t_{0.95} \cdot s_m = m \pm 2.776 \cdot s_m
+$$}
+
+\end{exemplify}
+
+
+\section{Intervalli di confidenza}
+\label{sec:IntervalliDiConfidenza}
+\index{confidenza!intervalli di}
+
+Approfondiamo qui alcuni dei concetti esposti nel paragrafo precedente.
+Il teorema del limite centrale ci assicura che, se abbiamo un campione
+costituito da un numero $n$ molto grande di misure, ognuna estratta da una
+distribuzione generatrice di media $\mu$ e deviazione standard $\sigma$,
+la distribuzione della media $m$ \`e normale con media $\mu_m = \mu$ e
+deviazione standard $\sigma_m = \sigma /\sqrt{n}$.
+Consideriamo la variabile:
+$$
+z=\frac{m-\mu}{\sigma_m}
+$$
+che ha valor medio 0 e varianza 1, come si pu\`o immediatamente
+verificare.
+La probabilit\`a che $z$ assuma valori compresi tra $z_1$ e $z_2$ \`e data
+da :
+$$
+\prob{z_1 \leq z \leq z_2} = \dintegral{g(z)}{z}{z_1}{z_2} =
+\frac{1}{\sqrt{2\pi}} \dintegral{e^{-\frac{z^2}{2}}}{z}{z_1}{z_2}
+$$
+In particolare, tanto per fissare le idee, per $z_1=-1$ e $z_2=1$ questa
+probabilit\`a \`e, come sappiamo, circa il 68.26\%:
+\eqnl{
+\prob{-1 \leq z \leq 1} \approx 0.6826
+}{eq:Intervallo68_1}
+Notiamo esplicitamente che la diseguaglianza:
+$$
+-1 \leq z \leq 1
+$$
+si legge come:
+$$
+-1 \leq \frac{m-\mu}{\sigma_m} \leq 1
+$$
+e, dopo poche semplici manipolazioni:
+$$
+m-\sigma_m \leq \mu \leq m+\sigma_m
+$$
+La (\ref{eq:Intervallo68_1}) si pu\`o dunque riscrivere come:
+\eqnl{
+\prob{m-\sigma_m \le \mu \le m+\sigma_m} \approx 0.6826
+}{eq:Intervallo68_2}
+In questo caso l'intervallo $\cinterval{m-\sigma_m}{m+\sigma_m}$
+viene chiamato \emph{intervallo di confidenza} per il parametro $\mu$ con
+\emph{coefficiente di confidenza} del 68\%; $m-\sigma_m$ e $m+\sigma_m$
+sono i \emph{limiti di confidenza} inferiore e superiore rispettivamente.
+
+Per $z_1=-1.96$ e $z_2=1.96$ si costruisce l'intervallo di confidenza con
+coefficiente di confidenza del 95\%
+$\cinterval{m-1.96 \cdot \sigma_m}{m+1.96 \cdot \sigma_m}$
+intendendo che:
+$$
+\prob{m-1.96 \cdot \sigma_m \leq \mu\leq m+1.96 \cdot \sigma_m} = 0.95
+$$
+In generale, fissato il coefficiente di confidenza (cio\`e il valore
+di probabilit\`a $P_0$) rimangono fissati gli estremi dell'intervallo di
+confidenza $\cinterval{m - z_1 \cdot \sigma_m}{m + z_2 \cdot \sigma_m}$.
+Data la simmetria della funzione di distribuzione \`e consuetudine
+prendere $z_1 = z_2 = z_0$.
+Scriviamo pertanto:
+\eqnl{
+\prob{m-z_0 \cdot \sigma_m \leq \mu \leq m+z_0 \cdot \sigma_m} = P_0
+}{eq:IntervalloConfidenza}
+La quantit\`a $1-P_0$ \`e chiamata {\itshape livello di confidenza}.
+
+Vale la pena notare che $\mu$ non \`e una variabile casuale e
+quindi non ci chiediamo quale sia la probabilit\`a che il suo
+valore sia compreso in un generico intervallo $\cinterval{m_1}{m_2}$.
+Ma supponiamo di avere fissato il coefficiente di confidenza $P_0$ e
+ripetiamo varie volte le $n$ prove considerate. Si otterranno in generale,
+secondo quanto detto sino ad ora, varie coppie di $m_1, m_2$ (cambia il valor
+medio del campione in ogni ripetizione, mentre $z_1$ e $z_2$ rimangono fissi)
+e ha senso chiedersi quale sia la probabilit\`a che la variabile casuale $m_1$
+assuma un valore minore di $\mu$ mentre la variabile casuale $m_2$ assuma un
+valore maggiore di $\mu$. In altre parole ci chiediamo quale \`e
+la probabilit\`a che l'intervallo $\cinterval{m_1}{m_2}$, variabile
+casualmente, contenga il punto $\mu$. Questa probabilit\`a, che \`e
+la stessa in ciascuna delle $n$ prove, \`e $P_0$. Questo significa
+che se uno usa ripetutamente l'intervallo di confidenza cos\`i
+costruito e ogni volta afferma che l'intervallo contiene $\mu$, si
+pu\`o aspettare di fare una affermazione corretta $P_0 \cdot 100$
+volte su 100 affermazioni.
+
+Se $\sigma$ (come tipicamente avviene) non \`e nota, l'intervallo
+di confidenza (\ref{eq:IntervalloConfidenza})
+ha estremi non noti. Dobbiamo allora sostituire alla varianza $\sigma^2$
+una sua stima, e il contenuto probabilistico dell'intervallo non \`e pi\`u lo
+stesso, specialmente per piccoli campioni.
+Introduciamo la nuova variabile
+\eqn{
+t = \frac{m-\mu}{s_m}
+}
+dove $s_m$ \`e la stima della deviazione standard della media
+(\ref{eq:StdevMediaCampione}). Si pu\`o dimostrare (cfr. paragrafo
+\ref{sec:tStudent}) che la variabile $t$ ha la distribuzione di
+Student a $n-1$ gradi di libert\`a, pertanto viene di solito
+indicata come $t_{n-1}$. Allora il coefficiente di confidenza
+rimane definito tramite la funzione di distribuzione di Student a
+$n-1$ gradi di libert\`a che indichiamo $S_{n-1}$:
+$$
+\prob{t_1, t_2} = \dintegral{S_{n-1}(t)}{t}{t_1}{t_2}
+$$
+Data la simmetria della funzione di distribuzione $S_{n-1}$
+intorno allo zero, \`e conveniente, di nuovo, prendere $t_2 = -t_1 = t_0$;
+in analogia al caso precedente scriveremo l'intervallo di
+confidenza come $\cinterval{m-t_0\cdot s_m}{m+t_0\cdot s_m}$, intendendo che:
+\eqnl{
+\prob{m-t_0 \cdot s_m \leq \mu \leq m+t_0 \cdot s_m} = P_0
+}{eq:IntervalloConfidenza_tStudent}
+ed il valore di $t_0$ a $P_0$ fissato si leggono direttamente nella tavola in
+appendice \ref{app:tStudent_2}, come mostrato nell'esempio
+\ref{esem:ErroreCampionePiccolo}.
+Quando si scrive $m\pm s_m$ oppure $m\pm 1.96\;s_m$ ci si riferisce, come prima,
+ad un intervallo di confidenza $\cinterval{m - s_m}{m + s_m}$ o
+$\cinterval{m - 1.96\;s_m}{m + 1.96\;s_m}$, rispettivamente.
+In questo caso, per\`o, la probabilit\`a corrispondente non \`e del
+68\% o del 95\% ma, come gi\`a detto, dipende dal numero di misure utilizzate
+per la stima di $s$ ed \`e prossimo a questi valori solo per grandi campioni
+(si vedano le tavole relative alla distribuzione di Student).

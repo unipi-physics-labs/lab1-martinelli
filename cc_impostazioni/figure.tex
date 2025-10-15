@@ -1,0 +1,60 @@
+\newcommand{\meanlabel}{\mu\makebox[0pt]{\phantom{+}}}
+\newcommand{\onesigmalabel}{\mu+\sigma}
+\newcommand{\medianlabel}{\median\makebox[0pt]{\phantom{+}}}
+\newcommand{\onehwhmlabel}{\median+\hwhm}
+\newcommand{\gplabel}[1]{\small #1}
+
+\newcommand{\figwidth}{0.79\textwidth} % obsolete
+
+\renewcommand{\thesubfigure}{\thefigure.\arabic{subfigure}}
+\makeatletter
+\renewcommand{\p@subfigure}{}
+\makeatother
+
+\newcommand{\panelfig}[3]
+{\captionsetup{labelfont=sc, textfont=rm, size=small, labelsep=period}
+\begin{figure}[!htb]
+\centering #1
+\caption{#2}
+\label{#3}
+\end{figure}}
+
+\newcommand{\twobytwofig}[9]
+{\captionsetup{margin=20pt}
+\subfloat[#2]{\label{#9:a}\includegraphics[width=0.499\textwidth]{#1}}%
+\subfloat[#4]{\label{#9:b}\includegraphics[width=0.499\textwidth]{#3}}\\
+\subfloat[#6]{\label{#9:c}\includegraphics[width=0.499\textwidth]{#5}}%
+\subfloat[#8]{\label{#9:d}\includegraphics[width=0.499\textwidth]{#7}}
+\captionsetup{margin=0pt}}
+
+\newcommand{\twobytwotexfig}[9]
+{\subfloat[#2]{\label{#9:a}\makebox[0.46\linewidth][l]{%
+\hspace{-10pt} \input{#1}}}
+\hfill
+\subfloat[#4]{\label{#9:b}\makebox[0.46\linewidth][r]{%
+\input{#3} \hspace{-12pt}}}\\
+\subfloat[#6]{\label{#9:c}\makebox[0.46\linewidth][l]{%
+\hspace{-10pt} \input{#5}}}
+\hfill
+\subfloat[#8]{\label{#9:d}\makebox[0.46\linewidth][r]{%
+\input{#7} \hspace{-12pt}}}}
+
+\newcommand{\twobyonefig}[5]
+{\captionsetup{margin=20pt}
+\subfloat[#2]{\label{#5:a}\includegraphics[width=0.499\textwidth]{#1}}%
+\subfloat[#4]{\label{#5:b}\includegraphics[width=0.499\textwidth]{#3}}
+\captionsetup{margin=0pt}}
+
+\newcommand{\twobyonetexfig}[5]
+{\subfloat[#2]{\label{#5:a}\makebox[0.46\linewidth][l]{%
+\hspace{-10pt} \input{#1}}}
+\hfill
+\subfloat[#4]{\label{#5:b}\makebox[0.46\linewidth][r]{%
+\input{#3} \hspace{-12pt}}}}
+
+\newcommand{\onebyonefig}[1]
+{\includegraphics[width=\figwidth]{#1}}
+
+\newcommand{\onebyonetexfig}[1]
+{\input{#1}}
+

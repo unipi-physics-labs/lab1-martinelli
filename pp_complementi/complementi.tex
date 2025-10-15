@@ -1,0 +1,891 @@
+\chapter{Complementi}
+\mt
+
+\section{Correlazione}
+\label{sec:Correlazione}
+
+\index{correlazione} Dato un insieme di dati ($x_i$, $y_i)$, non evidentemente
+legati da una legge fisica, se osserviamo che grandi valori della variabile
+$x$ tendono ad associarsi con grandi valori della variabile $y$ e piccoli
+valori di $x$ con piccoli valori di $y$ o viceversa, diciamo che vi \`e una
+{\itshape correlazione} tra $x$ e $y$.
+Un diagramma ({\itshape scatter diagram}) in cui vengano riportate
+le coppie ordinate ($x_i$, $y_i$) indica {\itshape visivamente} se esiste
+una qualche correlazione tra questi dati, ma \`e necessario avere una
+misura quantitativa di tale fatto.
+Bisogna quindi sviluppare una statistica che possa misurare il grado di
+connessione o meglio di correlazione tra $x$ ed $y$.
+
+\begin{exemplify}
+
+\example{\label{esem:DatiChiodini}
+Si misura la lunghezza $l$ (con un calibro Palmer) e la massa $m$ (con una
+bilancia di precisione) di ciascun elemento di un campione di $70$
+chiodini%
+\footnote{
+Dati realmente ottenuti il 6 Agosto 2005.
+}%
+.
+La seguente tabella include i risultati ottenuti (tutte le lunghezze sono
+in $\cm$ e le masse in $\mg$)
+\listtable{5}{Lunghezza, massa}{cm, g}
+{$(1.731, 276)$ & $(1.728, 281)$ & $(1.724, 277)$ & $(1.679, 274)$ &
+$(1.742, 278)$ \\
+$(1.681, 274)$ & $(1.737, 280)$ & $(1.724, 279)$ & $(1.712, 274)$ &
+$(1.661, 266)$ \\
+$(1.705, 274)$ & $(1.722, 280)$ & $(1.707, 274)$ & $(1.706, 275)$ &
+$(1.739, 281)$ \\
+$(1.696, 275)$ & $(1.729, 279)$ & $(1.756, 282)$ & $(1.723, 282)$ &
+$(1.657, 267)$ \\
+$(1.717, 278)$ & $(1.706, 276)$ & $(1.731, 280)$ & $(1.685, 274)$ &
+$(1.730, 278)$ \\
+$(1.724, 276)$ & $(1.713, 278)$ & $(1.726, 279)$ & $(1.698, 275)$ &
+$(1.714, 275)$ \\
+$(1.714, 284)$ & $(1.689, 273)$ & $(1.712, 280)$ & $(1.663, 266)$ &
+$(1.736, 280)$ \\
+$(1.699, 275)$ & $(1.729, 275)$ & $(1.695, 272)$ & $(1.723, 278)$ &
+$(1.729, 281)$ \\
+$(1.722, 281)$ & $(1.732, 279)$ & $(1.700, 277)$ & $(1.697, 275)$ &
+$(1.703, 278)$ \\
+$(1.743, 278)$ & $(1.729, 280)$ & $(1.694, 272)$ & $(1.709, 276)$ &
+$(1.701, 277)$ \\
+$(1.703, 276)$ & $(1.703, 281)$ & $(1.716, 276)$ & $(1.695, 276)$ &
+$(1.695, 277)$ \\
+$(1.703, 275)$ & $(1.697, 272)$ & $(1.697, 274)$ & $(1.696, 274)$ &
+$(1.747, 280)$ \\
+$(1.739, 277)$ & $(1.693, 272)$ & $(1.705, 274)$ & $(1.708, 277)$ &
+$(1.698, 274)$\\
+$(1.740, 280)$ & $(1.711, 276)$ & $(1.721, 277)$ & $(1.649, 264)$ &
+$(1.707, 277)$ \\}
+
+\noindent
+\`E abbastanza immediato verificare, a partire dai numeri nella tabella,
+che a valori grandi (piccoli) di lunghezza tendono a corrispondere valori
+grandi (piccoli) della massa misurato. Questo risulta ancora pi\`u evidente
+dallo scatter plot dei dati mostrato in figura \ref{fig:CorrelazioneChiodini}.
+
+Il fatto che le due serie siano correlate non dovrebbe stupire affatto:
+in fondo \`e perfettamente normale che i chiodini pi\`u lunghi siano anche
+i pi\`u pesanti\ldots Ma torneremo ancora su questo esempio nel seguito.}
+
+\end{exemplify}
+
+\panelfig
+{\onebyonetexfig{./pp_complementi/figure/chiodini.tex}}
+{Scatter plot dei dati relativi all'esempio \ref{esem:DatiChiodini}
+(misura di lunghezza e massa di un campione di 70 chiodini).}
+{fig:CorrelazioneChiodini}
+
+\subsection{Coefficiente di correlazione}
+\label{sub:CoeffCorrelazione}
+
+Si definisce coefficiente di correlazione $r_{xy}$ tra due qualsiasi variabili
+casuali $x$ ed $y$ la quantit\`a:\index{correlazione!coefficiente di}
+\eqnlbox{
+r_{xy}=\frac{\displaystyle \sigma_{xy}}{\displaystyle \sigma_x\sigma_y}
+}{eq:CoeffCorrelazione}
+dove $\sigma_{xy}$ \`e la covarianza tra $x$ ed $y$
+$$
+\sigma_{xy} = \expect{(x-\mu_{x})\cdot(y-\mu_{y})}
+$$
+e $\sigma^2_x$ e $\sigma^2_y$ sono le varianze di $x$ ed $y$:
+\begin{eqnarray*}
+\sigma_x^2 & = & \expect{(x-\mu_{x})^2} = \expect{x^2} - \mu_{x}^2\\
+\sigma_y^2 & = & \expect{(y-\mu_{y})^2} = \expect{y^2} - \mu_{y}^2
+\end{eqnarray*}
+(ricordiamo che $\mu_{x}$ e $\mu_{y}$ rappresentano il valor
+medio di $x$ ed $y$, rispettivamente).
+Elenchiamo qui di seguito una alcune osservazioni che ci saranno utili
+nel seguito.
+
+\begin{numlist}
+\item {
+$r_{xy}$ \`e una quantit\`a adimensionale.
+}
+\item{
+Se le variabili $x$ e $y$ sono statisticamente indipendenti, allora
+$r_{xy} = 0$; infatti in tal caso $\sigma_{xy}=0$.
+L'implicazione inversa non \`e necessariamente
+verificata: se la covarianza \`e uguale a zero non \`e detto che
+le variabili siano statisticamente indipendenti.
+In effetti la condizione $\sigma_{xy}=0$ \`e necessaria ma
+non sufficiente per l'indipendenza statistica di due variabili.
+}
+\item{
+Quando $r_{xy}> 0$ si dice che le variabili sono {\itshape positivamente}
+correlate; quando, al contrario, $r_{xy}< 0$ si dice le variabili sono
+{\itshape negativamente} correlate o anche {\itshape anticorrelate}.
+}
+\item{\label{oss:Correlazione1}
+Se le variabili casuali $x$ ed $y$ sono legate da una relazione funzionale del
+tipo $y=a+b x$ allora
+$$
+r_{xy}=\pm 1
+$$
+a seconda che $b$ sia positivo
+o negativo. In tutti gli altri casi
+$$
+-1 \le r_{xy} \le 1.
+$$
+In generale quanto pi\`u $\mid r_{xy}\mid$ \`e piccolo, tanto pi\`u la
+correlazione \`e debole.
+}
+\item{\label{oss:Correlazione2}
+Date le variabili casuali
+\begin{eqnarray*}
+x'&=&a+b x\\
+y'&=&c+dy
+\end{eqnarray*}
+si trova facilmente che:
+$$
+r_{x'y'} = r_{xy}
+$$
+purch\'e $b$ e $d$ siano entrambe positive o entrambe negative.
+Questo ci dice che la correlazione non cambia quando i dati $\{x_i\}$  o
+$\{y_i\}$ sono traslati ciascuno della stessa quantit\`a o quando sono
+moltiplicati ciascuno per la stessa costante. Ne consegue, in particolare, che
+il coefficiente di correlazione non dipende dalle unit\`a scelte per misurare i
+dati.
+}
+\end{numlist}
+
+Per un campione costituito da un set di dati sperimentali ($x_i$, $y_i$) il
+coefficiente di correlazione si scrive :
+\begin{eqnarray}\label{eq:CoeffCorrelazioneDati}
+r_{xy} &=&
+\frac{\displaystyle \sum_{i=1}^n(x_i-m_{x})
+\cdot (y_i-m_{y})}{(n-1)\cdot s_x s_y}= \nonumber \\
+&=&\frac{\displaystyle \sum_{i=1}^n(x_i-m_{x}) \cdot (y_i-m_{y})}
+{\sqrt{\displaystyle \sum_{i=1}^n(x_i-m_{x})^2
+\cdot \sum_{i=1}^n(y_i-m_{y})^2}}.
+\end{eqnarray}
+dove $m_x$, $m_y$, $s_x$ ed $s_y$ sono le medie e le varianze campione,
+rispettivamente.
+Anche in questo caso, ovviamente, valgono tutte le propriet\`a
+elencate sopra.
+
+
+\begin{exemplify}
+
+\example{\label{esem:CorrelazioneChiodini}
+Tornando all'esempio \ref{esem:DatiChiodini}, adesso abbiamo gli strumenti
+per precisare ci\`o che abbiamo detto in precedenza. Il coefficiente di
+correlazione tra le due serie di dati si pu\`o facilmente calcolare
+utilizzando la (\ref{eq:CoeffCorrelazioneDati}) e risulta essere
+$$
+r_{l m} \approx 0.849.
+$$
+Dunque, in questo caso, la lunghezza e la massa dei chiodini del campione
+sono effettivamente due grandezze positivamente correlate , come del resto
+appariva gi\`a evidente, sia pure a livello qualitativo, dallo scatter diagram.
+Questa correlazione \`e inoltre piuttosto stretta, essendo $r_{l m}$
+prossimo ad $1$.}
+
+\end{exemplify}
+
+Vale la pena notare che la correlazione misura {\em l'associazione} tra
+variabili casuali, non  {\em  la causa}. Quindi non bisogna fare
+deduzioni arbitrarie quando si applicano questi concetti a situazioni complesse
+(inerenti per esempio la natura umana, l'ambiente, la
+societ\`a\ldots). La spiegazione di una associazione osservata pu\`o stare in
+fattori inespressi che magari coinvolgono entrambe le variabili in esame.
+
+Ricordiamo che, in generale, l'incertezza associata ad una grandezza
+$G$ che sia funzione di due quantit\`a {\itshape non} statisticamente
+indipendenti
+$$
+G = f(x, y)
+$$
+si scrive come:
+$$
+\sigma_G^2 = \left( \pfder{f}{x} \right)^2 \cdot \sigma_x^2+
+\left( \pfder{f}{y} \right)^2 \cdot \sigma_y^2 +
+2\cdot \pfder{f}{x} \cdot \pfder{f}{y} \cdot \sigma_{xy}
+$$
+che adesso, utilizzando la (\ref{eq:CoeffCorrelazione}), diviene:
+\eqnl{
+\sigma_G^2 = \left( \pfder{f}{x} \right)^2 \cdot \sigma_x^2+
+\left( \pfder{f}{y} \right)^2 \cdot \sigma_y^2 +
+2r_{xy}\cdot \pfder{f}{x} \cdot \pfder{f}{y} \cdot \sigma_{x}\sigma_{y}
+}{eq:PropErroriCorrelazione}
+
+Nel nostro lavoro di fisici un esempio importante
+di variabili correlate \`e costituito dall'insieme dei parametri forniti da un
+qualunque procedimento di fit. Infatti tali parametri sono funzioni
+delle stesse misure, per cui in generale sono tra di loro correlati.
+Ogni programma di fitting, solitamente, riporta tra i risultati anche la
+{\itshape matrice di correlazione} dei parametri (vedi per esempio le uscite
+di \gnuplot\ dopo una procedura di fit). Gli elementi di matrice sono
+costituiti dai coefficienti di correlazione tra i parametri: quelli diagonali
+sono uguali ad 1 (ogni parametro \`e completamente correlato a s\'e stesso,
+il che si verifica immediatamente applicando la definizione di
+coefficiente di correlazione), gli elementi di matrice fuori diagonale
+danno il coefficiente di correlazione tra i parametri diversi,
+noto il quale \`e possibile determinarne la covarianza,
+che, come sappiamo, \`e un ingrediente necessario nella propagazione delle
+incertezze per funzioni di tali parametri.
+
+\begin{exemplify}
+
+\example{Supponiamo di avere fatto un fit lineare
+$$
+y=a+b x
+$$ di un insieme di misure ($x_i$, $y_i$) e di
+dovere calcolare una quantit\`a funzione di $a$ e $b$
+$$
+G=f(a,b),
+$$
+come succede quando per esempio usiamo funzioni di taratura o quando
+ci interessa l'intercetta con l'asse $y=0$;
+$a$ e $b$ sono in generale correlati (cambiando coefficiente angolare \`e
+necessario cambiare anche l'intercetta per far s\`i che la retta continui ad
+adattarsi ai dati), per cui il modo giusto
+di propagare le incertezze su $G$ \`e dato dalla
+(\ref{eq:PropErroriCorrelazione}).
+Un programma di fit completo fornisce di solito anche
+$r_{ab}$, $\sigma_a$ e $\sigma_b$, ed allora l'incertezza sulla
+grandezza $G$ \`e subito calcolata.}
+
+\end{exemplify}
+
+
+\section{La distribuzione di Student}
+
+\label{sec:tStudent}Questa distribuzione entra in gioco quando abbiamo a che
+fare con campioni {\itshape piccoli} e vogliamo determinare intervallo di
+confidenza e coefficiente di confidenza, oppure vogliamo verificare
+alcune ipotesi statistiche (confronto di medie).
+In effetti l'abbiamo gi\`a incontrata nel paragrafo
+\ref{sec:IntervalliDiConfidenza}.
+
+
+\subsection{Variabile t di Student a n gradi di libert\`a}
+
+\index{t!variabile di Student}Sia data una variabile casuale $x$ con
+distribuzione gaussiana di media $\mu$ e varianza $\sigma^2$.
+Costruiamo la corrispondente variabile in forma standard (o
+scarto standardizzato):
+$$
+z= \frac{x-\mu}{\sigma}
+$$
+La sua funzione di distribuzione \`e ancora gaussiana ed ha valor medio
+$0$ e varianza $1$, come si verifica facilmente.
+Dati $n$ campionamenti $x_i$ ($i = 1 \ldots n$) della variabile $x$
+(le $x_i$ sono quantit\`a statisticamente indipendenti provenienti
+dalla stessa distribuzione normale con media $\mu$ e deviazione
+standard $\sigma$), consideriamo la variabile $X$ definita come:
+$$
+X = \sum_{i=1}^{n}z_i^2 = \sum_{i=1}^{n} \frac{(x_i-\mu)^2}{\sigma^2}
+$$
+La variabile $X$ \`e distribuita come un $\chi^2$ a $n$ gradi di libert\`a
+(cfr. sezione \ref{sec:chiquadro}). Costruiamo adesso la nuova variabile
+$$
+t=\frac{z}{\displaystyle \sqrt{\frac{X}{n}}}
+$$
+che \`e in sostanza il rapporto tra una variabile normale standard e la radice
+quadrata di un $\chi^2$ ridotto. Tale variabile \`e
+chiamata {\itshape  variabile $t$ di Student a $n$ gradi di libert\`a}
+e si pu\`o dimostrare che la sua funzione di distribuzione \`e data da:
+\eqnlbox{
+\tpdf{t}{n}=\frac{\displaystyle C_n}
+{\left( 1+\frac{\displaystyle t^2}{\displaystyle n} \right)^{\frac{n+1}{2}}}
+}{eq:tStudent}
+Tale funzione di distribuzione \`e simmetrica rispetto a $t=0$ e per
+$n$ grande tende ad una distribuzione normale standard (cio\`e
+con media 0 e varianza 1)%
+\footnote{
+Per dimostrarlo si sfrutta il limite notevole
+$\displaystyle \lim_{x\rightarrow \infty} \left( 1+\frac{k}{x} \right)^x=e^k$.
+}%
+.
+Si pu\`o anche dimostrare che la media della distribuzione $t$ \`e:
+\index{t!distribuzione}
+\eqnbox{
+\mu = \expect{t} = 0
+}
+e la sua varianza (per $n>2$):
+\eqnbox{
+\sigma^2 = \expect{t^2} = \frac{n}{n-2}
+}
+Da cui ancora:
+\eqnbox{
+\sigma = \sqrt{\frac{n}{n-2}}
+}
+
+
+\subsection{Variabile t di Student a n-1 gradi di libert\`a}
+
+Dato un campione di n variabili $x_i$, provenienti da una stessa
+distribuzione gaussiana con media $\mu$ e varianza $\sigma^2$, costruiamo la
+migliore stima della media e della varianza :
+\begin{eqnarray*}
+m &=& \sum_i^n\frac{x_i}{n}\\
+s^2 &=& \sum_i^n\frac{(x_i-m)^2}{n-1}
+\end{eqnarray*}
+Si pu\`o dimostrare che la variabile
+$$
+X'=(n-1)\frac{s^2}{\sigma^2}
+$$
+ha la funzione di distribuzione di un $\chi^2$ a $n-1$ gradi di libert\`a.
+Inoltre si verifica facilmente che la variabile
+$$
+z'=\frac{m-\mu}{\displaystyle \frac{\sigma}{\sqrt{n}}}
+$$
+\`e una variabile normale standard. Allora la variabile
+$$
+t_{n-1}=\frac{z'}{\displaystyle \sqrt{\frac{X'}{n-1}}}
+$$
+segue la distribuzione $t$ di Student a $n-1$ gradi di libert\`a (per questo
+la indichiamo come $t_{n-1}$).
+Se esplicitiamo $z'$ e $X'$ si ottiene :
+$$
+t_{n-1} = \frac{m-\mu}{\displaystyle \frac{\sigma}{\sqrt{n}}}
+\cdot \frac{\sigma}{s}
+$$
+e infine si arriva alla interessante forma:
+$$t_{n-1}=\frac{m-\mu}{s_m}$$
+dove, al solito:
+$$
+s_m=\frac{s}{\sqrt{n}}
+$$
+Ed \`e proprio in questa forma che abbiamo utilizzato nel paragrafo
+{\ref{sec:IntervalliDiConfidenza}} la variabile casuale $t_{n-1}$
+per costruire,  nel caso di campioni {\itshape piccoli}, l'intervallo di
+confidenza per un assegnato coefficiente di confidenza.
+
+
+\subsection{t-test}
+
+\index{t!test}La variabile $t$ di Student viene utilizzata anche nel confronto
+di medie. Per esempio supponiamo di avere due campioni $x$ ed $y$, non tanto
+grandi, inizialmente provenienti dalla stessa popolazione
+con media $\mu$ e deviazione standard $\sigma$.
+Supponiamo che uno dei due campioni subisca
+qualche variazione nelle condizioni ambientali o sia sottoposto
+a qualche trattamento particolare. Registriamo i valori medi
+ per ciascun campione e la loro differenza. Ci possiamo domandare se tale
+differenza \`e significativa, se cio\`e indica che nel secondo
+campione \`e cambiato qualche cosa (se le mutate condizioni ambientali del
+secondo campione o il trattamento a cui \`e stato sottoposto  lo hanno
+fatto evolvere verso stati diversi rispetto al primo, se hanno cambiato
+in un qualche modo le sue condizioni fisiche).
+
+Per rispondere a questa domanda, facciamo l'ipotesi che non ci siano
+state alterazioni nei due campioni anche dopo il diverso trattamento.
+Si cerca quindi di costruire una variabile statistica che  permetta di trovare
+quale sia la probabilit\`a che l'ipotesi fatta sia corretta.
+Consideriamo la variabile:
+$$
+\Delta = m_x - m_y
+$$
+dove:
+\begin{eqnarray*}
+m_x &=& \frac{1}{n_x} \sum_{i=1}^{n_x} x_i\\
+m_y &=& \frac{1}{n_y} \sum_{i=1}^{n_y} y_i
+\end{eqnarray*}
+e $n_x$ ed $n_y$ sono le dimensioni dei campioni.
+Dalla (\ref{eq:PropErroriGeneraleIndip}) segue che:
+$$
+\sigma_{\Delta}^2 = \sigma_{m_x}^2 + \sigma_{m_y}^2
+$$
+Pertanto, nell'ipotesi fatta che i due campioni appartengano sempre alla stessa
+distribuzione, si ha:
+$$
+\sigma_{\Delta}^2 = \frac{\sigma^2}{n_x}+\frac{\sigma^2}{n_y}=
+\frac{n_x + n_y}{n_x n_y} \cdot \sigma^2
+$$
+Quale stima di $\sigma^2$ si prende la quantit\`a:
+$$
+s^2=\frac{\displaystyle \sum_{i=1}^{n_x}(x_i-m_x)^2
++ \sum_{i=1}^{n_y}(y_i-m_y)^2}{\displaystyle n_x + n_y -2}
+$$
+Allora $\sigma_{\Delta}^2$ \`e stimato da:
+$$
+s_{\Delta}^2 = \frac{n_x + n_y}{n_x n_y} \cdot s^2
+$$
+Costruiamo ora la variabile :
+\eqnl{
+t = \frac{\Delta}{s_{\Delta}}
+}{eq:VariabileTConfrontoMedie}
+Questa variabile segue la distribuzione t di Student a $n_x + n_y - 2$
+gradi di libert\`a. Infatti la variabile:
+$$
+z''=\frac{\Delta}{\sigma \sqrt{\frac{n_x + n_y}{n_x n_y}}}
+$$
+\`e una variabile normale standard (provate a verificarlo).
+D'altra parte la variabile:
+$$
+X''=(n_x + n_y - 2)\frac{s^2}{\sigma^2}
+$$
+\`e un $\chi^2$ a $n_x + n_y - 2$ gradi di libert\`a.
+Allora la variabile
+$$
+t=\frac{z''}{\sqrt{\frac{X''}{n_x + n_y - 2}}}
+$$
+segue la distribuzione $t$ di Student a $n_x + n_y - 2$ gradi di
+libert\`a. Se esplicitiamo $z''$ e $X''$ si ottiene, come si voleva,
+la (\ref{eq:VariabileTConfrontoMedie}).
+
+A questo punto non rimane che calcolare le quantit\`a $\Delta$ ed
+$s_{\Delta}$ dai dati registrati dei due campioni, e quindi il valore
+di $t$, che indichiamo con $\tilde{t}$. Allora
+$$
+\prob{t<\tilde{t}} = \dintegral{\tpdf{t}{n_x + n_y - 2}}{t}{-\infty}{\tilde{t}}
+$$
+e il livello di significativit\`a dell'ipotesi fatta \`e dato da $1-P$.
+
+
+\section{Funzione di distribuzione per funzioni di variabile casuale}
+
+\label{sec:Cambiamento Variabile} Supponiamo di avere una variabile casuale, che
+chiameremo $x$, di cui \`e nota la funzione di  distribuzione.
+Consideriamo ora una funzione $y$ della variabile $x$: 
+$$
+y = \phi(x)
+$$
+$y$ \`e pertanto una variabile casuale generata dalla funzione $\phi(x)$.
+Il problema che si pone \`e come trovare la funzione di distribuzione
+della variabile casuale $y$, nota la funzione di distribuzione della variabile
+casuale $x$. 
+
+\subsection{Variabili casuali discrete}
+
+Supponiamo dapprima che $x$ sia una variabile discreta. Pertanto la
+sua funzione di distribuzione $\prob{x}$ \`e essenzialmente la probabilit\`a
+associata ad ogni valore che la variabile $x$ pu\`o assumere.
+
+Se facciamo l'ulteriore assunzione che la funzione $\phi(x)$ sia
+\emph{biunivoca} nell'intervallo di variabilit\`a di $x$ (cio\`e che non ci
+siano due o pi\`u valori $x_i$ della variabile $x$ che corrispondano allo
+stesso valore di $y$), si ha semplicemente:
+
+\eqnlbox
+{\prob{y = \phi(x_i)} = \prob{x = x_i}}
+{eq:CamVarDiscrBiu}
+
+\begin{exemplify}
+
+\example{\label{esem:CamVarDiscr1}
+Consideriamo una variabile casuale discreta $x$ che possa assumere
+valori interi compresi tra $0$ e $3$ (compresi) con la seguente funzione
+di distribuzione $\prob{x}$.
+\pdftable{x_i}{4}%
+{$0$ & $1$ & $2$ & $3$}%
+{$\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$}
+Supponiamo adesso di essere interessati alla variabile $y$ definita da
+$y = x^2$. La funzione di distribuzione di $y$ si scrive banalmente come:
+\pdftable{y_i}{4}%
+{$0$ & $1$ & $4$ & $9$}%
+{$\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$ & $\frac{1}{8}$}
+}
+\end{exemplify}
+
+Lasciamo adesso cadere l'ipotesi di biunivocit\`a. \`E facile convincersi che
+in questo caso, preso un valore (ammesso) $\tilde y$ della variabile $y$:
+\eqnlbox
+{\prob{y = \tilde y} = \sum_{i=1}^{k} \prob{x = x_i}}
+{eq:CamVarDiscrGen}
+dove la somma \`e estesa a tutti i valori (che qui supponiamo genericamente
+essere $k$) di $x$ per cui:
+$$
+\phi(x_i) = \tilde y
+$$
+
+\begin{exemplify}
+
+\example{\label{esem:CamVarDiscr2}
+Consideriamo una variabile casuale discreta $x$ con la seguente funzione
+di distribuzione:
+\pdftable{x_i}{6}%
+{$-2$ & $-1$ & $\phantom{-}0$ & $\phantom{-}1$ & $\phantom{-}2$ &
+$\phantom{-}3$}%
+{$\phantom{-}\frac{1}{16}$ & $\phantom{-}\frac{1}{16}$ &
+$\phantom{-}\frac{1}{8}$ & $\phantom{-}\frac{1}{8}$ &
+$\phantom{-}\frac{1}{8}$ & $\phantom{-}\frac{1}{2}$}
+Se, come prima, siamo interessati alla variabile $y = x^2$,
+in questo caso dobbiamo utilizzare la \ref{eq:CamVarDiscrGen}, non essendo
+l'ipotesi di biunivocit\`a verificata.
+Per fissare le idee, ad esempio:
+$$
+\prob{y = 1} = \prob{x = -1} + \prob{x = 1} =
+\frac{1}{16} + \frac{1}{8} = \frac{3}{16}
+$$
+La funzione di distribuzione di $y$ si scrive esplicitamente come:
+\pdftable{y_i}{4}%
+{$0$ & $1$ & $4$ & $9$}%
+{$\frac{1}{8}$ & $\frac{3}{16}$ & $\frac{3}{16}$ & $\frac{1}{2}$}
+}
+\end{exemplify}
+
+
+\subsection{Variabili casuali continue}
+
+Consideriamo ora il caso in cui $x$ sia una variabile
+continua. Supponiamo dapprima che la funzione $\phi$
+sia biunivoca nell'intervallo di variabilit\`a di $x$.
+Supponiamo inoltre che $\phi(x)$ sia derivabile. La biunivocit\`a della
+corrispondenza tra le due variabili assicura che se $x$ \`e compresa
+in un intervallo infinitesimo centrato su un generico valore $x_0$:
+$$
+x \in \cinterval{x_0 - dx}{x_0 + dx}
+$$
+allora (e solo allora) $y$ \`e compresa in un intervallo (infinitesimo)
+$$
+y \in \cinterval{y_0 - dy}{y_0 + dy}
+$$
+centrato intorno al valore
+$$
+y_0 = \phi(x_0)
+$$
+e di semiampiezza%
+\footnote{Il modulo tiene conto del fatto che $\phi(x)$ pu\`o essere
+sempre crescente oppure sempre decrescente.
+}%
+:
+$$
+\ud y = \abs{\tfdereval{\phi}{x}{x}} \, \ud x
+$$
+Essendo la corrispondenza tra le due variabili biunivoca, \`e possibile, in
+linea di principio, invertire la funzione $\phi$ e scrivere la variabile
+originaria $x$ in funzione di quella trasformata $y$.
+Senza volere seguire una dimostrazione formale, questo fatto 
+(si pensi anche al caso precedente) permette di affermare che la
+probabilit\`a che la $y$ sia in un intervallo infinitesimo generico
+di ampiezza $dy$ \`e uguale alla probabilit\`a che la $x$ sia compresa
+nell'intervallo corrispondente, centrato nel valore
+$$
+x = \phi^{-1}(y)
+$$
+e di semiampiezza
+$$
+dx = \abs{\tfdereval{\phi^{-1}}{y}{y}} \, \ud y
+$$
+Pertanto, indicando con $p_x(x)$ la densit\`a di probabilit\`a per la variabile
+casuale $x$ e con $p_y(y)$ la corrispondente densit\`a di probabilit\`a per la
+$y$, si pu\`o scrivere:
+$$
+p_y(y) \, \ud y = p_x(x) \, \ud x =
+p_x\left(\phi^{-1}(y)\right)\abs{\tfdereval{\phi^{-1}}{y}{y}} \, \ud y
+$$
+da cui, in definitiva:
+\eqnlbox
+{p_y(y) = p_x\left(\phi^{-1}(y)\right)\abs{\tfdereval{\phi^{-1}}{y}{y}}}
+{eq:CamVarContBiu}
+che costituisce sostanzialmente la relazione cercata.
+
+\begin{exemplify}
+
+\example{\label{esem:CamVarCont0}
+Consideriamo una variabile casuale $x$ definita nell'intervallo:
+$$
+x \in \cinterval{0}{1}
+$$
+e ivi distribuita uniformemente:
+$$
+p_x(x) = 1
+$$
+Vogliamo calcolare la funzione di distribuzione della variabile $y$
+definita da:
+$$
+y = \phi(x) = 2x + 1
+$$
+L'intervallo di variabilit\`a della nuova variabile sar\`a banalmente:
+$$
+y \in \cinterval{1}{3}
+$$
+e per scrivere la funzione di distribuzione dovremo prima invertire $\phi$:
+$$
+x = \phi^{-1}(y) = \frac{1}{2} (y - 1)
+$$
+e quindi calcolare:
+$$
+\tfdereval{\phi^{-1}}{y}{y} = \frac{1}{2}
+$$
+Dalla (\ref{eq:CamVarContBiu}) leggiamo direttamente:
+$$
+p_y(y) = 1 \cdot \frac{1}{2} = \frac{1}{2}
+$$
+per cui la nostra funzione di trasformazione $\phi(x)$, in questo caso,
+trasforma semplicemente un variabile distribuita uniformemente in
+$\cinterval{0}{1}$ in una distribuita uniformemente in $\cinterval{1}{3}$.}
+
+\example{\label{esem:CamVarCont1}
+Supponiamo di avere una variabile casuale $x$ definita nell'intervallo:
+$$
+x \in \cinterval{0}{\frac{\pi}{2}}
+$$
+con funzione di distribuzione:
+$$
+p_x(x) = \frac{4}{\pi}\left( 1 - \frac{2x}{\pi} \right)
+$$
+Vogliamo calcolare la funzione di distribuzione della variabile casuale $y$
+definita da:
+$$
+y = \phi(x) = \sin x
+$$
+Prima di tutto notiamo che la variabile $y$ sar\`a definita nell'intervallo:
+$$
+y \in \cinterval{0}{1}
+$$
+Come prima invertiamo la funzione di trasformazione $\phi(x)$:
+$$
+x = \phi^{-1} (y) = \arcsin y
+$$
+e calcoliamo la derivata:
+$$
+\tfdereval{\phi^{-1}}{y}{y} = \frac{1}{\sqrt{1 - y^2}}
+$$
+Tanto basta per scrivere immediatamente
+la funzione di distribuzione della variabile $y$, che sar\`a:
+$$
+p_y(y) = \frac{4}{\pi}\left( 1 - \frac{2}{\pi} \arcsin y \right)
+\frac{1}{\sqrt{1 - y^2}}
+$$
+come si legge dalla \ref{eq:CamVarContBiu}}
+
+\example{\label{esem:CamVarCont2}
+Consideriamo la variabile casuale $x$ definita nell'intervallo:
+$$
+x \in \cinterval{-\frac{\pi}{2}}{\frac{\pi}{2}}
+$$
+e qui distribuita uniformemente:
+$$
+p_x(x) = \frac{1}{\pi}
+$$
+Supponiamo che la nostra legge di trasformazione sia:
+$$
+\phi(x) = a\tan x
+$$
+con $a$ reale e positivo. Esattamente come prima:
+$$
+x = \phi^{-1}(y) = \arctan \left( \frac{y}{a} \right)
+$$
+e:
+$$
+\tfdereval{\phi^{-1}}{y}{y} = \frac{a}{a^2 + y^2}
+$$
+Da cui:
+$$
+p_y(y) = \frac{1}{\pi} \frac{a}{a^2 + y^2}
+$$
+che \`e una distribuzione di Cauchy (cfr. esempio \ref{es:Cauchy}).}
+
+\end{exemplify}
+
+
+Se abbandoniamo l'ipotesi della corrispondenza biunivoca dobbiamo,
+esattamente come nel caso di variabile discreta, considerare il fatto che
+ad uno stesso valore di $y$ possono corrispondere pi\`u valori di $x$.
+Pertanto, analogamente al caso discreto, si avr\`a:
+\eqnlbox
+{p_y(y) = \sum_{i=1}^{k} p_x\left(\phi_i^{-1}(y)\right)
+\abs{\tfdereval{\phi_i^{-1}}{y}{y}}}
+{eq:CamVarContGen}
+dove la somma \`e estesa a tutti i valori $x_i$ di $x$ (che supponiamo
+genericamente essere $k$) che sono immagine di $y$ attraverso la funzione
+inversa di $\phi$, in tutti i suoi possibili rami indipendenti%
+\footnote{
+Potremmo dire, altrettanto correttamente, che la somma \`e estesa a tutti i
+valori di $x$ per cui:
+$$
+y = \phi(x_i)
+$$
+}%
+:
+$$
+x_i = \phi_i^{-1}(y)
+$$
+
+\begin{exemplify}
+
+\example{\label{esem:CamVarCont3}
+Consideriamo una variabile gaussiana $x$ in forma standard
+($\mu = 0$, $\sigma = 1$):
+$$
+p_x(x) = \frac{1}{\sqrt{2\pi}} \, e^{-\frac{1}{2}x^2}
+$$
+e sia:
+$$
+y = \phi(x) = x^2
+$$
+\`E facile rendersi conto che la variabile $y$ pu\`o assumere tutti i valori
+compresi nell'intervallo:
+$$
+y \in \linterval{0}{\infty}
+$$
+Ma il punto fondamentale \`e che la funzione di trasformazione $\phi$ non \`e
+biunivoca, nel senso che per ogni $y$ esistono esattamente%
+\footnote{
+A rigore l'affermazione non \`e esatta per il punto $y=0$, ma questo,
+come vedremo tra un attimo, non avr\`a nessuna influenza su quanto diremo.
+}%
+due valori, $x_1$ ed $x_2$, di $x$ che sono immagine di $y$ attraverso
+$\phi^{-1}$:
+\begin{eqnarray*}
+x_1 &=& \phi_1^{-1}(y) = + \sqrt{y}\\
+x_2 &=& \phi_2^{-1}(y) = - \sqrt{y}\\
+\end{eqnarray*}
+Notiamo che:
+$$
+\abs{\tfdereval{\phi_1^{-1}}{y}{y}} =
+\abs{\tfdereval{\phi_2^{-1}}{y}{y}} = \frac{1}{2\sqrt{y}} 
+$$
+Dall'equazione (\ref{eq:CamVarContGen}) leggiamo allora:
+$$
+p_y(y) = \frac{1}{\sqrt{2\pi}} \, e^{-y/2}\frac{1}{2\sqrt{y}} +
+         \frac{1}{\sqrt{2\pi}} \, e^{-y/2}\frac{1}{2\sqrt{y}}  = 
+         \frac{1}{\sqrt{2\pi y}} \, e^{-y/2}
+$$
+che pu\`o essere confrontata direttamente con la distribuzione aspettata nel
+caso di una variabile $\chi^2$ ad un solo grado di libert\`a.}
+
+\example{
+Supponiamo di avere $n$ variabili gaussiane $x_i$ di media $\mu = 0$ e
+deviazione standard (uguale per tutte) $\sigma$.
+Consideriamo adesso la variabile:
+$$
+y = \sum_{i=1}^{n} x_i^2
+$$
+Le relazioni che abbiamo ricavato fino ad adesso non si possono applicare
+direttamente perch\'e $y$ non \`e funzione di una sola variabile casuale.
+Noi sappiamo per\`o che se $\sigma$ fosse uguale ad $1$, $y$ sarebbe
+la somma di $n$ variabili gaussiane standard, per cui la sua funzione di
+distribuzione sarebbe quella di una variabile $\chi^2$ ad $n$ gradi di
+libert\`a.
+Proviamo allora a scrivere:
+$$
+y = \sum_{i=1}^{n} \sigma^2 \left( \frac{x_i}{\sigma} \right)^2 =
+    \sigma^2 \sum_{i=1}^{n} \left( \frac{x_i}{\sigma} \right)^2 = \sigma^2 x
+$$
+dove abbiamo definito la nuova variabile $x$ come:
+$$
+x =  \sum_{i=1}^{n} z_i^2 = \sum_{i=1}^{n} \left( \frac{x_i}{\sigma} \right)^2
+$$
+\`E facile convincersi che $x$ \`e distribuita proprio come una
+variabile $\chi^2$ ad $n$ gradi di libert\`a, poich\'e, se le $x_i$ sono
+variabili gaussiane di media $\mu = 0$ e deviazione standard $\sigma$, le $z_i$
+date da:
+$$
+z_i = \frac{x_i}{\sigma}
+$$
+sono variabili gaussiane in forma standard.
+Cerchiamo allora di riassumere il tutto nel linguaggio che abbiamo sviluppato
+nel resto del paragrafo.
+Abbiamo una variabile casuale $x$ la cui funzione di distribuzione \`e data da
+(cfr. equazione (\ref{eq:ChiQuadro})):
+$$
+p_x(x) = \wp_n(x) =
+\frac{1}{2^{\frac{n}{2}}\Gamma \left( \frac{n}{2} \right)}
+x^{\frac{n-2}{2}}e^{-x/2}
+$$
+ed una variabile $y$, funzione della $x$, data da:
+$$
+y = \phi(x) = \sigma^2 x
+$$
+Da cui:
+$$
+x = \phi^{-1}(y) = \frac{y}{\sigma^2}
+$$
+e
+$$
+\tfdereval{\phi_1^{-1}}{y}{y} = \frac{1}{\sigma^2}
+$$
+Combinando tutto insieme si ha, banalmente:
+$$
+p_y(y) = \wp_n\left( \frac{y}{\sigma^2} \right) \cdot \frac{1}{\sigma^2} =
+\frac{1}{2^{\frac{n}{2}}\Gamma \left( \frac{n}{2} \right)}
+\left( \frac{y}{\sigma^2} \right)^{\frac{n-2}{2}}e^{-y/2\sigma^2}
+\cdot \frac{1}{\sigma^2}
+$$}
+
+\example{Supponiamo di avere una variabile casuale $x$ definita da:
+$$
+x = \sum_{i=1}^{n} x_i^2
+$$
+dove le $x_i$ sono $n$ variabili gaussiane di media $\mu = 0$ e deviazione
+standard (uguale per tutte) $\sigma$.
+Abbiamo trovato la funzione di distribuzione di $x$ nell'esercizio precedente
+(in cui, tanto per essere chiari, la variabile in questione si chiamava $y$).
+Consideriamo adesso la variabile:
+$$
+y = \phi(x) = \sqrt{x}
+$$
+Abbiamo, al solito:
+$$
+x = \phi^{-1}(y) = y^2
+$$
+e
+$$
+\tfdereval{\phi_1^{-1}}{y}{y} = 2y
+$$
+Da cui si ricava immediatamente:
+$$
+p_y(y) = \wp_n\left( \frac{y}{\sigma^2} \right) \cdot \frac{2y}{\sigma^2}
+$$}
+
+\example{Si tratta di un'applicazione tutto sommato elementare dell'esercizio
+precedente. Consideriamo una data molecola di un gas omogeneo che si trova
+all'equilibrio termico ad una certa temperatura $T$.
+In generale i valori delle tre componenti della velocit\`a
+($v_x$, $v_y$ e $v_z$) della molecola in questione, ad un istante di tempo
+fissato, sono variabili casuali distribuite gaussianamente con media $\mu = 0$%
+\footnote{
+Il fatto che il valor medio di ognuna delle componenti della velocit\`a sia
+nullo \`e connesso con il fatto che, in assenza di una direzione spaziale
+privilegiata, ad ogni istante la molecola ha la stessa probabilit\`a di
+muoversi verso destra o verso sinistra.
+}%
+e deviazione standard $\sigma_v$%
+\footnote{
+Il valore di $\sigma_v$ resta sostanzialmente fissato, come si pu\`o leggere
+in un qualsiasi testo di termodinamica o meccanica statistica, dalla
+temperatura $T$ e dalla costante di Boltzmann $k$.
+}%
+, uguale nelle tre direzioni.
+Ci chiediamo quale sia la funzione di distribuzione del modulo della
+velocit\`a $v$, definito da:
+$$
+v = \sqrt{v_x^2 + v_y^2 + v_z^2}
+$$
+\`E chiaro che, a parte lievi differenze di notazione, siamo essenzialmente
+nel caso dell'esercizio precedente con $n = 3$ (adesso $v_x$, $v_y$ e $v_z$
+rappresentano le $x_i$ e $v$ rappresenta la $y$).
+La funzione di distribuzione per una variabile $\chi^2$ con tre gradi di
+libert\`a si scrive esplicitamente come:
+$$
+\wp_3(x) = \frac{x^{\frac{1}{2}} e^{-\frac{x}{2}}}{2^{\frac{3}{2}}
+\Gamma\left( \frac{3}{2} \right)}
+$$
+Possiamo esplicitare il valore della funzione $\Gamma$ di Eulero seguendo
+la definizione  (cfr. sezione \ref{sec:chiquadro}) e sfruttando la relazione
+di ricorrenza:
+$$
+\Gamma \left( \frac{3}{2} \right) = \Gamma \left( \frac{1}{2} + 1 \right) =
+\frac{1}{2} \Gamma \left( \frac{1}{2} \right)
+$$
+dove:
+$$
+\Gamma \left( \frac{1}{2} \right) =
+\dintegral{t^{-\frac{1}{2}}e^{-t}}{t}{0}{\infty}
+$$
+Tramite la sostituzione $s = \sqrt{t}$ otteniamo:
+$$
+\Gamma \left( \frac{1}{2} \right) =
+\dintegral{e^{-s^2}}{s}{0}{\infty} = \sqrt{\pi}
+$$
+da cui:
+$$
+\Gamma \left( \frac{3}{2} \right) = \frac{\sqrt{\pi}}{2}
+$$
+ed infine:
+$$
+\wp_3(x) = \frac{x^{\frac{1}{2}} e^{-\frac{x}{2}}}{\sqrt{2\pi}}
+$$
+La funzione di distribuzione di v si scrive come:
+$$
+p_v(v) = \frac{1}{\sigma_v^3} \sqrt{\frac{2}{\pi}} \, 
+v^2 e^{-\frac{v^2}{2\sigma_v^2}}
+$$
+che \`e generalmente nota come distribuzione di Maxwell delle velocit\`a.}
+
+\end{exemplify}

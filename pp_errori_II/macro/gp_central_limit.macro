@@ -1,0 +1,54 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$k$}" offset xlab_xoff, xlab_yoff
+
+k_min = -1
+k_max = 2
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set yrange [0:0.6]
+set ylabel "\\gplabel{$\\binomialpdf{k}{1, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 1, 1.0/2.0) with boxes
+set out 'binomial_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+k_max = 3
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set ylabel "\\gplabel{$\\binomialpdf{k}{2, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 2, 1.0/2.0) with boxes
+set out 'binomial_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+k_max = 4
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set ylabel "\\gplabel{$\\binomialpdf{k}{3, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 3, 1.0/2.0) with boxes
+set out 'binomial_3.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+k_max = 5
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set ylabel "\\gplabel{$\\binomialpdf{k}{4, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 4, 1.0/2.0) with boxes
+set out 'binomial_4.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+k_max = 11
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set ylabel "\\gplabel{$\\binomialpdf{k}{10, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 10, 1.0/2.0) with boxes
+set out 'binomial_10.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+k_max = 21
+set samples k_max - k_min +1
+set xrange [k_min:k_max]
+set ylabel "\\gplabel{$\\binomialpdf{k}{20, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 20, 1.0/2.0) with boxes
+set out 'binomial_20.tex'
+load '../../cc_gnuplot/gp_smallplot.util'

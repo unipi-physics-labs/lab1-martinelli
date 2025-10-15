@@ -1,0 +1,218 @@
+\chapter{Formule approssimate}
+\mt
+
+Trattiamo in questo capitolo alcuni problemi connessi alla
+\emph{manipolazione} (integrazione, derivazione, interpolazione) di funzioni
+tabulate---funzioni cio\`e di cui si conoscono i valori solamente in
+un determinato numero di punti discreti dell'intervallo di variabilit\`a.
+
+
+\section{Derivata di una funzione data per punti}
+
+Supponiamo di conoscere i valori di una generica funzione $f(x)$ in
+un certo numero di punti $x_i$ egualmente spaziati di una quantit\`a $h$.
+Per fissare le idee supponiamo di avere una tabella con $2n + 1$ valori di
+$f(x)$, in corrispondenza di:
+$$
+x_i = x_0 + i \cdot h \qquad i = -n \ldots n
+$$
+Supponiamo ancora che la funzione sia {\itshape derivabile} su tutto
+l'intervallo delle $x$ a cui siamo interessati, e che $h$ sia abbastanza
+piccolo in modo che la funzione non compia forti oscillazione
+all'interno di ciascun intervallo $\cinterval{x_i}{x_{i+1}}$.
+In queste condizioni avr\`a senso usare le formule approssimate che
+ricaveremo.
+
+Per semplicit\`a indicheremo nel seguito con $f_i$ il valore della funzione
+nel punto $x_i$:
+$$
+f_i = f(x_i)
+$$
+ed useremo la seguente notazione per le derivate:
+$$
+\left \{ \begin{array}{l}
+f'_i   = \tfdereval{f}{x}{x_i}
+\vspace{0.3cm}\\
+f''_i  = \tsdereval{f}{x}{x_i}
+\vspace{0.3cm}\\
+f'''_i = \tndereval{f}{x}{x_i}{3}
+\vspace{0.3cm}\\
+f^{iv}_i  = \tndereval{f}{x}{x_i}{4} 
+\end{array} \right.
+$$
+
+Il valore $f_{i+m}$ di $f(x)$ in un generico punto $x_i + mh$ si pu\`o
+esprimere in termini di $f(x)$ e delle sue derivate nel punto $x_i$
+per mezzo di uno sviluppo in serie di Taylor intorno ad $x_i$:
+$$
+f_{i+m} = f(x_i + mh) = f_i + mhf'_i + \frac{(m h)^2}{2!} f''_i +
+\frac{(m h)^3}{3!}f'''_i + \cdots
+$$
+Quindi per $m=1$ si ha:
+$$
+f_{i+1} = f(x_i + h) = f_i + h f'_i + \frac{h^2}{2}f''_i+
+\frac{h^3}{6}f'''_i + \cdots
+$$
+da cui si pu\`o scrivere facilmente lo sviluppo completo per la derivata
+di $f(x)$ in $x_i$:
+$$
+f'_i=\frac{f_{i+1}-f_i}{h}-
+\left(\frac{h}{2}f''_i+\frac{h^2}{6}f'''_i+ \cdots\right)
+$$
+Trascurando i termini tra parentesi si ottiene un'espressione
+{\itshape utilizzabile} per $f'_i$:
+\eqnlbox{
+\begin{array}{ll}
+\displaystyle f'_i & \simeq
+\frac{\displaystyle f_{i+1} - f_i}{\displaystyle h}
+\vspace{0.3cm}\\
+\displaystyle \Delta f'_i & \simeq -
+\frac{\displaystyle h}{\displaystyle 2} f''_i
+\end{array}
+}{eq:DerivataApprossimata1}
+dove per $\Delta f'_i$ si prende il primo dei termini tra parentesi,
+che solitamente costituisce la correzione dominante allo sviluppo.
+
+Per $m=-1$ si ottiene:
+$$
+f_{i-1} = f(x_i - h) = f_i-h f'_i + \frac{h^2}{2}f''_i -
+\frac{h^3}{6}f'''_i + \cdots
+$$
+Sottraendo $f_{i-1}$ da $f_{i+1}$ si ottiene un'altra espressione approssimata
+per la derivata prima:
+\eqnlbox{
+\begin{array}{ll}
+\displaystyle f'_i & \simeq \frac{\displaystyle f_{i+1}-f_{i-1}}
+{\displaystyle 2h}
+\vspace{0.3cm}\\
+\Delta f'_i & \simeq -\frac{\displaystyle h^2}{\displaystyle 6}f'''_i
+\end{array}
+}{eq:DerivataApprossimata2}
+
+\noindent Sommando $f_{i+1}$ con $f_{i-1}$ si ottiene infine  un'espressione
+approssimata per $f''_i$:
+\eqnlbox{
+\begin{array}{ll}
+\displaystyle f''_i & \simeq \frac{\displaystyle f_{i+1}-2f_i+f_{i-1}}
+{\displaystyle h^2}
+\vspace{0.3cm}\\
+\displaystyle \Delta f''_i & \simeq -\frac{\displaystyle h^2}
+{\displaystyle 12}f^{iv}_i
+\end{array}
+}{eq:Derivata2Approssimata}
+Sempre mediante uno sviluppo in serie di Taylor si possono ottenere
+espressioni approssimate anche per derivate di ordine superiore con diversi
+gradi di approssimazione \cite{McCormick}.
+
+
+\section{Integrale di una funzione data per punti}
+
+L'integrale di una funzione $f(x)$ si calcola integrando il suo
+sviluppo in serie di Taylor termine per termine.
+Indichiamo con $I_i$ l'integrale della funzione $f(x)$ calcolato tra i due
+estremi $x_i$ ed $x_{i+1}$:
+$$
+I_i = \dintegral{f(x)}{x}{x_i}{x_{i+1}} = \dintegral{f(x)}{x}{x_i}{x_i + h}
+$$
+Mediante il cambiamento di variabile $z = x - x_i$ possiamo riscrivere
+la relazione precedente come:
+$$
+I_i = \dintegral{f(x_i+z)}{z}{0}{h}
+$$
+e valutare l'integrale utilizzando lo sviluppo in serie:
+$$
+f(x_i+z) = f_i + z f'_i + \frac{z^2}{2}f''_i + \frac{z^3}{6}f'''_i + \cdots
+$$
+Integrando termine per termine si ottiene:
+\begin{eqnarray*}
+\dintegral{f(x_i+z)}{z}{0}{h} & = &
+\dintegral{f_i}{z}{0}{h} + \dintegral{z f'_i}{z}{0}{h} +
+\dintegral{\frac{z^2}{2}f''_i}{z}{0}{h} + \cdots\\
+& = & h f_i+\frac{h^2}{2}f'_i+\frac{h^3}{6}f''_i+\cdots
+\end{eqnarray*}
+Sostituiamo a $f'_i$ la formula a due punti della derivata, data dalla
+\ref{eq:DerivataApprossimata1}:
+$$
+I_i\ = h f_i+\frac{h^2}{2}\left (\frac{f_{i-1}-f_i}{h}-\frac{h}{2}f''_i+
+\cdots\right)
++\frac{h^3}{6}f''_i+\cdots$$
+da cui, trascurando i termini in $h^3$ e superiori, si ottiene
+\eqnbox{
+\begin{array}{ll}
+\displaystyle I_i \simeq h f_i + \frac{h^2}{2} \cdot \frac{f_{i+1} - f_i}{h}
+\vspace{0.3cm}\\
+\displaystyle  \Delta I_i \simeq -\frac{h^3}{12}f''_i
+\end{array}}
+Questa \`e la nota regola del trapezio. Per avere l'integrale su $n$ passi
+si sommano gli integrali fatti su ciascun passo.
+
+L'integrale fatto in questo modo non converge molto rapidamente, cio\`e
+bisogna prendere molti intervallini per avere una buona approssimazione. Molto
+usata \`e invece la {\itshape formula di Simpson} che andiamo adesso a
+ricavare.
+Indichiamo con $J_i$ l'integrale della funzione $f(x)$ calcolato tra i due
+estremi $x_{i-1}$ ed $x_{i+1}$:
+$$
+J_i = \dintegral{f(x)}{x}{x_{i-1}}{x_{i+1}} =
+\dintegral{f(x)}{x}{x_i - h}{x_i + h}
+$$
+Facciamo il solito cambiamento di variabile $z = x - x_i$:
+$$
+J_i = \dintegral{f(x_i+z)}{z}{-h}{h}
+$$
+e, come prima, integriamo termine a termine:
+\begin{eqnarray*}
+\dintegral{f(x_i+z)}{z}{-h}{h} & = &
+\dintegral{f_i}{z}{-h}{h} + 
+\dintegral{z f'_i}{z}{-h}{h} +
+\dintegral{\frac{z^2}{2}f''_i}{z}{-h}{h} +
+\dintegral{\frac{z^3}{6}f'''_i}{z}{-h}{h} +
+\dintegral{\frac{z^4}{24}f^{iv}_i}{z}{-h}{h} + \cdots\\
+&=& 2hf_i + 0 + 2\cdot \frac{h^3}{6}f''_i + 0 +
+2 \cdot \frac{h^5}{120}f^{iv}_i+\cdots
+\end{eqnarray*}
+Facendo uso dell'espressione (\ref{eq:Derivata2Approssimata}) per la derivata
+seconda possiamo allora scrivere:
+\eqn{
+\dintegral{f(x_i+z)}{z}{-h}{h} =
+2hf_i + \frac{h^3}{3}\cdot\frac{1}{h^2}(f_{i+1}-2f_i+f_{i-1}) - \left(
+\frac{h^3}{3}\cdot\frac{h^2}{12}f^{iv}_i - \frac{h^5}{60}f^{iv}_i \right) +
+\cdots}
+da cui otteniamo infine:
+\eqnbox{
+\begin{array}{ll}
+\displaystyle J_i \simeq \frac{h}{3}\left(f_{i-1}+4f_i+f_{i+1}\right)
+\vspace{0.3cm}\\
+\displaystyle \Delta J_i \simeq -\frac{h^5}{90}f^{iv}_i
+\end{array}}
+che, come anticipato, \`e proprio la formula di Simpson.
+
+
+\section{Interpolazione}
+
+L'\emph{interpolazione} consiste operativamente nella stima del valore
+della funzione $f(x)$ in un punto $x$ compreso tra due punti successivi
+$x_i$ ed $x_{i+1}$ della tabella.
+La stima di $f(x)$ al di fuori dell'intervallo coperto dalla tabella
+prende invece il nome di $estrapolazione$.
+
+Il metodo pi\`u semplice \`e quello di approssimare la curva ad una retta,
+scrivere l'equazione della retta che passa per $x_i$ ed $x_{i+1}$ e quindi
+calcolare $f(x)$ nel punto desiderato. 
+Nel nostro linguaggio consideriamo lo sviluppo in serie di $f(x)$ intorno a
+$x_i$ troncato al prim'ordine:
+$$
+f(x) = f_i + (x - x_i) \cdot f'_i + \cdots
+$$
+Utilizziamo la relazione (\ref{eq:DerivataApprossimata1}) per la derivata
+prima otteniamo la formula di \emph{interpolazione lineare}:
+\eqnbox{
+f(x) \simeq f_i + (x - x_i) \cdot \frac{f_{i+1} - f_i}{h}
+}
+Se invece lo sviluppo in serie viene troncato al second'ordine e $f''_i$ viene
+approssimata con la (\ref{eq:Derivata2Approssimata}) si ottiene la formula di
+\emph{interpolazione quadratica a tre punti}:
+\eqnbox{
+f(x) \simeq f_i + (x - x_i) \cdot \frac{f_{i+1} - f_{i-1}}{2h} +
+(x - x_i)^2 \cdot \frac{f_{i+1} - 2f_i + f_{i-1}}{2h^2}
+}

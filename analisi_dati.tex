@@ -1,0 +1,64 @@
+
+% Impostazioni generali del documento.
+\input{./cc_impostazioni/preambolo}
+\input{./cc_impostazioni/cesure}
+
+\begin{document}
+
+% Frontespizio ed introduzione.
+\frontmatter
+\include{./cc_complementi/frontespizio}
+\include{./cc_complementi/copyright}
+\include{./cc_complementi/prefazione}
+
+\dominitoc
+\tableofcontents
+
+\mainmatter
+
+% Parte prima.
+\part{Statistica ed analisi dei dati}
+\include{./pp_introduzione/introduzione}
+\include{./pp_errori_I/errori_I}
+\include{./pp_errori_I/esercizi}
+\include{./pp_statistica/statistica}
+\include{./pp_statistica/esercizi}
+\include{./pp_distribuzioni/distribuzioni}
+\include{./pp_distribuzioni/esercizi}
+\include{./pp_errori_II/errori_II}
+\include{./pp_fit/fit}
+\include{./pp_fit/esercizi}
+\include{./pp_calcolo/calcolo}
+\include{./pp_complementi/complementi}
+\include{./pp_complementi/esercizi}
+
+% Parte seconda.
+\part{Introduzione al calcolatore}
+\include{./ps_introduzione/introduzione}
+\include{./ps_linux/linux}
+\include{./ps_LaTeX/LaTeX}
+\include{./ps_gnuplot/gnuplot}
+
+\appendix
+
+% Appendici.
+\include{./aa_tabelle/tabelle}
+\include{./aa_tabelle/erf}
+\include{./aa_tabelle/erf_inversa}
+\include{./aa_tabelle/chi_quadro_I}
+\include{./aa_tabelle/chi_quadro_II}
+\include{./aa_tabelle/chi_quadro_III}
+\include{./aa_tabelle/t_student}
+\include{./aa_tabelle/t_student_inversa}
+\include{./aa_LaTeX/LaTeX}
+\include{./aa_LaTeX/symbols}
+\include{./aa_gnuplot/gnuplot}
+\include{./aa_scilab/scilab}
+
+% Bibliografia e colophon.
+\include{./cc_complementi/bibliografia}
+\include{./cc_complementi/colophon}
+
+\printindex
+
+\end{document}

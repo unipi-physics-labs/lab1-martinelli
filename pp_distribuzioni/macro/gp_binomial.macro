@@ -1,0 +1,49 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$k$}" offset xlab_xoff, xlab_yoff
+
+k_max = 10
+set samples k_max + 1
+set xrange [0:k_max]
+set xtics 0, 1
+set yrange [0:0.5]
+set ytics 0 0.1
+set offsets 0.4, 0.4, 0, 0
+
+# Four graphs with different parameters.
+set ylabel "\\gplabel{$\\binomialpdf{k}{4, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 4, 1.0/2.0) with boxes
+set out 'binomial_4_1-2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\binomialpdf{k}{4, \\tinyfrac{1}{6}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 4, 1.0/6.0) with boxes
+set out 'binomial_4_1-6.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\binomialpdf{k}{10, \\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 10, 1.0/2.0) with boxes
+set out 'binomial_10_1-2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\binomialpdf{k}{10, \\tinyfrac{1}{6}}}$" offset ylab_xoff, ylab_yoff
+plot binomial_pdf(x, 10, 1.0/6.0) with boxes
+set out 'binomial_10_1-6.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+# Graph for n = 10, p = 1/6, with the mean and the rms on the plot
+n    = 10
+p    = 1.0/6.0
+mean = binomial_mean(n, p)
+rms  = binomial_rms(n, p)
+ymax = 0.5
+ylab = ymax*0.85
+yarr = ymax*0.8
+plot binomial_pdf(x, 10, 1.0/6.0) with boxes
+set arrow from mean, yarr to mean, 0 front
+set label "$\\meanlabel$" at mean, ylab center
+set arrow from mean+rms, yarr to mean+rms, 0 front
+set label "$\\onesigmalabel$" at mean+rms, ylab center
+set out 'binomial_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

@@ -1,0 +1,68 @@
+\begin{exercises}
+
+\exercise{Ricavare le formule di propagazione dell'errore massimo nelle quattro
+operazioni elementari (somma, differenza, prodotto, quoziente) a partire dalla
+formula generale (\ref{eq:ErroreMassimoGenerale}).}
+
+\exercise{Calcolare l'errore massimo sul volume del cilindro,
+ricavato nell'esempio \ref{esem:VolumeCilindroRisolto} a partire dalla
+formula di propagazione dell'errore massimo sul prodotto
+(\ref{eq:ErroreProdotto}).}
+
+\exercise{Applicare la formula di propagazione dell'errore massimo sul
+prodotto (\ref{eq:ErroreProdotto}) all'esempio
+\ref{esem:ArrotondamentoProdotto1} e discutere il risultato.
+
+\hint{si consideri, ad esempio, $a = 1.25$, $\Delta a = 0.005$, $b = 9.4$,
+$\Delta b = 0.005$.}}
+
+\exercise{Applicare la formula di propagazione dell'errore massimo sul
+prodotto (\ref{eq:ErroreProdotto}) all'esempio
+\ref{esem:ArrotondamentoProdotto2}.
+
+\hint{si consideri, ad esempio, $\Delta a = \Delta b = 5 \times 10^{-4}$.}}
+
+\exercise{Si considerino le due grandezze:
+\begin{eqnarray*}
+a & = & 10.3484\\
+b & = & 6.24
+\end{eqnarray*}
+Con quante cifre significative deve essere preso il quoziente?
+Verificare che si ottiene lo stesso risultato dalla propagazione dell'errore
+massimo (\ref{eq:ErroreQuoziente}).
+}
+
+\exercise{Nel prodotto tra le due grandezze:
+\begin{eqnarray*}
+a & = & 1.25432\\
+b & = & 9.3
+\end{eqnarray*}
+a quante cifre significative conviene arrotondare $a$?
+
+\hint{eseguire i prodotti arrotondando successivamente a $5$, $4$, $3$,
+$2$ \ldots~cifre significative.}}
+
+\exercise{Una certa attenzione va fatta quando i prodotti sono pi\`u di due.
+Consideriamo ad esempio il caso:
+$$
+p = 1.234 \times 56.789 \times 11.9955 \times 5.1248
+$$
+Mostrare che potrebbe essere dannoso arrotondare prima della moltiplicazione
+ciascun fattore a quattro cifre. Conviene partire dai fattori con pi\`u cifre
+significative o da quelli con meno?}
+
+\exercise{A quante cifre significative va arrotondato
+$\pi=3.14159265$ affinch\'e le potenze $\pi^2$, $\pi^3$, $\pi^4$, $\pi^5$,
+$\pi^6$ siano corrette al livello dell'1\%? E allo 0.1\%?}
+
+\exercise{Consideriamo la grandezza:
+$$
+G = \frac{\sqrt{2}+\pi^2}{\sqrt{10}-\pi}
+$$
+Con quante cifre significative dobbiamo prendere $\sqrt{2}$,
+$\sqrt{10}$ e $\pi$ se vogliamo che l'errore relativo su $G$ sia $1\%$?}
+
+\exercise{Ripetere l'esercizio precedente nel caso in cui l'errore relativo
+richiesto sia lo $0.1\%$}
+
+\end{exercises}

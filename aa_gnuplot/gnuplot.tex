@@ -1,0 +1,185 @@
+\chapter{Breve glossario di \gnuplot}
+
+Questa appendice include alcuni dei comandi di \gnuplot\ pi\`u comunemente
+usati, in combinazione con alcune tra le opzioni pi\`u utili.
+Pu\`o servire da riferimento veloce durante l'elaborazione di dati.
+Si rimanda comunque al capitolo \ref{chap:gnuplot} per informazioni pi\`u
+dettagliate sul significato dei singoli comandi.
+
+\begin{verbatim}
+gnuplot> set output
+gnuplot> set terminal x11
+\end{verbatim}
+\gnuplotcmd{Questi due comandi preparano \gnuplot\ ad operare nella modalit\`a
+comunemente impiegata, in cui i grafici vengono rediretti sullo schermo.
+\`E una buona abitudine includerli all'inizio ed alla fine di ogni macro.
+Ricordiamo anche la variante per \windows\ \cchar{set terminal windows}.}
+
+\begin{verbatim}
+gnuplot> set terminal postscript
+gnuplot> set output 'prova.eps'
+\end{verbatim}
+\gnuplotcmd{Questi comandi redirigono l'uscita su di un file postscript
+denominato \cchar{prova.eps}. \`E essenziale ricordarsi di tornare allo
+schermo con i due comandi precedenti, una volta scritto il file.}
+
+\begin{verbatim}
+gnuplot> help
+\end{verbatim}
+\gnuplotcmd{Visualizza le pagine di documentazione interattiva. Pu\`o
+accettare come argomento comandi o parole chiave di \gnuplot\ su cui si
+desidera avere informazioni.}
+
+\begin{verbatim}
+gnuplot> set title 'Titolo del grafico'
+\end{verbatim}
+\gnuplotcmd{Imposta il titolo del grafico, che \`e accettato come parametro
+tra virgolette o tra apici.}
+
+\begin{verbatim}
+gnuplot> set xlabel 'x (cm)'
+\end{verbatim}
+\gnuplotcmd{Imposta l'etichetta di testo sull'asse delle $x$, passata come
+parametro tra virgolette o apici.}
+
+\begin{verbatim}
+gnuplot> set ylabel 'y (cm)'
+\end{verbatim}
+\gnuplotcmd{Imposta l'etichetta di testo sull'asse delle $y$, passata come
+parametro tra virgolette o apici.}
+
+\begin{verbatim}
+gnuplot> set xrange [0.5:1.5]
+\end{verbatim}
+\gnuplotcmd{Imposta gli estremi del grafico sull'asse delle $x$. Essi vengono
+passati tra parentesi quadre, separati da due punti.}
+
+\begin{verbatim}
+gnuplot> set yrange [3:4]
+\end{verbatim}
+\gnuplotcmd{Imposta gli estremi del grafico sull'asse delle $y$. Funziona
+esattamente come il comando precedente.}
+
+\begin{verbatim}
+gnuplot> set autoscale x
+\end{verbatim}
+\gnuplotcmd{Abilita l'impostazione automatica degli estremi dell'asse $x$
+(che, in questo modo, si adattano ai dati).}
+
+\begin{verbatim}
+gnuplot> set autoscale y
+\end{verbatim}
+\gnuplotcmd{Abilita l'impostazione automatica degli estremi dell'asse $y$
+(che, in questo modo, si adattano ai dati).}
+
+\begin{verbatim}
+gnuplot> unset key
+\end{verbatim}
+\gnuplotcmd{Elimina la legenda (se presente).}
+
+\begin{verbatim}
+gnuplot> set key
+\end{verbatim}
+\gnuplotcmd{Ripristina la legenda (se era stata eliminata). \`E il contrario
+del comando precedente.}
+
+\begin{verbatim}
+gnuplot> set logscale x
+\end{verbatim}
+\gnuplotcmd{Seleziona la scala logaritmica sull'asse delle $x$.}
+
+\begin{verbatim}
+gnuplot> unset logscale x
+\end{verbatim}
+\gnuplotcmd{Ripristina la scala lineare sull'asse delle $x$ (se era
+selezionata quella logaritmica). \`E il contrario del comando precedente.}
+
+\begin{verbatim}
+gnuplot> set logscale y
+\end{verbatim}
+\gnuplotcmd{Seleziona la scala logaritmica sull'asse delle $y$.}
+
+\begin{verbatim}
+gnuplot> unset logscale y
+\end{verbatim}
+\gnuplotcmd{Ripristina la scala lineare sull'asse delle $y$ (se era
+selezionata quella logaritmica). \`E il contrario del comando precedente.}
+
+\begin{verbatim}
+gnuplot> lambda = 3.0
+\end{verbatim}
+\gnuplotcmd{Crea una variabile chiamata \cchar{lambda} e le assegna il valore
+di $3.0$. Le variabili possono essere identificate con una qualsiasi
+combinazione di lettere e numeri (purch\'e cominci con una lettera).
+Questa sintassi \`e spesso usata quando si eseguono dei fit.}
+
+\begin{verbatim}
+gnuplot> print lambda
+\end{verbatim}
+\gnuplotcmd{Stampa sullo schermo il valore della variabile \cchar{lambda}
+(che deve essere stata precedentemente definita).}
+
+\begin{verbatim}
+gnuplot> plot 'dati.txt' using 1:2
+\end{verbatim}
+\gnuplotcmd{Crea un grafico a partire dai dati contenuti nel file
+\cchar{dati.txt}. In questo caso particolare la prima colonna \`e messa
+sull'asse delle $x$, la seconda su quello delle $y$.}
+
+\begin{verbatim}
+gnuplot> plot 'dati.txt' using 1:2:3 with yerrorbars
+\end{verbatim}
+\gnuplotcmd{Come il comando precedente, ma la terza colonna \`e questa volta
+interpretata coma colonna degli errori sull'asse delle $y$, che sono
+correttamente riportati sul grafico.}
+
+\begin{verbatim}
+gnuplot> plot 'dati.txt' using 1:2:3:4 with xyerrorbars
+\end{verbatim}
+\gnuplotcmd{Come i due comandi precedenti, con le barre d'errore su entrambi
+gli assi.}
+
+\begin{verbatim}
+gnuplot> plot 'dati.txt' using 1:2 with histeps
+\end{verbatim}
+\gnuplotcmd{I dati contenuti nel file \cchar{dati.txt} vengono rappresentati
+sotto forma di istogramma.}
+
+\begin{verbatim}
+gnuplot> plot 'dati.txt' using 1:(($2)**2)
+\end{verbatim}
+\gnuplotcmd{Con questa sintassi sull'asse delle $y$ vengono rappresentati i
+valori contenuta nella seconda colonna, elevati al quadrato.}
+
+\begin{verbatim}
+gnuplot> replot
+\end{verbatim}
+\gnuplotcmd{Esegue di nuovo l'ultimo comando \cchar{plot} che \`e stato
+impartito nella \emph{shell} di \gnuplot.}
+
+\begin{verbatim}
+gnuplot> f(x) = a*sin(x)
+\end{verbatim}
+\gnuplotcmd{Definisce una funzione della variabile indipendente $x$ (che non
+necessita di essere definita a sua volta). La funzione pu\`o poi essere usata
+in un fit.}
+
+\begin{verbatim}
+gnuplot> fit f(x) 'dati.txt' using 1:2 via a
+\end{verbatim}
+\gnuplotcmd{Esegue un fit ai dati contenuti nel file \cchar{dati.txt} con la
+funzione (precedentemente definita) $f(x)$. Il parametro $a$ \`e lasciato
+libero di variare (ricordiamo che la sua inizializzazione \`e essenziale per
+una corretta convergenza del fit).}
+
+\begin{verbatim}
+gnuplot> fit f(x) 'dati.txt' using 1:2:3 via a
+\end{verbatim}
+\gnuplotcmd{Come il comando precedente, ma in questo caso i punti $(x_i, y_i)$
+sono pesati con gli errori $\Delta y_i$, contenuti nella colonna numero $3$
+del file di dati.}
+
+%\begin{verbatim}
+%gnuplot>
+%\end{verbatim}
+%\begin{quotation}

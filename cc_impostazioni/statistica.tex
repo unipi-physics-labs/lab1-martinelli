@@ -1,0 +1,97 @@
+% Probability.
+% \prob{expression}
+\newcommand{\prob}[1]
+{\displaystyle P\left(\, #1 \, \right)}
+
+% Expectation value.
+% \expect{expression}
+\newcommand{\expect}[1]
+{\displaystyle E\left[\, #1 \, \right]}
+
+% Momentum.
+% \mom{order}{center}
+\newcommand{\mom}[2]
+{\displaystyle {\cal M}_{#1}(#2)}
+
+% Momentum centered on the mean.
+% \mommean{order}
+\newcommand{\mommean}[1]
+{\displaystyle {\cal M}_{#1}}
+
+%% FWHM
+\newcommand{\fwhm}
+{{\scriptstyle \textsc{FWHM}}}
+
+%% HWHM
+\newcommand{\hwhm}
+{{\scriptstyle \textsc{HWHM}}}
+
+% Median
+% \median
+\newcommand{\median}
+{\mu_{\frac{1}{2}}}
+
+% Probability density function
+% \pdf{name}{variable}{parameters}
+\newcommand{\pdf}[3]
+{#1(#2; \; #3)}
+\newcommand{\shortpdf}[2]
+{#1(#2)}
+
+% Binomial pdf.
+% \binomialpdf{variable}{parameters}
+\newcommand{\binomialpdf}[2]
+{\pdf{{\cal B}}{#1}{#2}}
+\newcommand{\binomialshortpdf}[1]
+{\shortpdf{{\cal B}}{#1}}
+
+% Poisson pdf.
+% \poissonpdf{variable}{parameters}
+\newcommand{\poissonpdf}[2]
+{\pdf{{\cal P}}{#1}{#2}}
+\newcommand{\poissonshortpdf}[1]
+{\shortpdf{{\cal P}}{#1}}
+
+% Uniform pdf.
+% \uniformpdf{variable}{parameters}
+\newcommand{\uniformpdf}[2]
+{\pdf{u}{#1}{#2}}
+\newcommand{\uniformshortpdf}[1]
+{\shortpdf{\upsilon}{#1}}
+
+% Exponential pdf.
+% \exponentialpdf{variable}{parameters}
+\newcommand{\exponentialpdf}[2]
+{\pdf{\varepsilon}{#1}{#2}}
+\newcommand{\exponentialshortpdf}[1]
+{\shortpdf{\varepsilon}{#1}}
+
+% Gaussian pdf.
+% \gaussianpdf{variable}{parameters}
+\newcommand{\gaussianpdf}[2]
+{\pdf{g}{#1}{#2}}
+\newcommand{\gaussianshortpdf}[1]
+{\shortpdf{g}{#1}}
+
+% Chi square pdf.
+% \chisquarepdf{variable}{parameters}
+\newcommand{\chisquarepdf}[2]
+{\pdf{\wp}{#1}{#2}}
+\newcommand{\chisquareshortpdf}[1]
+{\shortpdf{\wp}{#1}}
+
+% Cauchy pdf.
+% \cauchypdf{variable}{parameters}
+\newcommand{\cauchypdf}[2]
+{\pdf{c}{#1}{#2}}
+\newcommand{\cauchyshortpdf}[1]
+{\shortpdf{c}{#1}}
+
+\newcommand{\tpdf}[2]
+{\pdf{\tau}{#1}{#2}}
+
+\newcommand{\erf}
+{{\rm erf}}
+
+\newcommand{\Erf}
+{{\rm Erf}}

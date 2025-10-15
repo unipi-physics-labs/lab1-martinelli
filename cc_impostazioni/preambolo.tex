@@ -1,0 +1,62 @@
+% Preambolo.
+\documentclass[11pt, a4paper, cleardoubleempty]{scrbook}
+
+% Definizione dei pacchetti
+\usepackage[italian]{babel}
+
+% This is a workaround for using classic thesis without aligning equations to
+% left (http://www.guit.sssup.it/phpbb/viewtopic.php?p=21797)
+\usepackage{amsmath}
+\let\origRequirePackage\RequirePackage
+\renewcommand{\RequirePackage}[2][]{%
+  \def\next{#2}\def\nxt{amsmath}%
+  \def\rightRequirePackage{\origRequirePackage[#1]{#2}}%
+  \ifx\next\nxt\else\expandafter\rightRequirePackage\fi}
+\usepackage{classicthesis-ldpkg}
+% End of workaround.
+\usepackage[linedheaders, subfig, eulerchapternumbers, parts]{classicthesis}
+
+% This is a workaround for avoiding overfull hboxes for page numbers greater
+% than 99.
+\settowidth{\newnumberwidth}{999}
+\setlength\cftpartnumwidth{\newnumberwidth}
+% End of workaround.
+
+\usepackage[latin1]{inputenc}
+\usepackage{latexsym}
+\usepackage{makeidx}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{mathabx}
+\usepackage{color}
+\usepackage{fancybox}
+\usepackage{manfnt}
+\usepackage{subfig}
+\usepackage{caption}
+\usepackage{epic, eepic}
+
+% Setup per i mini-indici
+\usepackage[tight, italian]{minitoc}
+\renewcommand{\mtifont}{\normalsize\scshape\lsstyle}
+\newcommand{\mt}{\minitoc\mtcskip}
+%\newcommand{\mt}{}
+%\newcommand{\dominitoc}{}
+
+% Cartelle per le figure.
+\graphicspath{{./pp_statistica/figure/} {./pp_distribuzioni/figure/}
+  {./pp_fit/figure/} {./pp_complementi/figure/} {./ps_gnuplot/figure/}
+  {./aa_tabelle/figure/}{./cc_complementi/figure/}}
+
+% Geometria.
+\areaset[10mm]{420pt}{640pt}
+\setlength\topmargin{-15pt}
+
+\makeindex
+
+\input{./cc_impostazioni/ambienti}
+\input{./cc_impostazioni/matematica}
+\input{./cc_impostazioni/statistica}
+\input{./cc_impostazioni/figure}
+\input{./cc_impostazioni/tabelle}
+\input{./cc_impostazioni/miscellanea}
+\input{./cc_impostazioni/bibliografia}

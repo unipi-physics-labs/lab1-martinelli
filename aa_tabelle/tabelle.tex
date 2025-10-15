@@ -1,0 +1,80 @@
+\chapter{Tavole numeriche}
+\label{chap:TavoleNumeriche}
+
+\section{Definizione della funzione \texorpdfstring{$\erf(x)$}{erf}}
+\label{app:Erf}
+
+La funzione $\erf$ (nota anche come {\itshape error function}) \`e
+solitamente definita%
+\footnote
+{
+Purtroppo alcuni autori preferiscono definire la funzione erf come:
+\begin{equation}\label{eq:Erf}
+\Erf(x) = \frac{2}{\sqrt{\pi}} \dintegral{e^{-\xi^2}}{\xi}{0}{x}
+\end{equation}
+che \`e legata alla \ref{eq:erf} da un semplice cambio di variabile:
+\begin{equation}
+\erf(x) = \frac{1}{2} \Erf \left( \frac{x}{\sqrt{2}} \right)
+\end{equation}
+Prima di utilizzare delle tavole numeriche \`e dunque essenziale
+verificarne il significato esatto.
+}
+come:
+\begin{equation}\label{eq:erf}
+\erf(x) = \frac{1}{\sqrt{2\pi}} \dintegral{e^{-\xi^2/2}}{\xi}{0}{x}
+\end{equation}
+ed \`e essenzialmente l'integrale, eseguito tra 0 ed un estremo
+variabile $x$, di una distribuzione Gaussiana di media 0 e deviazione
+standard 1:
+\begin{equation}
+\erf(x) = \dintegral{G(z)}{z}{0}{x}
+\end{equation}
+\panelfig
+{\onebyonetexfig{./aa_tabelle/figure/erf.tex}}
+{Grafico della funzione $\erf(x)$ definita dall'equazione \ref{eq:erf}.}
+{fig:Erf}
+
+\begin{exemplify}
+
+\example{$\erf(1) = 0.3413$. Questo significa che la probabilit\`a che il
+valore di una variabile Gaussiana standard sia compreso tra $0$ ed $1$ vale
+$0.3413$.\\
+Il risultato pu\`o essere facilmente generalizzato ad una qualsiasi
+distribuzione Gaussiana: la probabilit\`a che la variabile sia compresa tra
+$\mu$ ($0$ per la variabile standard) e $\mu + \sigma$ ($0 + 1 = 1$ per la
+variabile standard) vale $0.3413$.}
+
+\example{Se moltiplichiamo per due il valore appena trovato
+($0.3413 \cdot 2 = 0.6826$) riotteniamo il ben noto risultato che la
+probabilit\`a che una variabile gaussiana disti meno di una deviazione
+standard dal suo valor medio \`e circa il 68\%.}
+
+\end{exemplify}
+
+Nel capitolo \ref{chap:Distribuzioni} abbiamo gi\`a anticipato che questo
+integrale (che rappresenta la probabilit\`a di trovare una variabile normale
+in forma standard entro l'intervallo $\cinterval{0}{x}$) non ha espressione
+analitica e deve essere valutato numericamente.
+La funzione $\erf$ si trova tabulata qui di seguito per un insieme
+significativo di valori di $x$.
+Il procedimento base per estrarre dalle tavole i valori di probabilit\`a
+\`e stato gi\`a descritto nel capitolo \ref{chap:Distribuzioni} e \`e
+sostanzialmente fondato sulla relazione, valida per una variabile Gaussiana
+standard%
+\footnote{
+Alcuni dei programmi di analisi dati comunemente usati (ad esempio scilab e
+\gnuplot) utilizzano la definizione (\ref{eq:Erf}).
+In questo caso si ha, ovviamente:
+$$
+\prob{a \leq x \leq b} =
+\frac{1}{2} \left[ \Erf\left(\frac{b}{\sqrt{2}}\right) -
+\Erf\left(\frac{a}{\sqrt{2}}\right) \right]
+$$
+}%
+:
+\begin{equation}\label{eq:ProbErf}
+\prob{a \leq x \leq b} = \erf(b) - \erf(a)
+\end{equation}
+Per una distribuzione Gaussiana con media e deviazione standard arbitrarie
+la (\ref{eq:ProbErf}) pu\`o ancora essere utilizzata passando alla variabile
+in forma standard (cfr. capitolo \ref{chap:Distribuzioni}).

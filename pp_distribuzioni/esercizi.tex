@@ -1,0 +1,146 @@
+\begin{exercises}
+
+\exercise{Costruire sperimentalmente la distribuzione
+$\binomialpdf{k}{4, \tinyfrac{1}{6}}$ operando in questo modo:
+\begin{numlist}
+\item Fare $N$ prove, ogni prova sia un lancio di 4 dadi.
+\item Contare quanti 5 escono in ciascuna prova.
+\item Contare quante prove contengono $k$ $5$.
+\item Dividere per il numero di prove, in modo da ottenere la frequenza
+relativa, che \`e una stima della probabilit\`a.
+\item Rappresentare le frequenze relative e confrontarle con quelle teoriche.
+\end{numlist}}
+
+\exercise{\label{exr:RicorrenzaBinomiale}Sia $k$ una variabile casuale
+con funzione di distribuzione binomiale. Si dimostri che vale la seguente
+relazione di ricorrenza:
+$$
+\expect{k^{m+1}} = p(1-p) \cdot \frac{\ud}{\ud p} \, \expect{k^m} +
+np \cdot \expect{k^m}
+$$
+
+\hint{si scriva esplicitamente la derivata rispetto a $p$ di $\expect{k^m}$:
+$$
+\frac{\ud}{\ud p} \, \expect{k^m} =
+\frac{\ud}{\ud p} \, \dsum{k^m \cdot \binomialpdf{k}{n, p}}{k}{0}{n} =
+\frac{\ud}{\ud p} \, \dsum{k^m \cdot \binom{n}{k}p^k (1-p)^{n-k}}{k}{0}{n}
+$$
+Si porti dunque la derivata dentro il segno di sommatoria e si
+esegua la derivata stessa termine per termine. A questo punto non dovrebbe
+essere troppo complicato provare la tesi.}}
+
+\exercise{\label{exr:Ek2Binomiale}Sia $k$ una variabile casuale
+con funzione di distribuzione binomiale. Si utilizzi il risultato
+dell'esercizio \ref{exr:RicorrenzaBinomiale} per calcolare $\expect{k^2}$,
+sapendo che $\expect{k} = np$.}
+\answer{np(np - p + 1)}
+
+\exercise{\label{exr:Ek3Binomiale}Sia $k$ una variabile casuale
+con funzione di distribuzione binomiale. Si utilizzino i risultati degli
+esercizi \ref{exr:RicorrenzaBinomiale} e \ref{exr:Ek2Binomiale} per calcolare
+$\expect{k^3}$.}
+\answer{np(n^2p^2 + 2p^2 - 3np^2 + 3np - 3p + 1)}
+
+\exercise{Calcolare il coefficiente di asimmetria $\gamma_1$ per la
+distribuzione binomiale.
+
+\hint{Si usino i risultati degli esercizi \ref{exr:Ek3Binomiale} e 
+\ref{exr:Mom3}, oltre ovviamente ai fatti noti sulla distribuzione
+binomiale.}}
+\answer{\frac{1 - 2p}{\sqrt{np(1 - p)}}}
+
+\exercise{Calcolare il limite per grande $n$ del coefficiente di asimmetria
+$\gamma_1$ della distribuzione binomiale. Commentare.}
+\answer{0}
+
+\exercise{\label{exr:RicorrenzaPoisson}Sia $k$ una variabile casuale
+con funzione di distribuzione Poissoniana. Si dimostri che vale la
+seguente relazione di ricorrenza:
+$$
+\expect{k^{m+1}} = \mu \cdot \left( \frac{\ud}{\ud\mu} \, \expect{k^m} +
+\expect{k^m}\right)
+$$
+
+\hint{si scriva esplicitamente la derivata rispetto al valor medio $\mu$ di
+$\expect{k^m}$:
+$$
+\frac{\ud}{\ud\mu} \, \expect{k^m} =
+\frac{\ud}{\ud\mu} \, \dsum{k^m \cdot \poissonpdf{k}{\mu}}{k}{0}{\infty} =
+\frac{\ud}{\ud\mu} \, \dsum{k^m \cdot \frac{\mu^k}{k!}\,e^{-\mu}}{k}{0}{\infty}
+$$
+Si porti dunque la derivata dentro il segno di sommatoria e si
+esegua la derivata stessa termine per termine. A questo punto non dovrebbe
+essere troppo complicato provare la tesi.}}
+
+\exercise{\label{exr:Ek2Poisson}Sia $k$ una variabile casuale
+con funzione di distribuzione Poissoniana. Si utilizzi il risultato
+dell'esercizio \ref{exr:RicorrenzaPoisson} per calcolare $\expect{k^2}$,
+sapendo che $\expect{k} = \mu$.}
+\answer{\mu + \mu^2}
+
+\exercise{\label{exr:Ek3Poisson}Sia $k$ una variabile casuale
+con funzione di distribuzione Poissoniana. Si utilizzino i risultati degli
+esercizi \ref{exr:RicorrenzaPoisson} e \ref{exr:Ek2Poisson} per calcolare
+$\expect{k^3}$.}
+\answer{\mu + 3\mu^2 - \mu^3}
+
+\exercise{Calcolare il coefficiente di asimmetria $\gamma_1$ per la
+distribuzione di Poisson.
+
+\hint{Si usino i risultati degli esercizi \ref{exr:Ek3Poisson} e 
+\ref{exr:Mom3}, oltre ovviamente ai fatti noti sulla distribuzione di
+Poisson.}}
+\answer{\frac{1}{\sqrt{\mu}}}
+
+\exercise{Calcolare il limite per grande $\mu$ del coefficiente di asimmetria
+$\gamma_1$ della distribuzione di Poisson. Commentare.}
+\answer{0}
+
+\exercise{Calcolare la semilarghezza a met\`a altezza per una funzione
+di distribuzione uniforme scritta nella forma (\ref{eq:Uniforme}).}
+\answer{\frac{(b-a)}{2}}
+
+\exercise{Calcolare la mediana $\median$ per una distribuzione esponenziale
+nella forma (\ref{eq:Esponenziale}).}
+\answer{\frac{\ln(2)}{\lambda}}
+
+\exercise{Calcolare la semilarghezza a met\`a altezza per una distribuzione
+esponenziale nella forma (\ref{eq:Esponenziale}).}
+\answer{\frac{\ln(2)}{2\lambda}}
+
+\exercise{Sia $x$ una variabile casuale continua con funzione di distribuzione
+esponenziale, nella forma (\ref{eq:Esponenziale}). Si calcoli $\expect{x^3}$.}
+\answer{\frac{6}{\lambda^3}}
+
+\exercise{Si calcoli il valore del coefficiente di asimmetria
+(\ref{eq:Skewness}) per la distribuzione
+esponenziale nella forma (\ref{eq:Esponenziale}).
+
+\hint{si usi il risultato dell'esercizio precedente, insieme a quello
+dell'esercizio \ref{exr:Mom3}.}}
+\answer{2}
+
+\exercise{Si calcoli la moda della distribuzione del $\chi^2$ in funzione
+del numero di gradi di libert\`a (si calcoli, cio\`e, il valore di
+$x$ per cui la funzione di distribuzione $\chisquarepdf{x}{n}$ assume
+il suo valore massimo).
+
+\hint{si derivi $\chisquarepdf{x}{n}$ rispetto ad $x$ e si ponga la
+derivata uguale a zero.}}
+\answer{n-2}
+
+\exercise{Si dimostri che per $n = 2$ la distribuzione del $\chi2$ 
+$\chisquarepdf{x}{n}$ si riduce ad una distribuzione esponenziale.}
+
+\exercise{Sfruttando i risultati degli esercizi precedenti ed i fatti
+noti dal corpo del capitolo, si compili una tabella in cui, per
+le principali distribuzioni continue note, siano riportate la
+deviazione standard $\sigma$, la semilarghezza a met\`a altezza
+$\hwhm$ ed il fattore di proporzionalit\`a $\varepsilon$ tra le due, dato da:
+$$
+\hwhm = \varepsilon \sigma
+$$
+Si verifichi in particolare che, per ciascuna delle distribuzioni,
+$\varepsilon$ \`e dell'ordine dell'unit\`a.}
+
+\end{exercises}

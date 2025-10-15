@@ -1,0 +1,13 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$p(x)$}" offset ylab_xoff, ylab_yoff
+set xrange [0:3]
+set xtics  0, 0.5
+set yrange [0:1.25]
+set ytics 0, 0.25
+plot triangular_pdf(x, 0, 2, 0) lw lw_normal
+set out 'triangular.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

@@ -1,0 +1,53 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+
+set xrange [0:5]
+set yrange [0:2]
+set ytics 0 0.4
+
+
+# Four graphs with different lambda. 
+set ylabel "\\gplabel{$\\exponentialpdf{x}{\\tinyfrac{1}{2}}}$" offset ylab_xoff, ylab_yoff
+plot exponential_pdf(x, 0.5) lw lw_normal
+set out 'exponential_0_5.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\exponentialpdf{x}{4, 1}}$" offset ylab_xoff, ylab_yoff
+plot exponential_pdf(x, 1.0) lw lw_normal
+set out 'exponential_1_0.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\exponentialpdf{x}{\\tinyfrac{3}{2}}}$" offset ylab_xoff, ylab_yoff
+plot exponential_pdf(x, 1.5) lw lw_normal
+set out 'exponential_1_5.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\exponentialpdf{x}{2}}$" offset ylab_xoff, ylab_yoff
+plot exponential_pdf(x, 2.0) lw lw_normal
+set out 'exponential_2_0.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+
+# Graph for lambda = 1, with the mean and the rms on the plot
+#
+lambda  = 1
+mean    = exponential_mean(lambda)
+rms     = exponential_rms(lambda)
+set xrange [0:5]
+set yrange [0:1.5]
+set ytics 0 0.3
+
+ymax = 1.5
+ylab = ymax*0.85
+yarr = ymax*0.8
+set ylabel "\\gplabel{$\\exponentialpdf{x}{1}}$" offset ylab_xoff, ylab_yoff
+plot exponential_pdf(x, lambda) lw lw_normal
+set arrow from mean, yarr to mean, 0 front
+set label "$\\meanlabel$" at mean, ylab center
+set arrow from mean+rms, yarr to mean+rms, 0 front
+set label "$\\onesigmalabel$" at mean+rms, ylab center
+set out 'exponential_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

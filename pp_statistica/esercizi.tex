@@ -1,0 +1,192 @@
+\begin{exercises}
+
+\exercise{Verificare {\itshape sperimentalmente} la (\ref{eq:ProbVenn})
+nel caso del lancio di una moneta (verificare, cio\`e, che il rapporto tra
+il numero di teste $n$ ed il numero di lanci $N$ tende ad $\frac{1}{2}$
+al crescere di $N$).
+
+\hint{operativamente si pu\`o costruire un grafico cartesiano in
+cui, dopo ogni lancio, si pone $N$ sull'asse delle $x$ e $n/N$ su quello
+delle $y$.}}
+
+\exercise{Sia data una scatola contenente $6$ palline rosse, $3$ blu e $5$
+bianche. Supponiamo di estrarre una pallina a caso dalla scatola; calcolare
+la probabilit\`a che essa sia blu o bianca.}
+\answer{\frac{4}{7}}
+
+\exercise{Nel lancio di una moneta qual \`e la probabilit\`a di avere
+una successione di cinque teste, seguita da una croce?}
+\answer{\frac{1}{64}}
+
+\exercise{Nel lancio di una moneta, qual \`e la probabilit\`a che la
+\emph{prima} croce esca esattamente al $k$-esimo tentativo (cio\`e che
+escano $k-1$ teste in successione, seguite da una testa)?}
+\answer{\frac{1}{2^k}}
+
+\exercise{\label{exr:TreNelLancioDado}Consideriamo il lancio di una dado a
+sei facce. Qual \`e la probabilit\`a che un numero fissato (ad esempio il $3$)
+esca per la prima volta al $k$-esimo tentativo (cio\`e che le prime $k-1$
+uscite siano diverse da $3$ e la $k$-esima sia $3$)?}
+\answer{\frac{1}{6} \cdot \left( \frac{5}{6} \right)^{k-1}}
+
+\exercise{Con riferimento all'esempio \ref{esem:Autobus}, quanti minuti
+dovremo aspettare l'autobus alla fermata, in media?
+
+\hint{si tratta semplicemente di calcolare la media della distribuzione
+scritta esplicitamente nell'esempio usando la definizione
+(\ref{eq:Media}).}}
+\answer{5}
+
+\exercise{Provate a rappresentare le funzioni di distribuzione per la somma 
+delle uscite di uno, due e tre dadi e confrontate i grafici.}
+
+\exercise{\label{eser:Lavagna}Un gruppo di studenti (ognuno dei quali
+\`e identificato da un numero progressivo $i$) misura ad occhio ed
+indipendentemente la lunghezza della lavagna dell'aula A. Vengono registrati
+i seguenti risultati (in metri)%
+\footnote{
+Dati realmente ottenuti il 9 Gennaio 1990.
+}%
+:
+
+\listtable{10}{Lunghezza}{cm}
+{$6$    & $4.8$  & $6.5$  & $5.62$ & $3$    &
+ $7.5$  & $5.5$  & $4$    & $5.5$  & $5$    \\
+ $4.5$  & $5$    & $4.75$ & $4$    & $5.8$  &
+ $5$    & $5$    & $5.5$  & $4.6$  & $4.7$  \\
+ $4.5$  & $5.3$  & $4.75$ & $2.80$ & $4.50$ &
+ $5$    & $6.1$  & $4$    & $5.5$  & $4.6$  \\
+ $6.60$ & $5.80$ & $5.4$  & $5.5$  & $7.5$  &
+ $5.9$  & $10$   & $5.8$  & $3.7$  & $5.4$  \\
+ $5.5$  & $5$    & $5.5$  & $5.8$  & $5$    &
+ $5.5$  & $5.7$  & $5$    & $6.2$  & $6.1$  \\
+ $3.45$ & $7.5$  & $5.40$ & $3.5$  & $6.2$  &
+ $5.18$ & $4.5$  & $4.80$ & $5.30$ & $5.5$  \\
+ $6$    & $5.3$  & $6$    & $5$    & $6.20$ &
+ $6$    & $5$    & $5$    & $6.5$  & $5.5$  \\
+ $5$    & $5.5$  & $5.35$ & $5.2$  & $5.8$  &
+ $4.5$  & $5.45$ & $6.5$  & $6$    & $5$    \\
+ $6$    & $5.75$ & $5.25$ & $5.6$  & $5.6$  &
+ $5.9$  & $5$    & $6.5$  & $8$    & $5.40$ \\
+ $4$    & $3.2$  & $5.60$ & $6.05$ & $5.5$ & $6.5$\\
+}
+ 
+\noindent Rappresentare questi dati mediante un istogramma.}
+
+\exercise{Dimostrare che:
+$$
+\dsum{c}{k}{1}{n} = nc
+$$}
+
+\exercise{Dimostrare che:
+$$
+\dsum{k}{k}{1}{n} = \frac{n(n+1)}{2}
+$$
+
+\hint{sommare i termini a due a due (il primo con l'ultimo, il secondo
+con il penultimo e cos\`i via). Che cosa succede?}}
+
+\exercise{Dimostrare che:
+$$
+\dsum{k^2}{k}{1}{n} = \frac{n(n+1)(2n+1)}{6}
+$$
+
+\hint{procedere per induzione.}}
+
+\exercise{\label{exr:SommaAAllaKappa}Si consideri un numero reale positivo
+$0 < a < 1$.
+Calcolare esplicitamente la quantit\`a:
+$$
+\dsum{a^k}{k}{1}{n} = a + a^2 + a^3 + \ldots + a^n
+$$
+
+\hint{si scriva esplicitamente la somma e si moltiplichi numeratore e
+denominatore per $1 - a$. Si svolga dunque il prodotto al numeratore
+(un numero cospicuo di termini dovrebbe elidersi).}}
+\answer{a \cdot \frac{(1 - a^n)}{(1 - a)}}
+
+\exercise{Si consideri un numero reale positivo $0 <a < 1$.
+Utilizzando il risultato dell'esercizio precedente si calcoli la quantit\`a:
+$$
+\dsum{a^k}{k}{1}{\infty}
+$$
+
+\hint{si calcoli il limite, per $n$ che tende ad infinito, dell'espressione
+ottenuta nell'esercizio precedente.}}
+\answer{\frac{a}{(1 - a)}}
+
+\exercise{Si consideri un numero reale positivo $0 < a < 1$.
+Calcolare esplicitamente la quantit\`a:
+$$
+\dsum{ka^k}{k}{1}{n} = a + 2a^2 + 3a^3 + \ldots + na^n
+$$
+
+\hint{si applichi il suggerimento dell'esercizio \ref{exr:SommaAAllaKappa}.
+Questa volta i termini non si elidono, ma applicando il risultato
+ottenuto nell'esercizio stesso\ldots}}
+\answer{a \cdot \frac{(1 - a^n)}{(1 - a)^2} - \frac{na^{n+1}}{(1 - a)}}
+
+\exercise{\label{exr:SommaKappaAAllaKappaInf}Si consideri un numero reale
+positivo $0 < a < 1$.
+Utilizzando il risultato dell'esercizio precedente si calcoli la quantit\`a:
+$$
+\dsum{ka^k}{k}{1}{\infty}
+$$}
+\answer{\frac{a}{(1-a)^2}}
+
+\exercise{Verificare che la particolare distribuzione triangolare definita
+nell'esempio \ref{esem:MediaDistTriangolare} \`e normalizzata.}
+
+\exercise{Si dimostri che il valore di aspettazione di una costante \`e uguale
+al valore della costante stessa.
+
+\hint{si scriva esplicitamente il valore di aspettazione e si sfrutti la
+condizione di normalizzazione della funzione di distribuzione.}}
+
+\exercise{Si consideri di nuovo l'esercizio \ref{exr:TreNelLancioDado}.
+Quanti lanci di un dado a sei facce dobbiamo aspettare, in media, perch\'e
+esca un $3$?
+
+\hint{sappiamo gi\`a, dall'esercizio \ref{exr:TreNelLancioDado}, la
+probabilit\`a che il primo $3$ esca esattamente al $k$-esimo lancio.
+Si tratta allora di valutare il valore di aspettazione $\expect{k}$ per la
+specifica funzione di distribuzione. Sar\`a utile anche il risultato
+dell'esercizio \ref{exr:SommaKappaAAllaKappaInf}.}}
+\answer{6}
+
+\exercise{\label{eser:XQuadroUnDado}Sia la variabile casuale $x$ l'uscita
+di un dado equo a sei facce. Si calcoli il valore di aspettazione
+$\expect{x^2}$.}
+\answer{\frac{91}{6}}
+
+\exercise{Si verifichi la validit\`a della (\ref{eq:Varianza2})
+sfruttando il risultato dell'esercizio precedente.}
+
+\hint{si usino gli esempi \ref{esem:MediaUnDado} e \ref{esem:VarianzaUnDado}.}
+
+\exercise{Si ripeta l'esercizio \ref{eser:XQuadroUnDado} nel caso in cui la
+variabile casuale $x$ sia la somma delle uscite nel lancio di due dadi
+(si calcoli il valore di aspettazione $\expect{x^2}$).}
+\answer{\frac{329}{6}}
+
+\exercise{Si verifichi la validit\`a della (\ref{eq:Varianza2})
+sfruttando il risultato dell'esercizio precedente.
+
+\hint{si sfruttino in questo caso gli esempi \ref{esem:MediaDueDadi} e
+\ref{esem:VarianzaDueDadi}}.}
+
+\exercise{\label{exr:Mom3}Dimostrare che per una distribuzione arbitraria il
+momento di ordine $3$ centrato nel valor medio vale:
+$$
+\mommean{3} = \expect{x^3} - 3\mu\sigma^2 - \mu^3
+$$
+
+\hint{scrivere esplicitamente la definizione di $\mommean{3}$ e sfruttare
+la linearit\`a dell'operatore valore di aspettazione, insieme alla
+(\ref{eq:Varianza2}).}}
+
+\exercise{Dimostrare che per una funzione di distribuzione simmetrica
+rispetto al valor medio il coefficiente di asimmetria (\ref{eq:Skewness})
+\`e nullo.}
+
+\end{exercises}

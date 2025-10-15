@@ -1,0 +1,19 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$n(x)$}" offset ylab_xoff, ylab_yoff
+set xrange [1:13]
+set xtics  1, 1
+set yrange [0:50]
+set ytics 0, 10
+plot "dices.dat" using 1:2 with boxes
+set out 'dices_frequency.tex'
+load '../../cc_gnuplot/gp_largeplot.util'
+
+set ylabel "\\gplabel{$f(x)$}" offset ylab_xoff, ylab_yoff
+set yrange [0:0.25]
+set ytics 0, 0.05
+plot "dices.dat" using 1:(($2)/200.0) with boxes
+set out 'dices_relative_frequency.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

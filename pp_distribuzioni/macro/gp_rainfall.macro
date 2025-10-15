@@ -1,0 +1,81 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{Precipitazioni totali (pollici)}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{Occorrenze}" offset ylab_xoff, ylab_yoff
+
+k_max = 10
+set samples k_max + 1
+set xrange [0:k_max]
+set xtics 0, 1
+set yrange [0:500]
+set ytics 0 100
+set offsets 0.4, 0.4, 0, 0
+
+plot 'rainfall_0.dat' using ($1 + 0.35):2 with boxes,\
+1536*poisson_pdf(x, 2.052734) with boxes
+set out 'rainfall_0.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set yrange [0:50]
+set ytics 0 10
+
+plot 'rainfall_1.dat' using ($1 + 0.35):2 with boxes,\
+128*poisson_pdf(x, 2.437500) with boxes
+set out 'rainfall_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_2.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.0) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_3.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.140625) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_3.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_4.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.078125) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_4.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_5.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.812500) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_5.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_6.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 1.968750) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_6.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_7.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 0.914062) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_7.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_8.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 0.835938) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_8.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_9.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 1.312500) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_9.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_10.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 1.781250) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_10.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_11.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.250000) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_11.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+plot 'rainfall_12.dat' using ($1 + 0.35):2 with boxes lw 2 fs solid 0,\
+128*poisson_pdf(x, 2.718750) with boxes lw 2 fs solid 1 noborder
+set out 'rainfall_12.tex'
+load '../../cc_gnuplot/gp_smallplot.util'

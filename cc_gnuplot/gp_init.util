@@ -1,0 +1,24 @@
+# Global options
+#
+unset key
+unset grid
+set samples 1000
+
+# Fill style (for the discrete distributions).
+#
+set boxwidth 0.25
+set style fill solid 0.25 border
+
+# Style definition for lines and points
+#
+lw_normal = 3
+ls_solid  = 1
+ls_dashed = 2
+ls_dotted = 3
+
+# Label offsets
+#
+xlab_xoff = 0
+xlab_yoff = 0
+ylab_xoff = 1.5
+ylab_yoff = 0

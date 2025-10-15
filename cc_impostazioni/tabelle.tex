@@ -1,0 +1,66 @@
+
+\newcommand{\tabletop}{\hline}
+\newcommand{\tablemid}{\hline\hline}
+\newcommand{\tablebot}{\hline}
+
+\newcommand{\tableheaderrow}[1]
+{\rule[-2pt]{0pt}{15pt}#1}
+
+\newcommand{\tableheader}[1]
+{\tabletop\tableheaderrow{#1}\\ \tablemid}
+
+\newcommand{\twolinestable}[5]
+{\begin{center}
+{\small
+\begin{tabular}{c@{\hspace{30pt}}*{#3}{c}}
+\tableheader{#1 & #4}
+\rule[-6pt]{0pt}{22pt}#2 & #5\\
+\tablebot
+\end{tabular}
+}
+\end{center}}
+
+\newcommand{\pdftable}[4]
+{\twolinestable{$#1$}{$\prob{#1}$}{#2}{#3}{#4}}
+
+\newcommand{\listtable}[4]
+{\begin{center}
+{\small
+\begin{tabular}{*{#1}{l@{\hspace{18pt}}}}
+\tabletop
+\multicolumn{#1}{c}{\tableheaderrow{\sc #2 \rm (#3)}}\\
+\tablemid
+\rule[-2pt]{0pt}{15pt}#4
+\tablebot
+\end{tabular}
+}
+\end{center}}
+
+
+\newcommand{\tsym}[1]
+{\parbox{15pt}{$\csname#1\endcsname$}{\tt \char92 #1}}
+
+\newcommand{\symtable}[2]
+{\begin{center}
+{\small
+\begin{tabular}{*5{p{0.17\linewidth}}}
+\tabletop
+\multicolumn{5}{c}{\tableheaderrow{\sc #1}}\\
+\tablemid
+\rule[-2pt]{0pt}{15pt}#2
+\tablebot
+\end{tabular}
+}
+\end{center}}
+
+\newcommand{\stdtable}[3]
+{\begin{center}
+\stdtablenocenter{#1}{#2}{#3}
+\end{center}}
+
+\newcommand{\stdtablenocenter}[3]
+{\begin{tabular}{*{#1}{c}}
+\tableheader{#2}\\[-5 pt]
+#3
+\tablebot
+\end{tabular}}

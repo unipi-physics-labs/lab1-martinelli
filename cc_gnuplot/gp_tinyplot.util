@@ -1,0 +1,6 @@
+
+set terminal epslatex input header '\footnotesize'
+set size 0.60, 0.60
+replot
+set out
+set terminal X11

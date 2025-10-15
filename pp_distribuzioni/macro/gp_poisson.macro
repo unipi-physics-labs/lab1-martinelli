@@ -1,0 +1,56 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$k$}" offset xlab_xoff, xlab_yoff
+
+k_max = 20
+set samples k_max + 1
+set xrange [0:k_max]
+set xtics 0, 2
+set yrange [0:0.5]
+set ytics 0 0.1
+set offsets 0.4, 0.4, 0, 0
+
+# Four graphs with different parameters. 
+set ylabel "\\gplabel{$\\poissonpdf{k}{1}$}" offset ylab_xoff, ylab_yoff
+plot poisson_pdf(x, 1) with boxes
+set out 'poisson_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "$\\gplabel{\\poissonpdf{k}{2}$}" offset ylab_xoff, ylab_yoff
+plot poisson_pdf(x, 2) with boxes
+set out 'poisson_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\poissonpdf{k}{5}$}" offset ylab_xoff, ylab_yoff
+plot poisson_pdf(x, 5) with boxes
+set out 'poisson_5.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\poissonpdf{k}{10}$}" offset ylab_xoff, ylab_yoff
+plot poisson_pdf(x, 10) with boxes
+set out 'poisson_10.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+# Graph for mu = 2, with the mean and the rms on the plot
+#
+k_max = 10
+set samples k_max +1
+set xrange [0:k_max]
+set xtics 0, 1
+
+ymax = 0.5
+ylab = ymax*0.85
+yarr = ymax*0.8
+
+mu = 2
+mean    = poisson_mean(mu)
+rms     = poisson_rms(mu)
+set ylabel "\\gplabel{$\\poissonpdf{k}{2}$}" offset ylab_xoff, ylab_yoff
+plot poisson_pdf(x, mu) with boxes
+set arrow from mean, yarr to mean, 0 front
+set label "$\\meanlabel$" at mean, ylab center
+set arrow from mean+rms, yarr to mean+rms, 0 front
+set label "$\\onesigmalabel$" at mean+rms, ylab center
+set out 'poisson_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

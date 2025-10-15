@@ -1,0 +1,1018 @@
+\chapter{Propagazione degli errori. Parte I}
+\label{chap:PropagazioneDegliErrori1}
+\mt
+
+Dopo un breve paragrafo di terminologia, in questo capitolo si
+introducono i fatti fondamentali relativi alla propagazione dell'errore
+massimo nelle misure indirette ed alle regole e convenzioni di scrittura
+per i dati sperimentali.
+
+
+\section{Terminologia}
+
+Vi sono alcuni termini che entrano  comunemente  nel linguaggio del lavoro
+sperimentale: accuratezza, ripetitivit\`a, riproducibilit\`a,  errore, errore
+casuale, errore sistematico, incertezza, precisione.
+\` E opportuno che questi termini vengano usati in modo consistente secondo
+la consuetudine della comunit\`a scientifica internazionale.
+Pertanto riportiamo qui alcune definizioni seguendo il VIM
+({\em International Vocabulary of Basic and General Terms in Metrology}).
+
+\begin{termslist}
+\item{\index{accuratezza}
+\termdef{Accuratezza}{ (della misura)}
+{Una misura \`e tanto pi\`u {\em accurata} quanto maggiore \`e l'accordo tra
+il risultato della misura stessa ed il valore del misurando.}
+}
+\item{\index{ripetitivit\`a}
+\termdef{Ripetitivit\`a}{ (dei risultati di misura)}
+{Le misure si dicono ripetitive quanto pi\`u sono vicini i risultati di
+successive misure dello stesso misurando nelle stesse condizioni di misura.
+Queste condizioni si chiamano condizioni di ripetitivit\`a ed includono: lo
+stesso procedimento di misura, lo stesso osservatore, lo stesso
+strumento di misura usato nelle stesse condizioni, lo stesso posto,
+ripetizione della misura in brevi periodi di tempo.
+La dispersione caratteristica dei risultati permette di definire
+quantitativamente l'incertezza dei risultati.}
+}
+\item{\index{riproducibilit\`a}
+\termdef{Riproducibilit\`a}{ (dei risultati di misura)}
+{Le  misure si dicono riproducibili quanto pi\`u sono in accordo i risultati
+di misure fatte in condizioni diverse. Questo significa che possono essere
+diversi, per esempio, il principio di misura, il metodo di misura,
+l'osservatore, gli strumenti di misura, il luogo, il tempo\ldots}
+}
+\item{\index{errore!di misura}
+\termdef{Errore}{ (di misura)}
+{Il risultato di una misura meno il valore del misurando. Questo \`e un
+concetto qualitativo: in generale l'errore di misura non \`e noto perch\'e non
+\`e noto il valore del misurando.
+Tuttavia pu\`o essere valutata l'incertezza del risultato di una misura.}
+}
+\item{\index{errore!casuale}
+\termdef{Errore casuale}{}
+{Il risultato di una misura meno la media che dovrebbe risultare da un infinito
+numero di misure dello stesso misurando fatte in condizioni di
+ripetitivit\`a.}
+}
+\item{\index{errore!sistematico}
+\termdef{Errore sistematico}{}
+{Differenza tra la media che dovrebbe risultare da un infinito numero di
+misure dello stesso misurando fatte in condizioni di ripetitivit\`a ed il
+valore del misurando. L'errore sistematico \`e pertanto l'errore di misura
+meno l'errore casuale. L'errore sistematico e le sue cause non possono essere
+completamente noti. Spesso gli errori {\itshape sistematici} sono quelli che
+derivano  da errori di taratura degli
+strumenti o dell'apparato sperimentale o dalla mancanza di imparzialit\`a
+dell'osservatore.
+
+L'organizzazione internazionale di metrologia legale (OIML,~1968)
+definisce l'errore sistematico come un errore che nel corso di un certo numero
+di misure, fatte nelle stesse condizioni, dello stesso valore di una data
+quantit\`a, rimane costante in valore assoluto e segno o varia secondo una
+legge definita quando cambiano le condizioni.
+\`E evidente che gli errori sistematici limitano
+l'accuratezza della misura: quanto pi\`u si riescono ad eliminare gli
+errori sistematici, tanto pi\`u la misura \`e accurata.}
+}
+\end{termslist}
+
+\begin{exemplify}
+
+\example{Si supponga di misurare il periodo di un pendolo con un cronometro che
+ha la risoluzione di $\frac{1}{5}$ di secondo. Se il cronometro
+va avanti (cio\`e le lancette girano pi\`u in fretta di quanto dovrebbero)
+l'errore associato al risultato che si legge \`e potenzialmente molto pi\`u
+grande di $\frac{1}{5}$ di secondo.
+In ogni caso non \`e facile stabilire se ci sono errori sistematici a meno di
+non disporre di un orologio campione che segna l'ora esatta (per definizione).}
+
+\example{Si supponga di voler verificare la legge di Boyle misurando a
+temperatura ambiente pressione e volume dell'aria contenuta nel ramo chiuso
+di un tubo ad $\sqcup$ contenente {\rm Hg}.
+Le misure di pressione non sono in torr perch\'e la temperatura non \`e a
+$0$\celsius. Quindi le stime della costante $PV$, pur essendo tutte
+consistenti tra di loro, non servono a calcolare la costante dei gas $R$.}
+
+\end{exemplify}
+
+\begin{termslist}
+\item{\index{incertezza!di misura}
+\termdef{Incertezza}{ (di misura)}
+{\`E un intervallo al quale contribuiscono varie componenti che possono
+sostanzialmente essere distinte in due categorie: quelle che sono valutate
+con metodi statistici e quelle che sono valutate con altri metodi.
+
+Bisognerebbe sempre tenere in mente la differenza tra \emph{errore} ed
+\emph{incertezza}. Per esempio il risultato di una misura dopo correzioni
+per compensare effetti sistematici individuati pu\`o essere molto vicino
+(anche se non si pu\`o sapere di quanto) al valore incognito del misurando,
+ed avere cos\`i un errore trascurabile, ma avere una incertezza grande.}
+}
+\item{\index{precisione}
+\termdef{Precisione}{ (dei risultati di misura)}
+{Per questa parola si trovano in letteratura varie definizioni, ed il VIM non
+la definisce. Di solito il concetto di precisione viene legato sia alla
+ripetitivit\`a che alla riproducibilit\`a delle misure, cio\`e alla
+consistenza interna  dell'insieme delle misure. Quando l'errore sistematico
+\`e trascurabile (o si ritiene che lo sia) l'incertezza viene solo dalle
+fluttuazioni dei risultati o dalla risoluzione degli strumenti e la precisione
+di una misura viene identificata con l'incertezza relativa, cio\`e il rapporto
+tra l'incertezza e il risultato di misura.
+
+Il termine {\em precisione} non dovrebbe mai essere usato come sinonimo di
+{\em accuratezza}, che \`e un concetto soltanto qualitativo.}
+}
+\end{termslist}
+
+
+\section{Propagazione dell'incertezza massima (errore massimo)}
+
+\index{incertezza!massima}Quando la dispersione delle misure fatte in
+condizioni di ripetitivit\`a \`e nulla, l'incertezza deriva soltanto dalla
+risoluzione degli strumenti. Se la misura \`e diretta l'incertezza \`e
+data immediatamente dalla risoluzione dello strumento, se la misura \`e
+indiretta l'incertezza \`e data da una opportuna combinazione delle
+risoluzioni degli strumenti utilizzati come preciseremo tra breve.
+
+\begin{exemplify}
+
+\example{\label{esem:VolumeCilindro} Si supponga di voler stimare il
+volume $V$ di un cilindro di raggio $r$ ed altezza $h$; siano $r_0$ ed $h_0$
+le quantit\`a misurate, con incertezze $\Delta r$ e $\Delta h$ rispettivamente.
+\begin{eqnarray*}
+r &=& r_0 \pm \Delta r\\
+h &=& h_0 \pm \Delta h\\
+\end{eqnarray*}
+Ovviamente vorremmo scrivere il risultato nella forma $V = V_0 \pm \Delta V$.
+Si pone allora il problema di vedere come le incertezze sulle misure dirette
+influenzino l'errore $\Delta V$ da associare a $V$.
+Supponiamo, per fissare le idee, che:
+\begin{eqnarray*}
+r &=& (10.2 \pm 0.1)\mm\\
+h &=& (23.4 \pm 0.1)\mm\\
+\end{eqnarray*}
+\`E estremamente semplice calcolare i valori massimo e minimo che il volume
+pu\`o assumere, date le incertezze sul raggio di base e sull'altezza;
+essi corrisponderanno alle situazioni in cui $r$ ed $h$ assumono i valori
+massimi e minimi, rispettivamente:
+\begin{eqnarray*}
+V_{max} &=& \pi (r_0 + \Delta r)^2 \cdot (h_0 + \Delta h) \approx 7830\mm^3\\
+V_{min} &=& \pi (r_0 - \Delta r)^2 \cdot (h_0 - \Delta h) \approx 7470\mm^3
+\end{eqnarray*}
+Possiamo allora stimare $V_0$ e $\Delta V_0$ come media e semidispersione
+di tali valori:
+\begin{eqnarray*}
+V_0 &=& \frac{V_{max} + V_{min}}{2} \approx 7650\mm^3\\
+\Delta V_0 &=& \frac{V_{max} - V_{min}}{2} \approx 180\mm^3
+\end{eqnarray*}
+Si tratta adesso di sviluppare un formalismo che ci permetta di ricavare
+questo risultato nel modo pi\`u semplice e generale possibile, senza passare
+ogni volta attraverso il calcolo esplicito dei valori massimo e minimo della
+grandezza cui siamo interessati. In altre parole si tratta di capire come
+$\Delta h$ e $\Delta r$ si combinino per dare $\Delta V$.}
+
+\end{exemplify}
+
+\noindent Nei paragrafi che seguono studieremo la propagazione
+dell'errore nelle quattro operazioni e, di seguito, per una arbitraria
+combinazione funzionale delle misure sperimentali.
+Supporremo sempre che $a_0$, $b_0$, $c_0\ldots$ siano i valori
+{\itshape misurati} delle grandezze $a$, $b$, $c\ldots$ cui siamo interessati
+e che $\Delta a$, $\Delta b$, $\Delta c\ldots$ siano le incertezze associate
+(nel senso che $a$, $b$, $c\ldots$ possono assumere {\itshape solamente}
+valori entro $a_0 \pm \Delta a$, $b_0 \pm \Delta b$, $c_0 \pm \Delta c\ldots$).
+Supporremo anche che le quantit\`a in
+questione siano tra loro {\itshape indipendenti} (nel senso che la misura di
+una non influenza la misura delle altre); torneremo nel paragrafo
+\ref{sec:Correlazione} a discutere che cosa accade se questa assunzione
+viene meno.
+Ci poniamo ora il problema di definire, data una grandezza $G$ funzione
+delle grandezze che misuriamo:
+$$
+G = f(a, b, c, \ldots)
+$$
+un intervallo $\cinterval{G_0 - \Delta G}{G_0 + \Delta G}$ in cui si \`e
+{\itshape certi} di trovare la grandezza stessa, supponendo noti i rispettivi
+intervalli in cui si \`e certi di trovare $a$, $b$, $c\ldots$
+
+Notiamo esplicitamente che tutti i risultati che otterremo in questo capitolo
+si riferiscono a quello che viene solitamente definito
+{\itshape errore massimo}.
+Nel capitolo \ref{chap:PropagazioneDegliErrori2} presenteremo una
+formulazione del problema statisticamente pi\`u corretta.
+
+
+\subsection{Somma}
+
+Sia $S$ la somma:
+$$
+S = a + b
+$$
+Costruiamo esplicitamente $S$ mettendoci nei due casi peggiori,
+in cui sia $\Delta a$ che $\Delta b$ contribuiscono nello stesso verso:
+\begin{eqnarray*}
+S_{max} &=& (a_0+\Delta a)+(b_0+\Delta b) = (a_0+b_0)+(\Delta a+\Delta b)\\
+S_{min} &=& (a_0-\Delta a)+(b_0-\Delta b) = (a_0+b_0)-(\Delta a+\Delta b)
+\end{eqnarray*}
+Ne segue che possiamo scrivere:
+$$
+S = (a_0 + b_0) \pm (\Delta a+\Delta b)
+$$
+per cui assumeremo come miglior valore $S_0$ per la somma la quantit\`a:
+\eqnlbox{
+S_0 = a_0 + b_0
+}{eq:StimaSomma}
+e come errore {\itshape massimo} $\Delta S$ le quantit\`a:
+\eqnlbox{
+\Delta S = \Delta a + \Delta b
+}{eq:ErroreSomma}
+
+\begin{exemplify}
+
+\example{Supponiamo di misurare due lunghezze:
+\begin{eqnarray*}
+a &=& (2.50 \pm 0.05)\cm\\
+b &=& (2.34 \pm 0.05)\cm
+\end{eqnarray*}
+Date la (\ref{eq:StimaSomma}) e la (\ref{eq:ErroreSomma}), scriveremo la somma
+come:
+$$
+a+b = (4.84 \pm 0.10)\cm
+$$}
+
+\end{exemplify}
+
+
+\subsection{Differenza}
+
+Sia $D$ la differenza:
+$$
+D = a - b
+$$
+Come prima consideriamo i casi pi\`u sfavorevoli:
+\begin{eqnarray*}
+D_{max} &=& (a_0+\Delta a)-(b_0-\Delta b) = (a_0-b_0)+(\Delta a+\Delta b)\\
+D_{min} &=& (a_0-\Delta a)-(b_0+\Delta b) = (a_0-b_0)-(\Delta a+\Delta b)
+\end{eqnarray*}
+Ne segue che:
+$$
+D = (a_0 - b_0) \pm (\Delta a+\Delta b)
+$$
+e, come prima, la miglior stima per la differenza sar\`a:
+\eqnlbox{
+D_0 = a_0 - b_0
+}{eq:StimaDifferenza}
+mentre prenderemo come errore:
+\eqnlbox{
+\Delta D = \Delta a + \Delta b
+}{eq:ErroreDifferenza}
+
+\caution{Per coloro che, in analogia con la (\ref{eq:ErroreSomma}), fossero
+tentati di scrivere $\Delta D = \Delta a - \Delta b$, notiamo
+esplicitamente come questo sia sbagliato. Per convincersene basti pensare
+che, nel caso di due misure con la stessa incertezza, questa espressione
+darebbe zero, il che \`e chiaramente assurdo.
+In effetti il modo giusto di propagare l'errore massimo nella differenza
+\`e dato dalla \ref{eq:ErroreDifferenza}; purtroppo, in generale,
+gli errori si sommano e non si sottraggono.}
+
+
+\begin{exemplify}
+
+\example{\label{esem:ErroreDifferenza}
+Supponiamo di misurare due lunghezze:
+\begin{eqnarray*}
+a &=& (2.50 \pm 0.05)\cm\\
+b &=& (2.34 \pm 0.05)\cm
+\end{eqnarray*}
+e di essere interessati alla differenza. Seguendo la
+(\ref{eq:StimaDifferenza}) e la (\ref{eq:ErroreDifferenza}), la scriveremo
+come:
+$$
+a - b = (0.16 \pm 0.10)\cm
+$$
+Notiamo che, bench\'e le due misure di $a$ e $b$ siano abbastanza
+precise, la differenza risulta sostanzialmente indeterminata (nel
+senso che l'incertezza sulla differenza \`e dello stesso ordine di
+grandezza della differenza stessa). Si tratta di un problema comune quando
+si sottraggono misure {\itshape vicine} tra loro.}
+
+\end{exemplify}
+
+
+\subsection{Prodotto}
+Sia $P$ il prodotto:
+$$
+P=a \cdot b
+$$
+I casi peggiori sono, al solito:
+\begin{eqnarray*}
+P_{max} & = & (a_0+\Delta a)(b_0+\Delta b) =
+a_0 \cdot b_0 + (a_0\Delta b + b_0\Delta a + \Delta a\Delta b)\\
+P_{min} & = & (a_0-\Delta a)(b_0-\Delta b) =
+a_0 \cdot b_0 - (a_0\Delta b + b_0\Delta a - \Delta a\Delta b)
+\end{eqnarray*}
+Se valgono le condizioni:
+\begin{eqnarray*}
+\Delta a & \ll & a\\
+\Delta b & \ll & b
+\end{eqnarray*}
+che \`e la situazione tipica in laboratorio, possiamo trascurare il prodotto
+$\Delta a\Delta b$, come illustrato nell'esempio seguente.
+
+
+\begin{exemplify}
+
+\example{Torniamo all'esempio \ref{esem:ErroreDifferenza} e supponiamo adesso
+di voler calcolare il prodotto tra le due grandezze misurate. Per valutare
+l'incertezza associata ci occorrono:
+\begin{eqnarray*}
+a_0 \Delta b &=& 0.125\cm^2\\
+b_0 \Delta a &=& 0.117\cm^2\\
+\Delta a \Delta b &=& 0.0025\cm^2
+\end{eqnarray*}
+Dunque, effettivamente, il terzo termine \`e trascurabile rispetto agli
+altri due.}
+
+\end{exemplify}
+
+\noindent In queste condizioni si ha:
+\begin{eqnarray*}
+P_{max} & \simeq & a_0 \cdot b_0 + (a_0\Delta b + b_0\Delta a)\\
+P_{min} & \simeq & a_0 \cdot b_0 - (a_0\Delta b + b_0\Delta a)
+\end{eqnarray*}
+e dunque possiamo scrivere l'espressione per la migliore stima del prodotto
+come:
+\eqnlbox{
+P_0 = a_0 \cdot b_0
+}{eq:StimaProdotto}
+e quella dell'errore associato come:
+\eqnlbox{
+\Delta P = a_0\Delta b + b_0\Delta a
+}{eq:ErroreProdotto}
+
+\caution{\`E importante sottolineare come la (\ref{eq:ErroreProdotto}) non
+sia una relazione esatta, ma valga solamente nell'ipotesi in cui i
+termini di ordine superiore al primo siano, come precisato prima,
+trascurabili.}
+
+La (\ref{eq:ErroreProdotto}) pu\`o essere utilizzata per
+calcolare l'incertezza massima in un certo numero di casi interessanti,
+come mostrato negli esempi seguenti.
+
+\begin{exemplify}
+
+\example{Supponiamo di misurare una grandezza $a$ ottenendo il valore
+$a_0 \pm \Delta a$. Propaghiamo l'errore su $a^2$.
+Notando che $a^2 = a \cdot a$ e sfruttando le equazioni\
+(\ref{eq:StimaProdotto}) e (\ref{eq:ErroreProdotto}) scriveremo:
+\begin{eqnarray*}
+a^2 & = & a_0 \cdot a_0 = a_0^2\\
+\Delta (a^2) & = & a_0\Delta a + a_0\Delta a = 2a_0 \Delta a
+\end{eqnarray*}}
+
+\example{Ripetiamo l'esempio precedente propagando l'errore su $a^3$.
+Esattamente come prima, notando che $a^3 = a^2 \cdot a$:
+\begin{eqnarray*}
+a^3 & = & a_0^2 \cdot a_0 = a_0^3\\
+\Delta (a^3) & = & a_0^2\Delta a + a_0\Delta (a^2) =
+a_0^2 \Delta a + a_0 \cdot 2 a_0 \Delta a = 3 a_0^2 \Delta a
+\end{eqnarray*}}
+
+\end{exemplify}
+
+\noindent Si pu\`o dimostrare (come vedremo tra breve) che l'errore massimo
+sulla potenza n-esima $a^n$ si scrive come:
+\eqn{
+\Delta (a^n) = na_0^{n-1}\Delta a
+}
+Notiamo infine un'ultima conseguenza particolarmente interessante della
+(\ref{eq:ErroreProdotto}), nel caso in cui la grandezza misurata $a$ sia
+moltiplicata per un numero reale $c$ \emph{non affetto da errore}
+(cio\`e $\Delta c = 0$):
+\eqnl{
+\Delta (c \cdot a) = c\Delta a + a\Delta c = c\Delta a
+}{eq:ErroreProdottoCostante}
+Ne vediamo un'applicazione nell'esempio che segue.
+
+\begin{exemplify}
+
+\example{Si vuole misurare lo spessore $s$ di un foglio di carta disponendo
+solo di una riga millimetrata. A tale scopo si misura lo spessore $h$ di una
+risma di $500$ fogli identici ottenendo il valore:
+$$
+h = (48 \pm 1)\mm
+$$
+Abbiamo:
+$$
+s = \frac{h}{500}
+$$
+e, seguendo la \ref{eq:ErroreProdottoCostante}:
+$$
+\Delta s = \frac{\Delta h}{500}
+$$
+per cui la nostra stima dello spessore del singolo foglio sar\`a:
+$$
+s = (0.096 \pm 0.002)\mm
+$$
+Non deve sorprendere che l'errore su $s$ sia pi\`u piccolo della risoluzione
+del nostro strumento (la riga millimetrata) in quanto non si tratta di una
+misura diretta.}
+
+\end{exemplify}
+
+
+\subsection{Quoziente}
+
+Sia $Q$ il quoziente:
+$$
+Q=\frac{a}{b}
+$$
+I casi peggiori sono:
+\begin{eqnarray*}
+Q_{max} & = & \frac{a_0 + \Delta a}{b_0 - \Delta b}\\
+Q_{min} & = & \frac{a_0 - \Delta a}{b_0 + \Delta b}
+\end{eqnarray*}
+Concentriamoci sulla prima delle due equazioni; moltiplicando numeratore e
+denominatore per la quantit\`a $(b_0 + \Delta b)$ si ha:
+$$
+Q_{max} = \frac{(a_0 + \Delta a) \cdot (b_0 + \Delta b)}
+{(b_0 - \Delta b) \cdot (b_0 + \Delta b)} = 
+\frac{a_0 b_0 + a_0 \Delta b + b_0 \Delta a + \Delta a \Delta b}
+{b_0^2 - (\Delta b)^2}
+$$
+Se, come prima, trascuriamo i termini del second'ordine (cio\`e quelli
+del tipo $\Delta a \Delta b$ e $(\Delta b)^2$) possiamo scrivere:
+$$
+Q_{max} \approx \frac{a_0 b_0 + a_0 \Delta b + b_0 \Delta a}{b_0^2} =
+\frac{a_0}{b_0} + \frac{a_0 \Delta b + b_0 \Delta a}{b_0^2}
+$$
+Lo stesso vale, ovviamente, per $Q_{min}$; ne segue che, con la notazione
+consueta, possiamo scrivere:
+\eqnlbox{
+Q_0 = \frac{a_0}{b_0}
+}{eq:StimaQuoziente}
+e ancora:
+\eqnlbox{
+\Delta Q = \frac{a_0\Delta b + b_0\Delta a}{b_0^2}
+}{eq:ErroreQuoziente}
+
+
+\subsection{Caso generale}
+
+Iniziamo la trattazione della propagazione degli errori/incertezze nel caso
+generale dal caso semplice di funzioni di una sola variabile.
+Richiamiamo sinteticamente (senza addentrarci nei dettagli delle ipotesi
+necessarie alla dimostrazione) la formula di Taylor per lo sviluppo in serie
+di potenze di una funzione di una variabile reale $x$ attorno ad un generico
+punto $x_0$:
+\eqnl{
+f(x) = f(x_0) +
+\dsum{\frac{1}{k!} \cdot \tndereval{f}{x}{x_0}{k}}{k}{1}{n} \cdot (x - x_0)^k +
+\orderof{n+1}
+}{eq:TayolorUnaVariabile}
+in cui con il simbolo 
+$$
+\tndereval{f}{x}{x_0}{k}
+$$
+si intende la derivata k-esima della funzione \emph{calcolata} nel punto
+$x_0$ ed il resto $\orderof{n+1}$ \`e infinitesimo di ordine $(x - x_0)^{n+1}$.
+Per completezza riscriviamo esplicitamente la (\ref{eq:TayolorUnaVariabile})
+limitata al prim'ordine:
+\eqnl{
+f(x) = f(x_0) + \tfdereval{f}{x}{x_0} \cdot (x - x_0) + \orderof{2}
+}{eq:TayolorUnaVariabilePrimo}
+ed al secondo:
+\eqnl{
+f(x) = f(x_0) + \tfdereval{f}{x}{x_0} \cdot (x - x_0) +
+\frac{1}{2} \cdot \tsdereval{f}{x}{x_0} \cdot (x - x_0)^2 + \orderof{3}
+}{eq:TayolorUnaVariabileSecondo}
+Nel seguito non avremo bisogno di utilizzare la formula di Taylor
+oltre il second'ordine.
+
+\begin{exemplify}
+
+\example{Scriviamo esplicitamente lo sviluppo in serie di Taylor
+per la funzione
+$$
+f(x) = \sin x
+$$
+attorno al punto $x = 0$, fino al
+terzo ordine incluso.
+Utilizzando la (\ref{eq:TayolorUnaVariabile}) si ha:
+$$
+\sin x = \sin 0 + \cos 0 \cdot x - \frac{1}{2} \cdot \sin 0 \cdot x^2 -
+\frac{1}{6} \cos 0 \cdot x^3 + \orderof{4} =
+x - \frac{x^3}{6} + \orderof{4}
+$$
+Nel punto $x = 0.4\rad$, tanto per fare un esempio, abbiamo
+$\sin x \approx 0.3894$. Lo sviluppo al prim'ordine d\`a semplicemente
+$x = 0.4$ (che \`e gi\`a un'approssimazione ragionevole),
+mentre al second'ordine abbiamo $x - \frac{x^3}{6} \approx 0.3893$.
+In generale l'ordine dello sviluppo richiesto da una determinata applicazione
+dipende dal grado di approssimazione richiesta e dalla distanza dal punto
+attorno a cui sviluppiamo.}
+
+\end{exemplify}
+
+\noindent Supponiamo dunque, al solito, di misurare una certa grandezza
+$a$ ottenendo un valore $a_0$ con un'incertezza $\Delta a$:
+$$
+a = a_0 \pm \Delta a
+$$
+e di essere interessati ad una grandezza $G = f(a)$.
+Formalmente possiamo sviluppare la funzione in serie di Taylor al
+prim'ordine intorno al valore misurato:
+$$
+f(a_0 \pm \Delta a) = f(a_0) \pm \tfdereval{f}{a}{a_0} \cdot \Delta a +
+\orderof{2} 
+$$
+Ammettendo che la derivata prima sia non nulla e i termini di ordine superiore
+al primo siano trascurabili nello sviluppo possiamo scrivere, analogamente a
+prima, i casi pi\`u sfavorevoli come%
+\footnote{
+L'uso del modulo tiene conto del fatto che la funzione pu\`o essere crescente
+o decrescente in un intorno di $a_0$ e, corrispondentemente, la derivata
+pu\`o essere positiva o negativa.
+}%
+:
+\begin{eqnarray*}
+G_{max} & = & f(a_0) + \abs{\tfdereval{f}{a}{a_0}} \cdot \Delta a\\
+G_{min} & = & f(a_0) - \abs{\tfdereval{f}{a}{a_0}} \cdot \Delta a
+\end{eqnarray*}
+Seguendo la notazione introdotta nei paragrafi precedenti scriveremo
+allora:
+\eqnlbox{
+G_0 =  f(a_0)
+}{eq:StimaGeneraleMonodimensionale}
+e ancora:
+\eqnlbox{
+\Delta G = \abs{\tfdereval{f}{a}{a_0}} \cdot \Delta a
+}{eq:ErroreMassimoGeneraleMonodimensionale}
+Si tratta di un risultato fondamentale che permette di propagare
+l'errore (massimo) su una funzione arbitraria della variabile misurata.
+
+\caution{Ricordiamo che la (\ref{eq:ErroreMassimoGeneraleMonodimensionale})
+\`e valida solo nell'ipotesi che il prim'ordine sia il termine
+dominante nello sviluppo in serie (cfr. l'esempio
+\ref{esem:PropagazioneErroreSecondOrdine}).}
+
+\begin{exemplify}
+
+\example{Supponiamo di aver misurato un certo angolo $\theta$ ottenendo
+il valore:
+$$
+\theta = \theta_0 \pm \Delta \theta = (1.38 \pm 0.01)\rad
+$$
+e di essere interessati alla grandezza $G = \sin \theta$.
+Seguendo la (\ref{eq:StimaGeneraleMonodimensionale}) e la
+(\ref{eq:ErroreMassimoGeneraleMonodimensionale}) scriveremo:
+$$
+G_0 = \sin \theta_0 \approx 0.982
+$$
+ed ancora:
+$$
+\Delta G = \abs{\cos \theta_0} \cdot \Delta \theta \approx 0.002
+$$
+Per cui alla fine si avr\`a:
+$$
+\sin \theta = 0.982 \pm 0.002
+$$}
+
+\example{\label{esem:PropagazioneErroreSecondOrdine}
+Ripetiamo l'esercizio precedente supponendo che questa volta
+il valore di $\theta$ misurato e la relativa incertezza siano:
+$$
+\theta = \theta_0 \pm \Delta \theta = (90 \pm 1)\degrees
+$$
+Procedendo esattamente come nel caso precedente otterremmo:
+$$
+\Delta G = \abs{\cos \theta_0} \cdot \Delta \theta = 0
+$$
+che \`e chiaramente assurdo. In questo caso la
+(\ref{eq:ErroreMassimoGeneraleMonodimensionale}) non si pu\`o applicare in
+quanto la derivata prima della funzione si annulla nel punto misurato
+(facendo cadere una delle ipotesi nella derivazione della formula) e
+l'incertezza va calcolata esplicitamente considerando i casi pi\`u
+sfavorevoli come nell'esempio \ref{esem:VolumeCilindro} oppure
+considerando i termini del second'ordine.}
+
+\end{exemplify}
+
+
+\noindent Possiamo generalizzare le equazioni
+(\ref{eq:StimaGeneraleMonodimensionale}) e
+(\ref{eq:ErroreMassimoGeneraleMonodimensionale}) al caso in cui la funzione
+cui siamo interessati dipenda da pi\`u di una variabile:
+$$
+G = f(a, b, c \ldots)
+$$
+Lo sviluppo in serie al prim'ordine si scrive adesso come:
+\begin{eqnarray*}
+f(a_0 \pm \Delta a, b_0 \pm \Delta b, c_0 \pm \Delta c \ldots) =
+f(a_0, b_0, c_0 \ldots) \pm
+\pfdereval{f}{a}{a_0, b_0, c_0 \ldots} \cdot \Delta a \pm \\
+\pfdereval{f}{b}{a_0, b_0, c_0 \ldots} \cdot \Delta b \pm 
+\pfdereval{f}{c}{a_0, b_0, c_0 \ldots} \cdot \Delta c +
+\cdots + \orderof{2}
+\end{eqnarray*}
+in cui, vale la pena notarlo esplicitamente, tutte le derivate sono
+calcolate nel punto misurato $a_0$, $b_0$, $c_0\ldots$
+Con ovvia notazione, ed analogamente al caso di una sola variabile,
+scriviamo dunque:
+\eqnlbox{
+G_0 =  f(a_0, b_0, c_0\ldots)
+}{eq:StimaGenerale}
+e ancora:
+\eqnlbox{
+\Delta G = 
+\abs{\pfdereval{f}{a}{a_0, b_0, c_0 \ldots}} \cdot \Delta a + \\
+\abs{\pfdereval{f}{b}{a_0, b_0, c_0 \ldots}} \cdot \Delta b + 
+\abs{\pfdereval{f}{c}{a_0, b_0, c_0 \ldots}} \cdot \Delta c \ldots
+}{eq:ErroreMassimoGenerale}
+in cui abbiamo, come prima, trascurato i termini di ordine superiore
+al primo (cio\`e tutti i termini del tipo $(\Delta a)^2$,
+$\Delta a\Delta b$, etc.).
+
+\begin{exemplify}
+
+\example{\label{esem:VolumeCilindroRisolto}Torniamo all'esempio
+\ref{esem:VolumeCilindro} e calcoliamo l'incertezza sul volume
+$V$ del cilindro con il formalismo appena sviluppato. Dato che $V=\pi r^2h$,
+le derivate parziali si scrivono come:
+\begin{eqnarray*}
+\pfdereval{V}{r}{r, h} &=& 2\pi r h\\
+\pfdereval{V}{h}{r, h} &=& \pi r^2
+\end{eqnarray*}
+da calcolarsi nei punti misurati:
+\begin{eqnarray*}
+\abs{\pfdereval{V}{r}{r_0, h_0}} & = & 2\pi r_0 h_0\\
+\abs{\pfdereval{V}{h}{r_0, h_0}} & = & \pi r_0^2
+\end{eqnarray*}
+per cui scriveremo:
+\begin{eqnarray*}
+V_0      &=& \pi r_0^2h_0 \approx 7650\mm^2\\
+\Delta V &=& \pi r_0^2\Delta h+2\pi r_0h_0\Delta r \approx 180\mm^3
+\end{eqnarray*}
+che \`e esattamente il risultato ottenuto nell'esempio
+\ref{esem:VolumeCilindro}.}
+
+\end{exemplify}
+
+
+\section{Errore relativo}
+
+\index{errore!relativo}Quasi sempre quando si misura una generica grandezza
+$a$ \`e fisicamente pi\`u significativo il rapporto tra l'errore e la
+grandezza stessa, $\frac{\Delta a}{a}$,
+piuttosto che l'errore assoluto $\Delta a$. Tale rapporto viene chiamato
+{\itshape errore relativo}.
+
+\begin{exemplify}
+
+\example{Se misuriamo una lunghezza $l_0$ di $1\m$ con un errore assoluto
+$\Delta l = 1\mm$, l'errore relativo che commettiamo \`e:
+$$
+\frac{\Delta l}{l_0} = 10^{-3} = 0.1\%
+$$
+Se adesso, a parit\`a di errore assoluto, $l_0$ vale $10\mm$:
+$$
+\frac{\Delta l}{l_0} = 10^{-1} = 10\%
+$$
+In questo secondo caso lo stesso errore assoluto di $1\mm$ \`e dunque pi\`u
+grave.}
+
+\end{exemplify}
+
+
+\subsection{Propagazione dell'errore relativo}
+
+La propagazione dell'errore relativo non presenta niente di
+concettualmente nuovo. Si tratta semplicemente di propagare l'errore
+assoluto e dividere per il valore della grandezza misurata.
+
+
+\begin{exemplify}
+
+\example{Torniamo al cilindro dell'esempio \ref{esem:VolumeCilindroRisolto}.
+Avevamo ottenuto:
+\begin{eqnarray*}
+V_0      &=& \pi r_0^2h_0\\
+\Delta V &=& \pi r_0^2\Delta h+2\pi r_0h_0\Delta r
+\end{eqnarray*}
+Dividendo membro a membro si ottiene:
+$$
+\frac{\Delta V}{V_0} = \frac{\Delta h}{h_0} + 2 \frac{\Delta r}{r_0}
+$$}
+
+\end{exemplify}
+
+\noindent L'esempio appena mostrato \`e in realt\`a solo un caso particolare
+di una classe vasta di problemi in cui propagare direttamente l'errore
+relativo \`e pi\`u semplice che non passare attraverso il calcolo
+dell'errore assoluto.
+Consideriamo a questo proposito una grandezza $G$ del tipo:
+$$
+G = a^n  b^m  c^p \ldots
+$$
+dove
+$a$, $b$, $c\ldots$ al solito, sono grandezze misurate
+{\itshape indipendentemente} con incertezze $\Delta a$, $\Delta b$,
+$\Delta c\ldots$ rispettivamente, mentre $m$, $n$, $p\ldots$ sono
+numeri interi o reali, positivi o negativi.
+Dalla (\ref{eq:ErroreMassimoGenerale}) si legge direttamente:
+$$
+\Delta G =
+\abs{n  a_0^{n-1} b_0^m c_0^p \ldots}\cdot \Delta a +
+\abs{m a_0^n b_0^{m-1} c_0^p \ldots}\cdot \Delta b +
+\abs{p a_0^n b_0^m c_0^{p-1} \ldots}\cdot \Delta c + \ldots
+$$
+(notiamo ancora una volta che, al solito, le derivate sono calcolate
+in corrispondenza dei valori misurati).
+Dividendo per $G_0$, che vale:
+$$
+G_0 = a_0^n b_0^m c_0^p \ldots
+$$
+otteniamo:
+\eqnlbox
+{\frac{\Delta G}{G_0} =
+\abs{n \frac{\Delta a}{a_0}} +
+\abs{m \frac{\Delta b}{b_0}} +
+\abs{p \frac{\Delta c}{c_0}} + \ldots}
+{eq:ErroreMassimoRelativoGenerale}
+Andiamo a {\itshape leggere} la formula: dice che gli errori relativi,
+quando si abbia a che fare solo con prodotti, quozienti e potenze,
+si sommano con un peso che \`e uguale al modulo dell'esponente.
+Da questo si deduce che \`e bene che le grandezze che entrano in una misura
+siano valutate tutte con errori relativi dello stesso ordine di grandezza.
+O, in altre parole, \`e inutile cercare di ridurre l'errore relativo su
+una delle grandezze nel caso in cui esso sia gi\`a molto pi\`u piccolo
+degli errori relativi sulle altre (questi ultimi domineranno comunque
+sull'errore complessivo).
+
+
+\section{Cifre significative e convenzioni di scrittura}
+
+\index{cifre significative} La precisione di un risultato sperimentale \`e
+implicita nel modo in cui il risultato \`e scritto. Il numero di
+{\itshape cifre significative} in un risultato \`e determinato dalle seguenti
+regole:
+\begin{numlist}
+\item{
+La cifra pi\`u significativa \`e quella pi\`u a sinistra diversa da zero.
+}
+\item{
+La cifra meno significativa \`e quella pi\`u a destra.
+}
+\item{
+Tutte le cifre comprese fra la pi\`u e la meno significativa
+sono cifre significative.
+}
+\end{numlist}
+
+\begin{exemplify}
+
+\example{Vediamo alcuni esempi che illustrano i punti appena elencati.
+Indicando con una sottolineatura la cifra meno significativa, e con una
+sopralineatura la cifra pi\`u significativa, si ha:
+$$\begin{array}{r}
+\overline{3}11\underline{5}   \\
+\overline{3}212.\underline{5} \\
+0.0\overline{3}2\underline{5} \\
+ \overline{3}21.0\underline{5}\\
+0.0\overline{3}0\underline{0} \\
+\overline{3}00.0\underline{0} \\
+\overline{3}0.03\underline{0}
+\end{array}$$
+Si tenga presente che, come gi\`a detto, le cifre significative
+sono quelle comprese fra la pi\`u e la meno significativa.}
+
+\end{exemplify}
+
+\noindent \`E bene aggiungere che esiste una seconda convenzione
+ secondo la quale, se non c'\`e la virgola decimale, allora
+la cifra meno significativa \`e quella pi\`u a destra diversa da zero.
+
+\begin{exemplify}
+
+\example{Secondo la convenzione appena menzionata, il numero $10$
+(cos\`i come \`e scritto qui) ha una sola cifra significativa;
+se lo volessimo con due cifre significative, dovremmo scrivere $10.$
+per evitare l'ambiguit\`a.}
+
+\end{exemplify}
+
+\noindent Per sapere quante cifre significative devono essere riportate
+nel risultato di un esperimento bisogna valutare gli errori commessi:
+in generale {\itshape si riportano tutte le cifre fino alla prima influenzata
+dall'errore inclusa}.
+Questo \`e vero specialmente se si propagano gli errori utilizzando la nozione
+di errore massimo.
+Trattando gli errori in modo statisticamente appena pi\`u sofisticato
+(cfr. capitolo \ref{chap:PropagazioneDegliErrori2}) si usa spesso
+scrivere la misura fino alla seconda cifra affetta da errore e,
+corrispondentemente, l'errore con due cifre significative.
+
+\caution{L'incertezza relativa ad una generica misura non si scrive mai
+con pi\`u di due cifre significative.}
+
+Quando le cifre {\itshape non} significative vengono tagliate via da un
+numero, le rimanenti cifre devono essere arrotondate per una maggior
+accuratezza. Per arrotondare un numero lo si tronca fino ad ottenere il
+numero di cifre significative desiderato, poi si prendono le cifre in pi\`u e
+si trattano come una frazione decimale. Allora:
+\begin{numlist}
+\item{\label{item:Arrotondamento1}
+Se la frazione \`e {\itshape maggiore} di $\frac{1}{2}$ si incrementa di
+una unit\`a l'ultima cifra significativa.
+}
+\item{\label{item:Arrotondamento2}
+Se la frazione \`e {\itshape minore} di $\frac{1}{2}$ il numero \`e gi\`a
+pronto.
+}
+\item{\label{item:Arrotondamento3}
+Se la frazione \`e {\itshape uguale} ad $\frac{1}{2}$, allora se l'ultima
+cifra \`e pari si procede come al punto \ref{item:Arrotondamento1},
+mentre se \`e dispari si procede come al punto \ref{item:Arrotondamento2}.
+}
+\end{numlist}
+L'ultima regola viene usata perch\'e incrementando sempre o non facendo mai
+niente si incorrerebbe in un errore sistematico.
+Andrebbe bene anche fare l'opposto o tirare una moneta: testa incremento,
+croce lascio. Tuttavia il resto del mondo preferisce seguire
+la regola \ref{item:Arrotondamento3}.
+
+Molto spesso quando si riporta il valore di un numero molto maggiore o molto
+minore dell'unit\`a di misura, si usa scrivere la grandezza in questione
+mediante un numero con il punto decimale dopo la prima cifra significativa,
+moltiplicato per un'opportuna potenza di 10.
+
+\begin{exemplify}
+
+\example{Le grandezze:
+$$\begin{array}{r}
+0.000015 \m          \\
+677000 \m            \\
+\end{array}$$
+si scrivono pi\`u convenientemente come:
+$$\begin{array}{r}
+1.5\times 10^{-5} \m \\
+6.77\times 10^5 \m   \\
+\end{array}$$
+rispettivamente. Sono molto usate anche le scritture:
+$$\begin{array}{r}
+0.15\times 10^{-4} \m\\
+0.677\times 10^6 \m  \\
+\end{array}$$}
+
+\end{exemplify}
+
+\noindent Quando i risultati di misure vengono usati per calcolare altre
+grandezze, bisogna fare attenzione agli errori che si possono compiere
+nei calcoli numerici.
+
+\begin{exemplify}
+
+\example{\label{esem:ArrotondamentoProdotto1}
+Consideriamo due quantit\`a che, in qualche unit\`a di misura, valgono:
+\begin{eqnarray*} 
+a & = & 1.25432\\
+b & = & 9.35
+\end{eqnarray*}
+Se esse vengono arrotondate, rispettivamente, a:
+\begin{eqnarray*}
+a_0 & = & 1.25\\
+b_0 & = & 9.4
+\end{eqnarray*}
+quale errore massimo si commette nel prodotto?\\
+Possiamo calcolare il prodotto con i numeri originali (cio\`e con tutte
+le cifre significative):
+$$
+p = a \cdot b = 11.727892
+$$
+e con i numeri arrotondati:
+$$
+p_0 = a_0 \cdot b_0 = 11.750
+$$
+La differenza tra i due prodotti vale:
+$$
+p - p_0 = 0.022
+$$
+L'errore \`e sulla quarta cifra significativa, quindi
+$$
+p_0= 11.75 \pm 0.02
+$$
+oppure anche
+$$
+p_0=11.750\pm0.022
+$$
+Se non si riporta l'errore si scrive:
+$$
+p_0=11.7
+$$
+perch\'e solo tre cifre sono sicure. Con questa scrittura si intende:
+$$
+11.65< p_0 <11.75
+$$}
+
+\example{\label{esem:ArrotondamentoProdotto2} Consideriamo le due quantit\`a:
+\begin{eqnarray*}
+a & = & 3.658\\
+b & = & 24.763
+\end{eqnarray*}
+Con quante cifre significative \`e ragionevole scrivere il prodotto?\\
+Il risultato dell'operazione \`e:
+$$
+p = 90.583054
+$$
+ma, per come si conoscono i numeri, il prodotto pu\`o essere
+un numero qualunque compreso fra i due seguenti:
+\begin{eqnarray*}
+p_{max} &=& 3.6585\cdot 24.7635=90.59726457\\
+p_{min} &=& 3.6575\cdot 24.7625=90.56884375
+\end{eqnarray*}
+Allora il prodotto va scritto con 4 cifre significative; l'errore \`e
+sulla quarta cifra.}
+
+\example{Consideriamo le due grandezze:
+\begin{eqnarray*}
+a & = & 56.434\\
+b & = & 251.37
+\end{eqnarray*}
+Con quante cifre significative si scrive la somma $S = a + b$?\\
+Conviene scrivere i numeri in questo modo:
+\begin{eqnarray*}
+a & = & 0.056434 \times 10^3\\
+b & = & 0.25137 \times 10^3
+\end{eqnarray*}
+Facendo la somma:
+
+\begin{center}
+\begin{tabular}{lcr}
+$0.056434$ & $\times 10^3$ & $+$\\
+$0.25137 $ & $\times 10^3$ & $=$\\
+\hline
+$0.307804$ & $\times 10^3$ & \rule{0pt}{12pt} \\
+\end{tabular}
+\end{center}
+risulta subito evidente che la sesta cifra non \`e significativa, come si
+ottiene pure dalla (\ref{eq:ErroreSomma}):
+$$
+\Delta S=\Delta a+\Delta b=(5\times10^{-7}+5\times10^{-6})\times10^3
+\approx5\times10^{-6}\times10^3
+$$}
+
+\example{Consideriamo le due grandezze:
+\begin{eqnarray*}
+a & = & 86.67\\
+b & = & 7.0228
+\end{eqnarray*}
+Con quante cifre significative si scrive la differenza?\\
+Conviene scrivere i numeri in questo modo:
+\begin{eqnarray*}
+a & = & 0.8667 \times 10^2\\
+b & = & 0.070228 \times 10^2
+\end{eqnarray*}
+Facendo la sottrazione:
+\begin{center}
+\begin{tabular}{lcr}
+$0.8667  $ & $\times 10^2$ & $-$\\
+$0.070228$ & $\times 10^2$ & $=$\\
+\hline
+$0.796472$ & $\times 10^2$ & \rule{0pt}{12pt} \\
+\end{tabular}
+\end{center}
+risulta subito evidente che la quinta e la sesta cifra non sono significative.}
+
+\example{Consideriamo le due quantit\`a:
+\begin{eqnarray*}
+a & = & 0.738\\
+b & = & 0.736
+\end{eqnarray*}
+La differenza \`e:
+$$
+D = a - b = 0.002
+$$
+che ha una sola cifra significativa. Cio\`e la differenza di due numeri
+quasi uguali ha una precisione molto minore di quella dei due numeri stessi.
+Quindi \`e bene fare attenzione nell'arrotondare numeri di cui poi si deve
+calcolare la differenza.}
+
+\end{exemplify}
+
+\noindent Dagli esempi considerati si pu\`o trarre la seguente conclusione:
+se si vuole che in una operazione tra grandezze misurate gli errori di calcolo
+numerico siano piccoli rispetto agli errori di misura, occorre, in generale,
+tenere una cifra significativa in pi\`u di quelle consentite dall'errore.
+
+Quando un'operazione coinvolge, tra le altre, grandezze che hanno a priori
+infinite cifre significative, il numero di cifre significative al quale si
+arrotondano tali grandezze deve essere tale da rendere trascurabili gli
+errori di calcolo numerico rispetto agli errori di misura.
+Vale anche la pena notare, d'altra parte, che usando un calcolatore non
+c'\`e nulla di male a prendere $\pi$ con nove cifre significative
+(anzich\'e quattro) e moltiplicarlo per un numero con tre cifre significative:
+basta tagliare le cifre non significative dal risultato.
+\normalsize
+

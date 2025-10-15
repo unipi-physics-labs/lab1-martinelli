@@ -1,0 +1,13 @@
+load '../../cc_gnuplot/gp_init.util'
+
+set xlabel "\\gplabel{$l\\;({\\rm cm})$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$m\\;({\\rm g})$}" offset ylab_xoff, ylab_yoff
+
+set xrange [1.60:1.80]
+set yrange [0.25:0.30]
+set ytics 0.01
+
+plot "chiodini.txt" pt 8 ps 1
+
+set out 'chiodini.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

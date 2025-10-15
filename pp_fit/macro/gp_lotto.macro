@@ -1,0 +1,15 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_functions.fnc'
+
+set xlabel "\\gplabel{Numero estratto}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{Occorrenze}" offset ylab_xoff, ylab_yoff
+
+set xrange [1:90]
+set yrange [0:300]
+
+#fit line(x) 'least_squares.dat' using 1:2:4 via a, b
+plot 'lotto_BA.dat' using 1:2 with histeps
+set out 'lotto_BA.tex'
+load '../../cc_gnuplot/gp_largeplot.util'
+

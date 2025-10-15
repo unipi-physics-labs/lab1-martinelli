@@ -1,0 +1,113 @@
+\section{La distribuzione di Fisher}
+
+Sia $x$ una variabile casuale distribuita come un $\chi^2$ a $f_1$
+gradi di libert\`a; $y$ una variabile casuale distribuita come un
+$\chi^2$ a $f_2$ gradi di libert\`a. Chiamiamo $p(x,f_1)$ e $p(y,f_2)$
+le corrispondenti funzioni di distribuzione.
+La variabile casuale $F$
+costruita mediante il rapporto dei $\chi^2$ ridotti:
+\eqn{
+F = \frac{\frac{x}{f_1}}{\frac{y}{f_2}}
+}
+ha una funzione di distribuzione che segue la funzione di
+distribuzione di Fisher:
+$$
+\phi(F,f_1,f_2) =
+K_{f_1,f_2}F^{\frac{f_1}{2}-1}(1+\frac{f_1}{f_2}F)^{\frac{1}{2}(f_1+f_2)}
+$$
+dove $K_{f_1,f_2}$ \`e la costante di normalizzazione:
+$$
+\frac{f_1}{f_2}^{\frac{1}{2}f_1}
+\frac{\Gamma(\frac{1}{2}(f_1+f_2))}{\Gamma(\frac{f_1}{2})\Gamma(\frac{f_2}{2})}
+$$
+Si trova che:
+$$
+\expect{F} = \frac{f_2}{f_2-2}, per f_2 > 2
+$$
+$$
+\sigma_F^2=\frac{2f_2^2(f_1+f_2-2)}{f_1(f_2-2)^2(f_2-4)}, per f_2 > 4
+$$
+
+\noindent Alcune cosiderazioni:
+\begin{itemize}
+\item Si osservi che il valor medio del $\chi^2$ ridotto \`e
+uguale ad 1 (basta ricordare che il valor medio di una variabile
+$\chi^2$ \`e uguale al suo numero di gradi di libert\`a). Quindi nel caso
+specifico in esame  $\expect{\frac{x}{f_1}} = 1$ e pure
+$\expect{\frac{y}{f_2}} = 1$.
+Allora quando $f_2$ tende all'infinito, la variabile $F$ tende in
+probabilit\`a  alla variabile
+$\frac{x}{f_1}$ e di conseguenza $\phi(F,f_1,f_2) \rightarrow
+\frac{p(x,f_1)}{f_1}$. Analogamente, quando $f_1$ tende all'infinito,
+$F$ tende in probabilit\`a a
+$\frac{y}{f_2}$ e di conseguenza $\phi(F,f_1,f_2) \rightarrow
+\frac{p(y,f_2)}{f_2}$. Questo fatto mette in evidenza lo stretto
+legame tra la funzione di distribuzione di Fisher e quella del $\chi^2$.
+\item Se $z$ \`e una variabile normale (0,1), $z^2$ \`e una variabile
+  distribuita come un  $\chi^2$ ad 1 grado di libert\`a. Allora la
+  variabile
+$$F=\frac{z^2}{\frac{y}{f_2}}$$
+\`e una variabile che segue la distribuzione di Fischer
+$$
+\phi(F,1,f_2)=K(1,f_2)F^{-\frac{1}{2}}(1+\frac{F}{f_2})^{-\frac{1}{2}(f_2+1)3}
+$$
+\item Se $z$ \`e una variabile normale (0,1), si ha che la variabile
+$$t_{f_2}=\frac{z}{\sqrt{\frac{y}{f_2}}}$$
+  segue una distribuzione di Student a $f_2$ gradi di libert\`a.
+Segue immediatamente che la variabile $t_{f_2}^2$ ha distribuzione di
+  Fisher $\phi(t_{f_2}^2,1,f_2)$.
+\item Se $f_1$ e $f_2$ diventano molto grandi (almeno > 50), la funzione di
+  distribuzione $\phi$ tende ad una gaussiana.
+\end{itemize}
+
+\noindent {\bf Esercizio} : Usando quanto avete imparato per ottenere
+le funzioni di distribuzioni di funzioni
+di una variabile casuale, mostrate che la funzione di distribuzione
+per la funzione $y=t^2$, dove $t$ \`e una variabile con distribuzione
+di Student a $n$ gradi di libert\`a \`e data dalla distribuzione di
+Fisher $\phi(t^2,1,n)$.
+
+\subsection{F test per il controllo di varianze}
+Nello sviluppo di misure o nelle tecniche di produzione \`e spesso
+necessario confrontare le varianze di popolazioni che hanno la stessa media.
+Supponiamo di avere due campioni di misure di rango $N_1$ ed $N_2$ e
+tratti indipendentemente da popolazioni con distribuzione
+gaussiana. Potrebbero essere, ad esempio, le misure di una stessa
+grandezza fisica fatte per\`o in laboratori diversi o con una
+strumentazione diversa. Le varianze calcolate sui due campioni
+risultano diverse. Ci chiediamo se tali differenze dipendono dal
+fatto che i due campioni non sono molto grandi o se sono
+significative, cio\`e sono una forte indicazione che le due
+popolazioni non hanno la stessa varianza.
+
+\noindent Facciamo l'ipotesi che le due popolazioni abbiano la stessa
+varianza. Costruiamo una variabile statistica di cui si possa
+conoscere la funzione di distribuzione e pertanto
+calcolare la probabilit\`a di questa ipotesi.
+
+\noindent La variabile
+$$x=(N_1-1)\frac{s_1^2}{\sigma_1^2}, $$
+con ovvio significato dei simboli,
+ha funzione di distribuzione di un $\chi^2$ a $N_1-1$ gradi di
+libert\`a, che  indicheremo con $f_1$. Analogamente la variabile
+$$y= (N_2-1)\frac{s_2^2}{\sigma_2^2}$$
+ha funzione di distribuzione di un $\chi^2$ a $N_2-1$ gradi di
+libert\`a, che  indicheremo con $f_2$. Costruiamo la
+variabile $F$ di Fisher:
+$$F= \frac{x}{y}\frac{f_2}{f_1}.$$
+Esplicitando $x$ ed $y$ e tenendo conto dell'ipotesi che le
+popolazioni dei due campioni hanno la stessa varianza si ottiene
+\eqn{
+F= \frac{s_1^2}{s_2^2}
+}
+che \`e la variabile statistica cercata per il confronto di varianze.
+
+\noindent La registrazione dei dati relativi ai due campioni permette
+di calcolare $s_1^2$, $s_2^2$ e  $F_{campione}$.
+Quindi si calcola il livello di significativit\`a per l'ipotesi fatta :
+$$1 - \prob{F < F_{campione}} = \prob{F > F_{campione}}.$$
+Esistono tavole che permettono di calcolare tale probabilit\`a per
+diverse coppie di $f_1$ ed $f_2$ e (di solito) per valori di $F$
+>1. Questo significa che a numeratore bisogna mettere il valore
+maggiore tra $s_1^2$ e $s_2^2$, ed allora $f_1$ \`e inteso come numero
+dei gradi di libert\`a del numeratore ed $f_2$ del denominatore.

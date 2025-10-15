@@ -1,0 +1,152 @@
+
+% Standard equation.
+% \eqn{equation}
+\newcommand{\eqn}[1]
+{\begin{equation}#1\end{equation}}
+
+% Standard equation with label.
+% \eqnl{equation}{label}
+\newcommand{\eqnl}[2]
+{\begin{equation} \label{#2} #1 \end{equation}}
+
+
+% Define the box to be used for the equations
+\newcommand{\eqnboxinner}[1]
+%{\ovalbox{$\displaystyle #1$}}
+{\fbox{$\displaystyle #1$}}
+
+% Equations surrounded by a box.
+% \eqnbox{equation}
+\newcommand{\eqnbox}[1]
+{\begin{equation}\eqnboxinner{#1}\end{equation}}
+
+\setlength{\fboxsep}{8pt}
+\setlength{\shadowsize}{3pt}
+
+% Equations surrounded by a box with label.
+% \eqnlbox{equation}{label}
+\newcommand{\eqnlbox}[2]
+{\begin{equation}\label{#2}\eqnboxinner{#1}\end{equation}}
+
+%
+%
+\newcommand{\discvscont}[3]
+{#1 \left \{ \begin{array}{ll}
+\displaystyle {#2} &%
+{\rm per~una~variabile~discreta}\vspace{0.3cm}\\
+\displaystyle {#3} &%
+{\rm per~una~variabile~continua}%
+\end{array} \right.}
+
+% Differential sign under the integral sign.
+% \ud
+\newcommand{\ud}
+{\mathrm{d}}
+
+% Indefinite integral.
+% \iint{function}{integration variable}
+\newcommand{\iintegral}[2]
+{\int #1 \, \ud #2}
+
+% Definite integral.
+% \dintegral{function}{integration variable}{min}{max}
+\newcommand{\dintegral}[4]
+{\int_{#3}^{#4} #1 \, \ud #2}
+
+% Definite sum.
+\newcommand{\dsum}[4]
+{\sum_{#2 = #3}^{#4} #1}
+
+% Total first derivative.% \tfder{function}{derivative variable}
+\newcommand{\tfder}[2]
+{\displaystyle \frac{\ud#1}{\ud#2}}
+
+% Total first derivative evaluated in a given point.
+% \tfdereval{function}{derivative variable}{point}
+\newcommand{\tfdereval}[3]
+{\displaystyle \frac{\ud#1}{\ud#2}({#3})}
+
+% Total second derivative.
+% \tsder{function}{derivative variable}
+\newcommand{\tsder}[2]
+{\displaystyle \frac{\ud^2#1}{\ud#2^2}}
+
+% Total second derivative evaluated in a given point.
+% \tsdereval{function}{derivative variable}{point}
+\newcommand{\tsdereval}[3]
+{\displaystyle \frac{\ud^2#1}{\ud#2^2}({#3})}
+
+% Total n-th derivative evaluated in a given point.
+% \tsdereval{function}{derivative variable}{point}{order}
+\newcommand{\tndereval}[4]
+{\displaystyle \frac{\ud^{#4}#1}{\ud#2^{#4}}({#3})}
+
+% Partial first derivative.
+% \pfder{function}{derivative variable}
+\newcommand{\pfder}[2]
+{\displaystyle \frac{\partial#1}{\partial#2}}
+
+% Partial first derivative evaluated in a given point.
+% \pfdereval{function}{derivative variable}{point}
+\newcommand{\pfdereval}[3]
+{\displaystyle \frac{\partial#1}{\partial#2}({#3})}
+
+% Partial second derivative.
+% \psder{function}{derivative variable}
+\newcommand{\psder}[2]
+{\displaystyle \frac{\partial^2#1}{\partial#2^2}}
+
+% Partial second derivative evaluated in a given point.
+% \psdereval{function}{derivative variable}{point}
+\newcommand{\psdereval}[3]
+{\displaystyle \frac{\partial^2#1}{\partial#2^2}({#3})}
+
+% Leftovers in the series.
+% \orderof{stuff}
+\newcommand{\orderof}[1]
+{{\cal O} \left( \, #1 \, \right)}
+
+% Evaluation of an integral primite between fixed bounds.
+% \eval{expression}{min}{max}
+\newcommand{\eval}[3]
+{\displaystyle\left[\, #1 \, \right]_{#2}^{#3}}
+
+% Module
+% \abs{expression}
+\newcommand{\abs}[1]
+{\left| \, #1 \, \right|}
+
+% Binomial coefficient.
+% \binomial{upper}{lower}
+\newcommand{\binomial}[2]
+{\frac{#1!}{#2! (#1 - #2)!}}
+
+% Closed interval.
+% \cinterval{min}{max}
+\newcommand{\cinterval}[2]
+{\left[ \, #1, ~ #2 \, \right]}
+
+% Left closed interval.
+% \linterval{min}{max}
+\newcommand{\linterval}[2]
+{\left[ \, #1, ~ #2 \, \right)}
+
+% Right closed interval.
+% \rinterval{min}{max}
+\newcommand{\rinterval}[2]
+{\left( \, #1, ~ #2 \, \right]}
+
+% Open interval.
+% \ointerval{min}{max}
+\newcommand{\ointerval}[2]
+{\left( \, #1, ~ #2 \, \right)}
+
+% Small fractions.
+% \smallfrac{numerator}{denominator}
+\newcommand{\smallfrac}[2]
+{{\textstyle \frac{#1}{#2}}}
+
+% Tiny fractions.
+% \tinyfrac{numerator}{denominator}
+\newcommand{\tinyfrac}[2]
+{{\scriptscriptstyle \frac{#1}{#2}}}

@@ -1,0 +1,30 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$p(x)$}" offset ylab_xoff, ylab_yoff
+set xrange [0:20]
+set xtics  0, 2
+set yrange [0:0.2]
+set ytics 0, 0.04
+
+n    = 8
+peak = 0.112
+x_1  = 2.77
+x_2  = 11.03
+center = (x_1+x_2)/2
+hwhm   = (x_2-x_1)/2
+spacing = 0.008
+plot chisquare_pdf(x, n) lw lw_normal, peak/2
+set arrow from x_1, 0.12 to x_1, 0 front
+set label "$x_-$" at x_1, 0.128 center
+set arrow from x_2, 0.12 to x_2, 0 front
+set label "$x_+$" at x_2, 0.128 center
+set arrow from x_1, peak/8 to x_2, peak/8 heads
+set label "$\\fwhm$" at center, peak/8+spacing center
+set arrow from center, 7*peak/8 to x_2, 7*peak/8 heads
+set label "$\\hwhm$" at center+hwhm/2, 7*peak/8+spacing center
+set out 'fwhm.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

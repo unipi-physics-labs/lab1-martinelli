@@ -1,0 +1,53 @@
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xrange [-4:4]
+set yrange [0:0.5]
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$\\gaussianpdf{x}{0, 1}$}" offset ylab_xoff, ylab_yoff
+
+slice(x) = (x<0) ? 0 : ((x > 1) ? 0 : gauss_pdf(x, 0, 1))
+plot gauss_pdf(x, 0, 1) lw lw_normal, slice(x) with filledcurves
+set out 'gauss_integral.tex'
+load '../../cc_gnuplot/gp_tinyplot.util'
+
+slice(x) = (x<1) ? 0 : gauss_pdf(x, 0, 1)
+plot gauss_pdf(x, 0, 1) lw lw_normal, slice(x) with filledcurves
+set out 'gauss_integral_inverse.tex'
+load '../../cc_gnuplot/gp_tinyplot.util'
+
+
+set xlabel "\\gplabel{$t$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$\\tpdf{t}{n}$}" offset ylab_xoff, ylab_yoff
+
+slice(x) = (x<1) ? 0 : gauss_pdf(x, 0, 1)
+plot gauss_pdf(x, 0, 1) lw lw_normal, slice(x) with filledcurves
+set out 't_integral.tex'
+load '../../cc_gnuplot/gp_tinyplot.util'
+
+slice(x) = (x<-1) ? 0 : ((x > 1) ? 0 : gauss_pdf(x, 0, 1))
+plot gauss_pdf(x, 0, 1) lw lw_normal, slice(x) with filledcurves
+set out 't_integral_inverse.tex'
+load '../../cc_gnuplot/gp_tinyplot.util'
+
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$\\chisquarepdf{x}{n}$}" offset ylab_xoff, ylab_yoff
+
+set xrange [0:10]
+set yrange [0:0.2]
+slice(x) = (x>5) ? 0 : chisquare_pdf(x, 5)
+plot chisquare_pdf(x, 5) lw lw_normal, slice(x) with filledcurves
+set out 'chisquare_pvalues.tex'
+load '../../cc_gnuplot/gp_tinyplot.util'
+
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+set ylabel "\\gplabel{$\\erf(x)$}" offset ylab_xoff, ylab_yoff
+
+set xrange [0:3]
+set yrange [0:0.5]
+plot 0.5*erf(x/sqrt(2)) lw lw_normal
+set out 'erf.tex'
+load '../../cc_gnuplot/gp_largeplot.util'

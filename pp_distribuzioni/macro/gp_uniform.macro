@@ -1,0 +1,52 @@
+
+load '../../cc_gnuplot/gp_init.util'
+load '../../cc_gnuplot/gp_pdfs.fnc'
+
+set xlabel "\\gplabel{$x$}" offset xlab_xoff, xlab_yoff
+
+set xrange [-3:3]
+set yrange [0:1.5]
+set ytics 0 0.3
+
+# Four graphs with different a and b. 
+set ylabel "\\gplabel{$\\uniformpdf{x}{-1, 1}}$" offset ylab_xoff, ylab_yoff
+plot uniform_pdf(x, -1, 1) lw lw_normal
+set out 'uniform_-1_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\uniformpdf{x}{0, 1}}$" offset ylab_xoff, ylab_yoff
+plot uniform_pdf(x, 0, 1) lw lw_normal
+set out 'uniform_0_1.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\uniformpdf{x}{-2, 2}}$" offset ylab_xoff, ylab_yoff
+plot uniform_pdf(x, -2, 2) lw lw_normal
+set out 'uniform_-2_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+set ylabel "\\gplabel{$\\uniformpdf{x}{0, 2}}$" offset ylab_xoff, ylab_yoff
+plot uniform_pdf(x, 0, 2) lw lw_normal
+set out 'uniform_0_2.tex'
+load '../../cc_gnuplot/gp_smallplot.util'
+
+# Graph for a = -1, b = 1, with the mean and the rms on the plot
+#
+a = -1
+b = 1
+mean    = uniform_mean(a, b)
+rms     = uniform_rms(a, b)
+set xrange [-1.5:1.5]
+set yrange [0:1]
+set ytics 0 0.2
+
+ymax = 1
+ylab = ymax*0.85
+yarr = ymax*0.8
+set ylabel "\\gplabel{$\\uniformpdf{x}{-1, 1}}$" offset ylab_xoff, ylab_yoff
+plot uniform_pdf(x, a, b) lw lw_normal
+set arrow from mean, yarr to mean, 0 front
+set label "$\\meanlabel$" at mean, ylab center
+set arrow from mean+rms, yarr to mean+rms, 0 front
+set label "$\\onesigmalabel$" at mean+rms, ylab center
+set out 'uniform_detailed.tex'
+load '../../cc_gnuplot/gp_largeplot.util'
