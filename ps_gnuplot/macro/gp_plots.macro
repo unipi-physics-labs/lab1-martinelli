@@ -1,0 +1,13 @@
+
+plot sin(x)/x
+
+set output "function_small.tex"
+load '../../cc_gnuplot/gp_largeplot.util'
+
+set xrange [-170:170]
+set output "function_large.tex"
+load '../../cc_gnuplot/gp_largeplot.util'
+
+set samples 10000
+set output "function_sampled.tex"
+load '../../cc_gnuplot/gp_largeplot.util'

@@ -1,0 +1,844 @@
+\chapter{Il sistema operativo Linux}
+\mt
+
+\section{Terminologia}
+
+Esattamente come per la prima parte, questa breve introduzione all'uso del
+calcolatore prende avvio con un elenco dei termini \emph{tecnici} che saranno
+diffusamente utilizzati nel seguito. Ovviamente la lista non ha alcuna pretesa
+di essere esaustiva; il lettore pi\`u esigente perdoner\`a anche alcuni
+passaggi non particolarmente rigorosi.
+
+\begin{termslist}
+\item{
+\termdef{Hardware}{}
+{Termine generico per indicare i dispositivi (per la maggior parte elettronici)
+che costituiscono fisicamente il calcolatore.}}
+\item{
+\termdef{Hard disk}{ (disco rigido)}
+{Dispositivo magnetico per l'archiviazione \emph{permanente} dei dati.}}
+\item{
+\termdef{Sistema operativo}{}
+{Insieme di programmi che costituiscono l'interfaccia tra l'utente e
+l'\emph{hardware}. Gestisce il corretto funzionamento dell'\emph{hardware}
+stesso e l'esecuzione delle applicazioni.}}
+\item{
+\termdef{File}{}
+{\`E sostanzialmente un'unit\`a di memoria logica persistente (nel senso
+che risiede fisicamente su un disco rigido o su una memoria di massa in
+genere), gestita dal sistema operativo, contenente un insieme di
+informazioni.}}
+\item{
+\termdef{Directory}{}
+{\`E una sorta di \emph{contenitore} che pu\`o avere al suo interno \emph{file}
+o altre \emph{directory}. Nel seguito, con un lieve abuso di terminologia,
+useremo anche la parola \emph{cartella} come sinonimo.}}
+\item{
+\termdef{Filesystem}{}
+{Parte del sistema operativo che si occupa della gestione dei \emph{file}.}}
+\item{
+\termdef{Shell}{}
+{Interprete interattivo dei comandi, i quali vengono inviati tramite terminale
+al sistema operativo. La \emph{shell} è un programma di sistema che agisce da
+interfaccia tra utente e sistema operativo stesso.}}
+\item{
+\termdef{Software}{}
+{Termine generico per indicare i programmi per il calcolatore. Ogni programma
+\`e costituito da un insieme di istruzioni che possono essere eseguite dal
+calcolatore stesso.}}
+\item{
+\termdef{Freeware}{}
+{Letteralmente si traduce come \emph{software} gratuito. Indica genericamente
+tutto quel \emph{software} per il cui utilizzo non \`e necessario pagare una
+licenza.}}
+\item{
+\termdef{Open source}{}
+{Termine che indica  i programmi il cui codice sorgente è pubblico e
+disponibile per la consultazione e la modifica. Notiamo esplicitamente che
+non tutti i programmi \emph{freeware} sono anche \emph{open source}.}}
+\end{termslist}
+
+
+\section{Una breve storia di \linux}
+
+Nel 1965 i laboratori della Bell Telephone (una divisione della AT\&T)
+decisero di interrompere una collaborazione avviata con la General Electric
+ed il Project MAC del MIT per la scrittura di un sistema operativo che avrebbe
+dovuto chiamarsi \emph{Multics}.
+Pur tuttavia due programmatori, Ken Thompson e Dennis Ritchie, ritennero che
+fosse un peccato sprecare il lavoro fatto; i loro sforzi culminarono nella
+realizzazione di una prima versione del sistema che un altro ricercatore,
+Brian Kernighan (futuro \emph{inventore} del linguaggio di programmazione C),
+decise di chiamare, in opposizione a Multics, \unix.
+
+Nel 1973 \unix, originariamente scritto in \emph{assembly language} venne
+interamente tradotto in C; questa riscrittura aument\`o notevolmente
+la portabilit\`a del codice e segn\`o l'inizio della sua diffusione.
+Alla fine degli anni '70 la AT\&T forn\`i a basso costo le licenze del sistema
+operativo a diversi \emph{college} ed universit\`a americane ed in pochi anni
+la popolarit\`a di \unix\ riusc\`i a superare i confini ristretti delle
+istituzioni accademiche; ovviamente col tempo le cose sono andate avanti ed
+oggi esistono svariate versioni commerciali del sistema, per le diverse
+piattaforme \emph{hardware}.
+
+\linux\ \`e un sistema operativo \unix\ a tutti gli effetti; \`e una sorta di
+\emph{clone}, riscritto da zero, di \unix. La cosa interessante \`e che nessuna
+istituzione commerciale \`e stata coinvolta nella sua redazione (ed in
+effetti \`e assolutamente \emph{freeware}); esso \`e il risultato dello
+sforzo congiunto di migliaia di persone che, in tutto il mondo, hanno dedicato
+(e continuano a dedicare) tempo e fatica per perfezionare ci\`o che era
+iniziato come progetto di esplorazione del chip 80386.
+Pu\`o essere curioso ricordare che uno dei primi \emph{prodotti} di Linus
+Torvalds (l'ideatore e padre di \linux) fu un programma che, tramite due
+processi funzionanti in \emph{multitasking}, doveva stampare alternativamente
+\verb|AAAA| e \verb|BBBB|. Ne \`e stata fatta di strada\ldots
+
+
+\section{Concetti di base}
+
+\linux\ \`e un sistema operativo \emph{multi-utente} e \emph{multi-tasking}.
+Preciseremo, in parte, il senso di queste affermazione strada facendo;
+pur tuttavia spendere due parole al proposito \`e probabilmente un buon punto
+di partenza.
+
+Multi-utenza significa che diversi utenti possono avere diversi dati,
+programmi ed impostazioni di sistema memorizzate separatamente sulla stessa
+macchina; la struttura del \emph{filesystem} \linux\ \`e basata, come
+vedremo, sui concetti di propriet\`a e permesso.
+
+Multi-tasking significa semplicemente che pi\`u processi possono essere
+eseguiti contemporaneamente. Anche di questo ci occuperemo pi\`u in dettaglio
+tra breve.
+
+Come tutti i sistemi \unix, \linux\ \`e formato da un \emph{kernel} e da
+programmi di sistema, oltre ovviamente alle \emph{applicazioni}
+propriamente dette, con cui l'utente fa il lavoro vero e proprio.
+Il \emph{kernel} costituisce il cuore del sistema operativo; avvia i processi e
+permette loro di operare contemporaneamente, assegna le risorse di sistema
+ai vari processi ed in definitiva fornisce tutti gli strumenti necessari ad
+implementare i servizi che normalmente si richiedono ad un sistema operativo;
+questa implementazione avviene attraverso chiamate di sistema.
+I programmi di sistema, ed a maggior ragione le applicazioni, girano
+\emph{sopra} al \emph{kernel}, in quella che si chiama modalit\`a utente.
+
+
+\subsection{Il \emph{login}}
+
+Essendo \linux, come abbiamo appena detto, un sistema operativo multi-utente,
+l'accesso al sistema \`e subordinato ad una procedura di identificazione che
+prende il nome di \emph{login}.
+A tale scopo l'utente \`e tenuto a fornire il proprio \emph{username} e
+la propria \emph{password} (che presumibilmente sono stati forniti
+dall'amministratore di sistema) per potersi \emph{loggare} (cio\`e eseguire
+il \emph{login}) alla macchina. Esistono diverse schermate di \emph{login},
+che possono essere grafiche o testuali a seconda delle impostazioni di sistema
+e della distribuzione di \linux\ utilizzata.
+
+\caution{\linux\ (al contrario di \dos\ e di \windows, come probabilmente
+qualcuno sa) distingue maiuscole e minuscole (cio\`e \`e case sensitive) per
+cui il nome utente, la \emph{password} ed i comandi in generale devono essere
+digitati esattamente come sono, con lettere maiuscole e minuscole al loro
+posto.}
+
+
+\subsection{La \emph{shell} ed i comandi}
+
+Una volta loggato sulla macchina, l'utente pu\`o aprire una \emph{shell}
+(se il sistema non \`e configurato per farlo automaticamente). La \emph{shell}
+\`e il luogo in cui si impartiscono i comandi \linux; \`e per certi aspetti
+l'equivalente del \emph{prompt} di \dos, per chi ha un po' di esperienza al
+proposito.
+Esistono svariati tipi di \emph{shell}, che sostanzialmente differiscono tra
+di loro per quanto riguarda il linguaggio di \emph{scripting} ed alcune altre
+funzionalit\`a che il neofita tipicamente non utilizza.
+
+L'uso della \emph{shell} \`e semplicissimo e consiste essenzialmente nello
+scrivere un comando \linux\ valido e nel premere il tasto di \ckey{INVIO}.
+Ogni comando pu\`o avere delle opzioni (che sono precedute da un carattere
+\cchar{-} e ne determinano l'esito) e pu\`o accettare dei parametri;
+in sostanza la struttura tipica di un comando \linux\ \`e del tipo%
+\footnote{
+Notiamo per chiarezza che, qui e nel seguito del capitolo, i comandi da
+digitare sono costituiti da tutto (e solo) ci\`o che segue il carattere
+\cchar{>}, la cui unica funzione \`e quella di segnalare che ci
+troviamo nella \emph{shell} \linux.
+}%
+:
+\begin{verbatim}
+>comando -opzione argomento
+\end{verbatim}
+
+Sar\`a tutto pi\`u chiaro tra poco, quando vedremo alcuni esempi espliciti.
+Vale la pena di notare che \linux\ ha un efficiente sistema di documentazione
+che pu\`o rivelarsi utilissimo quando non si ricorda con precisione la sintassi
+di un comando o l'effetto di un opzione sul comando stesso.
+\`E sufficiente digitare dalla \emph{shell}:
+\begin{verbatim}
+>man comando
+\end{verbatim}
+per avere sul display tutta la documentazione disponibile (si torna alla
+\emph{shell} semplicemente digitando \cchar{q}).
+
+Prima di andare avanti \`e utile ricordare che ci sono alcuni modi per
+riprendere il controllo della \emph{shell} nel caso questo dovesse
+momentaneamente sfuggire (il che accade tipicamente quando si esegue un
+comando che si aspetta l'inserimento di dati da parte dell'utente oppure quando
+si avvia un programma la cui esecuzione impiega pi\`u tempo del previsto):
+\begin{numlist}
+\item \ckey{CTRL + c}: solitamente elimina ogni programma in esecuzione
+e riporta alla linea di comando.
+\item \ckey{CTRL + z}: sospende il processo corrente mentre \`e in
+esecuzione e riporta alla linea di comando.
+\end{numlist}
+
+\subsection{Il \emph{logout}}
+
+Il processo di \emph{logout} chiude tutti i \emph{file} che sono (per qualche
+ragione) aperti e termina ogni programma mandato in esecuzione dall'utente.
+\`E buona regola scollegarsi sempre, una volta che abbiamo finito di
+utilizzare il computer; questo permette agli altri utenti, eventualmente
+collegati da un terminale remoto, di utilizzare nel modo pi\`u efficiente
+possibile le risorse di sistema. Per fare il \emph{logout} da una sessione
+testuale \`e sufficiente digitare dalla \emph{shell}:
+\begin{verbatim}
+>logout
+\end{verbatim}
+ed il sistema torna al \emph{prompt} di \emph{login}; un nuovo utente pu\`o
+collegarsi. Se la sessione \`e grafica si pu\`o avviare la procedura di
+\emph{logout} (ed eventualmente quella di spegnimento della macchina)
+accedendo all'apposito menu con il mouse.
+
+
+\section{Il \emph{filesystem} \linux}
+
+A differenza di ci\`o che accade sotto \windows\ (in cui le varie unit\`a,
+interne o esterne, di memorizzazione permanente dei dati sono associate alle
+lettere A, B, C\ldots), il \emph{filesystem} di \linux\ ha un'unica
+\emph{directory} radice (che si chiama \emph{root} e che si indica con il
+simbolo \cchar{/}).
+La \emph{directory} \emph{root} pu\`o contenere \emph{file} ed altre
+\emph{directory} e le \emph{directory} dei livelli sottostanti possono a loro
+volta fare altrettanto. La struttura fisica dell'\emph{hardware} \`e in un
+certo senso \emph{nascosta} all'utente: tutte le unit\`a di archiviazione
+appaiono semplicemente come sotto-\emph{directory} della \emph{directory}
+\emph{root}.
+
+Ogni utente ha inoltre una \emph{home directory}, che non ha niente di
+particolare a parte il fatto di essere quella in cui l'utente stesso si trova
+immediatamente dopo il \emph{login}.
+
+Sotto \linux\ i \emph{file} sono caratterizzati da tre attributi fondamentali:
+\cchar{r}, \cchar{w} ed 
+\cchar{x} (che stanno per \emph{read}, \emph{write} ed \emph{execute});
+come dire che un \emph{file} si pu\`o leggere, scrivere ed eseguire.
+O meglio che un determinato utente pu\`o avere (o non avere) i privilegi
+necessari per leggere, scrivere od eseguire un determinato \emph{file}.
+Qualsiasi combinazione di questi tre attributi \`e ammissibile per il sistema
+operativo, anche se non tutte sono propriamente sensate.
+
+Ogni \emph{file} \linux\ ha un proprietario (che \`e un utente con un account
+valido sulla macchina) ed ogni utente appartiene ad uno o pi\`u gruppi di
+utenti. I permessi su ogni \emph{file} sono settati su tre livelli:
+quello del proprietario del \emph{file}, quello del gruppo a cui appartiene il
+proprietario e quello di tutti gli altri utenti del sistema; tanto per fare
+un esempio, \`e possibile che un \emph{file} sia leggibile, scrivibile ed
+eseguibile dal proprietario, solamente leggibile dal gruppo del proprietario ed
+assolutamente inaccessibile a tutti gli altri.
+Vedremo tra poco come \`e possibile visualizzare (ed eventualmente cambiare)
+i permessi relativi ad un determinato \emph{file} o ad una \emph{directory}.
+
+
+\section{Navigare il \emph{filesystem}}
+
+Esiste un certo numero di comandi dedicati alla navigazione nel
+\emph{filesystem} e ne vedremo tra breve alcuni esempi;
+dovrebbero essere pi\`u o meno sufficienti per sopravvivere nel sistema,
+ma \`e sempre importante ricordare che ogni comando pu\`o avere un gran numero
+di opzioni che in generale \`e utile conoscere per soddisfare in pieno le
+proprie esigenze (ed il comando \ccmd{man} \`e, in questo senso,
+insostituibile).
+
+
+\subsection{\texorpdfstring{\ccmd{pwd}}{pwd}}
+
+\`E l'acronimo di \emph{present work directory} e restituisce sullo schermo
+il nome della \emph{directory} corrente. \`E sufficiente digitare \ccmd{pwd}
+per sapere dove siamo; ad esempio:
+\begin{verbatim}
+>pwd
+/afs/pi.infn.it/user/lbaldini
+>
+\end{verbatim}
+
+
+\subsection{\texorpdfstring{\ccmd{ls}}{ls}}
+
+Elenca semplicemente i \emph{file} contenuti in una certa \emph{directory}
+(pi\`u o meno l'equivalente di \ccmd{dir} in \dos); se l'utente non passa
+alcun argomento al comando, elenca i \emph{file} nella \emph{directory}
+corrente. Ad esempio:
+\begin{verbatim}
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+>
+\end{verbatim}
+
+Nel caso specifico la \emph{directory} contiene tre oggetti. A questo livello
+non siamo in grado di dire se essi sono \emph{file} o \emph{directory}.
+Per far questo \`e necessario, come vedremo tra un attimo, invocare il comando
+con l'opzione \cchar{-l}:
+\begin{verbatim}
+>ls -l
+total 5
+-rw-rw-r--   1  lbaldini glast     36352  Dec 20 18:18 Ciao.doc
+drwxrwxr-x   2  lbaldini glast      2048  Jul  7 2002  Temp
+-rw-rw-r--   1  lbaldini glast     21847  Jul 24 2002  Cluster.ps
+>
+\end{verbatim}
+La prima riga dice quanti sono gli oggetti nella \emph{directory} (in questo
+caso cinque$\ldots$ capiremo tra un attimo il motivo per cui ne sono elencati
+solamente tre), mentre le linee successive visualizzano alcuni dettagli sugli
+oggetti in questione.
+Il primo campo indica se si tratta di un \emph{file} (\cchar{-}), di una
+\emph{directory} (\cchar{d}) o di un link (\cchar{l}); di seguito compaiono
+i permessi per il proprietario, per il gruppo del proprietario e per l'utente
+generico (\cchar{r}, \cchar{w} ed \cchar{x} indicano rispettivamente che
+l'utente possiede il permesso di lettura, scrittura ed esecuzione, mentre il
+simbolo \cchar{-} indica che il corrispondente permesso \`e disabilitato). 
+Nel caso in questione \cchar{Ciao.doc}, come indicato dalla stringa
+\cchar{-rw-rw-r--}, \`e un \emph{file} che il proprietario ed il suo gruppo
+possono leggere e modificare, mentre tutti gli altri utenti possono solamente
+leggere. Invece \cchar{Temp} \`e una \emph{directory} e cos\`{\i} via\ldots
+
+Il campo successivo nella linea indica il numero di \emph{hard link}
+all'oggetto in questione, ma per noi \`e poco importante. Seguono dunque il
+nome del proprietario (in questo caso \cchar{lbaldini}) e del gruppo
+(\cchar{glast}).
+Infine vediamo la dimensione dell'oggetto su disco, la data della sua ultima
+modifica ed il nome; da notare che, nel caso delle \emph{directory},
+la dimensione non corrisponde allo spazio su disco occupato dal contenuto,
+ma a quello occupato dall'unit\`a logica che controlla la \emph{directory}
+stessa.
+
+In generale \linux\ non mostra all'utente (a meno che esso non lo richieda
+esplicitamente) tutti i \emph{file} contenuti in una \emph{directory}.
+In particolare il semplice comando \ccmd{ls} nasconde i \emph{file} e le
+\emph{directory} che cominciano con il carattere\cchar{.}
+(generalmente si tratta di
+\emph{file} di configurazione). Per visualizzare tutti i \emph{file} si pu\`o
+utilizzare l'opzione \cchar{-a} di \ccmd{ls}:
+\begin{verbatim}
+>ls -a
+.
+..
+Ciao.doc
+Temp
+ClusterAxes.eps
+>
+\end{verbatim}
+Adesso compaiono anche gli oggetti \cchar{.} (che in \linux\ sta per la
+\emph{directory} corrente) e \cchar{..} che viceversa indica la
+\emph{directory} che nel \emph{filesystem} si trova al livello immediatamente
+superiore rispetto a quella corrente (a volte detta anche \emph{directory}
+genitrice).
+
+Notiamo che l'oggetto \cchar{.} esiste in tutte le \emph{directory} e che
+\cchar{..} esiste in tutte le \emph{directory} fatta eccezione per la
+\emph{directory root} (\cchar{/}), che si trova in assoluto al livello pi\`u
+alto nel \emph{filesystem}.
+
+Il comando \ccmd{ls} pu\`o accettare un argomento, che indica la
+\emph{directory} della quale si vogliono elencare gli oggetti:
+\begin{verbatim}
+>ls -a Temp
+.
+..
+Luca.jpg
+>
+\end{verbatim}
+In questo caso ci dice che la \emph{directory} \cchar{Temp} contiene (oltre
+ovviamente a \cchar{.} e \cchar{..}) un solo \emph{file} che si chiama
+\cchar{Luca.jpg}.
+
+\caution{Sotto \linux\ il tasto \ckey{TAB} funziona da \emph{auto completion},
+cio\`e completa automaticamente i nomi di comandi od oggetti del
+\emph{filesystem}, a patto che l'utente ne abbia scritto una parte
+abbastanza lunga da rimuovere eventuali ambiguit\`a. Una volta provato non
+si pu\`o pi\`u rinunciarvi!}
+
+
+\subsection{\texorpdfstring{\ccmd{cd}}{cd}}
+
+Esattamente come in \dos, questo comando serve per cambiare \emph{directory};
+necessita, come argomento, del nome della \emph{directory} di destinazione.
+Il percorso verso quest'ultima pu\`o essere quello assoluto (cio\`e partendo
+da \emph{root}) oppure quello relativo (cio\`e partendo dalla \emph{directory}
+corrente). L'esempio seguente, che unisce i pochi comandi visti sino ad adesso,
+dovrebbe chiarire le idee:
+\begin{verbatim}
+>pwd
+/afs/pi.infn.it/user/lbaldini
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+>cd Temp
+>ls
+Luca.jpg
+>cd .
+>ls
+Luca.jpg
+>cd ..
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+>cd /afs/pi.infn.it/user/lbaldini/Temp
+>ls
+Luca.jpg
+>
+\end{verbatim}
+Notiamo che il comando \cchar{cd .} non fa niente (essendo \cchar{.} la
+\emph{directory} corrente), mentre \cchar{cd ..} porta nella \emph{directory}
+immediatamente superiore nel \emph{filesystem}. La documentazione di \linux\
+contiene un'esposizione esauriente di tutte le possibili opzioni del comando;
+per visualizzarla, al solito:
+\begin{verbatim}
+>man cd
+\end{verbatim}
+(dopo di che barra spaziatrice o frecce per scorrere e \cchar{q} per tornare
+alla \emph{shell}).
+
+
+\section{Modificare il \emph{filesystem}}
+
+Ovviamente navigare non \`e l'unica cosa che si pu\`o fare col
+\emph{filesystem}$\ldots$ Esistono comandi per creare, copiare, muovere
+\emph{file} e cos\`i via. Al solito diamo una rapida occhiata a quelli
+indispensabili.
+
+
+\subsection{\texorpdfstring{\ccmd{mkdir}}{mkdir}}
+
+Come si pu\`o intuire dal nome, crea una \emph{directory} e richiede come
+argomento il nome della \emph{directory} da creare. Al solito il percorso
+pu\`o essere assoluto o relativo; ovviamente se non si specifica niente,
+il nuovo oggetto viene creato nella \emph{directory} corrente. Ad esempio:
+\begin{verbatim}
+>pwd
+/afs/pi.infn.it/user/lbaldini
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+>mkdir NewDirectory
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+NewDirectory
+>
+\end{verbatim}
+
+\caution{Sotto \linux\ \`e buona norma evitare gli spazi all'interno dei nomi
+di \emph{file} o \emph{directory}. Lo spazio \`e un carattere molto
+particolare poich\'e costituisce il separatore tra comandi, opzioni ed
+argomenti e, quando si lavora dalla \emph{shell}, gestire spazi nei nomi dei
+\emph{file} pu\`o essere difficoltoso, se non si \`e preparati.}
+
+
+\subsection{\texorpdfstring{\ccmd{rmdir}}{rmdir}}
+
+\`E il contrario del comando precedente e semplicemente rimuove una
+\emph{directory} esistente, a patto che sia vuota:
+\begin{verbatim}
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+NewDirectory
+>rmdir NewDirectory
+>ls
+Ciao.doc
+Temp
+ClusterAxes.eps
+>
+\end{verbatim}
+Come vedremo tra un attimo, per cancellare una \emph{directory} non vuota
+\`e necessario usare il comando \ccmd{rm} con l'opzione \cchar{-r}.
+
+
+\subsection{\texorpdfstring{\ccmd{rm}}{rm}}
+
+
+Rimuove il \emph{file} che gli viene passato come argomento e la sintassi
+\`e analoga a quella di \ccmd{rmdir}. Ha alcune opzioni che vale la pena di
+conoscere:
+\begin{numlist}
+\item \cchar{-i}: il comando agisce in modo interattivo e chiede conferma
+prima di cancellare ogni \emph{file}; caldamente consigliata quando si lavora
+a notte fonda!
+\item \cchar{-f}: il comando agisce in modo forzato senza chiedere conferma.
+\item \cchar{-r}: il comando agisce in modo ricorsivo; con questa pu\`o
+accettare il nome di una \emph{directory} come argomento ed in tal caso
+cancella ricorsivamente tutto il contenuto della \emph{directory} stessa.
+\end{numlist}
+
+\caution{Pu\`o essere buona abitudine utilizzare d'abitudine il comando
+\ccmd{rm} in modo interattivo (con l'opzione \cchar{-i}) e, cosa forse pi\`u
+utile, evitare di lavorare fino a notte fonda dopo una giornata faticosa ed
+una cena pesante!}
+
+
+\subsection{\texorpdfstring{\ccmd{cp}}{cp}}
+
+\`E l'analogo del comando \ccmd{copy} in \dos\ e serve per copiare un
+\emph{file} di partenza (che viene passato come primo argomento) in un
+\emph{file} o in una \emph{directory} di destinazione (che costituisce
+viceversa il secondo argomento). Ad esempio il comando:
+\begin{verbatim}
+>cp *.doc Temp
+>
+\end{verbatim}
+copia tutti i \emph{file} il cui nome termina per \cchar{.doc} nella
+\emph{directory} \cchar{Temp}.
+
+\caution{Sotto \linux\ il simbolo \cchar{*} \`e un carattere speciale che
+sostanzialmente sta per ``qualsiasi sequenza di lettere e numeri''.
+\`E la \emph{shell} stessa che si occupa di operare la sostituzione, sulla
+base del contenuto del \emph{filesystem} nel momento in cui il comando viene
+impartito.}
+
+L'esempio successivo:
+\begin{verbatim}
+>cp Ciao.doc Salve.doc
+>
+\end{verbatim}
+crea una copia del \emph{file} \cchar{Ciao.doc} nella \emph{directory}
+corrente chiamandola \cchar{Salve.doc}.
+
+
+\subsection{\texorpdfstring{\ccmd{mv}}{mv}}
+
+Serve per rinominare un \emph{file}:
+\begin{verbatim}
+>mv Ciao.doc Salve.doc
+>
+\end{verbatim}
+oppure per spostarlo in una \emph{directory} di destinazione, se quest'ultima
+viene specificata:
+\begin{verbatim}
+>mv Ciao.doc Temp
+>
+\end{verbatim}
+Per inciso notiamo che, dopo il primo comando, il \emph{file} \cchar{Ciao.doc}
+non esiste pi\`u.
+
+
+\subsection{\texorpdfstring{\ccmd{chmod}}{chmod}}
+
+Serve essenzialmente per cambiare i permessi su un \emph{file}.
+L'utente deve passare al comando il
+livello del permesso che vuole cambiare (\cchar{u} per il proprietario,
+\cchar{g} per il gruppo e \cchar{o} per l'utente generico), l'operazione da
+eseguire (\cchar{+} per aggiungere il permesso e \cchar{-} per toglierlo),
+il tipo di permesso (\cchar{r} per la lettura, \cchar{w} per la scrittura
+e \cchar{x} per l'esecuzione) ed infine il nome del \emph{file} su cui
+impostare i nuovi permessi. 
+
+\`E pi\`u semplice di quello che sembra; il seguente comando:
+\begin{verbatim}
+>chmod u-w Cluster.eps
+>
+\end{verbatim}
+toglie al proprietario i privilegi necessari per poter modificare il
+\emph{file} \cchar{Cluster.eps}. Digitando \cchar{ls -l} \`e possibile
+verificarlo facilmente.
+
+
+\section{Visualizzare i \emph{file} di testo}
+
+Al di l\`a dei \emph{file} di testo propriamente detti, molte applicazioni
+\linux\ (ed il sistema stesso) utilizzano \emph{file} di configurazione di tipo
+testuale, per cui \`e essenziale avere strumenti per visualizzare (ed
+eventualmente modificare) gli oggetti di questo tipo.
+
+\linux\ offre un ampio insieme di comandi dedicati alla visualizzazione dei
+\emph{file} di tipo testuale. Di seguito elenchiamo i principali; al solito
+le pagine \ccmd{man} sono uno strumento utile per esplorare le svariate
+opzioni che ognuno di questi comandi prevede.
+
+
+\subsection{\texorpdfstring{\ccmd{more}}{more}}
+
+Accetta come argomento un \emph{file} e ne visualizza il contenuto sullo
+schermo; per esempio
+\begin{verbatim}
+>more Cluster.eps
+>
+\end{verbatim}
+visualizza il contenuto del \emph{file} \cchar{Cluster.eps}. La barra
+spaziatrice fa avanzare di una pagina, mentre il tasto \cchar{b} riporta
+indietro di una pagina; si torna alla \emph{shell} premendo il tasto \cchar{q}.
+Le pagine \ccmd{man} dovrebbero illustrare l'elenco completo dei comandi che
+si possono usare all'interno di more.
+
+
+\subsection{\texorpdfstring{\ccmd{less}}{less}}
+
+La sintassi ed il funzionamento sono essenzialmente identici a quelli di more:
+\begin{verbatim}
+>less Cluster.eps
+>
+\end{verbatim}
+La differenza \`e che dovrebbe essere pi\`u facile muoversi all'interno del
+documento (in particolare si possono usare le frecce direzionali).
+
+
+\subsection{\texorpdfstring{\ccmd{head}}{head}}
+
+Visualizza le prime 10 righe (ma il numero pu\`o essere modificato utilizzando
+l'opportuna opzione) del \emph{file} che gli viene passato come argomento.
+La sintassi \`e la solita:
+\begin{verbatim}
+>head Cluster.eps
+>
+\end{verbatim}
+\`E utile quando si vuole dare una sola occhiata ad un \emph{file}.
+
+
+\subsection{\texorpdfstring{\ccmd{tail}}{tail}}
+
+Al contrario del precedente visualizza le ultime righe di un \emph{file}.
+
+
+\section{Modificare i \emph{file} di testo}
+
+La visualizzazione non \`e certo l'unica cosa di cui uno ha bisogno, lavorando
+con i \emph{file} di tipo testuale; \emacs\ \`e probabilmente l'editor di testo
+pi\`u diffuso tra gli utenti \linux, ormai. Descrivere, sia pur in modo
+sommario, le sterminate funzionalit\`a di \emacs\ ci porterebbe lontano dal
+filo della discussione; d'altra parte il programma ha un ampio sistema di
+documentazione integrata che dovrebbe essere pi\`u che sufficiente per
+cavarsela in ogni situazione.
+
+Si pu\`o aprire un \emph{file} di testo con \emacs\ semplicemente digitando
+dalla \emph{shell}:
+\begin{verbatim}
+>emacs sample.txt
+\end{verbatim}
+(ovviamente sostituite \cchar{sample.txt} con il nome del file di cui avete
+bisogno). Fatto questo, \emacs\ funziona pi\`u o meno come un qualsiasi
+\emph{editor} di testo; da notare che offre un grandissimo numero di
+\emph{shortcut} da tastiera (ad esempio \ckey{CTRL + x} \ckey{CTRL + s}
+per salvare) che rendono veramente veloce ed efficiente (per lo meno per gli
+esperti) l'\emph{editing}.
+Al solito: lavorare con \emacs\ \`e il miglior modo per imparare ad usarlo.
+
+
+\section{I processi}
+
+Ogni comando \linux\ crea un \emph{processo} che il sistema operativo esegue
+fino a quando esso non termina o viene interrotto. Il punto fondamentale \`e
+che, essendo multitasking, \linux\ permette di mandare in esecuzione pi\`u di
+un processo contemporaneamente; permette inoltre di mandare in esecuzione
+processi in \emph{background} (o, come si dice, dietro le quinte)
+semplicemente facendo seguire un carattere \cchar{\&} al comando.
+
+Un esempio pu\`o essere utile per chiarire le idee. Supponiamo di voler aprire
+con \emacs\ il \emph{file} \cchar{Cluster.txt}; possiamo farlo normalmente:
+\begin{verbatim}
+>emacs Cluster.txt
+\end{verbatim}
+oppure possiamo farlo in \emph{background}:
+\begin{verbatim}
+>emacs Cluster.txt &
+[2] 12563
+>
+\end{verbatim}
+La differenza, come si vede, \`e che nel secondo caso il sistema torna alla
+linea di comando e la \emph{shell} \`e di nuovo utilizzabile, mentre nel
+primo la \emph{shell} \`e inutilizzabile fino a che non chiudiamo \emacs\
+(anche se, a dirla tutta, possiamo sempre aprire una nuova \emph{shell}\ldots).
+Per completezza, i numeri \cchar{[2] 12563} identificano il processo
+all'interno del sistema operativo.
+
+\linux\ offre un \emph{set} di comandi per monitorare i processi ed
+eventualmente intervenire su di essi. Al solito vedremo i fondamentali.
+
+
+\subsection{\texorpdfstring{\ccmd{ps}}{ps}}
+
+Visualizza l'elenco dei processi in memoria dei quali l'utente \`e
+proprietario. Non servono argomenti e la sintassi \`e banale:
+\begin{verbatim}
+>ps
+>
+\end{verbatim}
+Il risultato \`e una lista dei processi con il proprio numero di
+identificazione, lo stato (\emph{running}, \emph{stopped}, etc.) ed altre
+informazioni per le quali si rimanda alle pagine \ccmd{man}.
+
+
+\subsection{\texorpdfstring{\ccmd{top}}{top}}
+
+Visualizza un elenco, aggiornato continuamente, di tutti i processi in memoria,
+fornendo inoltre alcune informazioni importanti come il numero di
+identificazione, il proprietario, il tempo di esecuzione, la priorit\`a, etc.
+Anche qui non servono argomenti
+\begin{verbatim}
+>top
+>
+\end{verbatim}
+e le pagine \ccmd{man} riportano tutte le opzioni valide. Si torna alla
+\emph{shell} digitando \ckey{CTRL + c}.
+
+
+\subsection{\texorpdfstring{\ccmd{kill}}{kill}}
+
+Capita a volte, per qualche ragione, di voler interrompere forzatamente un
+processo; in tal caso si utilizza il comando \ccmd{kill}, che accetta come
+parametro il numero di identificazione del processo da eliminare. Ad esempio
+per uccidere il processo avviato quando prima avevamo lanciato \emacs\ in
+background dovremmo fare:
+\begin{verbatim}
+>kill -9 12563
+[2]+  Killed     emacs
+>
+\end{verbatim}
+Si rimanda alle pagine \ccmd{man} per il significato dell'opzione \cchar{-9}.
+
+
+\section{La stampa}
+
+L'installazione, la configurazione e la gestione delle stampanti sono punti
+non proprio banali di cui generalmente si occupa l'amministratore di sistema.
+All'utente \`e sufficiente conoscere pochi comandi, che fortunatamente sono
+gli stessi in tutti i casi (stampante locale o stampante condivisa in rete).
+
+
+\subsection{\texorpdfstring{\ccmd{lpr}}{lpr}}
+
+Permette di stampare un \emph{file} e richiede come argomento il nome
+del \emph{file} da stampare. Se non si passano opzioni, il documento viene
+inviato alla stampante di \emph{default}; \`e tuttavia buona regola
+specificare esplicitamente il nome della stampante di destinazione
+mediante l'opzione \cchar{-P}.
+Supponiamo ad esempio di avere una stampante postscript che si chiama
+\cchar{hp} e di voler stampare il \emph{file} \cchar{Cluster.eps}.
+La sintassi \`e:
+\begin{verbatim}
+>lpr -P hp Cluster.eps
+>
+\end{verbatim}
+
+
+\subsection{\texorpdfstring{\ccmd{lpq}}{lpq}}
+
+Accetta come parametro il nome di una stampante e mostra i processi nella
+coda di stampa per la stampante in questione. Esempio:
+\begin{verbatim}
+>lpq -P hp
+\end{verbatim}
+
+
+\subsection{\texorpdfstring{\ccmd{lprm}}{lprm}}
+
+Permette di rimuovere un processo dalla coda di stampa, nel caso ve ne sia
+bisogno; supponiamo di voler eliminare il processo di stampa \cchar{123} (il
+numero di identificazione \`e fornito dal comando \ccmd{lpq}):
+\begin{verbatim}
+>lprm -P hp 123
+>
+\end{verbatim}
+
+
+\section{Accesso alle periferiche}
+
+Abbiamo gi\`a detto che \linux\ non fa alcuna distinzione, dal punto di vista
+dell'utente che accede al \emph{filesystem}, tra dispositivi (ad esempio
+\emph{hard disk}) che sono fisicamente diversi tra loro. Questo \`e vero
+anche per le periferiche come \emph{cd rom} o \emph{floppy disk}.
+L'unica cosa che l'utente deve fare \`e dire al sistema come accedere a queste
+periferiche, dopo di che i dati in esse contenuti divengono disponibili nel
+\emph{filesystem} esattamente come i \emph{file} contenuti
+sull'\emph{hard disk}.
+
+\caution{Tutto ci\`o che diremo nel resto del capitolo, ed in particolare
+questa sezione sull'accesso alle periferiche, dipende fortemente dalla
+particolare distribuzione di \linux\ utilizzata e dalla configurazione
+impostata dall'amministratore di sistema. Il lettore non deve rimanere
+sorpreso se alcuni dei comandi non funzionano immediatamente per la sua
+particolare installazione; nella maggior parte dei casi saranno necessarie
+solo piccole modifiche.}
+
+
+\subsection{\texorpdfstring{\ccmd{mount}}{mount}}
+
+Questo comando dice al sistema come accedere ad una periferica e come
+essa deve essere visualizzata all'interno del \emph{filesystem}.
+Supponiamo per esempio di voler leggere il contenuto di un \emph{cd rom}
+(che \`e probabilmente una delle operazioni pi\`u comuni che l'utente medio
+esegue). I comandi:
+\begin{verbatim}
+>mount /media/cdrom
+>cd /media/cdrom
+>
+\end{verbatim}
+dovrebbero essere sufficienti per \emph{montare} il dispositivo (renderlo
+cio\`e disponibile nel \emph{filesystem}) e spostarsi nella \emph{directory}
+corrispondente.
+Per alcune distribuzioni potrebbe rendersi necessaria la variante:
+\begin{verbatim}
+>mount /mnt/cdrom
+>cd /mnt/cdrom
+>
+\end{verbatim}
+A questo punto il contenuto del \emph{cd rom} dovrebbe essere disponibile
+nella \emph{directory} stessa di modo che si possono eseguire senza particolari
+problemi i comandi che gi\`a conosciamo.
+
+Il procedimento \`e sostanzialmente lo stesso nel caso di una
+\emph{memory stick} USB, anche se qui la situazione si complica leggermente
+in quanto distribuzioni diverse (o anche distribuzioni identiche
+configurate in modo differente) possono comportarsi in modo molto diverso.
+In alcuni casi un utente generico potrebbe anche non avere i permessi necessari
+per montare il dispositivo.
+Nel caso pi\`u semplice i comandi:
+\begin{verbatim} 
+>mount /media/pen
+>cd /media/pen
+>
+\end{verbatim}
+potrebbero funzionare (ovviamente a patto di aver inserito correttamente
+la \emph{memory stick} in una delle porte USB). Se cos\`i non fosse, con
+ogni probabilit\`a il sistema ha riconosciuto il dispositivo con un nome
+diverso da \cchar{pen} (ad esempio \cchar{usb} o \cchar{USB\_DISK}).
+Se il comando:
+\begin{verbatim}
+ls /media
+\end{verbatim}
+non mostra niente oltre al \emph{cd rom} ed al \emph{floppy}, \`e probabilmente
+una buona idea chiedere aiuto all'amministratore di sistema.
+
+
+\subsection{\texorpdfstring{\ccmd{umount}}{umount}}
+
+Non \`e il caso di preoccuparsi se non si riesce pi\`u ad aprire il drive del
+\emph{cd rom}! Probabilmente dipende dal fatto che non si \`e fatto
+correttamente l'\ccmd{umount} (cio\`e lo \emph{smontaggio}) del dispositivo.
+\`E sufficiente digitare:
+\begin{verbatim}
+>umount /media/cdrom
+>
+\end{verbatim}
+oppure
+\begin{verbatim}
+>umount /mnt/cdrom
+>
+\end{verbatim}
+per poter riprendere il controllo della situazione e poter estrarre fisicamente
+il disco.
+
